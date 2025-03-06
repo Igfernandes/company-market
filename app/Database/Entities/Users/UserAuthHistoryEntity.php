@@ -1,0 +1,171 @@
+<?php
+
+namespace App\Database\Entities\Users;
+
+use CodeIgniter\Entity\Entity;
+use Exception;
+
+class UserAuthHistoryEntity extends Entity
+{
+    protected $dates = [
+        'created_at'      => null
+    ];
+    public $attributes = [
+        'id'              => null,
+        'ip'              => null,
+        'browser'         => null,
+        'user_id'         => null,
+        'user'            => null,
+    ];
+
+    /**
+     * getId function
+     *
+     * @return Int|null
+     */
+    public function getId(): ?Int
+    {
+        return $this->attributes['id'];
+    }
+
+    /**
+     * setId function
+     *
+     * @param Int|null $id
+     * @return void
+     */
+    public function setId(?Int $id)
+    {
+        if (!empty($id))
+            $this->attributes['id'] = $id;
+    }
+
+    /**
+     * getIp function
+     *
+     * @return String|null
+     */
+    public function getIp(): ?String
+    {
+        return $this->attributes['ip'];
+    }
+
+    /**
+     * setIp function
+     *
+     * @param String|null $ip
+     * @return void
+     */
+    public function setIp(?String $ip)
+    {
+        $session = session();
+
+        if (strlen($ip) > 30)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => "Ip",
+                "param" => 30
+            ], $session->get("language")), BAD_REQUEST);
+
+        if (!empty($ip))
+            $this->attributes['ip'] = $ip;
+    }
+
+
+    /**
+     * getBrowser function
+     *
+     * @return String|null
+     */
+    public function getBrowser(): ?String
+    {
+        return $this->attributes['browser'];
+    }
+
+    /**
+     * setBrowser function
+     *
+     * @param String|null $browser
+     * @return void
+     */
+    public function setBrowser(?String $browser)
+    {
+        $session = session();
+        $LANGUAGE = $session->get("language");
+        $BROWSER_NAME_TRANSLATE = lang('Words.name_browser', [], $LANGUAGE);
+
+        if (strlen($browser) > 150)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => $BROWSER_NAME_TRANSLATE,
+                "param" => 150
+            ], $LANGUAGE), BAD_REQUEST);
+
+        if (!empty($browser))
+            $this->attributes['browser'] = $browser;
+    }
+
+    /**
+     * getUserId function
+     *
+     * @return Int|null
+     */
+    public function getUserId(): ?Int
+    {
+        return $this->attributes['user_id'];
+    }
+
+    /**
+     * setUserId function
+     *
+     * @param Int|null $userId
+     * @return void
+     */
+    public function setUserId(Int $userId)
+    {
+        if (!empty($userId))
+            $this->attributes['user_id'] = $userId;
+    }
+
+    /**
+     * getUser function
+     *
+     * @return UsersEntity|null
+     */
+    public function getUser(): UserEntity
+    {
+        return $this->attributes['user'];
+    }
+
+    /**
+     * setUser function
+     *
+     * @param UsersEntity|null $user
+     * @return void
+     */
+    public function setUser(UserEntity $user)
+    {
+        if (!empty($user))
+            $this->attributes['user'] = $user;
+    }
+
+    /**
+     * setCreatedAt function
+     *
+     * @param String|null $createdAt
+     * @return void
+     */
+    public function setCreatedAt(?String $createdAt)
+    {
+        if (!empty($createdAt))
+            $this->dates['created_at'] = $createdAt;
+    }
+
+    /**
+     * getCreatedAt function
+     *
+     * @return String|null
+     */
+    public function getCreatedAt(): ?String
+    {
+        return $this->dates['created_at'];
+    }
+}
