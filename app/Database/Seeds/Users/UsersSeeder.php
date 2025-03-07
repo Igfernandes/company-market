@@ -21,13 +21,12 @@ class UsersSeeder extends Seeder
         $USER_ID = 1;
 
         $userEntity->setId($USER_ID);
-        $userEntity->setLogin($email);
+        $userEntity->setEmail($email);
         $userEntity->setPassword($password);
-        $userEntity->setPhoto(site_url(getenv("globals.admin.photo")));
+        $userEntity->setAvatar(site_url(getenv("globals.admin.photo")));
         $userEntity->setCpf(getenv("globals.admin.cpf"));
         $userEntity->setName(getenv("globals.admin.name"));
         $userEntity->setEmailSha1(sha1(getenv("globals.admin.login")));
-        $userEntity->setRegistration($USER_ID + BASE_NUMERIC_REGISTRATIONS);
         $userEntity->setBirthdate(getenv("globals.admin.birthdate"));
         $userEntity->setStatus("ACTIVE");
         $userEntity->setKeyword(getenv("globals.admin.keyword"));

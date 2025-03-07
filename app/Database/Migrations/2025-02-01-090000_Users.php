@@ -26,17 +26,16 @@ class Users extends Migration
                 'constraint' => '45'
             ],
             'avatar'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '500',
+                'type'       => 'TINYTEXT',
             ],
             'email' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '450',
+                'constraint' => '255',
                 'unique'     => true
             ],
             'password'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '400',
+                'constraint' => '255',
             ],
             'cpf'       => [
                 'type'       => 'VARCHAR',
@@ -76,7 +75,7 @@ class Users extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true, ['ENGINE' => 'InnoDB']);
     }
 
     public function down()

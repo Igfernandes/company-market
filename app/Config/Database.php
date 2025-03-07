@@ -40,8 +40,8 @@ class Database extends Config
         'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => (ENVIRONMENT !== 'production'),
-        'charset'  => 'utf8',
-        'DBCollat' => 'utf8_general_ci',
+        'charset'  => 'utf8', // Muda aqui para utf8
+        'DBCollat' => 'utf8_general_ci', // Muda aqui também
         'swapPre'  => '',
         'encrypt'  => false,
         'compress' => false,

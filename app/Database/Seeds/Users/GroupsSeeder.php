@@ -16,13 +16,13 @@ class GroupsSeeder extends Seeder
         ],
         [
             "id" => 2,
-            "title" => "employee",
+            "name" => "employee",
             "description" => "The group with somes permissions",
             "status" => "ACTIVE"
         ],
         [
             "id" => 3,
-            "title" => "client",
+            "name" => "client",
             "description" => "The group to user simples",
             "status" => "ACTIVE"
         ],
@@ -36,7 +36,7 @@ class GroupsSeeder extends Seeder
             $groupsEntity = new GroupEntity();
 
             $groupsEntity->setId($data['id']);
-            $groupsEntity->setTitle($data['title']);
+            $groupsEntity->setName($data['name']);
             $groupsEntity->setDescription($data['description']);
             $groupsEntity->setStatus($data['status']);
 

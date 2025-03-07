@@ -3,12 +3,15 @@
 namespace App\Database\Entities\Users;
 
 use App\Libraries\Crypto\Crypto;
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class UserEntity extends Entity
 {
-    private string $userKey;
+    use EntityEnhancerTrait;
+
+    private string $userKey = "";
     private Crypto $cryptoLibrary;
 
     protected $dates = [
@@ -19,22 +22,21 @@ class UserEntity extends Entity
     public $attributes = [
         'id'               => null,
         'name'             => null,
-        'login'            => null,
+        'email'            => null,
         'password'         => null,
-        'photo'            => null,
+        'avatar'           => null,
         'cpf'              => null,
         'birthdate'        => null,
-        'rg'               => null,
-        'registration'     => null,
         'status'           => null,
         'keyword'          => null,
-        'is_social'        => null,
         'system_key'       => null,
-        'twof_secret_enc'  => null,
+        'twof_secret'      => null,
+    ];
+    public $relations = [
         'groups'           => null
     ];
 
-    public function __construct(String $systemKey)
+    public function __construct(String|Null $systemKey = null)
     {
         $this->cryptoLibrary = new Crypto();
 
@@ -82,45 +84,68 @@ class UserEntity extends Entity
      */
     public function setName(?String $name)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $NAME_TRANSLATE = lang('Words.name', [], $LANGUAGE);
+        $NAME_TRANSLATE = lang('Words.name');
 
         if (strlen($name) > 100)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $NAME_TRANSLATE,
                 "param" => 100
-            ],  $LANGUAGE), BAD_REQUEST);
+            ]), BAD_REQUEST);
 
         if (!empty($name))
             $this->attributes['name'] = $name;
     }
 
     /**
-     * @method mixed setLogin()
+     * @method mixed setEmail()
      *
-     * @param String|null $login
+     * @param String|null $email
      * @return void
      */
-    public function setLogin(?String $login)
+    public function setEmail(?String $email)
     {
-        $session = session();
 
-        if (preg_match(VALIDATE_EMAIL, $login) === false)
-            throw new Exception(lang('Validation.invalid_email', [], $session->get("language")), BAD_REQUEST);
+        if (preg_match(VALIDATE_EMAIL, $email) === false)
+            throw new Exception(lang('Validation.invalid_email'), BAD_REQUEST);
 
-        if (!empty($login))
-            $this->attributes['login'] = $this->cryptoLibrary->encrypt(strtolower($login), $this->userKey);
+        if (!empty($email))
+            $this->attributes['email'] = $email;
     }
 
     /**
-     * @method mixed getLogin()
+     * @method mixed setEncryptEmail()
+     *
+     * @param String|null $email
+     * @return void
+     */
+    public function setEncryptEmail(?String $email)
+    {
+
+        if (preg_match(VALIDATE_EMAIL, $email) === false)
+            throw new Exception(lang('Validation.invalid_email'), BAD_REQUEST);
+
+        if (!empty($email))
+            $this->attributes['email'] = $this->cryptoLibrary->encrypt(strtolower($email), $this->userKey);
+    }
+
+    /**
+     * @method mixed getEmail()
      *
      * @return String|null
      */
-    public function getLogin(): ?String
+    public function getEmail()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['login'], $this->userKey);
+        return $this->attributes['email'];
+    }
+
+    /**
+     * @method mixed getEncryptEmail()
+     *
+     * @return String|null
+     */
+    public function getEncryptEmail()
+    {
+        return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->userKey);
     }
 
     /**
@@ -131,15 +156,33 @@ class UserEntity extends Entity
      */
     public function setPassword(?string $password)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $PASSWORD_TRANSLATE = lang('Words.password', [], $LANGUAGE);
+        $PASSWORD_TRANSLATE = lang('Words.password');
 
         if (strlen($password) > 20)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $PASSWORD_TRANSLATE,
                 "param" => 20
-            ], $LANGUAGE), BAD_REQUEST);
+            ]), BAD_REQUEST);
+
+        if (!empty($password))
+            $this->attributes['password'] = $password;
+    }
+
+    /**
+     * @method mixed setEncryptPassword()
+     *
+     * @param String|null $password
+     * @return void
+     */
+    public function setEncryptPassword(?string $password)
+    {
+        $PASSWORD_TRANSLATE = lang('Words.password');
+
+        if (strlen($password) > 20)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => $PASSWORD_TRANSLATE,
+                "param" => 20
+            ]), BAD_REQUEST);
 
         if (!empty($password))
             $this->attributes['password'] = $this->cryptoLibrary->encrypt($password, $this->userKey);
@@ -150,31 +193,41 @@ class UserEntity extends Entity
      *
      * @return String|null
      */
-    public function getPassword(): string
+    public function getPassword()
+    {
+        return $this->attributes['password'];
+    }
+
+    /**
+     * @method mixed getEncryptPassword()
+     *
+     * @return String|null
+     */
+    public function getEncryptPassword()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['password'], $this->userKey);
     }
 
     /**
-     * @method String setPhoto()
+     * @method String setAvatar()
      *
-     * @param integer $photo
+     * @param integer $avatar
      * @return void
      */
-    public function setPhoto(?String $photo)
+    public function setAvatar(?String $avatar)
     {
-        if (!empty($photo))
-            $this->attributes['photo'] = $photo;
+        if (!empty($avatar))
+            $this->attributes['avatar'] = $avatar;
     }
 
     /**
-     * @method String getPhoto()
+     * @method String getAvatar()
      *
      * @return String|null
      */
-    public function getPhoto(): ?String
+    public function getAvatar(): ?String
     {
-        return  $this->attributes['photo'];
+        return  $this->attributes['avatar'];
     }
 
     /**
@@ -185,17 +238,36 @@ class UserEntity extends Entity
      */
     public function setCpf(?string $cpf)
     {
-        $session = session();
         $cpf = str_replace([".", "-"], "", $cpf);
 
         if (strlen($cpf) > 11)
             throw new Exception(lang('Validation.max_length', [
                 "field" => "Cpf",
                 "param" => 11
-            ], $session->get("language")), BAD_REQUEST);
+            ]), BAD_REQUEST);
+
+        if (!empty($cpf) && isset($this->userKey))
+            $this->attributes['cpf'] = $this->userKey;
+    }
+
+    /**
+     * @method mixed setEncryptCpf()
+     *
+     * @param string|null $cpf O valor bruto do CPF sem pontuação "18222234798"
+     * @return void
+     */
+    public function setEncryptCpf(?string $cpf)
+    {
+        $cpf = str_replace([".", "-"], "", $cpf);
+
+        if (strlen($cpf) > 11)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => "Cpf",
+                "param" => 11
+            ]), BAD_REQUEST);
 
         if (!empty($cpf))
-            $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->userKey);
+            $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->userKey);;
     }
 
     /**
@@ -203,7 +275,17 @@ class UserEntity extends Entity
      *
      * @return String|null
      */
-    public function getCpf(): ?String
+    public function getCpf()
+    {
+        return $this->attributes['cpf'];
+    }
+
+    /**
+     * @method mixed getEncryptCpf()
+     *
+     * @return String|null
+     */
+    public function getEncryptCpf()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['cpf'], $this->userKey);
     }
@@ -234,66 +316,6 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed setRg()
-     *
-     * @param String|null $rg
-     * @return void
-     */
-    public function setRg(?String $rg)
-    {
-        $session = session();
-
-        if (strlen($rg) > 30)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "RG",
-                "param" => 30
-            ], $session->get("language")), BAD_REQUEST);
-
-        if (!empty($rg))
-            $this->attributes['rg'] = $this->cryptoLibrary->encrypt($rg, $this->userKey);
-    }
-
-    /**
-     * @method mixed getRg()
-     *
-     * @return String|null
-     */
-    public function getRg(): ?String
-    {
-        return $this->cryptoLibrary->decrypt($this->attributes['rg'], $this->userKey);
-    }
-
-    /**
-     * @method mixed setRegistration()
-     *
-     * @param String|null $registration
-     * @return void
-     */
-    public function setRegistration(?String $registration)
-    {
-        $session = session();
-
-        if (strlen($registration) > 30)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "RG",
-                "param" => 30
-            ], $session->get("language")), BAD_REQUEST);
-
-        if (!empty($registration))
-            $this->attributes['registration'] = $this->cryptoLibrary->encrypt($registration, $this->userKey);
-    }
-
-    /**
-     * @method mixed getRegistration()
-     *
-     * @return String|null
-     */
-    public function getRegistration(): ?String
-    {
-        return $this->cryptoLibrary->decrypt($this->attributes['registration'], $this->userKey);
-    }
-
-    /**
      * @method mixed getStatus()
      *
      * @return ACTIVE|INACTIVE|ANALYSIS
@@ -311,10 +333,9 @@ class UserEntity extends Entity
      */
     public function setStatus(?String $status)
     {
-        $session = session();
 
         if (array_search($status, ["ACTIVE", "INACTIVE", "ANALYSIS"]) === false)
-            throw new Exception(lang('Validation.enum_invalid', [], $session->get("language")), BAD_REQUEST);
+            throw new Exception(lang('Validation.enum_invalid'), BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;
@@ -328,18 +349,37 @@ class UserEntity extends Entity
      */
     public function setKeyword(?string $keyword)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $KEYWORD_TRANSLATE = lang('Words.keyword', [], $LANGUAGE);
+        $KEYWORD_TRANSLATE = lang('Words.keyword');
 
         if (strlen($keyword) > 100)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $KEYWORD_TRANSLATE,
                 "param" => 100
-            ], $LANGUAGE), BAD_REQUEST);
+            ]), BAD_REQUEST);
 
-        if (!empty($keyword))
+        if (!empty($keyword) && isset($this->userKey))
+            $this->attributes['keyword'] = $keyword;
+    }
+
+    /**
+     * @method mixed setEncryptKeyword()
+     *
+     * @param string|null $keyword
+     * @return void
+     */
+    public function setEncryptKeyword(?string $keyword)
+    {
+        $KEYWORD_TRANSLATE = lang('Words.keyword');
+
+        if (strlen($keyword) > 100)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => $KEYWORD_TRANSLATE,
+                "param" => 100
+            ]), BAD_REQUEST);
+
+        if (!empty($keyword) && isset($this->userKey))
             $this->attributes['keyword'] = $this->cryptoLibrary->encrypt($keyword, $this->userKey);
+        else  $this->attributes['keyword'] = $keyword;
     }
 
     /**
@@ -347,10 +387,21 @@ class UserEntity extends Entity
      *
      * @return String|null
      */
-    public function getKeyword(): ?String
+    public function getKeyword()
+    {
+        return $this->attributes['keyword'];
+    }
+
+    /**
+     * @method mixed getEncryptKeyword()
+     *
+     * @return String|null
+     */
+    public function getEncryptKeyword()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['keyword'], $this->userKey);
     }
+
 
     /**
      * @method mixed setEmailSha1()
@@ -382,16 +433,15 @@ class UserEntity extends Entity
      */
     public function setTwofSecretEnc(?String $twofSecretEnc)
     {
-        $session = session();
 
         if (strlen($twofSecretEnc ?? "") > 250)
             throw new Exception(lang('Validation.max_length', [
-                "field" => "twof_secret_enc",
+                "field" => "twof_secret",
                 "param" => 250
-            ], $session->get("language")), BAD_REQUEST);
+            ]), BAD_REQUEST);
 
         if (!empty($twofSecretEnc))
-            $this->attributes['twof_secret_enc'] = $twofSecretEnc;
+            $this->attributes['twof_secret'] = $twofSecretEnc;
     }
 
     /**
@@ -401,7 +451,7 @@ class UserEntity extends Entity
      */
     public function getTwofSecretEnc(): ?String
     {
-        return $this->attributes['twof_secret_enc'];
+        return $this->attributes['twof_secret'];
     }
 
     /**
@@ -412,10 +462,9 @@ class UserEntity extends Entity
      */
     public function setIsSocial(?bool $isSocial)
     {
-        $session = session();
 
         if (gettype($isSocial) != 'boolean')
-            throw new Exception(lang('Validation.invalid_field', ["field" => "is_social"], $session->get("language")), BAD_REQUEST);
+            throw new Exception(lang('Validation.invalid_field', ["field" => "is_social"]), BAD_REQUEST);
 
         if (!empty($isSocial))
             $this->attributes['is_social'] = $isSocial;
@@ -439,13 +488,12 @@ class UserEntity extends Entity
      */
     public function setSystemKey(?String $systemKey)
     {
-        $session = session();
 
         if (strlen($systemKey) > 400)
             throw new Exception(lang('Validation.max_length', [
                 "field" => "system_key",
                 "param" => 400
-            ], $session->get("language")), BAD_REQUEST);
+            ]), BAD_REQUEST);
 
         if (!empty($systemKey))
             $this->attributes['system_key'] = $systemKey;
@@ -470,7 +518,7 @@ class UserEntity extends Entity
     public function setGroups(array|null $groups)
     {
         if (!empty($groups))
-            $this->attributes['groups'] = $groups;
+            $this->relations['groups'] = $groups;
     }
 
     /**
@@ -480,7 +528,7 @@ class UserEntity extends Entity
      */
     public function getGroups(): array|null
     {
-        return $this->attributes['groups'];
+        return $this->relations['groups'];
     }
 
     /**

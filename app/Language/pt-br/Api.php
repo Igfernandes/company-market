@@ -3,9 +3,10 @@
 // override core en language system validation or define your own en language validation message
 return [
     "authentications" => [
-        "social" => [
+        "auth" => [
             "post" => [
-                "success" => "A sua conta social foi autenticada com sucesso em nossos sistemas"
+                "credentials_invalid" => "As credenciais estão inválida",
+                "success" => "A sua conta foi autenticada com sucesso em nossos sistemas"
             ]
         ]
     ],
