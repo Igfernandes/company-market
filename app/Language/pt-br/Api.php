@@ -8,6 +8,12 @@ return [
                 "credentials_invalid" => "As credenciais estão inválida",
                 "success" => "A sua conta foi autenticada com sucesso em nossos sistemas"
             ]
+        ],
+        "remember" => [
+            "post" => [
+                "token_invalid" => "O usuário não está apto para essa operação.",
+                "success" => "A sua conta foi autenticada com sucesso. Você será redirecionado."
+            ]
         ]
     ],
     "tokens" => [
