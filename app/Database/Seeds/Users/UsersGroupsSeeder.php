@@ -9,7 +9,6 @@ class UsersGroupsSeeder extends Seeder
 {
     protected array $datas = [
         [
-            "id" => 1,
             "user_id"  => 1,
             "group_id" => 1
         ],
@@ -21,7 +20,6 @@ class UsersGroupsSeeder extends Seeder
             $prefix = getenv('database.default.DBPrefix');
             $usersGroupsEntity = new UserGroupsEntity();
 
-            $usersGroupsEntity->setId($data['id']);
             $usersGroupsEntity->setUserId($data['user_id']);
             $usersGroupsEntity->setGroupId($data['group_id']);
 
