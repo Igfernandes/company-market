@@ -11,8 +11,7 @@ class RoutesApi
   {
     /** Authentications */
     $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
-
-
+    $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
 
     return $routes;
   }
