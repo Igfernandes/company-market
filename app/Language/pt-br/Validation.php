@@ -9,8 +9,9 @@ return [
     "invalid_json" => "{json} não contém o formato JSON válido",
     "invalid_field" => "O {field} encontra-se inválido ou não foi encontrado",
     "required" => "{field} é obrigatório, mas não foi encontrado.",
-    "string" => "{field} não é uma palavra válida ou encontra-se vazia",
+    "string" => "O {field} não é uma palavra válida ou encontra-se vazia",
     "valid_url" => "O {field} encontra-se com a url inválida ou incompleta.",
-    "in_list" => "O '{value}' não atende aos tipos de conexões permetidas no sistema.",
-    "invalid_index" => "O {field} indice não atende aos critérios mínimos da operação"
+    "in_list" => "O '{field}' não atende aos tipos de conexões permitidas no sistema.",
+    "invalid_index" => "O {field} índice não atende aos critérios mínimos da operação",
+    "recaptcha" => "A solicitação encontra-se inválida ou incompatível com o servidor"
 ];
