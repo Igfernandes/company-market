@@ -51,13 +51,7 @@ class Cors extends \Fluent\Cors\Config\Cors
      */
     public $allowedOrigins = [
         'http://localhost:8080',
-        'https://brasilarco.org.br',
-        'https://aprovacao.brasilarco.org.br',
-        'http://aprovacao.brasilarco.org.br',
         'http://localhost:3000',
-        'https://brasilarco.org.br',
-        'https://painel.brasilarco.org.br',
-        'https://ws2.hubdodesenvolvedor.com.br'
     ];
 
     /**
