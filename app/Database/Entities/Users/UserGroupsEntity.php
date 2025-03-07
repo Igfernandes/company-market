@@ -11,34 +11,11 @@ class UserGroupsEntity extends Entity
         "updated_at"      => null
     ];
     public $attributes = [
-        'id'              => null,
         'group_id'        => null,
         'group'           => null,
         'user_id'         => null,
         'user'            => null,
     ];
-
-    /**
-     * getId function
-     *
-     * @return Int|null
-     */
-    public function getId(): ?Int
-    {
-        return $this->attributes['id'];
-    }
-
-    /**
-     * setId function
-     *
-     * @param Int|null $id
-     * @return void
-     */
-    public function setId(?Int $id)
-    {
-        if (!empty($id))
-            $this->attributes['id'] = $id;
-    }
 
     /**
      * getGroupId function

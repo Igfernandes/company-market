@@ -13,7 +13,7 @@ class GroupEntity extends Entity
     ];
     public $attributes = [
         'id'              => null,
-        'title'           => null,
+        'name'           => null,
         'description'     => null,
         'status'          => null,
     ];
@@ -41,25 +41,25 @@ class GroupEntity extends Entity
     }
 
     /**
-     * getTitle function
+     * getName function
      *
      * @return String|null
      */
-    public function getTitle(): ?String
+    public function getName(): ?String
     {
-        return $this->attributes['title'];
+        return $this->attributes['name'];
     }
 
     /**
-     * setTitle function
+     * setName function
      *
-     * @param String|null $title
+     * @param String|null $name
      * @return void
      */
-    public function setTitle(?String $title)
+    public function setName(?String $name)
     {
-        if (!empty($title))
-            $this->attributes['title'] = $title;
+        if (!empty($name))
+            $this->attributes['name'] = $name;
     }
 
     /**
