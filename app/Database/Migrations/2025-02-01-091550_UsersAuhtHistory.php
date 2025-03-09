@@ -25,6 +25,11 @@ class UsersAuthHistory extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '50'
             ],
+            'token' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+                'unique'     => true
+            ],
             'user_id' => [
                 'type' => 'INT'
             ],

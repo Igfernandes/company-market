@@ -33,13 +33,18 @@ class Users extends Migration
                 'constraint' => '255',
                 'unique'     => true
             ],
+            'phone' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'unique'     => true
+            ],
             'password'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
             ],
             'cpf'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '11',
+                'constraint' => '255',
                 'unique'         => true
             ],
             'birthdate'       => [
@@ -47,7 +52,7 @@ class Users extends Migration
             ],
             'keyword'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '255',
                 'null' => true
             ],
             'status' => [
@@ -67,6 +72,10 @@ class Users extends Migration
             'system_key'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '400',
+                'null' => true
+            ],
+            'owner_id' => [
+                'type' => 'INT',
                 'null' => true
             ],
             'created_at datetime default current_timestamp',
