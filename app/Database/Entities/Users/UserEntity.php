@@ -2,16 +2,14 @@
 
 namespace App\Database\Entities\Users;
 
-use App\Libraries\Crypto\Crypto;
+use App\Traits\CryptoEntityTrait;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class UserEntity extends Entity
 {
-    use EntityEnhancerTrait;
-
-    private Crypto $cryptoLibrary;
+    use EntityEnhancerTrait, CryptoEntityTrait;
 
     public $attributes = [
         'id'               => null,
@@ -25,7 +23,6 @@ class UserEntity extends Entity
         'keyword'          => null,
         'system_key'       => null,
         'twof_secret'      => null,
-        'owner_id'         => null,
         "created_at"       => null,
         "updated_at"       => null,
         "deleted_at"       => null
@@ -33,16 +30,6 @@ class UserEntity extends Entity
     public $relations = [
         'groups'           => null
     ];
-
-    public function __construct()
-    {
-        $this->cryptoLibrary = new Crypto();
-    }
-
-    public function getEncryptedKey()
-    {
-        return $this->cryptoLibrary->decrypt($this->attributes['system_key'], getenv('system.encrypted_key'));
-    }
 
     /**
      * @method mixed getId()
@@ -90,7 +77,7 @@ class UserEntity extends Entity
             throw new Exception(lang('Validation.max_length', [
                 "field" => $NAME_TRANSLATE,
                 "param" => 100
-            ]), BAD_REQUEST);
+            ]), BAD_BUSINESS_RULES);
 
         if (!empty($name))
             $this->attributes['name'] = $name;
@@ -136,11 +123,11 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed getEncryptEmail()
+     * @method mixed getDecryptEmail()
      *
      * @return String|null
      */
-    public function getEncryptEmail()
+    public function getDecryptEmail()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->getEncryptedKey());
     }
@@ -189,11 +176,11 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed getEncryptPassword()
+     * @method mixed getDecryptPassword()
      *
      * @return String|null
      */
-    public function getEncryptPassword()
+    public function getDecryptPassword()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['password'], $this->getEncryptedKey());
     }
@@ -263,11 +250,11 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed getEncryptCpf()
+     * @method mixed getDecryptCpf()
      *
      * @return String|null
      */
-    public function getEncryptCpf()
+    public function getDecryptCpf()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['cpf'], $this->getEncryptedKey());
     }
@@ -315,11 +302,11 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed getEncryptPhone()
+     * @method mixed getDecryptPhone()
      *
      * @return String|null
      */
-    public function getEncryptPhone()
+    public function getDecryptPhone()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['phone'], $this->getEncryptedKey());
     }
@@ -419,11 +406,11 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed getEncryptKeyword()
+     * @method mixed getDecryptKeyword()
      *
      * @return String|null
      */
-    public function getEncryptKeyword()
+    public function getDecryptKeyword()
     {
         return $this->cryptoLibrary->decrypt($this->attributes['keyword'], $this->getEncryptedKey());
     }
@@ -555,28 +542,6 @@ class UserEntity extends Entity
     public function getGroups(): array|null
     {
         return $this->relations['groups'];
-    }
-
-    /**
-     * getOwnerId function
-     *
-     * @return Int|null
-     */
-    public function getOwnerId(): ?Int
-    {
-        return $this->attributes['owner_id'];
-    }
-
-    /**
-     * setOwnerId function
-     *
-     * @param Int|null $OwnerId
-     * @return void
-     */
-    public function setOwnerId(Int $ownerId)
-    {
-        if (!empty($ownerId))
-            $this->attributes['owner_id'] = $ownerId;
     }
 
     /**

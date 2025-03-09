@@ -32,7 +32,6 @@ class UsersSeeder extends Seeder
         $userEntity->setBirthdate(getenv("globals.admin.birthdate"));
         $userEntity->setStatus("ACTIVE");
         $userEntity->setEncryptKeyword(getenv("globals.admin.keyword"));
-        $userEntity->setOwnerId($USER_ID);
 
         $prefix = getenv('database.default.DBPrefix');
 

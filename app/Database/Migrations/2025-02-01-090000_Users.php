@@ -21,12 +21,9 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100'
             ],
-            'surname' => [
-                'type' => 'VARCHAR',
-                'constraint' => '45'
-            ],
             'avatar'       => [
-                'type'       => 'TINYTEXT',
+                'type'      => 'TINYTEXT',
+                'null'      => true
             ],
             'email' => [
                 'type'       => 'VARCHAR',
@@ -72,10 +69,6 @@ class Users extends Migration
             'system_key'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '400',
-                'null' => true
-            ],
-            'owner_id' => [
-                'type' => 'INT',
                 'null' => true
             ],
             'created_at datetime default current_timestamp',

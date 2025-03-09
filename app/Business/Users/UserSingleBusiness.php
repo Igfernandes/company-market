@@ -34,7 +34,6 @@ class UserSingleBusiness
 
         if (isset($payload['id'])) {
             $userEntity->setId($payload['id']);
-            $userEntity->setOwnerId($userAuthId);
         } else $userEntity->setId($userAuthId);
 
         /** @var UserEntity */
