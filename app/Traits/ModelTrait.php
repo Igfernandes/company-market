@@ -27,12 +27,13 @@ trait ModelTrait
      * // Atualiza se existir, caso contrário insere um novo registro
      * $this->upsert(['id' => 1], ['name' => 'Alice', 'email' => 'alice@example.com']);
      */
-    public function upsert(array|object $where, Entity|array $data)
+    public function upsert(array|object $where, Entity $data)
     {
         $this->where($where);
 
         if (!empty($this->first())) {
-            return $this->set($data)->where($where)->update();
+            $this->set($data->toArray(true))->where($where)->update();
+            return;
         }
 
         $this->save($data);
