@@ -7,13 +7,4 @@
 
 namespace App\Business;
 
-trait BaseBusiness
-{
-    protected function lang($param)
-    {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-
-        return lang($param, [$LANGUAGE]);
-    }
-}
+trait BaseBusiness {}

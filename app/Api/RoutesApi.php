@@ -13,6 +13,9 @@ class RoutesApi
     $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
     $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
 
+    /** Authentications */
+    $routes->get("users", "Api\Users\Get\GetController::handle", ["filter" => "bearerToken"]);
+
     return $routes;
   }
 }

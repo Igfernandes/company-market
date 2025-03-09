@@ -14,7 +14,7 @@ class PostController extends BaseController
     use Validation, ExceptionApi, PostDTOs;
 
     private PostUseCases $postUseCases;
-    protected $helpers = ['recaptcha'];
+    protected $helpers = ['recaptcha', 'cache'];
 
     public function __construct()
     {
@@ -25,6 +25,7 @@ class PostController extends BaseController
     {
         try {
             $validation = \Config\Services::validation();
+            $request = service('request');
 
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
@@ -34,7 +35,11 @@ class PostController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $responsePost = $this->postUseCases->execute($payload);
+            $browser =  $request->getUserAgent()->getBrowser();
+            $responsePost = $this->postUseCases->execute($payload, (object)[
+                "ip" => $request->getIPAddress(),
+                "browser" => !empty($browser) ? $browser : "Postman"
+            ]);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
