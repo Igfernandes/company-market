@@ -27,9 +27,7 @@ class Categories extends Migration
             ],
             'position' => [
                 'type' => 'INT',
-            ],
-            'status' => [
-                'type' => 'ENUM("ACTIVE", "INACTIVE")'
+                'unsigned'       => true,
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
