@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\BearerTokenFilter;
 use App\Filters\Cors;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
@@ -25,7 +26,8 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors' => \Fluent\Cors\Filters\CorsFilter::class,
-        'language' => \App\Filters\LanguageFilter::class
+        'language' => \App\Filters\LanguageFilter::class,
+        'bearerToken' => \App\Filters\BearerTokenFilter::class
     ];
 
     /**
@@ -36,7 +38,7 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            'language'
+            'language',
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
@@ -69,6 +71,6 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'cors' => ['after' => ['*']],
+        'cors' => ['after' => ['*']]
     ];
 }

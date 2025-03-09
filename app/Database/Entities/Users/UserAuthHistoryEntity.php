@@ -14,6 +14,7 @@ class UserAuthHistoryEntity extends Entity
         'id'              => null,
         'ip'              => null,
         'browser'         => null,
+        'token'           => null,
         'user_id'         => null,
         'user'            => null,
     ];
@@ -103,6 +104,35 @@ class UserAuthHistoryEntity extends Entity
             $this->attributes['browser'] = $browser;
     }
 
+
+    /**
+     * getToken function
+     *
+     * @return String|null
+     */
+    public function getToken(): ?String
+    {
+        return $this->attributes['token'];
+    }
+
+    /**
+     * setToken function
+     *
+     * @param String|null $token
+     * @return void
+     */
+    public function setToken(?String $token)
+    {
+        if (strlen($token) > 50)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => 'token',
+                "param" => 50
+            ]), BAD_BUSINESS_RULES);
+
+        if (!empty($token))
+            $this->attributes['token'] = $token;
+    }
+
     /**
      * getUserId function
      *
@@ -130,7 +160,7 @@ class UserAuthHistoryEntity extends Entity
      *
      * @return UsersEntity|null
      */
-    public function getUser(): UserEntity
+    public function getUser(): UserEntity|null
     {
         return $this->attributes['user'];
     }

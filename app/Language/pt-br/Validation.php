@@ -13,5 +13,5 @@ return [
     "valid_url" => "O {field} encontra-se com a url inválida ou incompleta.",
     "in_list" => "O '{field}' não atende aos tipos de conexões permitidas no sistema.",
     "invalid_index" => "O {field} índice não atende aos critérios mínimos da operação",
-    "recaptcha" => "A solicitação encontra-se inválida ou incompatível com o servidor"
+    "recaptcha" => "A página está com recursos desatualizados. Recarregue e tente novamente."
 ];

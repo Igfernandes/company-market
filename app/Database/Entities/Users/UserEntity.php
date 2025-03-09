@@ -11,14 +11,8 @@ class UserEntity extends Entity
 {
     use EntityEnhancerTrait;
 
-    private string $userKey = "";
     private Crypto $cryptoLibrary;
 
-    protected $dates = [
-        "created_at"       => null,
-        "updated_at"       => null,
-        "deleted_at"       => null
-    ];
     public $attributes = [
         'id'               => null,
         'name'             => null,
@@ -31,17 +25,23 @@ class UserEntity extends Entity
         'keyword'          => null,
         'system_key'       => null,
         'twof_secret'      => null,
+        'owner_id'         => null,
+        "created_at"       => null,
+        "updated_at"       => null,
+        "deleted_at"       => null
     ];
     public $relations = [
         'groups'           => null
     ];
 
-    public function __construct(String|Null $systemKey = null)
+    public function __construct()
     {
         $this->cryptoLibrary = new Crypto();
+    }
 
-        if (!empty($systemKey))
-            $this->userKey = $this->cryptoLibrary->decrypt($systemKey, (getenv('system.encrypted_key')));
+    public function getEncryptedKey()
+    {
+        return $this->cryptoLibrary->decrypt($this->attributes['system_key'], getenv('system.encrypted_key'));
     }
 
     /**
@@ -105,9 +105,6 @@ class UserEntity extends Entity
     public function setEmail(?String $email)
     {
 
-        if (preg_match(VALIDATE_EMAIL, $email) === false)
-            throw new Exception(lang('Validation.invalid_email'), BAD_REQUEST);
-
         if (!empty($email))
             $this->attributes['email'] = $email;
     }
@@ -125,7 +122,7 @@ class UserEntity extends Entity
             throw new Exception(lang('Validation.invalid_email'), BAD_REQUEST);
 
         if (!empty($email))
-            $this->attributes['email'] = $this->cryptoLibrary->encrypt(strtolower($email), $this->userKey);
+            $this->attributes['email'] = $this->cryptoLibrary->encrypt(strtolower($email), $this->getEncryptedKey());
     }
 
     /**
@@ -145,7 +142,7 @@ class UserEntity extends Entity
      */
     public function getEncryptEmail()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->userKey);
+        return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->getEncryptedKey());
     }
 
     /**
@@ -156,13 +153,6 @@ class UserEntity extends Entity
      */
     public function setPassword(?string $password)
     {
-        $PASSWORD_TRANSLATE = lang('Words.password');
-
-        if (strlen($password) > 20)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $PASSWORD_TRANSLATE,
-                "param" => 20
-            ]), BAD_REQUEST);
 
         if (!empty($password))
             $this->attributes['password'] = $password;
@@ -185,7 +175,7 @@ class UserEntity extends Entity
             ]), BAD_REQUEST);
 
         if (!empty($password))
-            $this->attributes['password'] = $this->cryptoLibrary->encrypt($password, $this->userKey);
+            $this->attributes['password'] = $this->cryptoLibrary->encrypt($password, $this->getEncryptedKey());
     }
 
     /**
@@ -205,7 +195,7 @@ class UserEntity extends Entity
      */
     public function getEncryptPassword()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['password'], $this->userKey);
+        return $this->cryptoLibrary->decrypt($this->attributes['password'], $this->getEncryptedKey());
     }
 
     /**
@@ -238,16 +228,8 @@ class UserEntity extends Entity
      */
     public function setCpf(?string $cpf)
     {
-        $cpf = str_replace([".", "-"], "", $cpf);
-
-        if (strlen($cpf) > 11)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "Cpf",
-                "param" => 11
-            ]), BAD_REQUEST);
-
-        if (!empty($cpf) && isset($this->userKey))
-            $this->attributes['cpf'] = $this->userKey;
+        if (!empty($cpf))
+            $this->attributes['cpf'] = $cpf;
     }
 
     /**
@@ -267,7 +249,7 @@ class UserEntity extends Entity
             ]), BAD_REQUEST);
 
         if (!empty($cpf))
-            $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->userKey);;
+            $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->getEncryptedKey());;
     }
 
     /**
@@ -287,7 +269,59 @@ class UserEntity extends Entity
      */
     public function getEncryptCpf()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['cpf'], $this->userKey);
+        return $this->cryptoLibrary->decrypt($this->attributes['cpf'], $this->getEncryptedKey());
+    }
+
+    /**
+     * @method mixed setPhone()
+     *
+     * @param string|null $phone O valor do telefone
+     * @return void
+     */
+    public function setPhone(?string $phone)
+    {
+
+        if (!empty($phone))
+            $this->attributes['phone'] = $phone;
+    }
+
+    /**
+     * @method mixed setEncryptPhone()
+     *
+     * @param string|null $phone O valor do Telefone
+     * @return void
+     */
+    public function setEncryptPhone(?string $phone)
+    {
+
+        if (strlen($phone) > 20)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => "phone",
+                "param" => 20
+            ]), BAD_BUSINESS_RULES);
+
+        if (!empty($phone))
+            $this->attributes['phone'] = $this->cryptoLibrary->encrypt($phone, $this->getEncryptedKey());
+    }
+
+    /**
+     * @method mixed getPhone()
+     *
+     * @return String|null
+     */
+    public function getPhone()
+    {
+        return $this->attributes['phone'];
+    }
+
+    /**
+     * @method mixed getEncryptPhone()
+     *
+     * @return String|null
+     */
+    public function getEncryptPhone()
+    {
+        return $this->cryptoLibrary->decrypt($this->attributes['phone'], $this->getEncryptedKey());
     }
 
     /**
@@ -349,15 +383,7 @@ class UserEntity extends Entity
      */
     public function setKeyword(?string $keyword)
     {
-        $KEYWORD_TRANSLATE = lang('Words.keyword');
-
-        if (strlen($keyword) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $KEYWORD_TRANSLATE,
-                "param" => 100
-            ]), BAD_REQUEST);
-
-        if (!empty($keyword) && isset($this->userKey))
+        if (!empty($keyword))
             $this->attributes['keyword'] = $keyword;
     }
 
@@ -377,8 +403,8 @@ class UserEntity extends Entity
                 "param" => 100
             ]), BAD_REQUEST);
 
-        if (!empty($keyword) && isset($this->userKey))
-            $this->attributes['keyword'] = $this->cryptoLibrary->encrypt($keyword, $this->userKey);
+        if (!empty($keyword))
+            $this->attributes['keyword'] = $this->cryptoLibrary->encrypt($keyword, $this->getEncryptedKey());
         else  $this->attributes['keyword'] = $keyword;
     }
 
@@ -399,7 +425,7 @@ class UserEntity extends Entity
      */
     public function getEncryptKeyword()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['keyword'], $this->userKey);
+        return $this->cryptoLibrary->decrypt($this->attributes['keyword'], $this->getEncryptedKey());
     }
 
 
@@ -532,6 +558,28 @@ class UserEntity extends Entity
     }
 
     /**
+     * getOwnerId function
+     *
+     * @return Int|null
+     */
+    public function getOwnerId(): ?Int
+    {
+        return $this->attributes['owner_id'];
+    }
+
+    /**
+     * setOwnerId function
+     *
+     * @param Int|null $OwnerId
+     * @return void
+     */
+    public function setOwnerId(Int $ownerId)
+    {
+        if (!empty($ownerId))
+            $this->attributes['owner_id'] = $ownerId;
+    }
+
+    /**
      * @method mixed setCreatedAt()
      *
      * @param String|null $createdAt
@@ -540,7 +588,7 @@ class UserEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -550,7 +598,7 @@ class UserEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 
     /**
@@ -562,7 +610,7 @@ class UserEntity extends Entity
     public function setUpdatedAt(?String $updatedAt)
     {
         if (!empty($updatedAt))
-            $this->dates['updated_at'] = $updatedAt;
+            $this->attributes['updated_at'] = $updatedAt;
     }
 
     /**
@@ -572,7 +620,7 @@ class UserEntity extends Entity
      */
     public function getUpdatedAt(): ?String
     {
-        return $this->dates['updated_at'];
+        return $this->attributes['updated_at'];
     }
 
     /**
@@ -584,7 +632,7 @@ class UserEntity extends Entity
     public function setDeletedAt(?String $deletedAt)
     {
         if (!empty($deletedAt))
-            $this->dates['deleted_at'] = $deletedAt;
+            $this->attributes['deleted_at'] = $deletedAt;
     }
 
     /**
@@ -594,6 +642,6 @@ class UserEntity extends Entity
      */
     public function getDeletedAt(): ?String
     {
-        return $this->dates['deleted_at'];
+        return $this->attributes['deleted_at'];
     }
 }

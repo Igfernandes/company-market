@@ -89,6 +89,7 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 define("OK", 200);
 define("BAD_REQUEST", 400);
 define("BAD_AUTH", 401);
+define("NOT_FOUND", 404);
 define("BAD_BUSINESS_RULES", 406);
 define("INTERNAL_ERROR", 500);
 
@@ -135,16 +136,8 @@ define("VALIDATE_CEP", "/(^\d{5}\x2D\d{3}$)/");
  |
  | The CONSTANTS of project.
  */
-// define("BASE_URL_CURRENT", "https://painel.brasilarco.org.br/");
-define("BASE_URL_CURRENT", getenv("BASE_URL_CURRENT"));
-// define("BASE_URL_CURRENT", "http://aprovacao.brasilarco.org.br/");
-define("TEMPORARY_SOCIAL_DATA", "SOCIAL_DATA");
 
 // CONTACTS AND SOCIAL MEDIAS
-define('CONTACT_EMAIL', 'suporte@sportplataform.com.br');
-define('YOUTUBE', '');
-define('FACEBOOK', '');
-define('TWITTER', '');
-define('LINKEDIN', '');
 
 define("BASE_NUMERIC_REGISTRATIONS", 100000);
+define("DAY_AT_SECONDS", 86400);
