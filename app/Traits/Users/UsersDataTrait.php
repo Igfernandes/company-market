@@ -11,9 +11,9 @@ trait UsersDataTrait
         return  (object)[
             "id" => $userEntity->getId(),
             "name" => $userEntity->getName(),
-            "email" => $userEntity->getEncryptEmail(),
-            "phone" => $userEntity->getEncryptPhone(),
-            "cpf" => $userEntity->getEncryptCpf(),
+            "email" => $userEntity->getDecryptEmail(),
+            "phone" => $userEntity->getDecryptPhone(),
+            "cpf" => $userEntity->getDecryptCpf(),
             "avatar" => $userEntity->getAvatar(),
             "birthdate" => $userEntity->getBirthdate(),
             "status" => $userEntity->getStatus(),

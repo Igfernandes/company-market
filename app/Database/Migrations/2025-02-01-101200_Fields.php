@@ -21,21 +21,25 @@ class Fields extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100'
             ],
-            'field_scope' => [
-                'type'       => 'SET("USER","COMPANY")',
-            ],
             'component' => [
                 'type' => 'ENUM("INPUT")',
                 'default' => 'INPUT'
             ],
             'type' => [
-                'type' => "VARCHAR(50)"
+                'type' => "VARCHAR(50)",
+                'null' => true
+            ],
+            'is_sensitive' => [
+                'type' => "BIT",
+                'default' => 0
             ],
             'is_file' => [
-                'type' => "BIT"
+                'type' => "BIT",
+                'default' => 0
             ],
             'is_required' => [
-                'type' => "BIT"
+                'type' => "BIT",
+                'default' => 0
             ],
             'group_id' => [
                 'type' => 'INT'
@@ -46,7 +50,7 @@ class Fields extends Migration
 
         $this->forge->addKey('id', true);
 
-        $this->forge->addForeignKey("group_id", "fields_groups", ["id"]);
+        $this->forge->addForeignKey("group_id", "fields_group", ["id"]);
         $this->forge->createTable($this->tb_name);
     }
 

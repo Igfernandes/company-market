@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Users extends Migration
+class Clients extends Migration
 {
-    protected $tb_name = "users";
+    protected $tb_name = "clients";
 
     public function up()
     {
@@ -19,61 +19,42 @@ class Users extends Migration
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100'
+                'constraint' => '100',
+                'null' => null,
             ],
             'avatar'       => [
                 'type'      => 'TINYTEXT',
-                'null'      => true
-            ],
-            'email' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'     => true
+                'null'      => true,
+                'null' => null,
             ],
             'phone' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
                 'unique'     => true
             ],
-            'password'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-            ],
-            'cpf'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'         => true
-            ],
             'birthdate'       => [
                 'type'       => 'DATE',
-            ],
-            'keyword'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'null' => true
+                'null' => null,
             ],
             'status' => [
-                'type' => 'ENUM("ACTIVE", "INACTIVE", "ANALYSIS")',
-                'default' => "ANALYSIS"
-            ],
-            'email_sha1'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '200',
-                'null' => true
-            ],
-            'twof_secret'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '250',
-                'null' => true
+                'type' => 'ENUM("ACTIVE", "INACTIVE")'
             ],
             'system_key'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '400',
                 'null' => true
             ],
+            'phone_sha1'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '200',
+                'null' => true
+            ],
+            'owner_id' => [
+                'type' => 'INT',
+                'null' => true
+            ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',
-            'deleted_at datetime',
         ]);
 
         $this->forge->addKey('id', true);

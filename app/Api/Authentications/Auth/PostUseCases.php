@@ -27,7 +27,7 @@ class PostUseCases
      */
     public function execute(array $payload, object $userSettings)
     {
-        if (!validateRecaptcha($payload['g-recaptcha-response']))
+        if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
             throw new Exceptions(lang("Validation.recaptcha"), BAD_REQUEST);
 
         $crypto = new Crypto();

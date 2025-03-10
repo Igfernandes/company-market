@@ -4,25 +4,27 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UsersCategories extends Migration
+class ClientsCategories extends Migration
 {
-    protected $tb_name = "users_categories";
+    protected $tb_name = "clients_categories";
 
     public function up()
     {
         $this->forge->addField([
             'category_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned'       => true,
             ],
-            'user_id' => [
-                'type' => 'INT'
+            'client_id' => [
+                'type' => 'INT',
+                'unsigned'       => true,
             ],
             'created_at datetime default current_timestamp'
         ]);
 
-        $this->forge->addKey('id', true);
+        $this->forge->addKey(['category_id', 'client_id'], true);
+        $this->forge->addForeignKey("client_id", "clients", ["id"]);
         $this->forge->addForeignKey("category_id", "categories", ["id"]);
-        $this->forge->addForeignKey("user_id", "users", ["id"]);
 
         $this->forge->createTable($this->tb_name);
     }

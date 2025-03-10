@@ -12,17 +12,20 @@ class UsersFields extends Migration
     {
         $this->forge->addField([
             'field_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned'       => true,
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned'       => true,
             ],
             'value' => [
                 'type' => "JSON"
-            ]
+            ],
+            'created_at datetime default current_timestamp'
         ]);
 
-        $this->forge->addKey('id', true);
+        $this->forge->addKey(['user_id', 'field_id'], true);
         $this->forge->addForeignKey("field_id", "fields", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
 

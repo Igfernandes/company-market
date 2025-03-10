@@ -6,7 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class FieldsGroup extends Migration
 {
-    protected $tb_name = "fields_groups";
+    protected $tb_name = "fields_group";
 
     public function up()
     {
@@ -21,8 +21,8 @@ class FieldsGroup extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100'
             ],
-            'position' => [
-                'type'       => 'SET("USER","COMPANY")',
+            'scope' => [
+                'type'       => 'SET("USER", "CLIENT", "COMPANY")',
             ],
             'created_at datetime default current_timestamp',
         ]);
