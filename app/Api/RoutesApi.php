@@ -20,6 +20,7 @@ class RoutesApi
 
     /** Clients */
     $routes->get("clients", "Api\Clients\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("clients/categories", "Api\Clients\Categories\Get\GetController::handle", $this->optionsWithAuthentications);
 
     return $routes;
   }
