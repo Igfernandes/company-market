@@ -28,6 +28,9 @@ class RoutesApi
     $routes->get("clients/categories", "Api\Clients\Categories\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("clients/categories", "Api\Clients\Categories\Post\PostController::handle", $this->optionsWithAuthentications);
 
+    /** Permissions */
+    $routes->get("permissions", "Api\Permissions\Get\GetController::handle", $this->optionsWithAuthentications);
+
     return $routes;
   }
 }

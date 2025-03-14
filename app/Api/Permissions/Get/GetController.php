@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Users\Get;
+namespace App\Api\Permissions\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -26,8 +26,6 @@ class GetController extends BaseController
 
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
-            if (isset($payload['current']))
-                $payload['current']  = $payload['current'] == true ? 1 : 0;
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
