@@ -13,5 +13,8 @@ return [
     "valid_url" => "O {field} encontra-se com a url inválida ou incompleta.",
     "in_list" => "O '{field}' não atende aos tipos de conexões permitidas no sistema.",
     "invalid_index" => "O {field} índice não atende aos critérios mínimos da operação",
-    "recaptcha" => "A página está com recursos desatualizados. Recarregue e tente novamente."
+    "recaptcha" => "A página está com recursos desatualizados. Recarregue e tente novamente.",
+    "is_unique" => "O campo '{field}' está inválido ou registrado.",
+    "not_found" => "O campo '{field}' está com valor inválido.",
+    "valid_date" => "O campo '{field}' não é uma data válida."
 ];

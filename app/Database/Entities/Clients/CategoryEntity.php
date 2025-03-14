@@ -3,12 +3,14 @@
 namespace App\Database\Entities\Clients;
 
 use App\Libraries\Crypto\Crypto;
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class CategoryEntity extends Entity
 {
-
+    use EntityEnhancerTrait;
+    
     public $attributes = [
         'id'              => null,
         'name'            => null,
@@ -94,9 +96,7 @@ class CategoryEntity extends Entity
      */
     public function setPosition(?int $position)
     {
-        if (!empty($position)) {
-            $this->attributes['position'] = $position;
-        }
+        $this->attributes['position'] = $position;
     }
 
     /**

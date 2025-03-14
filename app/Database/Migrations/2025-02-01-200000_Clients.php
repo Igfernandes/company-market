@@ -20,21 +20,26 @@ class Clients extends Migration
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
-                'null' => null,
+                'null' => true,
             ],
             'avatar'       => [
                 'type'      => 'TINYTEXT',
                 'null'      => true,
-                'null' => null,
+                'null' => true,
             ],
             'phone' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
                 'unique'     => true
             ],
+            'email' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true,
+            ],
             'birthdate'       => [
                 'type'       => 'DATE',
-                'null' => null,
+                'null' => true,
             ],
             'status' => [
                 'type' => 'ENUM("ACTIVE", "INACTIVE")'

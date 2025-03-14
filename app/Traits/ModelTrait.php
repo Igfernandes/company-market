@@ -38,4 +38,15 @@ trait ModelTrait
 
         $this->save($data);
     }
+
+    public function addPrefixInQuery(array $clientQuery, string $prefix)
+    {
+        $clientQueryUpdated = [];
+
+        foreach ($clientQuery as $fieldKey => $fieldValue) {
+            $clientQueryUpdated[$prefix . "." . $fieldKey] = $fieldValue;
+        }
+
+        return $clientQueryUpdated;
+    }
 }

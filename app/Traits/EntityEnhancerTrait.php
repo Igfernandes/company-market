@@ -4,6 +4,7 @@ namespace App\Traits;
 
 trait EntityEnhancerTrait
 {
+
     /**
      * Converte a entidade em um array, opcionalmente filtrando valores vazios.
      *
@@ -12,7 +13,6 @@ trait EntityEnhancerTrait
      *
      * @return array   Um array com os dados da entidade, potencialmente filtrado conforme os parâmetros.
      */
-    // Sobrescrevendo o método toArray para manter compatibilidade
     public function toArray(bool $onlyChanged = false, bool $cast = true, bool $recursive = false): array
     {
         $data = parent::toArray($onlyChanged, $cast, $recursive);
@@ -23,5 +23,14 @@ trait EntityEnhancerTrait
         });
 
         return $data;
+    }
+
+
+    public function setStore(array $data)
+    {
+        foreach ($this->attributes as $atbIndex => $atbValue) {
+            if (isset($data[$atbIndex]))
+                $this->attributes[$atbIndex] = $data[$atbIndex];
+        }
     }
 }

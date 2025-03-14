@@ -47,7 +47,7 @@ class ClientCategoryEntity extends Entity
      */
     public function getCategory(): ?CategoryEntity
     {
-        return $this->attributes['category'];
+        return $this->relations['category'];
     }
 
     /**
@@ -59,7 +59,7 @@ class ClientCategoryEntity extends Entity
     public function setCategory(CategoryEntity $category)
     {
         if (!empty($category))
-            $this->attributes['category'] = $category;
+            $this->relations['category'] = $category;
     }
 
     /**
@@ -115,7 +115,7 @@ class ClientCategoryEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -125,6 +125,6 @@ class ClientCategoryEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 }

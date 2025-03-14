@@ -94,5 +94,6 @@ return [
     "registration" => "matricula",
     "fill" => "preenchimento",
     "author" => "autor",
-    "registred" => "registrado"
+    "registered" => "registrado",
+    "category" => "categoria"
 ];

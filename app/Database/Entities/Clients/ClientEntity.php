@@ -4,18 +4,20 @@ namespace App\Database\Entities\Clients;
 
 use App\Libraries\Crypto\Crypto;
 use App\Traits\CryptoEntityTrait;
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class ClientEntity extends Entity
 {
-    use CryptoEntityTrait;
+    use CryptoEntityTrait, EntityEnhancerTrait;
 
     public $attributes = [
         'id'              => null,
         'name'            => null,
         'avatar'          => null,
         'phone'           => null,
+        'email'           => null,
         'birthdate'       => null,
         'status'          => null,
         'phone_sha1'      => null,
@@ -72,7 +74,7 @@ class ClientEntity extends Entity
     {
         $NAME_TRANSLATE = lang('Words.name');
 
-        if (strlen($name) > 100)
+        if (!empty($name) && strlen($name) > 100)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $NAME_TRANSLATE,
                 "param" => 100
@@ -102,7 +104,7 @@ class ClientEntity extends Entity
     public function setAvatar(?string $avatar)
     {;
 
-        if (strlen($avatar) > 500)
+        if (!empty($avatar) && !strlen($avatar) > 500)
             throw new Exception(lang('Validation.max_length', [
                 "field" => "avatar",
                 "param" => 500
@@ -143,10 +145,10 @@ class ClientEntity extends Entity
     {
         $PHONE_TRANSLATE = lang('Words.phone');
 
-        if (strlen($phone) > 450)
+        if (!empty($phone) && strlen($phone) > 255)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $PHONE_TRANSLATE,
-                "param" => 450
+                "param" => 255
             ]), BAD_BUSINESS_RULES);
 
         if (!empty($phone)) {
@@ -165,6 +167,60 @@ class ClientEntity extends Entity
         if (!empty($phone))
             $this->attributes['phone'] = $this->cryptoLibrary->encrypt(strtolower($phone), $this->getEncryptedKey());
     }
+
+    /**
+     * @method mixed getEmail()
+     *
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->attributes['email'];
+    }
+
+    /**
+     * @method mixed getDecryptEmail()
+     *
+     * @return String|null
+     */
+    public function getDecryptEmail()
+    {
+        return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->getEncryptedKey());
+    }
+
+    /**
+     * @method mixed setEmail()
+     *
+     * @param string|null $email
+     * @return void
+     */
+    public function setEmail(?string $email)
+    {
+        $EMAIL_TRANSLATE = lang('Words.email');
+
+        if (!empty($email) && strlen($email) > 255)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => $EMAIL_TRANSLATE,
+                "param" => 255
+            ]), BAD_BUSINESS_RULES);
+
+        if (!empty($email)) {
+            $this->attributes['email'] = $email;
+        }
+    }
+
+    /**
+     * @method mixed setEncryptEmail()
+     *
+     * @param String|null $email
+     * @return void
+     */
+    public function setEncryptEmail(?String $email)
+    {
+        if (!empty($email))
+            $this->attributes['email'] = $this->cryptoLibrary->encrypt(strtolower($email), $this->getEncryptedKey());
+    }
+
 
     /**
      * @method mixed getBirthdate()
@@ -236,6 +292,29 @@ class ClientEntity extends Entity
     }
 
     /**
+     * @method mixed getOwnerId()
+     *
+     * @return int|null
+     */
+    public function getOwnerId(): ?int
+    {
+        return $this->attributes['owner_id'];
+    }
+
+    /**
+     * @method mixed setOwnerId()
+     *
+     * @param int|null $ownerId
+     * @return void
+     */
+    public function setOwnerId(?int $ownerId)
+    {
+        if (!empty($ownerId)) {
+            $this->attributes['owner_id'] = $ownerId;
+        }
+    }
+
+    /**
      * @method mixed getSystemKey()
      *
      * @return string|null
@@ -258,7 +337,7 @@ class ClientEntity extends Entity
         }
     }
 
-  
+
 
     /**
      * @method mixed getCreatedAt()
