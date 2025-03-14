@@ -2,11 +2,19 @@
 
 namespace App\Api\Clients\Get;
 
+use App\Database\Entities\Clients\CategoryEntity;
+use App\Database\Entities\clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
+use App\Database\Migrations\Clients;
+use App\Database\Migrations\ClientsCategories;
+use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
+use App\Traits\Clients\ClientsDataTrait;
 
 class GetUseCases
 {
+    use ClientsDataTrait;
+
     /**
      * @param array{
      *     id: int,
@@ -26,7 +34,7 @@ class GetUseCases
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $clientsModel = new ClientsModel();
-        $clientEntity = new ClientEntity();
+        $clientsCategoriesModel = new ClientsCategoriesModel();
 
         $in_ids = isset($filteredPayload['in_ids']) ? $filteredPayload['in_ids'] : [];
         unset($filteredPayload['in_ids']);
@@ -38,10 +46,18 @@ class GetUseCases
 
         $filteredPayload['owner_id'] = $userAuthId;
 
-        $clientEntity->fill($filteredPayload);
-        /** @var array{ClientEntity}*/
-        $foundClients = $clientsModel->where($filteredPayload)->findAll();
+        $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($filteredPayload);
+        $clients = [];
 
-        return array_map(fn(ClientEntity $client) => $client->toArray(true), $foundClients);
+        foreach ($foundClientsCategory as $clientCategory) {
+            $clients[$clientCategory->getClientId()] = $clientCategory->getClient();
+        }
+
+        $clientsData = array_map(
+            fn(ClientEntity $client) => $this->builder($client, $foundClientsCategory),
+            $clients
+        );
+
+        return \array_values($clientsData);
     }
 }
