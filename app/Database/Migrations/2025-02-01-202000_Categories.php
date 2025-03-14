@@ -23,7 +23,8 @@ class Categories extends Migration
             ],
             'description' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '300'
+                'constraint' => '300',
+                'null'       => true
             ],
             'position' => [
                 'type' => 'INT',
