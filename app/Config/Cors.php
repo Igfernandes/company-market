@@ -37,7 +37,7 @@ class Cors extends \Fluent\Cors\Config\Cors
      *
      * @var array
      */
-    public $allowedMethods = ['GET', 'POST'];
+    public $allowedMethods = ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'];
 
     /**
      * --------------------------------------------------------------------------
