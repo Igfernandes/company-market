@@ -40,6 +40,6 @@ class GetUseCases
         /** @var array{CategoryEntity}*/
         $foundCategories = $categoriesModel->where($filteredPayload)->findAll();
 
-        return array_map(fn(CategoryEntity $Category) => $Category->toArray(true), $foundCategories);
+        return array_map(fn(CategoryEntity $Category) => $Category->toArray(), $foundCategories);
     }
 }
