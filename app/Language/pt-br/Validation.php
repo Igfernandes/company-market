@@ -16,5 +16,7 @@ return [
     "recaptcha" => "A página está com recursos desatualizados. Recarregue e tente novamente.",
     "is_unique" => "O campo '{field}' está inválido ou registrado.",
     "not_found" => "O campo '{field}' está com valor inválido.",
-    "valid_date" => "O campo '{field}' não é uma data válida."
+    "valid_date" => "O campo '{field}' não é uma data válida.",
+    "invalid_list" => "O campo '{field}' fornecido contém um item inválido ou inexistente",
+    "already_exists" => "O {field} já está utilizado ou não é permitido"
 ];

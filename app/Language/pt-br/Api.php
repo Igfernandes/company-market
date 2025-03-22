@@ -16,6 +16,16 @@ return [
             ]
         ]
     ],
+    "users" => [
+        "success" => [
+            "store" => "O convite já foi enviado ao usuário"
+        ]
+    ],
+    "groups" => [
+        "success" => [
+            "post" => "O grupo foi criado com sucesso",
+        ],
+    ],
     "tokens" => [
         "confirmEmail" => [
             "title" => "Confirme o seu e-mail",
