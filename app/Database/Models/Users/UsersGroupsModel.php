@@ -11,10 +11,11 @@ class UsersGroupsModel extends Model
     protected $primaryKey       = 'id';
 
     protected $useAutoIncrement = true;
-    protected $returnType       = 'App\Database\Entities\Users\UserGroupEntity';
+    protected $returnType       = 'App\Database\Entities\Users\UserGroupsEntity';
     protected $protectFields    = true;
     protected $allowedFields    = ['group_id', 'user_id'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }
