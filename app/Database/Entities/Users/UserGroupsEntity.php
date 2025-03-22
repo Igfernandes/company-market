@@ -6,15 +6,13 @@ use CodeIgniter\Entity\Entity;
 
 class UserGroupsEntity extends Entity
 {
-    protected $dates = [
-        "created_at"      => null,
-        "updated_at"      => null
-    ];
     public $attributes = [
         'group_id'        => null,
         'group'           => null,
         'user_id'         => null,
         'user'            => null,
+        "created_at"      => null,
+        "updated_at"      => null
     ];
 
     /**
@@ -114,7 +112,7 @@ class UserGroupsEntity extends Entity
     public function setExpiredAt(?String $expiredAt)
     {
         if (!empty($expiredAt))
-            $this->dates['expired_at'] = $expiredAt;
+            $this->attributes['expired_at'] = $expiredAt;
     }
 
     /**
@@ -124,7 +122,7 @@ class UserGroupsEntity extends Entity
      */
     public function getExpiredAt(): ?String
     {
-        return $this->dates['expired_at'];
+        return $this->attributes['expired_at'];
     }
 
     /**
@@ -136,7 +134,7 @@ class UserGroupsEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -146,7 +144,7 @@ class UserGroupsEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 
     /**
@@ -158,7 +156,7 @@ class UserGroupsEntity extends Entity
     public function setUpdatedAt(?String $updatedAt)
     {
         if (!empty($updatedAt))
-            $this->dates['updated_at'] = $updatedAt;
+            $this->attributes['updated_at'] = $updatedAt;
     }
 
     /**
@@ -168,6 +166,6 @@ class UserGroupsEntity extends Entity
      */
     public function getUpdatedAt(): ?String
     {
-        return $this->dates['updated_at'];
+        return $this->attributes['updated_at'];
     }
 }
