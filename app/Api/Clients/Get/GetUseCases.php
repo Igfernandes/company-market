@@ -2,11 +2,7 @@
 
 namespace App\Api\Clients\Get;
 
-use App\Database\Entities\Clients\CategoryEntity;
-use App\Database\Entities\clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
-use App\Database\Migrations\Clients;
-use App\Database\Migrations\ClientsCategories;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
 use App\Traits\Clients\ClientsDataTrait;

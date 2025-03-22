@@ -10,6 +10,15 @@ use App\Traits\Users\UsersDataTrait;
 class UsersBusiness
 {
     use BaseBusiness, UsersDataTrait;
+
+    private UsersModel $usersModel;
+
+    public function __construct()
+    {
+        $this->usersModel = new UsersModel();
+    }
+
+
     /**
      * @param array{
      *     current: string, 
@@ -27,7 +36,7 @@ class UsersBusiness
     public function handler($payload): array
     {
         $session = session();
-        $usersModel = new UsersModel();
+
         $userEntity = new UserEntity();
 
         $in_ids = isset($payload['in_ids']) ? $payload['in_ids'] : [];
@@ -36,13 +45,36 @@ class UsersBusiness
         $userAuthId = $session->get('userAuthId');
 
         if (count($in_ids) > 0)
-            $usersModel->whereIn("id", $in_ids);
+            $this->usersModel->whereIn("id", $in_ids);
 
         $payload['owner_id'] = $userAuthId;
 
         $userEntity->fill($payload);
-        $foundUsers = $usersModel->where($payload)->findAll();
+        $foundUsers = $this->usersModel->where($payload)->findAll();
 
         return array_map(fn($userEntity) => $this->builder($userEntity), $foundUsers);
+    }
+
+
+    public function isCPFAvailable(string $cpf)
+    {
+        $foundUser = $this->usersModel->where("cpf_sha1", \sha1($cpf))->first();
+
+        return empty($foundUser);
+    }
+
+
+    public function isEmailAvailable(string $email)
+    {
+        $foundUser = $this->usersModel->where("email_sha1", \sha1($email))->first();
+
+        return empty($foundUser);
+    }
+
+    public function isPhoneAvailable(string $phone)
+    {
+        $foundUser = $this->usersModel->where("phone_sha1", \sha1($phone))->first();
+
+        return empty($foundUser);
     }
 }
