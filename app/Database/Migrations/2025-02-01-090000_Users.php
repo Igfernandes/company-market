@@ -61,6 +61,16 @@ class Users extends Migration
                 'constraint' => '200',
                 'null' => true
             ],
+            'phone_sha1'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '200',
+                'null' => true
+            ],
+            'cpf_sha1'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '200',
+                'null' => true
+            ],
             'twof_secret'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '250',
