@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Database\Entities\Users;
+namespace App\Database\Entities\Permissions;
 
 use App\Database\Entities\Permissions\PermissionEntity;
+use App\Database\Entities\Users\UserEntity;
 use CodeIgniter\Entity\Entity;
 
 class UserPermissionsEntity extends Entity

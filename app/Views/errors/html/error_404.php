@@ -6,8 +6,7 @@ $data = array(
 	"form_out",
 	"side" => "user"
 );
-
-echo view('/globals/_header', $data); ?>
+ ?>
 
 <div class="_404">
 	<div class="_404_content">
@@ -46,5 +45,3 @@ echo view('/globals/_header', $data); ?>
 		</div>
 	</div>
 </div>
-
-<?php echo view('/globals/_footer', $data); ?>

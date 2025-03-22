@@ -9,6 +9,7 @@ return [
     "cpf" => "cpf",
     "cnpj" => "cnpj",
     "rg" => "rg",
+    "groups" => "grupos",
     "phone" => "Telefone",
     "cell" => "Celular",
     "name_complete" => "nome completo",

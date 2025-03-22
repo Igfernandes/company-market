@@ -21,6 +21,8 @@ class UserEntity extends Entity
         'birthdate'        => null,
         'status'           => null,
         'keyword'          => null,
+        'email_sha1'       => null,
+        'phone_sha1'       => null,
         'system_key'       => null,
         'twof_secret'      => null,
         "created_at"       => null,
@@ -437,6 +439,51 @@ class UserEntity extends Entity
     {
         return $this->attributes['email_sha1'];
     }
+
+    /**
+     * @method mixed setPhoneSha1()
+     *
+     * @param string|null $phone_sha1
+     * @return void
+     */
+    public function setPhoneSha1(?string $phone_sha1)
+    {
+        if (!empty($phone_sha1))
+            $this->attributes['phone_sha1'] = $phone_sha1;
+    }
+
+    /**
+     * @method mixed getPhoneSha1()
+     *
+     * @return String|null
+     */
+    public function getPhoneSha1(): ?String
+    {
+        return $this->attributes['phone_sha1'];
+    }
+
+    /**
+     * @method mixed setCPFSha1()
+     *
+     * @param string|null $cpf_sha1
+     * @return void
+     */
+    public function setCPFSha1(?string $cpf_sha1)
+    {
+        if (!empty($cpf_sha1))
+            $this->attributes['cpf_sha1'] = $cpf_sha1;
+    }
+
+    /**
+     * @method mixed getCPFSha1()
+     *
+     * @return String|null
+     */
+    public function getCPFSha1(): ?String
+    {
+        return $this->attributes['cpf_sha1'];
+    }
+
 
     /**
      * @method mixed setTwofSecretEnc()
