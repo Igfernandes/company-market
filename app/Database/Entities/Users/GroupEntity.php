@@ -2,20 +2,21 @@
 
 namespace App\Database\Entities\Users;
 
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class GroupEntity extends Entity
 {
-    protected $dates = [
-        "created_at"      => null,
-        "updated_at"      => null
-    ];
+    use EntityEnhancerTrait;
+
     public $attributes = [
         'id'              => null,
         'name'           => null,
         'description'     => null,
         'status'          => null,
+        "created_at"      => null,
+        "updated_at"      => null
     ];
 
     /**
@@ -97,7 +98,7 @@ class GroupEntity extends Entity
     /**
      * @method mixed setStatus()
      *
-     * @param ACTIVE|INACTIVE|ANALYSIS|null $status
+     * @param ACTIVE|INACTIVE|null $status
      * @return void
      */
     public function setStatus(?String $status)
@@ -120,7 +121,7 @@ class GroupEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -130,7 +131,7 @@ class GroupEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 
     /**
@@ -142,7 +143,7 @@ class GroupEntity extends Entity
     public function setUpdatedAt(?String $updatedAt)
     {
         if (!empty($updatedAt))
-            $this->dates['updated_at'] = $updatedAt;
+            $this->attributes['updated_at'] = $updatedAt;
     }
 
     /**
@@ -152,6 +153,6 @@ class GroupEntity extends Entity
      */
     public function getUpdatedAt(): ?String
     {
-        return $this->dates['updated_at'];
+        return $this->attributes['updated_at'];
     }
 }
