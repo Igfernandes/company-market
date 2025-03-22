@@ -14,15 +14,22 @@ class RoutesApi
     $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
     $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
 
-
     /** Users */
     $routes->get("users", "Api\Users\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->post("users", "Api\Users\Post\PostController::handle");
+    $routes->post("users/groups", "Api\Users\Groups\Post\PostController::handle", $this->optionsWithAuthentications);
+    $routes->get("users/groups", "Api\Users\Groups\Get\GetController::handle", $this->optionsWithAuthentications);
+
+    /** Invites */
+    $routes->post("invites/user", "Api\Invites\Users\Post\PostController::handle", $this->optionsWithAuthentications);
+    $routes->get("invites/user", "Api\Invites\Users\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("invites/user/(:num)", "Api\Invites\Users\Get\GetController::handle", $this->optionsWithAuthentications);
 
     /** Clients */
     $routes->get("clients", "Api\Clients\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("clients", "Api\Clients\Post\PostController::handle", $this->optionsWithAuthentications);
     $routes->patch("clients", "Api\Clients\Patch\PatchController::handle", $this->optionsWithAuthentications);
-    $routes->delete("clients/(:num)?", "Api\Clients\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
+    $routes->delete("clients/(:num)", "Api\Clients\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
     $routes->delete("clients", "Api\Clients\Delete\DeleteController::handle", $this->optionsWithAuthentications);
 
     $routes->get("clients/categories", "Api\Clients\Categories\Get\GetController::handle", $this->optionsWithAuthentications);
