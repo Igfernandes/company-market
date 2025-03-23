@@ -3,9 +3,7 @@
 namespace App\Api\Users\Groups\Get;
 
 use App\Database\Entities\Users\GroupEntity;
-use App\Database\Entities\Users\UserGroupsEntity;
 use App\Database\Models\Users\GroupsModel;
-use App\Database\Models\Users\UsersGroupsModel;
 
 class GetUseCases
 {

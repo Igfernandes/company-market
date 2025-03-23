@@ -4,6 +4,7 @@ namespace App\Business\Users;
 
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
+use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Traits\Users\UsersDataTrait;
 
@@ -17,7 +18,6 @@ class UsersBusiness
     {
         $this->usersModel = new UsersModel();
     }
-
 
     /**
      * @param array{
@@ -35,24 +35,20 @@ class UsersBusiness
      */
     public function handler($payload): array
     {
-        $session = session();
-
         $userEntity = new UserEntity();
-
-        $in_ids = isset($payload['in_ids']) ? $payload['in_ids'] : [];
-        unset($payload['in_ids']);
-
-        $userAuthId = $session->get('userAuthId');
-
-        if (count($in_ids) > 0)
-            $this->usersModel->whereIn("id", $in_ids);
-
-        $payload['owner_id'] = $userAuthId;
+        $usersGroupsModel = new UsersGroupsModel();
 
         $userEntity->fill($payload);
-        $foundUsers = $this->usersModel->where($payload)->findAll();
 
-        return array_map(fn($userEntity) => $this->builder($userEntity), $foundUsers);
+        $foundUserGroup = $usersGroupsModel->getUsersWithGroup($userEntity->toArray(true));
+        /** @var array{UserEntity} */
+        $users = [];
+
+        foreach ($foundUserGroup as $userGroup) {
+            $users[$userGroup->getUserId()] = $userGroup->getUser();
+        }
+
+        return \array_values(array_map(fn($userEntity) => $this->builder($userEntity, $foundUserGroup), $users));
     }
 
 

@@ -2,9 +2,8 @@
 
 namespace App\Interfaces;
 
-use CodeIgniter\Entity\Entity;
-
-interface IPermissions extends Entity
+interface IPermissions
 {
     public function setPermissionId(int $permissionId): void;
+    public function toArray(bool $onlyChanged = false, bool $cast = true, bool $recursive = false): array;
 }

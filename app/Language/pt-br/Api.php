@@ -24,6 +24,7 @@ return [
     "groups" => [
         "success" => [
             "post" => "O grupo foi criado com sucesso",
+            "put" => "O grupo foi atualizado com sucesso"
         ],
     ],
     "tokens" => [

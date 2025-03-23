@@ -16,6 +16,7 @@ class UserEntity extends Entity
         'name'             => null,
         'email'            => null,
         'password'         => null,
+        'phone'            => null,
         'avatar'           => null,
         'cpf'              => null,
         'birthdate'        => null,

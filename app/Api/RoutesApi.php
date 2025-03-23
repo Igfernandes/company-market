@@ -14,10 +14,11 @@ class RoutesApi
     $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
     $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
 
-    /** Users */
+    // /** Users */
     $routes->get("users", "Api\Users\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("users", "Api\Users\Post\PostController::handle");
     $routes->post("users/groups", "Api\Users\Groups\Post\PostController::handle", $this->optionsWithAuthentications);
+    $routes->put("users/groups/(:num)", "Api\Users\Groups\Put\PutController::handle/$1", $this->optionsWithAuthentications);
     $routes->get("users/groups", "Api\Users\Groups\Get\GetController::handle", $this->optionsWithAuthentications);
 
     /** Invites */
@@ -37,6 +38,9 @@ class RoutesApi
 
     /** Permissions */
     $routes->get("permissions", "Api\Permissions\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("permissions/groups", "Api\Permissions\Groups\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("permissions/groups/(:num)", "Api\Permissions\Groups\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+
 
     return $routes;
   }

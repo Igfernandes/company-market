@@ -5,7 +5,7 @@ namespace App\Traits\Users;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Entities\Users\UserGroupsEntity;
 
-trait UsersDataTrait
+trait GroupsDataTrait
 {
     /**
      * 
