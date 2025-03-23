@@ -4,9 +4,10 @@ namespace App\Database\Entities\Permissions;
 
 use App\Database\Entities\Permissions\PermissionEntity;
 use App\Database\Entities\Users\GroupEntity;
+use App\Interfaces\IPermissions;
 use CodeIgniter\Entity\Entity;
 
-class GroupPermissionsEntity extends Entity
+class GroupPermissionsEntity extends Entity implements IPermissions
 {
     public $attributes = [
         'permission_id'   => null,
@@ -34,7 +35,7 @@ class GroupPermissionsEntity extends Entity
      * @param Int|null $permissionId
      * @return void
      */
-    public function setPermissionId(Int $permissionId)
+    public function setPermissionId(int $permissionId): void
     {
         if (!empty($permissionId))
             $this->attributes['permission_id'] = $permissionId;
@@ -45,7 +46,7 @@ class GroupPermissionsEntity extends Entity
      *
      * @return PermissionEntity|null
      */
-    public function getGroup(): ?PermissionEntity
+    public function getPermission(): ?PermissionEntity
     {
         return $this->relations['permission'];
     }
@@ -85,11 +86,11 @@ class GroupPermissionsEntity extends Entity
     }
 
     /**
-     * getUser function
+     * getGroup function
      *
      * @return UsersEntity|null
      */
-    public function getUser(): ?GroupEntity
+    public function getGroup(): ?GroupEntity
     {
         return $this->attributes['group'];
     }
@@ -100,7 +101,7 @@ class GroupPermissionsEntity extends Entity
      * @param UsersEntity|null $group
      * @return void
      */
-    public function setUser(GroupEntity $group)
+    public function setGroup(GroupEntity $group)
     {
         if (!empty($group))
             $this->attributes['group'] = $group;
@@ -115,7 +116,7 @@ class GroupPermissionsEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -125,6 +126,6 @@ class GroupPermissionsEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 }

@@ -28,7 +28,7 @@ class PermissionsBusiness
         foreach ($permissions as $permission) {
             $entity->setPermissionId($permission);
 
-            $model->save($entity);
+            $model->upsert($entity->toArray(true), $entity);
         }
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Database\Entities\Permissions;
 
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 
 class PermissionEntity extends Entity
 {
+    use EntityEnhancerTrait;
+
     public $attributes = [
         'id'             => null,
         'name'           => null,

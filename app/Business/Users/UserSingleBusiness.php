@@ -4,7 +4,7 @@ namespace App\Business\Users;
 
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
-use App\Database\Models\Users\UsersModel;
+use App\Database\Models\Users\UsersGroupsModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\Users\UsersDataTrait;
 
@@ -15,20 +15,12 @@ class UserSingleBusiness
      * @param array{
      *     current: string, 
      *     id: int,
-     *     in_ids: array<int>, 
-     *     name: string, 
-     *     cpf: string, 
-     *     phone: string, 
-     *     birthdate: string, 
-     *     status: 'ACTIVE' | 'INACTIVE', 
-     *     created_at: string, 
-     *     updated_at: string 
      * } $payload
      */
     public function handler($payload): Object
     {
         $session = session();
-        $usersModel = new UsersModel();
+        $usersGroupsModel = new UsersGroupsModel();
         $userEntity = new UserEntity();
         $userAuthId = $session->get('userAuthId');
 
@@ -36,12 +28,19 @@ class UserSingleBusiness
             $userEntity->setId($payload['id']);
         } else $userEntity->setId($userAuthId);
 
-        /** @var UserEntity */
-        $foundUser = $usersModel->where($userEntity->toArray(true))->first();
+        $foundUserGroup = $usersGroupsModel->getUsersWithGroup($userEntity->toArray(true));
+        /** @var array{UserEntity} */
+        $users = [];
 
-        if (empty($foundUser))
+        foreach ($foundUserGroup as $userGroup) {
+            $users[$userGroup->getUserId()] = $userGroup->getUser();
+        }
+
+        $users = \array_values($users);
+
+        if (count($users) == 0)
             throw new Exceptions(lang("Errors.not_found"), \BAD_BUSINESS_RULES);
 
-        return $this->builder($foundUser);
+        return $this->builder($users[0], $foundUserGroup);
     }
 }
