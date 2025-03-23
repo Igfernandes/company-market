@@ -96,5 +96,6 @@ return [
     "fill" => "preenchimento",
     "author" => "autor",
     "registered" => "registrado",
-    "category" => "categoria"
-];
+    "category" => "categoria",
+    "group" => "grupo"
+]; 
