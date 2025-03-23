@@ -23,7 +23,8 @@ class Groups extends Migration
             ],
             'description' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '300'
+                'constraint' => '300',
+                'null'       => true
             ],
             'status' => [
                 'type' => 'ENUM("ACTIVE", "INACTIVE")'
