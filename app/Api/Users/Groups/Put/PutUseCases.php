@@ -33,7 +33,7 @@ class PutUseCases
         if (!$groupsBusiness->hasClub([
             "id" => $groupId
         ]))
-            throw new Exceptions(\str_replace("{field}", "permissions", lang("Validation.invalid_list")), \BAD_BUSINESS_RULES);
+            throw new Exceptions(\str_replace("{field}", "permissions", lang("Validation.not_found")), \BAD_BUSINESS_RULES);
 
         if (!$permissionsBusiness->hasPermissions($payload['permissions']))
             throw new Exceptions(\str_replace("{field}", "permissions", lang("Validation.invalid_list")), \BAD_BUSINESS_RULES);

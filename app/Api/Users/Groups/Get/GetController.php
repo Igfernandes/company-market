@@ -29,7 +29,7 @@ class GetController extends BaseController
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
-
+            
             $responseGet = $this->getUseCases->execute($payload);
 
             return $this->response->setJSON($responseGet)->setStatusCode(OK);
