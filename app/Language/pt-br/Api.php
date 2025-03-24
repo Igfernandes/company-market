@@ -16,9 +16,16 @@ return [
             ]
         ]
     ],
+    "invites" => [
+        "success" => [
+            "resend" => "O convite foi reenviado ao usuário",
+        ]
+    ],
     "users" => [
         "success" => [
-            "store" => "O convite já foi enviado ao usuário"
+            "store" => "O convite já foi enviado ao usuário",
+            "delete" => "O usuário foi deletado com sucesso",
+            "patch_status" => "O status do usuário foi atualizado com sucesso"
         ]
     ],
     "groups" => [

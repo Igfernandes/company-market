@@ -5,6 +5,7 @@ namespace App\Business\Users;
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\UsersGroupsModel;
+use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\Users\UsersDataTrait;
 
@@ -20,7 +21,7 @@ class UserSingleBusiness
     public function handler($payload): Object
     {
         $session = session();
-        $usersGroupsModel = new UsersGroupsModel();
+        $usersModel = new UsersModel();
         $userEntity = new UserEntity();
         $userAuthId = $session->get('userAuthId');
 
@@ -28,7 +29,7 @@ class UserSingleBusiness
             $userEntity->setId($payload['id']);
         } else $userEntity->setId($userAuthId);
 
-        $foundUserGroup = $usersGroupsModel->getUsersWithGroup($userEntity->toArray(true));
+        $foundUserGroup = $usersModel->getUsersWithGroup($userEntity->toArray(true));
         /** @var array{UserEntity} */
         $users = [];
 

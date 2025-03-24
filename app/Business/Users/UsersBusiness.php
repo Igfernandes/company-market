@@ -4,7 +4,6 @@ namespace App\Business\Users;
 
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
-use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Traits\Users\UsersDataTrait;
 
@@ -36,11 +35,11 @@ class UsersBusiness
     public function handler($payload): array
     {
         $userEntity = new UserEntity();
-        $usersGroupsModel = new UsersGroupsModel();
+        $usersModel = new UsersModel();
 
         $userEntity->fill($payload);
 
-        $foundUserGroup = $usersGroupsModel->getUsersWithGroup($userEntity->toArray(true));
+        $foundUserGroup = $usersModel->getUsersWithGroup($userEntity->toArray(true));
         /** @var array{UserEntity} */
         $users = [];
 
@@ -72,5 +71,14 @@ class UsersBusiness
         $foundUser = $this->usersModel->where("phone_sha1", \sha1($phone))->first();
 
         return empty($foundUser);
+    }
+
+    public function hasUser($query): bool
+    {
+        $usersModel = new UsersModel();
+
+        $foundUsers = $usersModel->where($query)->find();
+
+        return !empty($foundUsers);
     }
 }
