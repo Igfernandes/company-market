@@ -38,7 +38,6 @@ class PostUseCases
         if (isset($payload['group']) && !$usersGroupsBusiness->hasGroups($payload['group']))
             throw new Exceptions(\str_replace("{field}", lang("Words.group"), lang("Validation.invalid_list")), BAD_REQUEST);
 
-
         $invitesModel = new InvitesModel();
         $inviteEntity = new InviteEntity();
 
