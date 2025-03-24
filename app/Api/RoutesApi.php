@@ -17,6 +17,8 @@ class RoutesApi
     // /** Users */
     $routes->get("users", "Api\Users\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("users", "Api\Users\Post\PostController::handle");
+    $routes->delete("users/(:num)", "Api\Users\Delete\DeleteController::handle/$1");
+    $routes->patch("users/(:num)", "Api\Users\Patch\PatchController::handle/$1");
     $routes->post("users/groups", "Api\Users\Groups\Post\PostController::handle", $this->optionsWithAuthentications);
     $routes->put("users/groups/(:num)", "Api\Users\Groups\Put\PutController::handle/$1", $this->optionsWithAuthentications);
     $routes->delete("users/groups/(:num)", "Api\Users\Groups\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
@@ -25,6 +27,8 @@ class RoutesApi
 
     /** Invites */
     $routes->post("invites/user", "Api\Invites\Users\Post\PostController::handle", $this->optionsWithAuthentications);
+    $routes->post("invites/user/resend/(:num)", "Api\Invites\Users\Resend\PostController::handle/$1", $this->optionsWithAuthentications);
+    $routes->delete("invites/user/resend/(:num)", "Api\Invites\Users\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
     $routes->get("invites/user", "Api\Invites\Users\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->get("invites/user/(:num)", "Api\Invites\Users\Get\GetController::handle", $this->optionsWithAuthentications);
 
