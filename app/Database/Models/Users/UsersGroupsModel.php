@@ -47,8 +47,8 @@ class UsersGroupsModel extends Model
         users.updated_at as user_updated_at,
         groups.name as group_name, groups.id as group_id, groups.created_at as group_created_at,
         groups.updated_at as group_updated_at")
-            ->join("users", "users.id = users_groups.user_id")
-            ->join("groups", "groups.id = users_groups.group_id")
+            ->join("users", "users.id = users_groups.user_id", "left")
+            ->join("groups", "groups.id = users_groups.group_id", "left")
             ->where($usersQueryUpdated)
             ->where($groupsQueryUpdated)->findAll();
 

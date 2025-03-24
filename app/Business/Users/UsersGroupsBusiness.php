@@ -17,7 +17,7 @@ class UsersGroupsBusiness
     {
         $groupsModel = new GroupsModel();
 
-        if (!is_array($groups))
+        if (!is_array($groups) || count($groups) == 0)
             return false;
 
         $foundGroups = $groupsModel->whereIn("id", $groups)->findAll();
