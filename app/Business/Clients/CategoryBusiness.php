@@ -31,7 +31,7 @@ class CategoryBusiness
 
         /** @var array{foundCategories:CategoryEntity} */
         $foundCategories = $categoriesModel->findAll();
-        $excludeCategories = \array_filter($foundCategories, fn($category) => array_search($category->getName() === false, $categories));
+        $excludeCategories = \array_filter($foundCategories, fn($category) => array_search($category->getName(), $categories) === false);
 
         return $excludeCategories;
     }

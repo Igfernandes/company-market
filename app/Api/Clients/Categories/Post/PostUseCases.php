@@ -43,9 +43,9 @@ class PostUseCases
 
             $categoryEntity->setName($category->name);
             $categoryEntity->setDescription(isset($category->description) ? $category->description : "");
-            $categoryEntity->setPosition($position);
+            $categoryEntity->setPosition($position + 1);
 
-            $categoriesModel->save($categoryEntity);
+            $categoriesModel->upsert($categoryEntity->toArray(true), $categoryEntity);
         }
 
         return (object)[

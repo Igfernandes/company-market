@@ -2,10 +2,13 @@
 
 namespace App\Database\Models\Clients;
 
+use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
 class CategoriesModel extends Model
 {
+    use ModelTrait;
+
     protected $DBGroup          = 'default';
     protected $table            = 'categories';
     protected $primaryKey       = 'id';
