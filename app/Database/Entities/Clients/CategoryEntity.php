@@ -20,11 +20,6 @@ class CategoryEntity extends Entity
         'updated_at'      => null
     ];
 
-    public function __construct()
-    {
-        $this->cryptoLibrary = new Crypto();
-    }
-
     /**
      * @method mixed getId()
      *
