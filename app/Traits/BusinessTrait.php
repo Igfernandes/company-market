@@ -10,7 +10,7 @@ trait BusinessTrait
     public function builderClauseWithContains(array $payload, Model $model)
     {
         foreach ($payload as $fieldKey => $fieldValue) {
-            if (strstr($fieldKey, "_contains") !== false) {
+            if (strstr($fieldKey, "_contains") !== false && !empty($fieldValue)) {
                 $model->like(\str_replace("_contains", $fieldKey, ""), $fieldValue);
             }
         }

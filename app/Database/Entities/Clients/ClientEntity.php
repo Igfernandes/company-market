@@ -337,8 +337,6 @@ class ClientEntity extends Entity
         }
     }
 
-
-
     /**
      * @method mixed getCreatedAt()
      *
