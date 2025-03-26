@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Services\Post;
+namespace App\Api\Services\Put;
 
 use App\Business\Services\PhotoServiceBusiness;
 use App\Database\Entities\Services\ServiceEntity;
@@ -9,12 +9,13 @@ use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
 use CodeIgniter\HTTP\Files\UploadedFile;
 
-class PostUseCases
+class PutUseCases
 {
     use ServicesDataTrait, BusinessTrait;
 
     /**
      * @param array{
+     *     id: integer,
      *     name: string, 
      *     photo: UploadedFile,
      *     type: 'APPELLANT'|'PUNCTUAL', 
@@ -47,10 +48,10 @@ class PostUseCases
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
         $serviceEntity->setReservations(isset($filteredPayload['reservations']) ? $filteredPayload['reservations'] : 0);
 
-        $servicesModel->save($serviceEntity);
+        $servicesModel->set($serviceEntity->toArray(true))->update($filteredPayload['id']);
 
         return (object)[
-            "success" => lang("Api.services.success.post")
+            "success" => lang("Api.services.success.put")
         ];
     }
 }

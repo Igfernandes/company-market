@@ -42,9 +42,9 @@ class GetUseCases
 
         $services = $servicesModel->where($filteredPayload)->findAll();
 
-        if (isset($payload['id']) && count($services) > 0)
+        if (!empty($payload['id']) && count($services) > 0)
             return $this->builder($services[0]);
-        else if (isset($payload['id']) && \count($services) == 0)
+        else if (!empty($payload['id']) && \count($services) == 0)
             throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
 
         $servicesData = array_map(

@@ -97,5 +97,6 @@ return [
     "author" => "autor",
     "registered" => "registrado",
     "category" => "categoria",
-    "group" => "grupo"
-]; 
+    "group" => "grupo",
+    "service" => "serviço"
+];
