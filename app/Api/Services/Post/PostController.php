@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Services\Get;
+namespace App\Api\Services\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -8,34 +8,32 @@ use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
 
-class GetController extends BaseController
+class PostController extends BaseController
 {
-    use Validation, ExceptionApi, GetDTOs;
+    use Validation, ExceptionApi, PostDTOs;
 
-    private GetUseCases $getUseCases;
+    private PostUseCases $postUseCases;
 
     public function __construct()
     {
-        $this->getUseCases = new GetUseCases();
+        $this->postUseCases = new PostUseCases();
     }
 
-    public function handle(Int $serviceId = 0)
+    public function handle()
     {
         try {
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
-
-            if ($serviceId > 0)
-                $payload['id'] = $serviceId;
+            $payload['photo'] = $this->request->getFile("photo");
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $responseGet = $this->getUseCases->execute($payload);
+            $responsePost = $this->postUseCases->execute($payload);
 
-            return $this->response->setJSON($responseGet)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

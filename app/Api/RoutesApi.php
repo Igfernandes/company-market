@@ -49,6 +49,8 @@ class RoutesApi
 
     /** Services */
     $routes->get("services", "Api\Services\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("services/(:num)", "Api\Services\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->post("services", "Api\Services\Post\PostController::handle", $this->optionsWithAuthentications);
 
     return $routes;
   }

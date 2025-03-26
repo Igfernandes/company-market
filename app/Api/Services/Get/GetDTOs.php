@@ -17,9 +17,13 @@ trait GetDTOs
             'label'  => 'name',
             'rules'  => 'string|permit_empty',
         ],
+        'name_contains' => [
+            'label'  => 'name',
+            'rules'  => 'string|permit_empty',
+        ],
         'type' => [
             'label'  => 'type',
-            'rules'  => 'string|in_list["APPELLANT", "PUNCTUAL"]|permit_empty',
+            'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|permit_empty',
         ],
         'description_contains' => [
             'label'  => 'description',
@@ -31,7 +35,7 @@ trait GetDTOs
         ],
         'privacy' => [
             'label'  => 'status',
-            'rules'  => 'in_list[PUBLIC, PRIVACY]|permit_empty',
+            'rules'  => 'in_list[PUBLIC, PRIVATE]|permit_empty',
         ],
         'created_at' => [
             'label'  => 'created_at',

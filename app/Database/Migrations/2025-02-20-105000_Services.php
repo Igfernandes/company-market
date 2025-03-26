@@ -20,17 +20,22 @@ class Services extends Migration
             'name' => [
                 'type' => 'VARCHAR(200)'
             ],
+            'photo' => [
+                'type' => 'TEXT',
+                'null' => true
+            ],
             'type' => [
                 'type' => 'ENUM("APPELLANT", "PUNCTUAL")'
             ],
             'description' => [
                 'type' => 'TEXT',
+                'null' => true
             ],
             'status' => [
                 'type' => 'ENUM("ACTIVE", "INACTIVE")'
             ],
             'privacy' => [
-                'type' => 'ENUM("PUBLIC", "PRIVACY")'
+                'type' => 'ENUM("PUBLIC", "PRIVATE")'
             ],
             'stock' => [
                 'type' => 'INT',

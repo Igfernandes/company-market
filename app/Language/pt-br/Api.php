@@ -61,5 +61,13 @@ return [
             "required_clients" => "É necessário informar pelo menos um cliente.",
             "category" => "A categoria selecionada sofreu alterações ou está inválida. Recarregue e tente novamente."
         ]
+    ],
+    "services" => [
+        "success" => [
+            "post" => "O serviço foi criado com sucesso."
+        ],
+        "invalid" => [
+            "photo" => "A imagem encontra-se com problemas ou inválida. Reenvie ou tente uma outra imagem."
+        ]
     ]
 ];

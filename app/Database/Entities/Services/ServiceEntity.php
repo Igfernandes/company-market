@@ -8,6 +8,7 @@ use Exception;
 class ServiceEntity extends Entity
 {
     public $attributes = [
+        'id'             => null,
         'name'           => null,
         'type'           => null,
         'description'    => null,
