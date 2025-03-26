@@ -64,7 +64,8 @@ return [
     ],
     "services" => [
         "success" => [
-            "post" => "O serviço foi criado com sucesso."
+            "post" => "O serviço foi criado com sucesso.",
+            "delete" => "O serviço foi deletado com sucesso"
         ],
         "invalid" => [
             "photo" => "A imagem encontra-se com problemas ou inválida. Reenvie ou tente uma outra imagem."

@@ -2,11 +2,8 @@
 
 namespace App\Api\Users\Delete;
 
-use App\Business\Users\Groups\GroupsBusiness;
 use App\Business\Users\UsersBusiness;
 use App\Database\Models\Fields\UsersFieldsModel;
-use App\Database\Models\Permissions\GroupsPermissionsModel;
-use App\Database\Models\Users\GroupsModel;
 use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
