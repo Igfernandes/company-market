@@ -4,8 +4,10 @@ namespace App\Api\Services\Get;
 
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
+use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
+use Exception;
 
 class GetUseCases
 {
@@ -38,13 +40,18 @@ class GetUseCases
 
         $servicesModel = $this->builderClauseWithContains($payload, $servicesModel);
 
-        $clients = $servicesModel->where($filteredPayload)->findAll();
+        $services = $servicesModel->where($filteredPayload)->findAll();
 
-        $clientsData = array_map(
+        if (isset($payload['id']) && count($services) > 0)
+            return $this->builder($services[0]);
+        else if (isset($payload['id']) && \count($services) == 0)
+            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+
+        $servicesData = array_map(
             fn(ServiceEntity $service) => $this->builder($service),
-            $clients
+            $services
         );
 
-        return \array_values($clientsData);
+        return \array_values($servicesData);
     }
 }
