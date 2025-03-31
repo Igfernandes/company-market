@@ -17,6 +17,8 @@ class ServiceEntity extends Entity
         'stock'          => null,
         'reservations'   => null,
         'photo'          => null,
+        'created_at'     => null,
+        'updated_at'     => null
     ];
 
     /**
