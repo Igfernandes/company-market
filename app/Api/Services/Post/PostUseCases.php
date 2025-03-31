@@ -18,7 +18,7 @@ class PostUseCases
      *     name: string, 
      *     photo: UploadedFile,
      *     type: 'APPELLANT'|'PUNCTUAL', 
-     *     description_contains: string, 
+     *     description: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
      *     privacy: 'PUBLIC'|'PRIVATE',
      *     stock: integer,
