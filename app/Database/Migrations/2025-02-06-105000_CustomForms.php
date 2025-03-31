@@ -17,18 +17,25 @@ class CustomForms extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            "page" => [
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => '200'
+            ],
+            'slug' => [
                 'type' => 'VARCHAR',
                 'constraint' => '250'
+            ],
+            'type' => [
+                'type' => 'ENUM("PEOPLE","COMPANY")',
             ],
             'components' => [
                 'type'       => 'JSON',
             ],
-            "target" => [
-                'type' => 'VARCHAR',
-                'constraint' => '30'
+            'description' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '250'
             ],
-            "status" => [
+            'status' => [
                 'type'       => 'ENUM("PUBLISHED", "DRAFT")'
             ],
             'created_at datetime default current_timestamp',

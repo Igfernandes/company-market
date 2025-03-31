@@ -9,16 +9,14 @@ use Exception;
 
 class CustomFormsHistoryEntity extends Entity
 {
-    protected $dates = [
-        "created_at"      => null
-    ];
     public $attributes = [
         'id'              => null,
-        'description'            => null,
+        'description'     => null,
         'form_id'         => null,
         'form'            => null,
         'user_id'         => null,
-        'user'            => null
+        'user'            => null,
+        'created_at'      => null
     ];
 
     /**

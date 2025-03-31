@@ -7,17 +7,18 @@ use Exception;
 
 use function PHPUnit\Framework\isJson;
 
-class CustomFormsEntity extends Entity
+class CustomFormEntity extends Entity
 {
-    protected $dates = [
-        "created_at"      => null,
-        "updated_at"      => null
-    ];
     public $attributes = [
         'id'              => null,
-        'page'         => null,
-        'components'         => null,
-        'status'            => null
+        'name'            => null,
+        'slug'            => null,
+        'type'            => null,
+        'components'      => null,
+        'description'     => null,
+        'status'          => null,
+        'created_at'      => null,
+        'updated_at'      => null
     ];
 
     /**
@@ -43,35 +44,92 @@ class CustomFormsEntity extends Entity
     }
 
     /**
-     * getPage function
+     * getName function
      *
      * @return String|null
      */
-    public function getPage(): ?String
+    public function getName(): ?String
     {
-        return $this->attributes['page'];
+        return $this->attributes['name'];
     }
 
     /**
-     * setPage function
+     * setName function
      *
-     * @param String|null $page
+     * @param String|null $name
      * @return void
      */
-    public function setPage(?String $page)
+    public function setName(?String $name)
     {
         $session = session();
         $LANGUAGE = $session->get("language");
-        $PAGE_TRANSLATE = lang('Words.page', [], $LANGUAGE);
+        $PAGE_TRANSLATE = lang('Words.name', [], $LANGUAGE);
 
-        if (strlen($page) > 250)
+        if (strlen($name) > 200)
             throw new Exception(lang('Validation.max_length', [
                 "field" => $PAGE_TRANSLATE,
                 "param" => 250
             ], $LANGUAGE), BAD_REQUEST);
 
-        if (!empty($page))
-            $this->attributes['page'] = $page;
+        if (!empty($name))
+            $this->attributes['name'] = $name;
+    }
+
+    /**
+     * getSlug function
+     *
+     * @return String|null
+     */
+    public function getSlug(): ?String
+    {
+        return $this->attributes['slug'];
+    }
+
+    /**
+     * setSlug function
+     *
+     * @param String|null $slug
+     * @return void
+     */
+    public function setSlug(?String $slug)
+    {
+        $session = session();
+        $LANGUAGE = $session->get("language");
+        $PAGE_TRANSLATE = lang('Words.slug', [], $LANGUAGE);
+
+        if (strlen($slug) > 200)
+            throw new Exception(lang('Validation.max_length', [
+                "field" => $PAGE_TRANSLATE,
+                "param" => 250
+            ], $LANGUAGE), BAD_REQUEST);
+
+        if (!empty($slug))
+            $this->attributes['slug'] = $slug;
+    }
+
+    /**
+     * getType function
+     *
+     * @return String|null
+     */
+    public function getType(): ?String
+    {
+        return $this->attributes['type'];
+    }
+
+    /**
+     * setType function
+     *
+     * @param String|null $type
+     * @return void
+     */
+    public function setType(?String $type)
+    {
+        if (array_search($type, ["PEOPLE", "COMPANY"]) === false)
+            throw new Exception(lang('Validation.enum_invalid', []), BAD_REQUEST);
+
+        if (!empty($type))
+            $this->attributes['type'] = $type;
     }
 
     /**
@@ -105,34 +163,34 @@ class CustomFormsEntity extends Entity
     }
 
     /**
-     * getTarget function
+     * getDescription function
      *
      * @return String|null
      */
-    public function getTarget(): ?String
+    public function getDescription(): ?String
     {
-        return $this->attributes['target'];
+        return $this->attributes['description'];
     }
 
     /**
-     * setTarget function
+     * setDescription function
      *
-     * @param String|null $target
+     * @param String|null $description
      * @return void
      */
-    public function setTarget(?String $target)
+    public function setDescription(?String $description)
     {
         $session = session();
         $LANGUAGE = $session->get("language");
 
-        if (strlen($target) > 250)
+        if (strlen($description) > 250)
             throw new Exception(lang('Validation.max_length', [
-                "field" => "target",
+                "field" => "description",
                 "param" => 250
             ], $LANGUAGE), BAD_REQUEST);
 
-        if (!empty($target))
-            $this->attributes['target'] = $target;
+        if (!empty($description))
+            $this->attributes['description'] = $description;
     }
 
     /**
