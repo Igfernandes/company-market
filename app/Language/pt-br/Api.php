@@ -70,5 +70,8 @@ return [
         "invalid" => [
             "photo" => "A imagem encontra-se com problemas ou inválida. Reenvie ou tente uma outra imagem."
         ]
+    ],
+    "custom_forms" => [
+        "post" => "O formulário foi criado com sucesso.",
     ]
 ];

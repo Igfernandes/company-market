@@ -5,11 +5,12 @@ namespace App\Api\Clients\Get;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
+use App\Traits\BusinessTrait;
 use App\Traits\Clients\ClientsDataTrait;
 
 class GetUseCases
 {
-    use ClientsDataTrait;
+    use ClientsDataTrait, BusinessTrait;
 
     /**
      * @param array{
@@ -37,21 +38,20 @@ class GetUseCases
 
         $userAuthId = $session->get('userAuthId');
 
+        $clientsModel->where($filteredPayload);
         if (count($in_ids) > 0)
             $clientsModel->whereIn("id", $in_ids);
 
         $filteredPayload['owner_id'] = $userAuthId;
 
+        $clientsModel = $this->builderClauseWithContains($filteredPayload, $clientsModel);
         $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($filteredPayload);
-        $clients = [];
 
-        foreach ($foundClientsCategory as $clientCategory) {
-            $clients[$clientCategory->getClientId()] = $clientCategory->getClient();
-        }
+        $foundClients = $clientsModel->findAll();
 
         $clientsData = array_map(
             fn(ClientEntity $client) => $this->builder($client, $foundClientsCategory),
-            $clients
+            $foundClients
         );
 
         return \array_values($clientsData);

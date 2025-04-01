@@ -25,7 +25,7 @@ class PostUseCases
         $categories = $payload['categories'];
         $categoriesBusiness = new CategoryBusiness();
 
-        $categoriesExclude = $categoriesBusiness->getCategoriesExclude($categories);
+        $categoriesExclude = $categoriesBusiness->getCategoriesExclude(array_map(fn($category) => $category->name, $categories));
         $categoriesExcludeName = $categoriesBusiness->hasClientsRelations($categoriesExclude);
 
         if (count($categoriesExcludeName) > 0)
@@ -45,7 +45,7 @@ class PostUseCases
             $categoryEntity->setDescription(isset($category->description) ? $category->description : "");
             $categoryEntity->setPosition($position + 1);
 
-            $categoriesModel->upsert($categoryEntity->toArray(true), $categoryEntity);
+            $categoriesModel->upsert(["name" => $category->name], $categoryEntity);
         }
 
         return (object)[

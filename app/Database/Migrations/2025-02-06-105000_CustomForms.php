@@ -33,7 +33,8 @@ class CustomForms extends Migration
             ],
             'description' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '250'
+                'constraint' => '250',
+                'null'       => true
             ],
             'status' => [
                 'type'       => 'ENUM("PUBLISHED", "DRAFT")'
