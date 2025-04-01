@@ -49,6 +49,12 @@ class RoutesApi
 
     /** CustomForms */
     $routes->get("custom-forms", "Api\CustomForms\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("custom-forms/(:num)", "Api\CustomForms\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->post("custom-forms", "Api\CustomForms\Post\PostController::handle", $this->optionsWithAuthentications);
+    $routes->put("custom-forms/(:num)", "Api\CustomForms\Put\PutController::handle/$1", $this->optionsWithAuthentications);
+
+    /** Forms */
+    $routes->get("forms/(:num)", "Api\Forms\Get\GetController::handle/$1");
 
     /** Services */
     $routes->get("services", "Api\Services\Get\GetController::handle", $this->optionsWithAuthentications);

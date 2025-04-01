@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Api\CustomForms\Post;
+namespace App\Api\CustomForms\Put;
 
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Traits\BusinessTrait;
 use App\Traits\CustomForms\CustomFormsDataTrait;
 
-class PostUseCases
+class PutUseCases
 {
     use CustomFormsDataTrait, BusinessTrait;
 
@@ -22,15 +22,6 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
-        /**
-         * @var array{
-         *     name: string, 
-         *     type: 'PEOPLE'|'COMPANY', 
-         *     description: string, 
-         *     components: string,
-         *     status: 'PUBLISHED' | 'DRAFT',
-         * } $filteredPayload
-         */
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $customFormsModel = new CustomFormsModel();
@@ -42,12 +33,11 @@ class PostUseCases
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
         $customFormEntity->setComponents($filteredPayload['components']);
-        $customFormEntity->setSlug("form_" . date("his"));
 
-        $customFormsModel->save($customFormEntity);
+        $customFormsModel->set($customFormEntity->toArray(true))->update($filteredPayload['id']);
 
         return (object)[
-            "success" => lang("Api.custom_forms.success.post")
+            "success" => lang("Api.customForms.success.put")
         ];
     }
 }

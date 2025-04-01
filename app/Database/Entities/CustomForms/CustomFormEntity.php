@@ -229,7 +229,7 @@ class CustomFormEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -239,7 +239,7 @@ class CustomFormEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 
     /**
@@ -251,7 +251,7 @@ class CustomFormEntity extends Entity
     public function setUpdatedAt(?String $updatedAt)
     {
         if (!empty($updatedAt))
-            $this->dates['updated_at'] = $updatedAt;
+            $this->attributes['updated_at'] = $updatedAt;
     }
 
     /**
@@ -261,6 +261,6 @@ class CustomFormEntity extends Entity
      */
     public function getUpdatedAt(): ?String
     {
-        return $this->dates['updated_at'];
+        return $this->attributes['updated_at'];
     }
 }
