@@ -62,6 +62,14 @@ return [
             "category" => "A categoria selecionada sofreu alterações ou está inválida. Recarregue e tente novamente."
         ]
     ],
+    "fields" => [
+        "success" => [
+            "post" => "O campo foi criado com sucesso",
+        ],
+        "invalid" => [
+            "group" => "O grupo informado encontra-se inválido ou incorreto"
+        ]
+    ],
     "services" => [
         "success" => [
             "post" => "O serviço foi criado com sucesso.",

@@ -55,7 +55,7 @@ class UsersModel extends Model
             /** @var array */
             $attributes = $userData->attributes;
 
-            $userEntity->setStore($attributes);
+            $userEntity->store($attributes);
             $userEntity->setId($attributes['user_id']);
             $userEntity->setName($attributes['user_name']);
             $userEntity->setStatus($attributes['user_status']);
@@ -63,7 +63,7 @@ class UsersModel extends Model
             $userEntity->setUpdatedAt($attributes['user_updated_at']);
 
             if (isset($attributes['group_id'])) {
-                $groupEntity->setStore($attributes);
+                $groupEntity->store($attributes);
                 $groupEntity->setId($attributes['group_id']);
                 $groupEntity->setName($attributes['group_name']);
                 $groupEntity->setStatus($attributes['group_status']);

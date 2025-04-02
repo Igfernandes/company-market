@@ -47,13 +47,13 @@ class ClientsCategoriesModel extends Model
             /** @var array */
             $attributes = $clientCategoryData->attributes;
 
-            $clientEntity->setStore($attributes);
+            $clientEntity->store($attributes);
             $clientEntity->setId($attributes['client_id']);
             $clientEntity->setName($attributes['client_name']);
             $clientEntity->setCreatedAt($attributes['client_created_at']);
             $clientEntity->setUpdatedAt($attributes['client_updated_at']);
 
-            $categoryEntity->setStore($attributes);
+            $categoryEntity->store($attributes);
             $categoryEntity->setId($attributes['category_id']);
             $categoryEntity->setName($attributes['category_name']);
             $categoryEntity->setCreatedAt($attributes['category_created_at']);

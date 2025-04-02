@@ -38,7 +38,7 @@ class PutUseCases
         if (!$permissionsBusiness->hasPermissions($payload['permissions']))
             throw new Exceptions(\str_replace("{field}", "permissions", lang("Validation.invalid_list")), \BAD_BUSINESS_RULES);
 
-        $groupEntity->setStore($payload);
+        $groupEntity->store($payload);
         $groupEntity->setStatus("ACTIVE");
 
         $groupsModel->update($groupId, $groupEntity);

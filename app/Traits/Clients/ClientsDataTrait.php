@@ -6,7 +6,7 @@ use App\Database\Entities\Clients\ClientEntity;
 
 trait ClientsDataTrait
 {
-    public function builder(ClientEntity $clientEntity, array $clientCategories): Object
+    public function clientWithCategories(ClientEntity $clientEntity, array $clientCategories): Object
     {
         $categories = [];
         foreach ($clientCategories as $clientCategory) {

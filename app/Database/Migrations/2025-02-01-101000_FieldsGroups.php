@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class FieldsGroup extends Migration
+class FieldsGroups extends Migration
 {
-    protected $tb_name = "fields_group";
+    protected $tb_name = "fields_groups";
 
     public function up()
     {
