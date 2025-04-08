@@ -2,27 +2,31 @@
 
 namespace App\Database\Entities\Users;
 
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 use function PHPUnit\Framework\isJson;
 
-class UsersTokensEntity extends Entity
+class UserTokenEntity extends Entity
 {
-    protected $dates = [
-        'expired_at'      => null,
-        "created_at"      => null,
-        "updated_at"      => null
-    ];
+   use EntityEnhancerTrait;
+   
     public $attributes = [
         'id'              => null,
+        'token'           => null,
         'operation'       => null,
         'path'            => null,
         'data'            => null,
         'is_valid'        => null,
         'accessibility'   => null,
         'user_id'         => null,
-        'user'            => null
+        'expired_at'      => null,
+        'created_at'      => null,
+        'updated_at'      => null
+    ];
+    public $relations = [
+        'user'      => null
     ];
 
     /**
@@ -46,6 +50,29 @@ class UsersTokensEntity extends Entity
         if (!empty($id))
             $this->attributes['id'] = $id;
     }
+
+        /**
+     * getToken function
+     *
+     * @return string|null
+     */
+    public function getToken(): ?string
+    {
+        return $this->attributes['token'];
+    }
+
+    /**
+     * setToken function
+     *
+     * @param string|null $token
+     * @return void
+     */
+    public function setToken(?string $token)
+    {
+        if (!empty($token))
+            $this->attributes['token'] = $token;
+    }
+
 
     /**
      * getOperation function
@@ -96,7 +123,7 @@ class UsersTokensEntity extends Entity
      *
      * @return String|null
      */
-    public function getData(): ?String
+    public function getData(): String|Object|Array|null
     {
         return json_decode($this->attributes['data']);
     }
@@ -107,7 +134,7 @@ class UsersTokensEntity extends Entity
      * @param String|null $data
      * @return void
      */
-    public function setData(?String $data)
+    public function setData(Object|Array|string|null $data)
     {
         $session = session();
         $LANGUAGE = $session->get("language");
@@ -143,13 +170,13 @@ class UsersTokensEntity extends Entity
         $session = session();
         $LANGUAGE = $session->get("language");
 
-        if (is_bool($isValid))
+        if (!is_bool($isValid))
             throw new Exception(lang('Validation.invalid_field', [
                 "field" => "is_valid"
             ], $LANGUAGE), INTERNAL_ERROR);
 
-        if (!empty($data))
-            $this->attributes['data'] = $data;
+        if (!empty($isValid))
+            $this->attributes['is_valid'] = $isValid;
     }
 
     /**
@@ -212,7 +239,7 @@ class UsersTokensEntity extends Entity
      */
     public function getUser(): ?UserEntity
     {
-        return $this->attributes['user'];
+        return $this->relations['user'];
     }
 
     /**
@@ -224,7 +251,7 @@ class UsersTokensEntity extends Entity
     public function setUser(UserEntity $user)
     {
         if (!empty($user))
-            $this->attributes['user'] = $user;
+            $this->relations['user'] = $user;
     }
 
     /**
@@ -236,7 +263,7 @@ class UsersTokensEntity extends Entity
     public function setExpiredAt(?String $expiredAt)
     {
         if (!empty($expiredAt))
-            $this->dates['expired_at'] = $expiredAt;
+            $this->attributes['expired_at'] = $expiredAt;
     }
 
     /**
@@ -246,7 +273,7 @@ class UsersTokensEntity extends Entity
      */
     public function getExpiredAt(): ?String
     {
-        return $this->dates['expired_at'];
+        return $this->attributes['expired_at'];
     }
 
     /**
@@ -258,7 +285,7 @@ class UsersTokensEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -268,7 +295,7 @@ class UsersTokensEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 
     /**
@@ -280,7 +307,7 @@ class UsersTokensEntity extends Entity
     public function setUpdatedAt(?String $updatedAt)
     {
         if (!empty($updatedAt))
-            $this->dates['updated_at'] = $updatedAt;
+            $this->attributes['updated_at'] = $updatedAt;
     }
 
     /**
@@ -290,6 +317,6 @@ class UsersTokensEntity extends Entity
      */
     public function getUpdatedAt(): ?String
     {
-        return $this->dates['updated_at'];
+        return $this->attributes['updated_at'];
     }
 }

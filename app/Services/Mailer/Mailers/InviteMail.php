@@ -28,7 +28,7 @@ class InviteMail
 
         $optionsMail->html = (string) view('mails/invite', ['inviteToken' => $payload['inviteToken']]);
         $inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=" . $payload['inviteToken'];
-        $optionsMail->textHtml = "Olá, você foi convidado a fazer parte da plataforma da AGM! Acesse o link: $inviteLink";
+        $optionsMail->textHtml = "Olá, você foi convidado a fazer parte da plataforma da " . \getenv('system.mail.author') . "! Acesse o link: $inviteLink";
 
         $mailService->send($optionsMail);
 

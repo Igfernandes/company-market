@@ -15,7 +15,7 @@ trait PostDTOs
         ],
         'password' => [
             'label'  => 'password',
-            'rules'  => 'string|required',
+            'rules'  => 'string|required|regex_match[' . VALIDATE_PASSWORD . ']',
             'errors' => [
                 'string' => 'Validation.string'
             ],

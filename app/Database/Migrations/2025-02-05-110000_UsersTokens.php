@@ -17,6 +17,10 @@ class UsersTokens extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'token' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ],
             'operation' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100'
