@@ -43,7 +43,7 @@ class GetUseCases
             $groupEntity = new GroupEntity();
             $groupData = $group->attributes;
 
-            $groupEntity->setStore($groupData);
+            $groupEntity->store($groupData);
 
             $groups[$group->getId()] = $groupEntity;
 

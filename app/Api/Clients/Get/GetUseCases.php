@@ -50,7 +50,7 @@ class GetUseCases
         $foundClients = $clientsModel->findAll();
 
         $clientsData = array_map(
-            fn(ClientEntity $client) => $this->builder($client, $foundClientsCategory),
+            fn(ClientEntity $client) => $this->clientWithCategories($client, $foundClientsCategory),
             $foundClients
         );
 

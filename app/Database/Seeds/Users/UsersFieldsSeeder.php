@@ -2,7 +2,6 @@
 
 namespace App\Database\Seeds\Users;
 
-use App\Database\Entities\Users\UsersFieldsEntity;
 use CodeIgniter\Database\Seeder;
 
 class UsersFieldsSeeder extends Seeder

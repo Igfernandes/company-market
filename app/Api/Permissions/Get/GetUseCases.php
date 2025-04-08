@@ -34,9 +34,9 @@ class GetUseCases
         if (count($in_ids) > 0)
             $permissionsModel->whereIn("id", $in_ids);
 
-        $permissionEntity->fill($filteredPayload);
+        $permissionEntity->store($filteredPayload);
         /** @var array{CategoryEntity}*/
-        $foundPermissions = $permissionsModel->where($filteredPayload)->findAll();
+        $foundPermissions = $permissionsModel->where($permissionEntity->toArray())->findAll();
 
         return array_map(fn(PermissionEntity $permission) => $permission->toArray(), $foundPermissions);
     }

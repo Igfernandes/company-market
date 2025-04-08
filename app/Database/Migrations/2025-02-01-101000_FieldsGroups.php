@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class FieldsGroup extends Migration
+class FieldsGroups extends Migration
 {
-    protected $tb_name = "fields_group";
+    protected $tb_name = "fields_groups";
 
     public function up()
     {
@@ -22,7 +22,7 @@ class FieldsGroup extends Migration
                 'constraint' => '100'
             ],
             'scope' => [
-                'type'       => 'SET("USER", "CLIENT", "COMPANY")',
+                'type'       => 'ENUM("USER", "CLIENT", "COMPANY")',
             ],
             'created_at datetime default current_timestamp',
         ]);

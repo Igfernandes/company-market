@@ -58,13 +58,13 @@ class GroupsPermissionsModel extends Model
             /** @var array */
             $attributes = $groupPermissionData->attributes;
 
-            $groupEntity->setStore($attributes);
+            $groupEntity->store($attributes);
             $groupEntity->setId($attributes['group_id']);
             $groupEntity->setName($attributes['group_name']);
             $groupEntity->setCreatedAt($attributes['group_created_at']);
             $groupEntity->setUpdatedAt($attributes['group_updated_at']);
 
-            $permissionEntity->setStore($attributes);
+            $permissionEntity->store($attributes);
             $permissionEntity->setId($attributes['permission_id']);
             $permissionEntity->setName($attributes['permission_name']);
 

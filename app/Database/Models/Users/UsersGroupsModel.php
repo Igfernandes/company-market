@@ -60,13 +60,13 @@ class UsersGroupsModel extends Model
             /** @var array */
             $attributes = $userGroupData->attributes;
 
-            $userEntity->setStore($attributes);
+            $userEntity->store($attributes);
             $userEntity->setId($attributes['user_id']);
             $userEntity->setName($attributes['user_name']);
             $userEntity->setCreatedAt($attributes['user_created_at']);
             $userEntity->setUpdatedAt($attributes['user_updated_at']);
 
-            $groupEntity->setStore($attributes);
+            $groupEntity->store($attributes);
             $groupEntity->setId($attributes['group_id']);
             $groupEntity->setName($attributes['group_name']);
             $groupEntity->setCreatedAt($attributes['group_created_at']);

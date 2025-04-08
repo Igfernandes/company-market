@@ -26,7 +26,7 @@ trait EntityEnhancerTrait
     }
 
 
-    public function setStore(array $data)
+    public function store(array $data)
     {
         foreach ($this->attributes as $atbIndex => $atbValue) {
             if (isset($data[$atbIndex]))
