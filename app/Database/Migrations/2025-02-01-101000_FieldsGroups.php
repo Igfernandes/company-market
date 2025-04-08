@@ -22,7 +22,7 @@ class FieldsGroups extends Migration
                 'constraint' => '100'
             ],
             'scope' => [
-                'type'       => 'SET("USER", "CLIENT", "COMPANY")',
+                'type'       => 'ENUM("USER", "CLIENT", "COMPANY")',
             ],
             'created_at datetime default current_timestamp',
         ]);

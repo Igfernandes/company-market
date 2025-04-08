@@ -51,6 +51,14 @@ return [
         ]
     ],
     "clients" => [
+        "fields" => [
+            "success" => [
+                "post" => "O valor foi salvo com sucesso",
+            ],
+            "invalid" => [
+                "client_id" => "O identificador do cliente é invalido"
+            ]
+        ],
         "success" => [
             "post" => "O cliente foi criado com sucesso",
             "patchCategory" => "Agora a categoria da base de clientes selecionada é {name}",
@@ -65,8 +73,10 @@ return [
     "fields" => [
         "success" => [
             "post" => "O campo foi criado com sucesso",
+            "delete" => "O campo foi deletado com sucesso",
         ],
         "invalid" => [
+            "id" => "O id do campo fornecido é invalido",
             "group" => "O grupo informado encontra-se inválido ou incorreto"
         ]
     ],

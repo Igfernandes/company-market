@@ -4,6 +4,7 @@ namespace App\Api\Fields\Post;
 
 use App\Business\Fields\FieldsBusiness;
 use App\Database\Entities\Fields\FieldEntity;
+use App\Database\Models\Fields\FieldsGroupsModel;
 use App\Database\Models\Fields\FieldsModel;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -16,7 +17,6 @@ class PostUseCases
      *  component: "INPUT"|"SELECT"|"TEXTAREA",
      *  type: string|null,
      *  scope: "USER"|"CLIENT"|"COMPANY",
-     *  is_file: boolean,
      *  is_required: boolean,
      *  is_sensitive: boolean,
      *  group_id: integer,
@@ -33,6 +33,13 @@ class PostUseCases
 
         if (!$fieldBusiness->hasGroup($payload['group_id']))
             throw new Exceptions(lang("Api.fields.invalid.group"), BAD_BUSINESS_RULES);
+
+        if ($payload["type"] === "FILE") {
+            $fieldsGroupsModel = new FieldsGroupsModel();
+
+            $foundGroup = $fieldsGroupsModel->where("name", "ATTACHMENTS")->first();
+            $payload['group_id'] = $foundGroup->getId();
+        }
 
 
         $fieldsEntity->store($payload);

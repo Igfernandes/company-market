@@ -76,6 +76,14 @@ class ClientFieldEntity extends Entity
 
     public function setValue(?string $value): void
     {
+        helper("json");
+        $valueDecode =  \json_decode($value);
+
+        if (!is_object($valueDecode) || !isset($valueDecode->data))
+            $value = \json_encode((object)[
+                "data" => $value
+            ]);
+
         if (!empty($value)) {
             $this->attributes['value'] = $value;
         }

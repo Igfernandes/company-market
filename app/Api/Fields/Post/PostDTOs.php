@@ -9,7 +9,6 @@ trait PostDTOs
         'component'     => 'in_list[INPUT,SELECT,TEXTAREA]',
         'type'          => 'string|max_length[50]',
         'scope'         => 'in_list[USER,CLIENT,COMPANY]',
-        'is_file'       => 'boolean',
         'is_required'   => 'boolean',
         'is_sensitive'  => 'boolean',
         'group_id'      => 'integer',

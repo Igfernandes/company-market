@@ -33,10 +33,6 @@ class Fields extends Migration
                 'type' => "BIT",
                 'default' => 0
             ],
-            'is_file' => [
-                'type' => "BIT",
-                'default' => 0
-            ],
             'is_required' => [
                 'type' => "BIT",
                 'default' => 0

@@ -15,7 +15,7 @@ class FieldsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Fields\FieldEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'component', 'type', 'is_file', 'is_required', 'is_sensitive', 'group_id'];
+    protected $allowedFields    = ['name', 'component', 'type', 'is_required', 'is_sensitive', 'group_id'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

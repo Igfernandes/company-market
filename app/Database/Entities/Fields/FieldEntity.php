@@ -15,7 +15,6 @@ class FieldEntity extends Entity
         'component'   => null,
         'type'        => null,
         'is_sensitive' => null,
-        'is_file'     => null,
         'is_required' => null,
         'group_id'    => null,
         'created_at'  => null,
@@ -78,16 +77,6 @@ class FieldEntity extends Entity
     public function setIsSensitive(?bool $isSensitive): void
     {
         $this->attributes['is_sensitive'] = $isSensitive;
-    }
-
-    public function getIsFile(): ?bool
-    {
-        return $this->attributes['is_file'];
-    }
-
-    public function setIsFile(?bool $isFile): void
-    {
-        $this->attributes['is_file'] = $isFile;
     }
 
     public function getIsRequired(): ?bool
