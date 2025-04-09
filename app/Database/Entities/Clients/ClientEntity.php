@@ -165,7 +165,7 @@ class ClientEntity extends Entity
     public function setEncryptPhone(?String $phone)
     {
         if (!empty($phone))
-            $this->attributes['phone'] = $this->cryptoLibrary->encrypt(strtolower($phone), $this->getEncryptedKey());
+            $this->attributes['phone'] = $this->cryptoLibrary->encrypt(str_replace(['-', ' ', '(', ')'], '', $phone), $this->getEncryptedKey());
     }
 
     /**

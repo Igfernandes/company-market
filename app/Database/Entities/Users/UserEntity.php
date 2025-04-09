@@ -283,7 +283,6 @@ class UserEntity extends Entity
      */
     public function setEncryptPhone(?string $phone)
     {
-
         if (strlen($phone) > 20)
             throw new Exception(lang('Validation.max_length', [
                 "field" => "phone",
@@ -291,7 +290,7 @@ class UserEntity extends Entity
             ]), BAD_BUSINESS_RULES);
 
         if (!empty($phone))
-            $this->attributes['phone'] = $this->cryptoLibrary->encrypt($phone, $this->getEncryptedKey());
+            $this->attributes['phone'] = $this->cryptoLibrary->encrypt(str_replace(['-', ' ', '(', ')'], '', $phone), $this->getEncryptedKey());
     }
 
     /**

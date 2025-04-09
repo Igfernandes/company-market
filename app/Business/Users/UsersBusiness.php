@@ -5,6 +5,7 @@ namespace App\Business\Users;
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\UsersModel;
+use App\Libraries\Crypto\Crypto;
 use App\Traits\Users\UsersDataTrait;
 
 class UsersBusiness
@@ -51,23 +52,32 @@ class UsersBusiness
     }
 
 
-    public function isCPFAvailable(string $cpf)
+    public function isCPFAvailable(string $cpf, int $userId = 0)
     {
+        if ($userId > 0)
+            $this->usersModel->where("id !=", $userId);
+
         $foundUser = $this->usersModel->where("cpf_sha1", \sha1($cpf))->first();
 
         return empty($foundUser);
     }
 
 
-    public function isEmailAvailable(string $email)
+    public function isEmailAvailable(string $email,  int $userId = 0)
     {
+        if ($userId > 0)
+            $this->usersModel->where("id !=", $userId);
+
         $foundUser = $this->usersModel->where("email_sha1", \sha1($email))->first();
 
         return empty($foundUser);
     }
 
-    public function isPhoneAvailable(string $phone)
+    public function isPhoneAvailable(string $phone,  int $userId = 0)
     {
+        if ($userId > 0)
+            $this->usersModel->where("id !=", $userId);
+
         $foundUser = $this->usersModel->where("phone_sha1", \sha1($phone))->first();
 
         return empty($foundUser);
@@ -80,5 +90,25 @@ class UsersBusiness
         $foundUsers = $usersModel->where($query)->find();
 
         return !empty($foundUsers);
+    }
+
+    public function updateEncryptionReferences(UserEntity $user, string $password, string $email): UserEntity
+    {
+        $crypto = new Crypto();
+        $encryptedKey = "$email:$password";
+
+        $systemKey = $crypto->encrypt($encryptedKey, getenv('system.encrypted_key'));
+
+        $newUser = new UserEntity();
+
+        $newUser->store($user->toArray());
+        $newUser->setSystemKey($systemKey);
+        $newUser->setEncryptEmail($user->getDecryptEmail());
+        $newUser->setEncryptPassword($password);
+        $newUser->setEncryptCpf($user->getDecryptCpf());
+        $newUser->setEncryptPhone($user->getDecryptPhone());
+        $newUser->setEncryptKeyword($user->getDecryptKeyword());
+
+        return  $newUser;
     }
 }

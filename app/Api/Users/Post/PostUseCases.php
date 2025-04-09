@@ -28,7 +28,7 @@ class PostUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isCPFAvailable($payload['cpf']))
-            throw new Exceptions(\lang(\str_replace("{field}", "email", lang("Validation.already_exists"))));
+            throw new Exceptions(\lang(\str_replace("{field}", "email", lang("Validation.already_exists"))), BAD_AUTH);
 
         $invitesModel = new InvitesModel();
 
