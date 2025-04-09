@@ -2,6 +2,7 @@
 
 // override core en language system validation or define your own en language validation message
 return [
+    "hello" => "Olá",
     "file" => "arquivo",
     "email" => "e-mail",
     "name" => "nome",
@@ -98,5 +99,6 @@ return [
     "registered" => "registrado",
     "category" => "categoria",
     "group" => "grupo",
-    "service" => "serviço"
+    "service" => "serviço",
+    "country_region" => "País/região"
 ];

@@ -14,7 +14,11 @@ class RoutesApi
     $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
     $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
 
-    // /** Users */
+    /** Recover */
+    $routes->post("recover/password", "Api\Recover\Password\Post\PostController::handle");
+    $routes->put("recover/password", "Api\Recover\Password\Put\PutController::handle");
+
+    /** Users */
     $routes->get("users", "Api\Users\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("users", "Api\Users\Post\PostController::handle");
     $routes->delete("users/(:num)", "Api\Users\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);

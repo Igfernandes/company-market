@@ -8,7 +8,7 @@
                 <h1 style="
                         font-size: 1.2rem;
                         margin-bottom: 0;
-                    "> <?= str_replace("{name}", $name, lang("Mails.welcome.title")) ?></h1>
+                    "> <?= str_replace("{name}", $name, lang("Mails.alter_password.title")) ?></h1>
             </div>
             <div style="
                     max-width: 390px;
@@ -19,7 +19,7 @@
                         color: #646464;
                         margin-top: .3rem;
                     ">
-                    <?= lang("Mails.welcome.subtitle") ?>
+                    <?= lang("Mails.alter_password.subtitle") ?>
                 </p>
             </div>
         </td>
@@ -35,7 +35,7 @@
                     margin: 0 auto;
                 ">
                 <p style="font-size: .8rem;">
-                    <?= lang("Mails.welcome.text_about_date_created") . " " . date(lang('masks.date'), strtotime($createdAt)) . " às " . date(lang('masks.time'), strtotime($createdAt)) ?>
+                    <?= lang("Mails.alter_password.text_about_date_created") . " " . date(lang('masks.date'), strtotime($createdAt)) . " às " . date(lang('masks.time'), strtotime($createdAt)) ?>
                 </p>
             </div>
             <div style="
@@ -87,7 +87,7 @@
                     margin: 0 auto;
                 ">
                     <p style="font-size: .8rem;">
-                        <?= lang("Mails.welcome.alert_about_email") ?>
+                        <?= lang("Mails.alter_password.alert_about_email") ?>
                     </p>
                 </div>
             </div>
