@@ -2,6 +2,7 @@
 
 namespace App\Api\Recover\Password\Put;
 
+use App\Business\Users\UsersBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Entities\Users\UserTokenEntity;
 use App\Database\Models\Users\UsersModel;
@@ -38,6 +39,7 @@ class PutUseCases
 
         $usersModel = new UsersModel();
         $userEntity = new UserEntity();
+        $usersBusiness = new UsersBusiness();
 
         $cryptoLibrary = new Crypto();
 
@@ -46,17 +48,7 @@ class PutUseCases
 
         $password = $payload['password'];
         $email = $currentUser->getDecryptEmail();
-        $encryptedKey = "$email:$password";
-
-        $systemKey = $cryptoLibrary->encrypt($encryptedKey, getenv('system.encrypted_key'));
-
-        $userEntity->store($currentUser->toArray());
-        $userEntity->setSystemKey($systemKey);
-        $userEntity->setEncryptEmail($currentUser->getDecryptEmail());
-        $userEntity->setEncryptPassword($password);
-        $userEntity->setEncryptCpf($currentUser->getDecryptCpf());
-        $userEntity->setEncryptPhone($currentUser->getDecryptPhone());
-        $userEntity->setEncryptKeyword($currentUser->getDecryptKeyword());
+        $userEntity = $usersBusiness->updateEncryptionReferences($currentUser, $password,  $email);
 
         $usersModel->set($userEntity->toArray())->where(["id" => $currentUser->getId()])->update();
 

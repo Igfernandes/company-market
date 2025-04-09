@@ -3,6 +3,7 @@
 namespace App\Api\Users\Patch;
 
 use App\Api\ExceptionApi;
+use App\Api\Users\Patch\Password\PatchPasswordUseCases;
 use App\Api\Users\Patch\Status\PatchStatusUseCases;
 use App\Api\Validation;
 use App\Controllers\BaseController;
@@ -14,11 +15,14 @@ class PatchController extends BaseController
 {
     use Validation, ExceptionApi, ControllersTrait, PatchDTOs;
 
-    private PatchStatusUseCases $patchStatusUseCases;
+    private array $operations;
 
     public function __construct()
     {
-        $this->patchStatusUseCases = new PatchStatusUseCases();
+        $this->operations = [
+            "status" => new PatchStatusUseCases(),
+            "password" => new PatchPasswordUseCases()
+        ];
     }
 
     public function handle(int $userId = 0)
@@ -29,15 +33,18 @@ class PatchController extends BaseController
             $operation = $payload['operation'];
             $validation = \Config\Services::validation();
 
-            $payload['id'] = $userId;
+            $data = $payload['data'];
+            $data->id = $userId;
+
             $validation->setRules($this->rules);
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            if ($operation == "status")
-                $responsePatch = $this->patchStatusUseCases->execute($payload);
-            else throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            if (!isset($this->operations[$operation]))
+                throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+
+            $responsePatch = $this->operations[$operation]->execute((array)$data);
 
             return $this->response->setJSON($responsePatch)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
