@@ -14,6 +14,10 @@ class UserGroupsEntity extends Entity
         "created_at"      => null,
         "updated_at"      => null
     ];
+    public $relations = [
+        'group'     => null,
+        'user'      => null
+    ];
 
     /**
      * getGroupId function
@@ -44,7 +48,7 @@ class UserGroupsEntity extends Entity
      */
     public function getGroup(): ?GroupEntity
     {
-        return $this->attributes['group'];
+        return $this->relations['group'];
     }
 
     /**
@@ -56,7 +60,7 @@ class UserGroupsEntity extends Entity
     public function setGroup(GroupEntity $group)
     {
         if (!empty($group))
-            $this->attributes['group'] = $group;
+            $this->relations['group'] = $group;
     }
 
     /**
@@ -88,7 +92,7 @@ class UserGroupsEntity extends Entity
      */
     public function getUser(): ?UserEntity
     {
-        return $this->attributes['user'];
+        return $this->relations['user'];
     }
 
     /**
@@ -100,7 +104,7 @@ class UserGroupsEntity extends Entity
     public function setUser(UserEntity $user)
     {
         if (!empty($user))
-            $this->attributes['user'] = $user;
+            $this->relations['user'] = $user;
     }
 
     /**
