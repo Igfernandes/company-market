@@ -6,6 +6,8 @@ use App\Libraries\Crypto\Crypto;
 
 trait CryptoEntityTrait
 {
+    use EntityEnhancerTrait;
+
     private Crypto $cryptoLibrary;
 
     public function __construct()

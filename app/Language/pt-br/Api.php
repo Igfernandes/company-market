@@ -93,5 +93,10 @@ return [
     ],
     "custom_forms" => [
         "post" => "O formulário foi criado com sucesso.",
+    ],
+    "integrations" => [
+        "success" => [
+            "post" => "Credenciais atualizadas com sucesso"
+        ]
     ]
 ];

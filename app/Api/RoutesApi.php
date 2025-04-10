@@ -82,6 +82,13 @@ class RoutesApi
 
     $routes->delete("fields/(:num)", "Api\Fields\Delete\DeleteController::handle/$1",  $this->optionsWithAuthentications);
 
+    /** Integrations */
+    $routes->post("integrations/banks", "Api\Integrations\Banks\Post\PostController::handle",  $this->optionsWithAuthentications);
+    $routes->post("integrations/chats", "Api\Integrations\Chats\Post\PostController::handle",  $this->optionsWithAuthentications);
+    $routes->get("integrations/chats", "Api\Integrations\Chats\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("integrations/chats/(:num)", "Api\Integrations\Chats\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->get("integrations/banks/", "Api\Integrations\Banks\Get\GetController::handle", $this->optionsWithAuthentications);
+    $routes->get("integrations/banks/(:num)", "Api\Integrations\Banks\Get\GetController::handle/$1", $this->optionsWithAuthentications);
     return $routes;
   }
 }
