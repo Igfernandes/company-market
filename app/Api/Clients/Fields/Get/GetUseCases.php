@@ -2,8 +2,6 @@
 
 namespace App\Api\Clients\Fields\Get;
 
-use App\Database\Entities\Clients\ClientEntity;
-use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Entities\Fields\FieldEntity;
 use App\Database\Models\Fields\ClientsFieldsModel;
 use App\Database\Models\Fields\FieldsModel;

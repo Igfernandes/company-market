@@ -38,11 +38,16 @@ class GetUseCases
 
         $userAuthId = $session->get('userAuthId');
 
+        if (isset($filteredPayload['phone'])) {
+            $filteredPayload['phone_sha1'] = \sha1($filteredPayload['phone']);
+            unset($filteredPayload['phone']);
+        }
+
         $clientsModel->where($filteredPayload);
         if (count($in_ids) > 0)
             $clientsModel->whereIn("id", $in_ids);
 
-        $filteredPayload['owner_id'] = $userAuthId;
+        // $filteredPayload['owner_id'] = $userAuthId;
 
         $clientsModel = $this->builderClauseWithContains($filteredPayload, $clientsModel);
         $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($filteredPayload);
