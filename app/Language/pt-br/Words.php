@@ -100,5 +100,6 @@ return [
     "category" => "categoria",
     "group" => "grupo",
     "service" => "serviço",
-    "country_region" => "País/região"
+    "country_region" => "País/região",
+    "charge" => "Cobrança"
 ];

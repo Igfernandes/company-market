@@ -98,5 +98,14 @@ return [
         "success" => [
             "post" => "Credenciais atualizadas com sucesso"
         ]
+    ],
+    "charges" => [
+        "invalid" => [
+            "not_found_service_or_name" => "É obrigatório preencher o nome da cobrança ou selecionar um serviço"
+        ],
+        "success" => [
+            "post" => "A sua cobrança foi criado com sucesso!",
+            "delete" => "O cobrança foi deletado com sucesso"
+        ]
     ]
 ];

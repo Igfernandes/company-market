@@ -133,7 +133,7 @@ class IntegrationBankEntity extends Entity
     public function setEncryptPrivateToken(?String $privateToken)
     {
         if (!empty($privateToken))
-            $this->attributes['private_token'] = $this->cryptoLibrary->encrypt(strtolower($privateToken), $this->getEncryptedKey());
+            $this->attributes['private_token'] = $this->cryptoLibrary->encrypt($privateToken, $this->getEncryptedKey());
     }
 
     /**
@@ -189,7 +189,7 @@ class IntegrationBankEntity extends Entity
     public function setEncryptLogin(?String $login)
     {
         if (!empty($login))
-            $this->attributes['login'] = $this->cryptoLibrary->encrypt(strtolower($login), $this->getEncryptedKey());
+            $this->attributes['login'] = $this->cryptoLibrary->encrypt($login, $this->getEncryptedKey());
     }
 
     /**
@@ -228,7 +228,7 @@ class IntegrationBankEntity extends Entity
     public function setEncryptPassword(?String $password)
     {
         if (!empty($password))
-            $this->attributes['password'] = $this->cryptoLibrary->encrypt(strtolower($password), $this->getEncryptedKey());
+            $this->attributes['password'] = $this->cryptoLibrary->encrypt($password, $this->getEncryptedKey());
     }
 
     /**
