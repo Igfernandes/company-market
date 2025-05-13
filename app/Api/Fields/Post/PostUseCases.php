@@ -37,10 +37,9 @@ class PostUseCases
         if ($payload["type"] === "FILE") {
             $fieldsGroupsModel = new FieldsGroupsModel();
 
-            $foundGroup = $fieldsGroupsModel->where("name", "ATTACHMENTS")->first();
+            $foundGroup = $fieldsGroupsModel->where(["name" => "ATTACHMENTS", "scope" => $payload['scope']])->first();
             $payload['group_id'] = $foundGroup->getId();
         }
-
 
         $fieldsEntity->store($payload);
 
