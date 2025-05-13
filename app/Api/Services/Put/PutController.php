@@ -13,6 +13,7 @@ class PutController extends BaseController
     use Validation, ExceptionApi, PutDTOs;
 
     private PutUseCases $putUseCases;
+    protected $helpers = ['uploads'];
 
     public function __construct()
     {
@@ -28,10 +29,13 @@ class PutController extends BaseController
             $payload['id'] = $serviceId;
 
             $validation->setRules($this->rules);
-            $payload['photo'] = $this->request->getFile("photo");
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
+            
+            $photo = $this->request->getVar('photo');
+            if (!empty($photo))
+                $payload['photo'] = $photo;
 
             $responsePut = $this->putUseCases->execute($payload);
 
