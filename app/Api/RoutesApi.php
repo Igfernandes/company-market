@@ -47,6 +47,7 @@ class RoutesApi
 
     $routes->get("clients/fields", "Api\Clients\Fields\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->get("clients/(:num)/fields", "Api\Clients\Fields\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->get("clients/preview", "Api\Clients\GetPreview\GetPreviewController::handle", $this->optionsWithAuthentications);
 
     $routes->get("clients/categories", "Api\Clients\Categories\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->post("clients/categories", "Api\Clients\Categories\Post\PostController::handle", $this->optionsWithAuthentications);
@@ -89,6 +90,20 @@ class RoutesApi
     $routes->get("integrations/chats/(:num)", "Api\Integrations\Chats\Get\GetController::handle/$1", $this->optionsWithAuthentications);
     $routes->get("integrations/banks/", "Api\Integrations\Banks\Get\GetController::handle", $this->optionsWithAuthentications);
     $routes->get("integrations/banks/(:num)", "Api\Integrations\Banks\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+
+    /** Charges */
+    $routes->get("charges", "Api\Finances\Charges\Get\GetController::handle",  $this->optionsWithAuthentications);
+    $routes->get("charges/(:num)", "Api\Finances\Charges\Get\GetController::handle/$1",  $this->optionsWithAuthentications);
+    $routes->get("charges/preview", "Api\Finances\Charges\GetPreview\GetPreviewController::handle");
+
+    $routes->post("charges", "Api\Finances\Charges\Post\PostController::handle",  $this->optionsWithAuthentications);
+    $routes->patch("charges/(:num)", "Api\Finances\Charges\Patch\PatchController::handle/$1",  $this->optionsWithAuthentications);
+    $routes->delete("charges/(:num)", "Api\Finances\Charges\Delete\DeleteController::handle/$1",  $this->optionsWithAuthentications);
+
+    $routes->post("checkout", "Api\Finances\Checkout\Post\PostController::handle");
+    /** Webhooks */
+    $routes->post("webhook/mercado-pago", "Api\WebHooks\MercadoPago\Post\PostController::handle");
+
     return $routes;
   }
 }

@@ -17,6 +17,6 @@ class PhotoServiceBusiness
 
         $photo->move(WRITEPATH . 'uploads', $photoName);
 
-        return WRITEPATH . "uploads/$photoName";
+        return WRITEPATH . "uploads\\$photoName";
     }
 }
