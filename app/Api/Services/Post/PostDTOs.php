@@ -27,7 +27,7 @@ trait PostDTOs
         ],
         'stock' => [
             'label'  => 'stock',
-            'rules'  => 'integer|is_natural_no_zero|permit_empty',
+            'rules'  => 'integer|is_natural|permit_empty',
         ],
         'reservations' => [
             'label'  => 'stock',
