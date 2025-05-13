@@ -28,6 +28,7 @@ class PostController extends BaseController
             $request = service('request');
 
             $payload = $this->request->getVar(array_keys($this->rules));
+      
             $validation->setRules($this->rules);
 
             $payload['rememberMe'] = !isset($payload['rememberMe']) ? 0 : $payload['rememberMe'];
@@ -37,7 +38,7 @@ class PostController extends BaseController
 
             $browser =  $request->getUserAgent()->getBrowser();
             $responsePost = $this->postUseCases->execute($payload, (object)[
-                "ip" => $request->getIPAddress(),
+                "ip" => $request->getIPAddress() ?? "127.0.0.1",
                 "browser" => !empty($browser) ? $browser : "Postman"
             ]);
 
