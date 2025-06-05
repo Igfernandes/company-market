@@ -19,5 +19,6 @@ return [
     "valid_date" => "{field} não é uma data válida.",
     "invalid_list" => "{field} fornecido contém um item inválido ou inexistente",
     "already_exists" => "{field} já está utilizado ou não é permitido",
-    "boolean" => "{field} não é um booleano válido"
+    "boolean" => "{field} não é um booleano válido",
+    "login_invalid" => "Verifique se sua senha ou seu e-mail estão corretos."
 ];

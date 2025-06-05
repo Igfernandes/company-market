@@ -25,9 +25,6 @@ class CustomForms extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '250'
             ],
-            'type' => [
-                'type' => 'ENUM("PEOPLE","COMPANY")',
-            ],
             'components' => [
                 'type'       => 'JSON',
             ],

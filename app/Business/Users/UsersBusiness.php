@@ -17,6 +17,7 @@ class UsersBusiness
     public function __construct()
     {
         $this->usersModel = new UsersModel();
+        helper(['crypto']);
     }
 
     /**
@@ -57,7 +58,7 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("cpf_sha1", \sha1($cpf))->first();
+        $foundUser = $this->usersModel->where("cpf_sha256", \referenceHash($cpf))->first();
 
         return empty($foundUser);
     }
@@ -68,7 +69,7 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("email_sha1", \sha1($email))->first();
+        $foundUser = $this->usersModel->where("email_sha256", \referenceHash($email))->first();
 
         return empty($foundUser);
     }
@@ -78,7 +79,7 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("phone_sha1", \sha1($phone))->first();
+        $foundUser = $this->usersModel->where("phone_sha256", \referenceHash($phone))->first();
 
         return empty($foundUser);
     }
@@ -107,7 +108,7 @@ class UsersBusiness
         $newUser->setEncryptPassword($password);
         $newUser->setEncryptCpf($user->getDecryptCpf());
         $newUser->setEncryptPhone($user->getDecryptPhone());
-        $newUser->setEncryptKeyword($user->getDecryptKeyword());
+        $newUser->setEncryptKeyword($user->getDecryptKeyword() ?? "none");
 
         return  $newUser;
     }

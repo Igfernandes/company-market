@@ -11,7 +11,6 @@ trait CustomFormsDataTrait
         return  (object)[
             "id" => $customFormsEntity->getId(),
             "name" => $customFormsEntity->getName(),
-            "type" => $customFormsEntity->getType(),
             "slug" => $customFormsEntity->getSlug(),
             "description" => $customFormsEntity->getDescription(),
             "components" => $customFormsEntity->getComponents(),

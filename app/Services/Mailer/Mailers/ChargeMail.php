@@ -27,8 +27,15 @@ class ChargeMail
         $optionsMail->recipients = $payload['recipients'];
 
         $chargeId =  $payload['chargeId'];
-        $optionsMail->html = (string) view('mails/charges', ['chargeId' => $chargeId, "title" => $payload['title']]);
-        $chargeLink = getenv('globals.href.frontend') . "/charges/$chargeId";
+        $query = $payload['hasService'] ? "/services?charge=$chargeId" : "/checkout?charge=$chargeId";
+        $chargeLink = getenv('globals.href.frontend') . $query;
+
+        $optionsMail->html = (string) view('mails/charges', [
+            'chargeId' => $chargeId,
+            "title" => $payload['title'],
+            'chargeLink' => $chargeLink
+        ]);
+
         $optionsMail->textHtml = "Olá, você recebeu um cobrança da plataforma " . \getenv('system.mail.author') . "! Acesse o link: $chargeLink";
 
         $mailService->send($optionsMail);

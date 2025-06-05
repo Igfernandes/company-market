@@ -20,7 +20,8 @@ class ClientEntity extends Entity
         'email'           => null,
         'birthdate'       => null,
         'status'          => null,
-        'phone_sha1'      => null,
+        'phone_sha256'    => null,
+        'email_sha256'    => null,
         'system_key'      => null,
         'owner_id'        => null,
         'created_at'      => null,
@@ -204,9 +205,7 @@ class ClientEntity extends Entity
                 "param" => 255
             ]), BAD_BUSINESS_RULES);
 
-        if (!empty($email)) {
-            $this->attributes['email'] = $email;
-        }
+        $this->attributes['email'] = $email;
     }
 
     /**
@@ -269,25 +268,25 @@ class ClientEntity extends Entity
     }
 
     /**
-     * @method mixed getPhoneSha1()
+     * @method mixed getPhoneSha256()
      *
      * @return string|null
      */
-    public function getPhoneSha1(): ?string
+    public function getPhoneSha256(): ?string
     {
-        return $this->attributes['phone_sha1'];
+        return $this->attributes['phone_sha256'];
     }
 
     /**
-     * @method mixed setPhoneSha1()
+     * @method mixed setPhoneSha256()
      *
-     * @param string|null $phoneSha1
+     * @param string|null $phoneSha256
      * @return void
      */
-    public function setPhoneSha1(?string $phoneSha1)
+    public function setPhoneSha256(?string $phoneSha256)
     {
-        if (!empty($phoneSha1)) {
-            $this->attributes['phone_sha1'] = $phoneSha1;
+        if (!empty($phoneSha256)) {
+            $this->attributes['phone_sha256'] = $phoneSha256;
         }
     }
 

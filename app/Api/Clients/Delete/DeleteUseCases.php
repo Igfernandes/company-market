@@ -18,8 +18,8 @@ class DeleteUseCases
         else if (isset($payload['in_clients']))
             $deleteClientBusiness->deleteMultipleClients($payload['in_clients']);
 
-        return (object)[
-            "success" => lang("Api.clients.success.delete")
+        return [
+            "success" => "Api.clients.success.delete"
         ];
     }
 }

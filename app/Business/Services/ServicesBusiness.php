@@ -18,7 +18,7 @@ class ServicesBusiness
 
     public function hasService($query): bool
     {
-        $foundUsers = $this->serviceModel->where($query)->find();
+        $foundUsers = $this->serviceModel->where($query)->first();
 
         return !empty($foundUsers);
     }

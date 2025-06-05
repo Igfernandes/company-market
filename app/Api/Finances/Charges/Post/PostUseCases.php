@@ -20,8 +20,11 @@ class PostUseCases
      *     description: string,
      *     service_id: string, 
      *     type: 'APPELLANT'|'PUNCTUAL',
-     *     price: string, 
-     *     promotional_price: string, 
+     *     privacy: 'PUBLIC'|'PRIVATE',
+     *     amount: integer,
+     *     price: integer, 
+     *     promotional_price: integer,
+     *     expired_at: string, 
      *     clients: array{integer}
      * } $payload
      */
@@ -53,11 +56,16 @@ class PostUseCases
 
         $chargeEntity->setServiceId($payload['service_id']);
         $chargeEntity->setPrice($payload['price']);
+        $chargeEntity->setAmount($payload['amount']);
 
         if (!empty($payload['promotional_price']))
             $chargeEntity->setPromotionalPrice($payload['promotional_price']);
 
+        $chargeEntity->setPrivacy($payload['privacy']);
         $chargeEntity->setType($payload['type']);
+
+        $chargeEntity->setExpiredAt($payload['expired_at']);
+
         $chargeEntity->setReference(md5($title . date("YmdHS")));
         $chargesModel->save($chargeEntity->toArray(true));
         $chargeId = $chargesModel->getInsertID();

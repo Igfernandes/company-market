@@ -17,6 +17,7 @@ class GetPreviewController extends BaseController
     public function __construct()
     {
         $this->getPreviewUseCases = new GetPreviewUseCases();
+        helper('crypto');
     }
 
     public function handle()

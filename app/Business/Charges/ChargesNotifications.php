@@ -22,9 +22,8 @@ class ChargesNotifications
             $chargeClientEntity->setClientId($clientId);
             $chargeClientEntity->setChargedId($charge->getId());
 
-            $chargeClientModel->save($chargeClientEntity);
+            $chargeClientModel->upsert($chargeClientEntity->toArray(true), $chargeClientEntity);
         }
-
 
         /** @var array{ClientEntity} */
         $foundClients = $clientsModel->where('email IS NOT NULL')->whereIn('id', $clients)->findAll();
@@ -32,6 +31,7 @@ class ChargesNotifications
         $chargeMail->send([
             "title" => $title,
             "chargeId" =>  $charge->getReference(),
+            "hasService" => !empty($charge->getServiceId()),
             "recipients" => array_map(fn(ClientEntity $client) => [
                 "email" => $client->getDecryptEmail(),
                 "name" => $client->getName()

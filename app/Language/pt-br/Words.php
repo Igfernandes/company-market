@@ -101,5 +101,6 @@ return [
     "group" => "grupo",
     "service" => "serviço",
     "country_region" => "País/região",
-    "charge" => "Cobrança"
+    "charge" => "Cobrança",
+    "bank" => "Banco"
 ];

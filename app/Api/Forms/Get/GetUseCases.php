@@ -22,11 +22,11 @@ class GetUseCases
 
         $customFormModel = new CustomFormsModel();
 
-        $customForm = $customFormModel->where($filteredPayload)->findAll();
+        $customForm = $customFormModel->where($filteredPayload)->first();
 
-        if (!empty($payload['id']) && \count($customForm) == 0)
+        if (empty($customForm))
             throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
 
-        return $customForm[0]->getComponents();
+        return $customForm;
     }
 }

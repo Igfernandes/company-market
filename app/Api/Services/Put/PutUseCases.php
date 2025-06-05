@@ -34,19 +34,25 @@ class PutUseCases
         $serviceEntity = new ServiceEntity();
 
         if (isset($filteredPayload['photo'])) {
-            if (!isset($filteredPayload['photo']->base64))
-                throw new Exceptions(lang("invalid.photo"), BAD_REQUEST);
+            if (isset($filteredPayload['photo']->base64)) {
+                $idFile = uniqid("preview-service-") . date("Y-m-d-H-S");
+                $photo = saveBase64ToUploads($filteredPayload['photo']->base64,  $idFile);
+                $serviceEntity->setPhoto($photo);
+            }
+        } else {
+            $serviceEntity->setPhoto('');
+            /** @var ServiceEntity */
+            $service = $servicesModel->where("id", $filteredPayload['id'])->first();
 
-            $photo = saveBase64ToUploads($filteredPayload['photo']->base64, "preview-service");
-            $serviceEntity->setPhoto($photo);
+            unlink($service->getPhoto());
         }
+        unset($filteredPayload['photo']);
 
+        $serviceEntity->store($filteredPayload);
         $serviceEntity->setName($filteredPayload['name']);
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
         $serviceEntity->setType($filteredPayload['type']);
-        if (isset($filteredPayload['description']))
-            $serviceEntity->setDescription($filteredPayload['description']);
-        $serviceEntity->setPrivacy($filteredPayload['privacy']);
+
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
         $serviceEntity->setReservations(isset($filteredPayload['reservations']) ? $filteredPayload['reservations'] : 0);
 

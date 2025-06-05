@@ -28,6 +28,7 @@ class FieldsBusiness
      *  field_id: integer,
      *  entity_id: integer,
      *  value: string,
+     *  value_encrypted: string,
      *  scope: "USER"|"CLIENT"|"COMPANY"
      * } $data
      */
@@ -47,18 +48,27 @@ class FieldsBusiness
             "field_id"  => $payload["field_id"],
             $keyEntity  => $payload['entity_id'],
         ];
-        $jsonValue = \json_encode((object)[
-            "data" => $payload['value']
-        ]);
+
+        if (!isset($payload['value_encrypted']) || empty($payload['value_encrypted']))
+            $valueData =  [
+                "column" => "value",
+                "value" => \json_encode((object)[
+                    "data" => $payload['value']
+                ])
+            ];
+        else $valueData = [
+            "column" => "value_encrypted",
+            "value" => $payload['value_encrypted']
+        ];
 
         $foundField = $model[$payload["scope"]]->where($data)->first();
 
         if (!empty($foundField)) {
-            $model[$payload["scope"]]->set("value", $jsonValue)->where($data)->update();
+            $model[$payload["scope"]]->set($valueData['column'], $valueData['value'])->where($data)->update();
             return;
         }
 
-        $data['value'] = $jsonValue;
+        $data[$valueData['column']] = $valueData['value'];
         $model[$payload["scope"]]->save($data);
     }
 

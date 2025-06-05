@@ -30,8 +30,20 @@ trait PostDTOs
             'rules'  => 'integer|is_natural|permit_empty',
         ],
         'reservations' => [
-            'label'  => 'stock',
+            'label'  => 'reservations',
             'rules'  => 'integer|is_natural|permit_empty',
+        ],
+        'address' => [
+            'label'  => 'address',
+            'rules'  => 'string|permit_empty',
+        ],
+        'realized_at' => [
+            'label'  => 'realized_at',
+            'rules'  => 'string|permit_empty',
+        ],
+        'expired_at' => [
+            'label'  => 'expired_at',
+            'rules'  => 'string|permit_empty',
         ],
     ];
 }

@@ -32,11 +32,13 @@ trait ChargesDataTrait
             "privacy" => $chargeEntity->getPrivacy(),
             "amount" => $chargeEntity->getAmount(),
             "promotional_price" => $chargeEntity->getPromotionalPrice(),
+            "service_id" => $chargeEntity->getServiceId(),
             "service" => $currentService,
             "clients" => \array_map(fn(ChargeClientEntity $chargeClient) => [
                 "id" => $chargeClient->getClientId(),
                 "name" => $chargeClient->attributes['client_name'],
             ], $foundClients),
+            "expired_at" => $chargeEntity->getExpiredAt(),
             "created_at" => $chargeEntity->getCreatedAt(),
             "updated_at" => $chargeEntity->getUpdatedAt()
         ];

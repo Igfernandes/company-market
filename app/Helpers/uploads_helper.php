@@ -24,7 +24,7 @@ if (!function_exists('saveBase64ToUploads')) {
         }
 
         // Define o caminho de destino
-        $uploadPath = WRITEPATH . 'uploads\\';
+        $uploadPath = WRITEPATH . 'uploads\services\\';
         if (!is_dir($uploadPath)) {
             mkdir($uploadPath, 0775, true); // Cria o diretório se não existir
         }

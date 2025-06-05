@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Charges extends Migration
+class AddColumnStatusAtCharges extends Migration
 {
     protected $tb_name = "charges";
 

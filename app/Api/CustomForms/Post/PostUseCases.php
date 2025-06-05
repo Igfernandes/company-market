@@ -22,15 +22,6 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
-        /**
-         * @var array{
-         *     name: string, 
-         *     type: 'PEOPLE'|'COMPANY', 
-         *     description: string, 
-         *     components: string,
-         *     status: 'PUBLISHED' | 'DRAFT',
-         * } $filteredPayload
-         */
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $customFormsModel = new CustomFormsModel();
@@ -38,7 +29,6 @@ class PostUseCases
 
         $customFormEntity->setName($filteredPayload['name']);
         $customFormEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
-        $customFormEntity->setType($filteredPayload['type']);
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
         $customFormEntity->setComponents($filteredPayload['components']);

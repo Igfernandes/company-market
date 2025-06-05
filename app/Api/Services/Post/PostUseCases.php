@@ -22,7 +22,10 @@ class PostUseCases
      *     status: 'ACTIVE' | 'INACTIVE', 
      *     privacy: 'PUBLIC'|'PRIVATE',
      *     stock: integer,
-     *     reservations: integer
+     *     reservations: integer,
+     *     address: string,
+     *     realized_at: string,
+     *     expired_at: string
      * } $payload
      */
     public function execute(array $payload)
@@ -37,13 +40,13 @@ class PostUseCases
             $photo = $photoServiceBusiness->upload($filteredPayload['photo']);
             $serviceEntity->setPhoto($photo);
         }
+        unset($filteredPayload['photo']);
 
+        $serviceEntity->store($filteredPayload);
+        
         $serviceEntity->setName($filteredPayload['name']);
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
-        $serviceEntity->setType($filteredPayload['type']);
-        if (isset($filteredPayload['description']))
-            $serviceEntity->setDescription($filteredPayload['description']);
-        $serviceEntity->setPrivacy($filteredPayload['privacy']);
+
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
         $serviceEntity->setReservations(isset($filteredPayload['reservations']) ? $filteredPayload['reservations'] : 0);
 

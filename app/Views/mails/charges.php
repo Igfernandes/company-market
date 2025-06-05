@@ -1,7 +1,4 @@
-<?php
 
-$chargeLink = getenv('globals.href.frontend') . "/payment?charge=$chargeId ";
-?>
 
 <?= view('mails/_header') ?>
 <tbody>

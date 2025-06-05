@@ -28,12 +28,12 @@ class ClientsBusiness
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
-        $clientEntity->setPhoneSha1(\sha1($payload['phone']));
+        $clientEntity->setPhoneSha256(\Sha256($payload['phone']));
         $clientEntity->setOwnerId($userAuthId);
         $clientEntity->setEncryptPhone($payload['phone']);
 
         /** @var ClientEntity */
-        $foundClientWithPhone = $this->clientsModel->where("phone_sha1", $clientEntity->getPhoneSha1())->first();
+        $foundClientWithPhone = $this->clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
         if (!empty($foundClientWithPhone))
             return $foundClientWithPhone->getId();
 

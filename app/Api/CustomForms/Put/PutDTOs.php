@@ -9,10 +9,6 @@ trait PutDTOs
             'label'  => 'name',
             'rules'  => 'string|required'
         ],
-        'type' => [
-            'label'  => 'type',
-            'rules'  => 'string|in_list[PEOPLE, COMPANY]|required',
-        ],
         'components' => [
             'label'  => 'components',
             'rules'  => 'string|required',

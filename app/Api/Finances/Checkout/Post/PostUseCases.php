@@ -5,6 +5,7 @@ namespace App\Api\Finances\Checkout\Post;
 use App\Business\Charges\ChargesBusiness;
 use App\Business\Clients\ClientsBusiness;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\MercadoPago\MercadoPago;
 
 class PostUseCases
 {
@@ -36,19 +37,24 @@ class PostUseCases
         $clientId = $clientsModel->store($payload, $userAuthId);
 
         $chargesBusiness = new ChargesBusiness();
-        $charge = $chargesBusiness->getAvailableCharge([
+        $response = $chargesBusiness->getAvailableCharge([
             "reference" => $payload['product']
         ], $amount);
 
-        $productId = $chargesBusiness->saveProduct($charge, [
+        if ($response == false)
+            throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+
+        $charge = $response['charge'];
+
+        $mercadoPago = new MercadoPago();
+
+        $response = $mercadoPago->storeCharge($charge, [
             "amount" => $amount,
             "client_id" => $clientId,
             "reference" => $payload['product']
         ]);
-
-        return (object)[
-            "success" => lang("Api.payments.success.post"),
-            "product_id" => $productId
-        ];
+        $response['success'] = lang("Api.payments.success.post");
+        
+        return $response;
     }
 }

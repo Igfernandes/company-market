@@ -32,22 +32,24 @@ class PostController extends BaseController
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
-            $operationFailure = new OperationFailureEntity();
-
             $data = json_decode($json);
 
-            $operationFailure->store([
-                'operation_type'     => $data->action ?? "undefined",
-                'provider'           => "MERCADO_PAGO",
-                'error_code'         => $err->getCode(),
-                'error_message'      => $err->getMessage(),
-                'response_received'  => \json_encode($err),
-                'payload_sent'       => $json,
-                'attempt_number'     => 0,
-                'should_retry'       => true,
-                'status'             => "PENDING",
-            ]);
-            Cerberus::report($operationFailure);
+            if (isset($data->action) && !empty($data->action)) {
+                $operationFailure = new OperationFailureEntity();
+                
+                $operationFailure->store([
+                    'operation_type'     => $data->action ?? "none",
+                    'provider'           => "MERCADO_PAGO",
+                    'error_code'         => $err->getCode(),
+                    'error_message'      => $err->getMessage(),
+                    'response_received'  => \json_encode($err),
+                    'payload_sent'       => $json,
+                    'attempt_number'     => 0,
+                    'should_retry'       => true,
+                    'status'             => "PENDING",
+                ]);
+                Cerberus::report($operationFailure);
+            }
 
             return $this->response->setJSON((object)[
                 "errors" => $this->getMessageError($err)

@@ -142,3 +142,12 @@ define("ATTEMPT_CHANCES", 3);
 
 define("BASE_NUMERIC_REGISTRATIONS", 100000);
 define("DAY_AT_SECONDS", 86400);
+define("WEEKDAYS", [
+    "SUNDAY"    => 0,
+    "MONDAY"    => 1,
+    "TUESDAY"   => 2,
+    "WEDNESDAY" => 3,
+    "THURSDAY"  => 4,
+    "FRIDAY"    => 5,
+    "SATURDAY"  => 6,
+]);

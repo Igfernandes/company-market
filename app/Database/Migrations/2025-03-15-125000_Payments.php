@@ -35,6 +35,9 @@ class Payments extends Migration
             'bank_id' => [
                 'type' => 'INT'
             ],
+            'status' => [
+                'type' => 'ENUM("PAID", "PENDING", "CANCELED")'
+            ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
         ]);

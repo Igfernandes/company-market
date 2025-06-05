@@ -14,23 +14,35 @@ trait PostDTOs
             'rules'  => 'string|permit_empty',
         ],
         'service_id' => [
-            'label'  => 'int',
+            'label'  => 'service_id',
             'rules'  => 'integer|required',
+        ],
+        'privacy' => [
+            'label'  => 'privacy',
+            'rules'  => 'string|in_list[PUBLIC, PRIVATE]|required',
         ],
         'type' => [
             'label'  => 'type',
             'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|required',
         ],
+        'amount' => [
+            'label'  => 'amount',
+            'rules'  => 'integer|required',
+        ],
         'price' => [
-            'label'  => 'description',
-            'rules'  => 'string|required',
+            'label'  => 'price',
+            'rules'  => 'integer|required',
         ],
         'promotional_price' => [
-            'label'  => 'privacy',
-            'rules'  => 'string|permit_empty',
+            'label'  => 'promotional_price',
+            'rules'  => 'integer|permit_empty',
+        ],
+        'expired_at' => [
+            'label' => 'expired_at',
+            'rules' => 'string|permit_empty'
         ],
         'clients' => [
-            'label'  => 'stock',
+            'label'  => 'clients',
             'rules'  => 'permit_empty',
         ]
     ];

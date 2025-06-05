@@ -20,7 +20,7 @@ class PostUseCases
     {
         $usersModel = new UsersModel();
 
-        $foundUser =  $usersModel->where("email_sha1", sha1($payload['email']))->first();
+        $foundUser =  $usersModel->where("email_sha256", Sha256($payload['email']))->first();
 
         if (empty($foundUser))
             throw new Exceptions(\lang(\str_replace("{field}", "email", lang("Validation.already_exists"))), BAD_REQUEST);

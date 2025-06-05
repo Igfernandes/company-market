@@ -22,8 +22,9 @@ class UserEntity extends Entity
         'birthdate'        => null,
         'status'           => null,
         'keyword'          => null,
-        'email_sha1'       => null,
-        'phone_sha1'       => null,
+        'email_sha256'     => null,
+        'phone_sha256'     => null,
+        'cpf_sha256'       => null,
         'system_key'       => null,
         'twof_secret'      => null,
         "created_at"       => null,
@@ -419,69 +420,69 @@ class UserEntity extends Entity
 
 
     /**
-     * @method mixed setEmailSha1()
+     * @method mixed setEmailSha256()
      *
-     * @param string|null $emailSha1
+     * @param string|null $emailSha256
      * @return void
      */
-    public function setEmailSha1(?string $emailSha1)
+    public function setEmailSha256(?string $emailSha256)
     {
-        if (!empty($emailSha1))
-            $this->attributes['email_sha1'] = $emailSha1;
+        if (!empty($emailSha256))
+            $this->attributes['email_sha256'] = $emailSha256;
     }
 
     /**
-     * @method mixed getEmailSha1()
+     * @method mixed getEmailSha256()
      *
      * @return String|null
      */
-    public function getEmailSha1(): ?String
+    public function getEmailSha256(): ?String
     {
-        return $this->attributes['email_sha1'];
+        return $this->attributes['email_sha256'];
     }
 
     /**
-     * @method mixed setPhoneSha1()
+     * @method mixed setPhoneSha256()
      *
-     * @param string|null $phone_sha1
+     * @param string|null $phone_sha256
      * @return void
      */
-    public function setPhoneSha1(?string $phone_sha1)
+    public function setPhoneSha256(?string $phone_sha256)
     {
-        if (!empty($phone_sha1))
-            $this->attributes['phone_sha1'] = $phone_sha1;
+        if (!empty($phone_sha256))
+            $this->attributes['phone_sha256'] = $phone_sha256;
     }
 
     /**
-     * @method mixed getPhoneSha1()
+     * @method mixed getPhoneSha256()
      *
      * @return String|null
      */
-    public function getPhoneSha1(): ?String
+    public function getPhoneSha256(): ?String
     {
-        return $this->attributes['phone_sha1'];
+        return $this->attributes['phone_sha256'];
     }
 
     /**
-     * @method mixed setCPFSha1()
+     * @method mixed setCPFSha256()
      *
-     * @param string|null $cpf_sha1
+     * @param string|null $cpf_sha256
      * @return void
      */
-    public function setCPFSha1(?string $cpf_sha1)
+    public function setCPFSha256(?string $cpf_sha256)
     {
-        if (!empty($cpf_sha1))
-            $this->attributes['cpf_sha1'] = $cpf_sha1;
+        if (!empty($cpf_sha256))
+            $this->attributes['cpf_sha256'] = $cpf_sha256;
     }
 
     /**
-     * @method mixed getCPFSha1()
+     * @method mixed getCPFSha256()
      *
      * @return String|null
      */
-    public function getCPFSha1(): ?String
+    public function getCPFSha256(): ?String
     {
-        return $this->attributes['cpf_sha1'];
+        return $this->attributes['cpf_sha256'];
     }
 
 

@@ -19,22 +19,18 @@ class Clients extends Migration
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '150',
                 'null' => true,
             ],
             'avatar'       => [
                 'type'      => 'TINYTEXT',
                 'null'      => true,
-                'null' => true,
             ],
             'phone' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'     => true
+                'type'       => 'BLOB',
             ],
             'email' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
+                'type'       => 'BLOB',
                 'null' => true,
             ],
             'birthdate'       => [
@@ -45,14 +41,12 @@ class Clients extends Migration
                 'type' => 'ENUM("ACTIVE", "INACTIVE")'
             ],
             'system_key'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '400',
-                'null' => true
+                'type'       => 'BLOB'
             ],
-            'phone_sha1'       => [
+            'phone_sha256'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '200',
-                'null' => true
+                'constraint' => '70',
+                'unique'     => true
             ],
             'owner_id' => [
                 'type' => 'INT',

@@ -26,23 +26,16 @@ class Users extends Migration
                 'null'      => true
             ],
             'email' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'     => true
+                'type'       => 'BLOB',
             ],
             'phone' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'     => true
+                'type'       => 'BLOB',
             ],
             'password'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
+                'type'       => 'BLOB',
             ],
             'cpf'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'unique'         => true
+                'type'       => 'BLOB'
             ],
             'birthdate'       => [
                 'type'       => 'DATE',
@@ -56,20 +49,20 @@ class Users extends Migration
                 'type' => 'ENUM("ACTIVE", "INACTIVE", "ANALYSIS")',
                 'default' => "ANALYSIS"
             ],
-            'email_sha1'       => [
+            'email_sha256'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '200',
-                'null' => true
+                'constraint' => '70',
+                'unique'     => true
             ],
-            'phone_sha1'       => [
+            'phone_sha256'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '200',
-                'null' => true
+                'constraint' => '70',
+                'unique'     => true
             ],
-            'cpf_sha1'       => [
+            'cpf_sha256'       => [
                 'type'       => 'VARCHAR',
-                'constraint' => '200',
-                'null' => true
+                'constraint' => '70',
+                'unique'         => true
             ],
             'twof_secret'       => [
                 'type'       => 'VARCHAR',
@@ -77,9 +70,7 @@ class Users extends Migration
                 'null' => true
             ],
             'system_key'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '400',
-                'null' => true
+                'type'       => 'BLOB'
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',

@@ -6,8 +6,8 @@ use App\Business\Fields\FieldsBusiness;
 use App\Database\Entities\Fields\FieldEntity;
 use App\Database\Models\Fields\FieldsGroupsModel;
 use App\Database\Models\Fields\FieldsModel;
+use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
-use Exception;
 
 class PostUseCases
 {
@@ -45,13 +45,25 @@ class PostUseCases
 
         $fieldsModel->save($fieldsEntity);
 
-        if (isset($payload["relation_id"]) && isset($payload['value']))
-            $fieldBusiness->storeFieldValue([
+        if (isset($payload["relation_id"]) && isset($payload['value'])) {
+            $crypto = new Crypto();
+
+            $data = [
                 "entity_id" => $payload["relation_id"],
                 "field_id" => $fieldsModel->getInsertID(),
                 "value" => $payload['value'],
                 "scope" => $payload['scope']
-            ]);
+            ];
+
+            if ($fieldsEntity->getIsSensitive() && !empty($payload['value'])) {
+                $encryptedKey =  $payload["relation_id"] . ":" . getenv('system.encrypted_key');
+                $data['value_encrypted'] = $crypto->encrypt($payload['value'], $encryptedKey);
+                $data['value'] = "";
+            }
+
+            $fieldBusiness->storeFieldValue($data);
+        }
+
 
         return (object)[
             "success" => lang("Api.fields.success.post")

@@ -33,7 +33,7 @@ class PatchController extends BaseController
             $operation = $payload['operation'];
             $validation = \Config\Services::validation();
 
-            $data = $payload['data'];
+            $data = isset($payload['data']) ? $payload['data'] : (Object)[];
             $data->id = $userId;
 
             $validation->setRules($this->rules);

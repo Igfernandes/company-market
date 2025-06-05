@@ -7,7 +7,6 @@ use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
-use Exception;
 
 class GetUseCases
 {

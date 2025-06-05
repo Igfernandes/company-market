@@ -4,6 +4,7 @@ namespace App\Traits\Invites;
 
 use App\Database\Entities\Invites\InviteEntity;
 use App\Libraries\Crypto\Crypto;
+use Exception;
 
 trait InvitesDataTrait
 {
@@ -17,7 +18,11 @@ trait InvitesDataTrait
          *   group: array{number}
          * }  */
         $dataDecrypted = $crypto->decrypt($inviteEntity->getData(), getenv('system.encrypted_key'));
+
         $data = \json_decode((string) $dataDecrypted);
+
+        if (!isset($data->email))
+            throw new Exception(lang("error: data->email"), \INTERNAL_ERROR);
 
         return  (object)[
             "id" => $inviteEntity->getId(),

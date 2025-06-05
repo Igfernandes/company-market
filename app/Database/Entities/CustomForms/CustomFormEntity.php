@@ -13,7 +13,6 @@ class CustomFormEntity extends Entity
         'id'              => null,
         'name'            => null,
         'slug'            => null,
-        'type'            => null,
         'components'      => null,
         'description'     => null,
         'status'          => null,
@@ -75,6 +74,7 @@ class CustomFormEntity extends Entity
             $this->attributes['name'] = $name;
     }
 
+    
     /**
      * getSlug function
      *
@@ -105,31 +105,6 @@ class CustomFormEntity extends Entity
 
         if (!empty($slug))
             $this->attributes['slug'] = $slug;
-    }
-
-    /**
-     * getType function
-     *
-     * @return String|null
-     */
-    public function getType(): ?String
-    {
-        return $this->attributes['type'];
-    }
-
-    /**
-     * setType function
-     *
-     * @param String|null $type
-     * @return void
-     */
-    public function setType(?String $type)
-    {
-        if (array_search($type, ["PEOPLE", "COMPANY"]) === false)
-            throw new Exception(lang('Validation.enum_invalid', []), BAD_REQUEST);
-
-        if (!empty($type))
-            $this->attributes['type'] = $type;
     }
 
     /**

@@ -13,6 +13,10 @@ trait PutDTOs
             'label'  => 'type',
             'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|required',
         ],
+        'status' => [
+            'label'  => 'status',
+            'rules'  => 'string|in_list[ACTIVE,INACTIVE]|required',
+        ],
         'description' => [
             'label'  => 'description',
             'rules'  => 'string|permit_empty',
@@ -28,6 +32,18 @@ trait PutDTOs
         'reservations' => [
             'label'  => 'reservations',
             'rules'  => 'integer|is_natural|permit_empty',
-        ]
+        ],
+        'address' => [
+            'label'  => 'address',
+            'rules'  => 'string|permit_empty',
+        ],
+        'realized_at' => [
+            'label'  => 'realized_at',
+            'rules'  => 'string|permit_empty',
+        ],
+        'expired_at' => [
+            'label'  => 'expired_at',
+            'rules'  => 'string|permit_empty',
+        ],
     ];
 }

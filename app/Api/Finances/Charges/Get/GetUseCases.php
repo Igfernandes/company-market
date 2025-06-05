@@ -47,19 +47,20 @@ class GetUseCases
 
         if (\count($charges) == 0) return [];
 
-        if (!empty($payload['id']) && count($charges) > 0)
-            return $this->builder($charges[0]);
-        else if (!empty($payload['id']) && \count($charges) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
-
         $servicesModel = new ServicesModel();
         $foundServices = $servicesModel
-            ->whereIn("id", \array_map(fn(ChargeEntity $charge) => $charge->getId(), $charges))->findAll();
+            ->whereIn("id", \array_map(fn(ChargeEntity $charge) => $charge->getServiceId(), $charges))->findAll();
+
         $chargesClientsModel = new ChargesClientsModel();
         $foundChargesClients = $chargesClientsModel
             ->select("charges_clients.*, clients.name as client_name, clients.id as client_id")
             ->join("clients", "clients.id = charges_clients.client_id")
             ->whereIn("charge_id", \array_map(fn(ChargeEntity $charge) => $charge->getId(), $charges))->findAll();
+
+        if (!empty($payload['id']) && count($charges) > 0)
+            return $this->builder($charges[0], $foundServices, $foundChargesClients);
+        else if (!empty($payload['id']) && \count($charges) == 0)
+            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
 
         $chargesData = array_map(
             fn(ChargeEntity $charge) => $this->builder($charge, $foundServices, $foundChargesClients),

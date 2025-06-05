@@ -12,7 +12,7 @@ class UsersFieldsSeeder extends Seeder
     {
         foreach ($this->datas as $data) {
             $prefix = getenv('database.default.DBPrefix');
-            $usersFieldsEntity = new UsersFieldsEntity();
+            $usersFieldsEntity = new UserFieldEntity();
 
             $usersFieldsEntity->setLabel($data['label']);
             $usersFieldsEntity->setValue($data['value']);

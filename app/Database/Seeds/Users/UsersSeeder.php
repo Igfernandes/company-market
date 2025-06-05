@@ -11,6 +11,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $cryptoLibrary = new Crypto();
+        \helper(['crypto']);
 
         $password = getenv("globals.admin.password");
         $email = getenv("globals.admin.login");
@@ -28,7 +29,9 @@ class UsersSeeder extends Seeder
         $userEntity->setEncryptCpf(getenv("globals.admin.cpf"));
         $userEntity->setEncryptPhone(getenv("globals.admin.phone"));
         $userEntity->setName(getenv("globals.admin.name"));
-        $userEntity->setEmailSha1(sha1(getenv("globals.admin.login")));
+        $userEntity->setEmailSha256(referenceHash(getenv("globals.admin.login")));
+        $userEntity->setPhoneSha256(referenceHash(getenv("globals.admin.phone")));
+        $userEntity->setCPFSha256(referenceHash(getenv("globals.admin.cpf")));
         $userEntity->setBirthdate(getenv("globals.admin.birthdate"));
         $userEntity->setStatus("ACTIVE");
         $userEntity->setEncryptKeyword(getenv("globals.admin.keyword"));

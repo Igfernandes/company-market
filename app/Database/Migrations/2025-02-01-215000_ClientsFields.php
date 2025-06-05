@@ -20,7 +20,8 @@ class ClientsFields extends Migration
                 'unsigned'       => true,
             ],
             'value' => [
-                'type' => "JSON"
+                'type' => "JSON",
+                'true' => true
             ],
             'created_at datetime default current_timestamp'
         ]);

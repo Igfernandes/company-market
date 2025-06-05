@@ -22,7 +22,7 @@ class GetPreviewUseCases
 
         $clientsModel = new ClientsModel();
 
-        $filteredPayload['phone_sha1'] = \sha1($filteredPayload['phone']);
+        $filteredPayload['phone_sha256'] = referenceHash($filteredPayload['phone']);
         unset($filteredPayload['phone']);
 
         /** @var ClientEntity */

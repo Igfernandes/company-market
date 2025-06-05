@@ -15,8 +15,8 @@ class PhotoServiceBusiness
         $extension = $photo->getExtension();
         $photoName = date("Y_m_d-H_i_s") . "_service.$extension";
 
-        $photo->move(WRITEPATH . 'uploads', $photoName);
+        $photo->move(WRITEPATH . 'uploads\services', $photoName);
 
-        return WRITEPATH . "uploads\\$photoName";
+        return WRITEPATH . "uploads\services\\$photoName";
     }
 }

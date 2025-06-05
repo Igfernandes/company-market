@@ -10,6 +10,7 @@ class PaymentEntity extends Entity
     use CryptoEntityTrait;
 
     protected $attributes = [
+        'id'           => null,
         'payment_id'   => null,
         'paid_amount'  => null,
         'client_id'    => null,
@@ -17,8 +18,27 @@ class PaymentEntity extends Entity
         'bank_id'      => null,
         'status'       => null,
         'created_at'   => null,
-        'updated_at'   => null,
+        'updated_at'   => null
     ];
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->attributes['id'];
+    }
+
+    /**
+     * @param int|null $id
+     * @return void
+     */
+    public function setId(?int $id): void
+    {
+        if ($id !== null) {
+            $this->attributes['id'] = $id;
+        }
+    }
 
     public function getPaymentId(): ?string
     {

@@ -2,47 +2,65 @@
 
 namespace App\Services\MercadoPago;
 
+use App\Database\Entities\Finances\ChargeEntity;
+use App\Database\Models\Integrations\IntegrationBanksModel;
+use App\Libraries\Exceptions\Exceptions;
 use App\Services\MercadoPago\Operations\Authentication;
+use App\Services\MercadoPago\Operations\ProductAppellant;
+use App\Services\MercadoPago\Operations\ProductPunctual;
 use App\Services\MercadoPago\Operations\WebHooks;
 use MercadoPago\SDK;
-use MercadoPago\Preference;
 use MercadoPago\Item;
 use MercadoPago\Payment;
 
 class MercadoPago
 {
-    use WebHooks;
+    use WebHooks, ProductPunctual, ProductAppellant;
 
     private string $accessToken;
     private Authentication $authentication;
 
-    public function __construct(string $accessToken)
+    public function __construct()
     {
-        $this->accessToken = $accessToken;
-        $this->authentication = new Authentication($accessToken);
+        $this->accessToken = $this->getInstance();
     }
 
-    public function init()
+    function getInstance(): string
     {
-        // $user = $this->authentication->getUser();
-        // $this->storeWebHook($user);
+        $integrationBankModel = new IntegrationBanksModel();
+        /** @var IntegrationBankEntity */
+        $foundBank = $integrationBankModel->where(["type" => "MERCADO_PAGO"])->first();
+
+        if (empty($foundBank))
+            throw new Exceptions(\str_replace("{field}", lang("Words.bank"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+
+        return $foundBank->getDecryptPrivateToken();
     }
 
     /**
-     * @method createProduct 
+     * @method createCharge 
      * 
-     * @param string $privateToken 
-     * @param array{Item} $products
+     * @param ChargeEntity $chargeEntity 
+     * @param array $options
      */
-    public function createProduct(array $products): Preference
+    public function storeCharge(ChargeEntity $chargeEntity, array $options): array
     {
-        SDK::setAccessToken($this->accessToken);
 
-        $preference = new Preference();
-        $preference->items = $products;
-        $preference->save();
+        $title = $chargeEntity->getTitle();
+        \MercadoPago\SDK::setAccessToken($this->accessToken);
+        $priceFiltered = $chargeEntity->getPromotionalPrice() > 0 ? $chargeEntity->getPromotionalPrice() : $chargeEntity->getPrice();
 
-        return $preference;
+        $options['title'] = $title;
+        $options['price'] = $priceFiltered;
+
+        $response = [];
+
+        if ($chargeEntity->getType() === "PUNCTUAL")
+            $response['product_id'] =  $this->createPunctual($chargeEntity, $options);
+        else
+            $response['product_url'] = $this->createAppellant($chargeEntity, $options);
+
+        return $response;
     }
 
     /**
@@ -51,7 +69,7 @@ class MercadoPago
      * @param string $privateToken 
      * @param array{Item} $paymentId
      */
-    public function getPayment(int $paymentId): Payment
+    public function getPayment(int $paymentId): Payment|null
     {
         SDK::setAccessToken($this->accessToken);
 

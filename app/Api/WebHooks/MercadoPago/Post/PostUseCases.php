@@ -4,6 +4,7 @@ namespace App\Api\WebHooks\MercadoPago\Post;
 
 use App\Business\WebHooks\MercadoPagoBusiness;
 use App\Database\Models\Finances\PaymentsModel;
+use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 
 class PostUseCases
@@ -28,6 +29,10 @@ class PostUseCases
     {
         $mercadoPagoBusiness = new MercadoPagoBusiness();
         $paymentsModel = new PaymentsModel();
+
+        if (property_exists((object)$payload, "data") === false)
+            throw new Exceptions(lang("Api.invalid.operation_failed"), BAD_BUSINESS_RULES);
+
         $foundPayments = $paymentsModel->where(["payment_id" => $payload->data->id])->first();
 
         if (!empty($foundPayments))
@@ -38,6 +43,9 @@ class PostUseCases
             "payment.updated" => "update"
         ];
 
+        if (!isset($actions[$payload->action]))
+            throw new Exceptions(lang("Api.invalid.operation_failed"), BAD_BUSINESS_RULES);
+        
         $actionCurrent = $actions[$payload->action];
 
         return  $mercadoPagoBusiness->$actionCurrent($payload);

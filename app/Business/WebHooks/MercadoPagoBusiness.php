@@ -13,6 +13,7 @@ use App\Database\Models\Clients\ClientsModel;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Finances\PaymentsModel;
 use App\Database\Models\Integrations\IntegrationBanksModel;
+use App\Database\Models\Integrations\IntegrationsModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\MercadoPago\MercadoPago;
 
@@ -26,6 +27,20 @@ class MercadoPagoBusiness
         "rejected" => "CANCELED",
         "refunded" => "CANCELED"
     ];
+
+    public function getInstance(): MercadoPago
+    {
+        $integrationBankModel = new IntegrationsModel();
+
+        /** @var IntegrationBankEntity */
+        $foundBank = $integrationBankModel->where(["type" => "MERCADO_PAGO"])->first();
+
+        if (empty($foundBank))
+            throw new Exceptions(\lang("Api.webhook.mercado_pago"), \BAD_BUSINESS_RULES);
+
+        $mercadoPago = new MercadoPago($foundBank->getDecryptPrivateToken());
+        return $mercadoPago;
+    }
 
     /**
      * @param object{
@@ -43,7 +58,7 @@ class MercadoPagoBusiness
      */
     public function store(object $payload)
     {
-        $integrationBankModel = new IntegrationBanksModel();
+        $integrationBankModel = new IntegrationsModel();
         $paymentEntity = new PaymentEntity();
 
         /** @var IntegrationBankEntity */
@@ -57,6 +72,9 @@ class MercadoPagoBusiness
 
         $mercadoPago = new MercadoPago($foundBank->getDecryptPrivateToken());
         $payment = $mercadoPago->getPayment($payload->data->id);
+
+        if (empty($payment))
+            throw new Exceptions(\lang("Api.payment.invalid.not_found"), \BAD_BUSINESS_RULES);
 
         $paymentEntity->setBankId($foundBank->getId());
         $paymentEntity->setPaidAmount($payment->__get('transaction_amount'));

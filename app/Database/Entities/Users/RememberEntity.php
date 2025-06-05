@@ -79,7 +79,7 @@ class RememberEntity extends Entity
      */
     public function getIp(): ?String
     {
-        return $this->attributes['token'];
+        return $this->attributes['ip'];
     }
 
     /**
@@ -94,12 +94,12 @@ class RememberEntity extends Entity
 
         if (strlen($ip) > 100)
             throw new Exception(lang('Validation.max_length', [
-                "field" => "token",
+                "field" => "ip",
                 "param" => 100
             ], $session->get("language")), BAD_BUSINESS_RULES);
 
-        if (!empty($token))
-            $this->attributes['token'] = $token;
+        if (!empty($ip))
+            $this->attributes['ip'] = $ip;
     }
 
 

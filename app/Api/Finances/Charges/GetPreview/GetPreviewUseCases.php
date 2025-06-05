@@ -24,22 +24,22 @@ class GetPreviewUseCases
     public function execute(array $payload)
     {
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
-        $chargesModel = new ChargesModel();
         $chargesBusiness = new ChargesBusiness();
 
-        $filteredPayload['status'] = "ACTIVE";
+        $filteredPayload['charges.status'] = "ACTIVE";
 
         /** @var ChargeEntity */
-        $charge =  $chargesBusiness->getAvailableCharge($filteredPayload);
+        $response =  $chargesBusiness->getAvailableCharge($filteredPayload);
 
-        if ($charge === false) return null;
+        if ($response === false) return null;
+        $charge = $response['charge'];
 
         $data = [
             "title" => $charge->getTitle(),
             "description" => $charge->getDescription(),
             "price" => $charge->getPrice(),
             "promotional_price" => $charge->getPromotionalPrice(),
-            "amount"        => $charge->getAmount(),
+            "amount"        =>  $response['amountAvailable'],
         ];
 
         if (!empty($charge->getServiceId())) {

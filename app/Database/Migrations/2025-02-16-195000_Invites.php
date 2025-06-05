@@ -24,7 +24,7 @@ class Invites extends Migration
                 'type' => 'ENUM("USER", "COMPANY")',
             ],
             'data' => [
-                'type' => 'VARCHAR(255)'
+                'type' => 'BLOB'
             ],
             'expired_at' => [
                 'type' => 'DATETIME',

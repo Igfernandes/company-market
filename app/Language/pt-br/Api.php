@@ -99,8 +99,14 @@ return [
             "post" => "Credenciais atualizadas com sucesso"
         ]
     ],
+    "payment" => [
+        "invalid" => [
+            "not_found" => "O pagamento não existe no mercado ou encontra-se inválido. Refaça."
+        ]
+    ],
     "charges" => [
         "invalid" => [
+            "not_available" => "A cobrança já excedeu a quantidade disponível ou está expirada",
             "not_found_service_or_name" => "É obrigatório preencher o nome da cobrança ou selecionar um serviço"
         ],
         "success" => [

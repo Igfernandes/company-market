@@ -41,7 +41,7 @@ class PutController extends BaseController
 
             return $this->response->setJSON($responsePut)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
-
+            \var_dump($err);
             return  $this->response->setJSON((object)[
                 "errors" => $this->getMessageError($err)
             ])->setStatusCode($this->getCodeError($err));
