@@ -17,6 +17,7 @@ class GetController extends BaseController
     public function __construct()
     {
         $this->getUseCases = new GetUseCases();
+        \helper('files');
     }
 
     public function handle(Int $serviceId = 0)

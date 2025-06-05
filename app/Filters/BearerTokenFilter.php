@@ -2,12 +2,10 @@
 
 namespace App\Filters;
 
-use App\Database\Entities\Users\UserAuthHistoryEntity;
-use App\Database\Models\Users\UsersAuthHistoryModel;
+use App\Business\Authentication\UserAuthHistoryBusiness;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
-use Config\Services;
 
 class BearerTokenFilter implements FilterInterface
 {
@@ -37,28 +35,14 @@ class BearerTokenFilter implements FilterInterface
             $token = substr($headerValue, 7);
         }
 
-        if (empty($token))
+        $userAuthHistoryBusiness = new UserAuthHistoryBusiness();
+
+        $userAuthId = $userAuthHistoryBusiness->handleAuthNavigation($token);
+
+        if ($userAuthId == false)
             return $errorResponse;
 
-        $cache = Services::cache();
-
-        $userAuthId = $cache->get($token);
-        
-        if (!empty($userAuthId))
-            return $session->set('userAuthId', $userAuthId);
-
-        $userAuthHistory = new UserAuthHistoryEntity();
-        $userAuthHistoryModel = new UsersAuthHistoryModel();
-        $userAuthHistory->setToken($token);
-
-        $foundAuthHistory = $userAuthHistoryModel->where($userAuthHistory->toArray(true))->first();
-
-        if (empty($foundAuthHistory))
-            return $errorResponse;
-
-        $userId = $foundAuthHistory->getUserId();
-        $cache->save($token, $userId, DAY_AT_SECONDS * 2);
-        $session->set('userAuthId', $userId);
+        $session->set('userAuthId', $userAuthId);
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

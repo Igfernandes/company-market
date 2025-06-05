@@ -25,6 +25,16 @@ return [
         "text_button" => "Criar uma conta",
         "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
     ],
+    "charges" => [
+        "title" => "Olá, você recebeu uma nova cobrança!",
+        "subtitle" => "Você recebeu este e-mail com uma cobrança referente ao serviço ou referência abaixo:",
+        "charge_received" => "Para ver mais detalhes sobre a cobrança, acesse o link abaixo",
+        "text_button" => "Ver cobrança",
+        "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
+    ],
+    "services" => [
+        "text_button" => "Ver Evento",
+    ],
     "footer" => [
         "text" => " Se você acha que recebeu este e-mail por engano, entre em contato conosco em"
     ]

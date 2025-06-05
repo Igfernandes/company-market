@@ -56,15 +56,15 @@ class PostUseCases
         $userEntity->setName($dataInvite->name);
         $userEntity->setIsSocial(false);
         $userEntity->setStatus("ACTIVE");
-        $userEntity->setPhoneSha1(\sha1($dataInvite->phone));
+        $userEntity->setPhoneSha256(\referenceHash($dataInvite->phone));
         $userEntity->setEncryptCpf($payload['cpf']);
         $userEntity->setEncryptEmail($dataInvite->email);
         $userEntity->setEncryptKeyword($payload['keyword']);
         $userEntity->setEncryptPassword($payload['password']);
         $userEntity->setEncryptPhone($dataInvite->phone);
         $userEntity->setBirthdate($payload['birthdate']);
-        $userEntity->setCPFSha1(\sha1($payload['cpf']));
-        $userEntity->setEmailSha1(\sha1($dataInvite->email));
+        $userEntity->setCPFSha256(\referenceHash($payload['cpf']));
+        $userEntity->setEmailSha256(\referenceHash($dataInvite->email));
 
         $usersModel->save($userEntity);
 

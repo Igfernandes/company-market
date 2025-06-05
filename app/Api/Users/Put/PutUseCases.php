@@ -26,9 +26,6 @@ class PutUseCases
     {
         $usersBusiness = new UsersBusiness();
 
-        if (!$usersBusiness->isCPFAvailable($payload['cpf'], $payload['id']))
-            throw new Exceptions(\lang(\str_replace("{field}", "cpf", lang("Validation.already_exists"))), BAD_AUTH);
-
         if (!$usersBusiness->isPhoneAvailable($payload['phone'], $payload['id']))
             throw new Exceptions(\lang(\str_replace("{field}", "phone", lang("Validation.already_exists"))), BAD_AUTH);
 
@@ -40,14 +37,11 @@ class PutUseCases
         if (empty($foundUser))
             throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
 
-        $foundUser->setEncryptCpf($payload['cpf']);
-        $foundUser->setCPFSha1(sha1($payload['cpf']));
-        $foundUser->setPhoneSha1(sha1($payload['phone']));
+        $foundUser->setPhoneSha256(\referenceHash($payload['phone']));
         $foundUser->setEncryptPhone($payload['phone']);
         $foundUser->setName($payload['name']);
-        $foundUser->setBirthdate($payload['birthdate']);
 
-        $usersModel->save($foundUser->toArray());
+        $usersModel->set($foundUser->toArray(true))->where("id", $foundUser->getId())->update();
 
         return (object)[
             "success" => lang("Api.users.success.put")

@@ -13,6 +13,6 @@ trait PostDTOs
         'is_sensitive'  => 'boolean',
         'group_id'      => 'integer',
         'relation_id'   => 'integer|permit_empty',
-        'value'         => 'string|permit_empty'
+        'value'         => 'string|permit_empty',
     ];
 }

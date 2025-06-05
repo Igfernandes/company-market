@@ -9,7 +9,9 @@
     "codeigniter4/framework": "4.1.8",
     "agungsugiarto/codeigniter4-cors": "^2.0",
     "pagseguro/pagseguro-php-sdk": "^4.2",
-    "dompdf/dompdf": "^2.0"
+    "dompdf/dompdf": "^2.0",
+    "mercadopago/dx-php": "^2.6",
+    "cboden/ratchet": "^0.4.4"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9",

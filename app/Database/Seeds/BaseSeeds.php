@@ -16,5 +16,6 @@ class BaseSeeds extends Seeder
         $this->call('App\Database\Seeds\Permissions\PermissionsSeeder');
         $this->call('App\Database\Seeds\Permissions\GroupsPermissionsSeeder');
         $this->call('App\Database\Seeds\Fields\FieldsGroupsSeeder');
+        $this->call('App\Database\Seeds\Integrations\IntegrationsSeeder');
     }
 }

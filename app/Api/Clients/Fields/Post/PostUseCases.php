@@ -56,8 +56,8 @@ class PostUseCases
             $clientsFieldsModel->upsert($where, $clientField);
         endforeach;
 
-        return (object)[
-            "success" => lang("Api.clients.fields.success.post")
+        return [
+            "success" => "Api.clients.fields.success.post"
         ];
     }
 }

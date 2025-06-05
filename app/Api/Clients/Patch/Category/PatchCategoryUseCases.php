@@ -17,8 +17,6 @@ class PatchCategoryUseCases implements IUseCases
      */
     public function execute(array $payload): object
     {
-        $session = session();
-
         if (!isset($payload['clients']) || count($payload['clients']) == 0)
             throw new Exceptions(lang('Api.clients.invalid.required_clients'), BAD_BUSINESS_RULES);
 

@@ -34,7 +34,7 @@ class PostController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $responsePost = $this->postUseCases->execute($payload, $filesData['fields']);
+            $responsePost = $this->postUseCases->execute($payload, $filesData['fields'] ?? []);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {

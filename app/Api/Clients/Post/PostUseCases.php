@@ -36,17 +36,19 @@ class PostUseCases
         $clientCategoryEntity = new ClientCategoryEntity();
         $clientEntity = new ClientEntity();
 
+        $phone = str_replace(['+', '-', ' ', '(', ')'], '', $payload['phone']);
+
         $crypto = new Crypto();
-        $systemKey = $crypto->encrypt($payload['name'] . ":" . $payload['phone'], getenv('system.encrypted_key'));
+        $systemKey = $crypto->encrypt($payload['name'] . ":" . $phone, getenv('system.encrypted_key'));
 
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
-        $clientEntity->setPhoneSha1(\sha1($payload['phone']));
+        $clientEntity->setPhoneSha256(\referenceHash($phone));
         $clientEntity->setOwnerId($userAuthId);
-        $clientEntity->setEncryptPhone($payload['phone']);
+        $clientEntity->setEncryptPhone($phone);
 
-        $foundClientWithPhone = $clientsModel->where("phone_sha1", $clientEntity->getPhoneSha1())->first();
+        $foundClientWithPhone = $clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
         if (!empty($foundClientWithPhone))
             throw new Exceptions(\str_replace("{field}", lang("Words.phone"),  lang("Api.clients.invalid.phone")), BAD_BUSINESS_RULES);
 

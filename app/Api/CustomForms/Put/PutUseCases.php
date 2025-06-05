@@ -29,7 +29,6 @@ class PutUseCases
 
         $customFormEntity->setName($filteredPayload['name']);
         $customFormEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
-        $customFormEntity->setType($filteredPayload['type']);
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
         $customFormEntity->setComponents($filteredPayload['components']);
@@ -37,7 +36,7 @@ class PutUseCases
         $customFormsModel->set($customFormEntity->toArray(true))->update($filteredPayload['id']);
 
         return (object)[
-            "success" => lang("Api.customForms.success.put")
+            "success" => lang("Api.custom_forms.success.put")
         ];
     }
 }

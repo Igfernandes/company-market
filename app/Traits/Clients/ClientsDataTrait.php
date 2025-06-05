@@ -13,7 +13,7 @@ trait ClientsDataTrait
             if ($clientCategory->getClientId() == $clientEntity->getId()) {
                 $category = $clientCategory->getCategory();
 
-                array_push($categories, (object)[
+                array_push($categories, (Object)[
                     "name" =>  $category->getName(),
                     "id" =>  $category->getId()
                 ]);

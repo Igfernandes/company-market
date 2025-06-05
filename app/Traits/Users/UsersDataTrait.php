@@ -31,7 +31,7 @@ trait UsersDataTrait
             "cpf" => $userEntity->getDecryptCpf(),
             "avatar" => $userEntity->getAvatar(),
             "birthdate" => $userEntity->getBirthdate(),
-            "groups" => join(",", $groups),
+            "groups" => join(", ", $groups),
             "status" => $userEntity->getStatus(),
             "created_at" => $userEntity->getCreatedAt(),
             "updated_at" => $userEntity->getUpdatedAt()

@@ -17,6 +17,7 @@ class PutController extends BaseController
     public function __construct()
     {
         $this->putUseCases = new PutUseCases();
+        helper('crypto');
     }
 
     public function handle(int $userId = 0)

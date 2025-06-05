@@ -20,7 +20,7 @@ class DeleteController extends BaseController
         $this->deleteUseCases = new DeleteUseCases();
     }
 
-    public function handle($clientId = 0)
+    public function handle(int $clientId = 0)
     {
         try {
             $validation = \Config\Services::validation();

@@ -20,7 +20,7 @@ class ClientsFieldsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Fields\ClientFieldEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['field_id', 'client_id', 'value'];
+    protected $allowedFields    = ['field_id', 'client_id', 'value', 'value_encrypted'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
@@ -30,7 +30,7 @@ class ClientsFieldsModel extends Model
         $clientQueryUpdated = $this->addPrefixInQuery($clientQuery, "clients");
         $fieldQueryUpdated = $this->addPrefixInQuery($fieldsQuery, "fields");
 
-        $founds = $this->Select(" clients.*, fields.*, clients_fields.value,
+        $founds = $this->Select(" clients.*, fields.*, clients_fields.value, clients_fields.value_encrypted,
         clients.name as client_name, clients.id as client_id, clients.created_at as client_created_at, 
         clients.updated_at as client_updated_at,
         fields.name as field_name, fields.id as field_id, fields.created_at as field_created_at,
@@ -63,6 +63,7 @@ class ClientsFieldsModel extends Model
             $clientFieldEntity->setClientId($attributes['client_id']);
             $clientFieldEntity->setFieldId($attributes['field_id']);
             $clientFieldEntity->setValue($attributes['value']);
+            $clientFieldEntity->setValueEncrypted($attributes['value_encrypted']);
             $clientFieldEntity->setClient($clientEntity);
             $clientFieldEntity->setField($fieldEntity);
 

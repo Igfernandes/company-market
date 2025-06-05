@@ -2,12 +2,12 @@
 
 namespace App\Api\Services\Put;
 
-use App\Business\Services\PhotoServiceBusiness;
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
+use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
-use CodeIgniter\HTTP\Files\UploadedFile;
+use stdClass;
 
 class PutUseCases
 {
@@ -17,7 +17,7 @@ class PutUseCases
      * @param array{
      *     id: integer,
      *     name: string, 
-     *     photo: UploadedFile,
+     *     photo: stdClass,
      *     type: 'APPELLANT'|'PUNCTUAL', 
      *     description_contains: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
@@ -30,21 +30,29 @@ class PutUseCases
     {
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
-        $photoServiceBusiness = new PhotoServiceBusiness();
         $servicesModel = new ServicesModel();
         $serviceEntity = new ServiceEntity();
 
         if (isset($filteredPayload['photo'])) {
-            $photo = $photoServiceBusiness->upload($filteredPayload['photo']);
-            $serviceEntity->setPhoto($photo);
-        }
+            if (isset($filteredPayload['photo']->base64)) {
+                $idFile = uniqid("preview-service-") . date("Y-m-d-H-S");
+                $photo = saveBase64ToUploads($filteredPayload['photo']->base64,  $idFile);
+                $serviceEntity->setPhoto($photo);
+            }
+        } else {
+            $serviceEntity->setPhoto('');
+            /** @var ServiceEntity */
+            $service = $servicesModel->where("id", $filteredPayload['id'])->first();
 
+            unlink($service->getPhoto());
+        }
+        unset($filteredPayload['photo']);
+
+        $serviceEntity->store($filteredPayload);
         $serviceEntity->setName($filteredPayload['name']);
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
         $serviceEntity->setType($filteredPayload['type']);
-        if (isset($filteredPayload['description']))
-            $serviceEntity->setDescription($filteredPayload['description']);
-        $serviceEntity->setPrivacy($filteredPayload['privacy']);
+
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
         $serviceEntity->setReservations(isset($filteredPayload['reservations']) ? $filteredPayload['reservations'] : 0);
 

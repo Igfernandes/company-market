@@ -11,10 +11,11 @@ class ClientFieldEntity extends Entity
     use EntityEnhancerTrait;
 
     public $attributes = [
-        'client_id'  => null,
-        'field_id'   => null,
-        'value'      => null,
-        'created_at' => null
+        'client_id'       => null,
+        'field_id'        => null,
+        'value'           => null,
+        'value_encrypted' => null,
+        'created_at'      => null
     ];
     public $relations = [
         'client'    => null,
@@ -86,6 +87,19 @@ class ClientFieldEntity extends Entity
 
         if (!empty($value)) {
             $this->attributes['value'] = $value;
+        }
+    }
+
+
+    public function getValueEncrypted(): ?string
+    {
+        return $this->attributes['value_encrypted'];
+    }
+
+    public function setValueEncrypted(?string $valueEncrypted): void
+    {
+        if (!empty($valueEncrypted)) {
+            $this->attributes['value_encrypted'] = $valueEncrypted;
         }
     }
 

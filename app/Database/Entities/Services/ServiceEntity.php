@@ -2,11 +2,14 @@
 
 namespace App\Database\Entities\Services;
 
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
 class ServiceEntity extends Entity
 {
+    use EntityEnhancerTrait;
+
     public $attributes = [
         'id'             => null,
         'name'           => null,
@@ -17,6 +20,9 @@ class ServiceEntity extends Entity
         'stock'          => null,
         'reservations'   => null,
         'photo'          => null,
+        'address'        => null,
+        'expired_at'     => null,
+        'realized_at'    => null,
         'created_at'     => null,
         'updated_at'     => null
     ];
@@ -219,9 +225,77 @@ class ServiceEntity extends Entity
      */
     public function setPhoto(?String $photo)
     {
-        if (!empty($photo))
-            $this->attributes['photo'] = $photo;
+        $this->attributes['photo'] = $photo;
     }
+
+    /**
+     * getAddress function
+     *
+     * @return String|null
+     */
+    public function getAddress(): ?String
+    {
+        return $this->attributes['address'];
+    }
+
+    /**
+     * setAddress function
+     *
+     * @param String|null $address
+     * @return void
+     */
+    public function setAddress(?String $address)
+    {
+        if (!empty($realizedAt))
+            $this->attributes['address'] = $address;
+    }
+
+    /**
+     * @method mixed getRealizedAt()
+     *
+     * @return string|null
+     */
+    public function getRealizedAt(): ?string
+    {
+        return $this->attributes['realized_at'];
+    }
+
+    /**
+     * @method mixed setRealizedAt()
+     *
+     * @param string|null $realizedAt
+     * @return void
+     */
+    public function setRealizedAt(?string $realizedAt)
+    {
+        if (!empty($realizedAt)) {
+            $this->attributes['realized_at'] = $realizedAt;
+        }
+    }
+
+    /**
+     * @method mixed getExpiredAt()
+     *
+     * @return string|null
+     */
+    public function getExpiredAt(): ?string
+    {
+        return $this->attributes['expired_at'];
+    }
+
+    /**
+     * @method mixed setExpiredAt()
+     *
+     * @param string|null $expiredAt
+     * @return void
+     */
+    public function setExpiredAt(?string $expiredAt)
+    {
+        if (!empty($expiredAt)) {
+            $this->attributes['expired_at'] = $expiredAt;
+        }
+    }
+
 
     /**
      * @method mixed getCreatedAt()

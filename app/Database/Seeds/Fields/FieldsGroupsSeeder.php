@@ -4,7 +4,6 @@ namespace App\Database\Seeds\Fields;
 
 use App\Database\Entities\Fields\FieldsGroupEntity;
 use CodeIgniter\Database\Seeder;
-use PhpParser\Node\Stmt\Foreach_;
 
 class FieldsGroupsSeeder extends Seeder
 {

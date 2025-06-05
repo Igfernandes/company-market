@@ -33,7 +33,7 @@ class PostUseCases
         $session->set("userAuth", $foundUser);
 
         $response = (object)[
-            "success" =>  lang("Api.authentications.remember.post.success"),
+            "success" =>  "Api.authentications.remember.post.success",
         ];
 
 

@@ -14,10 +14,12 @@ class PostController extends BaseController
     use Validation, ExceptionApi, PostDTOs, ControllersTrait;
 
     private PostUseCases $postUseCases;
+    protected $helpers = [''];
 
     public function __construct()
     {
         $this->postUseCases = new PostUseCases();
+        helper('crypto');
     }
 
     public function handle()

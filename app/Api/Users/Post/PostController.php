@@ -18,6 +18,7 @@ class PostController extends BaseController
     public function __construct()
     {
         $this->postUseCases = new PostUseCases();
+        helper('crypto');
     }
 
     public function handle()

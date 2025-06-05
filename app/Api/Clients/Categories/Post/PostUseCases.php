@@ -4,9 +4,7 @@ namespace App\Api\Clients\Categories\Post;
 
 use App\Business\Clients\CategoryBusiness;
 use App\Database\Entities\Clients\CategoryEntity;
-use App\Database\Entities\clients\ClientCategoryEntity;
 use App\Database\Models\Clients\CategoriesModel;
-use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Libraries\Exceptions\Exceptions;
 
 class PostUseCases
@@ -48,8 +46,8 @@ class PostUseCases
             $categoriesModel->upsert(["name" => $category->name], $categoryEntity);
         }
 
-        return (object)[
-            "success" => lang("Api.categories.success.post")
+        return [
+            "success" => "Api.categories.success.post"
         ];
     }
 }

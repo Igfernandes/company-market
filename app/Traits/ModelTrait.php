@@ -30,13 +30,16 @@ trait ModelTrait
     public function upsert(array|object $where, Entity $data)
     {
         $this->where($where);
+        $found = $this->first();
 
-        if (!empty($this->first())) {
+        if (!empty($found)) {
             $this->set($data->toArray(true))->where($where)->update();
-            return;
+            return isset($found->attributes[$this->primaryKey]) ? $found->attributes[$this->primaryKey] : null;
         }
 
         $this->save($data);
+
+        return $this->getInsertID();
     }
 
     public function addPrefixInQuery(array $clientQuery, string $prefix)

@@ -21,7 +21,7 @@ class Services extends Migration
                 'type' => 'VARCHAR(200)'
             ],
             'photo' => [
-                'type' => 'TEXT',
+                'type' => 'TINYTEXT',
                 'null' => true
             ],
             'type' => [
@@ -42,6 +42,18 @@ class Services extends Migration
             ],
             'reservations' => [
                 'type' => 'INT'
+            ],
+            'address' => [
+                'type' => 'VARCHAR(250)',
+                'null' => true
+            ],
+            'realized_at' => [
+                'type' => 'DATETIME',
+                'null' => true
+            ],
+            'expired_at' => [
+                'type' => 'DATETIME',
+                'null' => true
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'

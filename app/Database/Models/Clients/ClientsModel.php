@@ -13,7 +13,7 @@ class ClientsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Clients\ClientEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'avatar', 'phone', 'email', 'birthdate', 'status', 'phone_sha1', 'system_key', 'owner_id'];
+    protected $allowedFields    = ['name', 'avatar', 'phone', 'email', 'birthdate', 'status', 'email_sha256', 'phone_sha256', 'system_key', 'owner_id'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
