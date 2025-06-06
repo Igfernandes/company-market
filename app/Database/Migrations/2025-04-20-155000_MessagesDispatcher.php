@@ -47,14 +47,17 @@ class MessagesDispatcher extends Migration
             ],
             'service_id' => [
                 'type' => 'INT',
-                'null' => true
+                'null' => true,
+                'unsigned' => true
             ],
             'charge_id' => [
                 'type' => 'INT',
-                'null' => true
+                'null' => true,
+                'unsigned' => true
             ],
             'author_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'started_at' => [
                 'type' => 'DATETIME',

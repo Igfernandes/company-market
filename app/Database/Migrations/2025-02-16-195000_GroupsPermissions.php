@@ -13,11 +13,11 @@ class GroupsPermissions extends Migration
         $this->forge->addField([
             'permission_id' => [
                 'type' => 'INT',
-                'unsigned'       => true,
+                'unsigned'       => true
             ],
             'group_id' => [
                 'type' => 'INT',
-                'unsigned'       => true,
+                'unsigned'       => true
             ],
             'created_at datetime default current_timestamp',
         ]);

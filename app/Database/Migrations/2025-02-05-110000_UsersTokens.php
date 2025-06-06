@@ -40,7 +40,8 @@ class UsersTokens extends Migration
                 'default'   => 'PRIVATE'
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'expired_at' => [
                 'type' => 'DATETIME',

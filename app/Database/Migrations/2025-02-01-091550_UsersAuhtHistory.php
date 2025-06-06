@@ -32,7 +32,7 @@ class UsersAuthHistory extends Migration
             ],
             'user_id' => [
                 'type' => 'INT',
-                'constraint'     => 5,
+                'unsigned' => true,
             ],
             'created_at datetime default current_timestamp'
         ]);

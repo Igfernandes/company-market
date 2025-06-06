@@ -34,7 +34,8 @@ class Charges extends Migration
                 'null' => true
             ],
             'service_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'type' => [
                 'type' => 'ENUM("APPELLANT", "PUNCTUAL")',

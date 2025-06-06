@@ -17,7 +17,7 @@ class ClientsCategories extends Migration
             ],
             'client_id' => [
                 'type' => 'INT',
-                'unsigned'       => true,
+                'unsigned'       => true
             ],
             'created_at datetime default current_timestamp'
         ]);

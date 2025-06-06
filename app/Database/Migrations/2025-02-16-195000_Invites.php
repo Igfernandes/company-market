@@ -34,7 +34,8 @@ class Invites extends Migration
             ],
             'owner_id' => [
                 'type' => 'INT',
-                'null' => true
+                'null' => true,
+                'unsigned' => true
             ],
             'created_at datetime default current_timestamp',
         ]);

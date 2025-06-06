@@ -26,7 +26,8 @@ class Remember extends Migration
                 'constraint' => '100'
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'created_at datetime default current_timestamp',
         ]);

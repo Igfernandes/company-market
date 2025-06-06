@@ -23,10 +23,12 @@ class CustomFormsHistory extends Migration
                 'null' => true
             ],
             'form_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'created_at datetime default current_timestamp'
         ]);

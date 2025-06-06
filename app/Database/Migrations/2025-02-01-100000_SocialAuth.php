@@ -32,7 +32,8 @@ class SocialAuth extends Migration
                 'type' => 'JSON',
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',

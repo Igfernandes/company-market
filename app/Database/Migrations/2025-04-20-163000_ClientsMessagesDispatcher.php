@@ -19,9 +19,11 @@ class ClientsMessagesDispatcher extends Migration
             ],
             'client_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'message_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'status' => [
                 'type' => 'ENUM("PENDING", "SUCCESSFUL", "BLOCKED")'

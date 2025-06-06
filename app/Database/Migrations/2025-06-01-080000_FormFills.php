@@ -19,9 +19,11 @@ class FormFills extends Migration
             ],
             'form_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'field_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'value' => [
                 'type' => 'BLOB'

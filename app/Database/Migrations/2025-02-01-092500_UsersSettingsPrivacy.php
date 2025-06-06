@@ -15,7 +15,8 @@ class UsersSettingsPrivacy extends Migration
                 'type'           => 'INT',
             ],
             'user_id' => [
-                'type'           => 'INT'
+                'type'           => 'INT',
+                'unsigned' => true
             ],
             'ip' => [
                 'type'       => 'VARCHAR',
@@ -34,7 +35,7 @@ class UsersSettingsPrivacy extends Migration
 
         $this->forge->addForeignKey("settings_privacy_id", "settings_privacy", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
-        
+
         $this->forge->createTable($this->tb_name);
     }
 

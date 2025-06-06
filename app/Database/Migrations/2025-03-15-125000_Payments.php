@@ -27,10 +27,12 @@ class Payments extends Migration
             ],
             'client_id' => [
                 'type' => 'INT',
-                'null' => true
+                'null' => true,
+                'unsigned' => true
             ],
             'charge_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'bank_id' => [
                 'type' => 'INT'

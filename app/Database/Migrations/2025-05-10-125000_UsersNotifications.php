@@ -13,9 +13,11 @@ class UsersNotifications extends Migration
         $this->forge->addField([
             'user_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'notification_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'created_at datetime default current_timestamp'
         ]);

@@ -13,11 +13,11 @@ class UsersPermissions extends Migration
         $this->forge->addField([
             'permission_id' => [
                 'type' => 'INT',
-                'unsigned'       => true,
+                'unsigned'       => true
             ],
             'user_id' => [
                 'type' => 'INT',
-                'unsigned'       => true,
+                'unsigned'       => true
             ],
             'created_at datetime default current_timestamp',
         ]);

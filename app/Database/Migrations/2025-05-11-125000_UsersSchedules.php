@@ -13,9 +13,11 @@ class UsersSchedules extends Migration
         $this->forge->addField([
             'user_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ],
             'schedule_id' => [
                 'type' => 'INT',
+                'unsigned' => true
             ]
         ]);
 
