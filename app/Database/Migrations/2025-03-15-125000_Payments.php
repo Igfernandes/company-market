@@ -35,7 +35,8 @@ class Payments extends Migration
                 'unsigned' => true
             ],
             'bank_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'unsigned' => true
             ],
             'status' => [
                 'type' => 'ENUM("PAID", "PENDING", "CANCELED")'
