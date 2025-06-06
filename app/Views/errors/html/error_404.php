@@ -7,7 +7,7 @@ $acceptsJson = $request->negotiate('media', ['application/json', 'text/html']) =
 $isApi = str_starts_with($request->uri->getPath(), 'api');
 
 if ($acceptsJson || $isApi) {
-	header('Content-Type: application/json', true, NOT_FOUND);
+	header('Content-Type: application/json', true, OK);
 	echo json_encode([
 		'status'  => false,
 		'error'   => NOT_FOUND,
