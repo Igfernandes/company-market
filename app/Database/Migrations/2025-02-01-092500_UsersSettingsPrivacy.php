@@ -13,6 +13,7 @@ class UsersSettingsPrivacy extends Migration
         $this->forge->addField([
             'settings_privacy_id' => [
                 'type'           => 'INT',
+                'unsigned' => true
             ],
             'user_id' => [
                 'type'           => 'INT',
