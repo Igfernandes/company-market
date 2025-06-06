@@ -31,7 +31,8 @@ class UsersAuthHistory extends Migration
                 'unique'     => true
             ],
             'user_id' => [
-                'type' => 'INT'
+                'type' => 'INT',
+                'constraint'     => 5,
             ],
             'created_at datetime default current_timestamp'
         ]);
