@@ -32,7 +32,7 @@ class FormFills extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey("form_id", "forms", ["id"]);
+        $this->forge->addForeignKey("form_id", "custom_forms", ["id"]);
         $this->forge->createTable($this->tb_name);
     }
 
