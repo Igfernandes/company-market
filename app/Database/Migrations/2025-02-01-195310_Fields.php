@@ -46,7 +46,7 @@ class Fields extends Migration
 
         $this->forge->addKey('id', true);
 
-        $this->forge->addForeignKey("group_id", "fields_group", ["id"]);
+        $this->forge->addForeignKey("group_id", "fields_groups", ["id"]);
         $this->forge->createTable($this->tb_name);
     }
 
