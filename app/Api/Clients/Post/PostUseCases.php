@@ -25,7 +25,6 @@ class PostUseCases
     public function execute(array $payload)
     {
         $session = session();
-
         $userAuthId = $session->get('userAuthId');
         $categoryBusiness = new CategoryBusiness();
 
