@@ -4,6 +4,7 @@ namespace App\Api\CustomForms\Post;
 
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Models\CustomForms\CustomFormsModel;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\CustomForms\CustomFormsDataTrait;
 
@@ -36,6 +37,11 @@ class PostUseCases
 
         $customFormsModel->save($customFormEntity);
 
+        NotificationsService::store([
+            "scope" => "forms",
+            "action" => "CREATE",
+            "key" =>  $customFormsModel->getInsertID()
+        ]);
         return (object)[
             "success" => lang("Api.custom_forms.success.post")
         ];

@@ -32,6 +32,7 @@ class RoutesApi
 
     $routes->get("users/(:num)/notifications/(:num)", "Api\Users\Notifications\Get\GetController::handle/$1/$2", $this->optionsWithAuthentications);
     $routes->get("users/(:num)/notifications", "Api\Users\Notifications\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->post("users/notifications", "Api\Users\Notifications\Post\PostController::handle/$1", $this->optionsWithAuthentications);
 
     /** Invites */
     $routes->post("invites/user", "Api\Invites\Users\Post\PostController::handle", $this->optionsWithAuthentications);

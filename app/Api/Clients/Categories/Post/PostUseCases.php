@@ -6,6 +6,7 @@ use App\Business\Clients\CategoryBusiness;
 use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Models\Clients\CategoriesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -45,6 +46,11 @@ class PostUseCases
 
             $categoriesModel->upsert(["name" => $category->name], $categoryEntity);
         }
+
+        NotificationsService::store([
+            "scope" => "categories",
+            "action" => "CREATE"
+        ]);
 
         return [
             "success" => "Api.categories.success.post"

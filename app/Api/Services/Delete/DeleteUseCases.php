@@ -5,6 +5,7 @@ namespace App\Api\Services\Delete;
 use App\Business\Services\ServicesBusiness;
 use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -28,6 +29,10 @@ class DeleteUseCases
 
         $servicesModel->delete($serviceId);
 
+        NotificationsService::store([
+            "scope" => "services",
+            "action" => "DELETE"
+        ]);
         return (object)[
             "success" => lang("Api.services.success.delete")
         ];

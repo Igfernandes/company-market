@@ -5,6 +5,7 @@ namespace App\Api\Services\Post;
 use App\Business\Services\PhotoServiceBusiness;
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -43,7 +44,7 @@ class PostUseCases
         unset($filteredPayload['photo']);
 
         $serviceEntity->store($filteredPayload);
-        
+
         $serviceEntity->setName($filteredPayload['name']);
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
 
@@ -52,6 +53,11 @@ class PostUseCases
 
         $servicesModel->save($serviceEntity);
 
+        NotificationsService::store([
+            "scope" => "services",
+            "action" => "CREATE",
+            "key" => $servicesModel->getInsertID()
+        ]);
         return (object)[
             "success" => lang("Api.services.success.post")
         ];

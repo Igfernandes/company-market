@@ -4,6 +4,7 @@ namespace App\Api\Users\Groups\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -22,6 +23,10 @@ class GetController extends BaseController
     public function handle()
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'VIEW'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
@@ -29,7 +34,7 @@ class GetController extends BaseController
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
-            
+
             $responseGet = $this->getUseCases->execute($payload);
 
             return $this->response->setJSON($responseGet)->setStatusCode(OK);

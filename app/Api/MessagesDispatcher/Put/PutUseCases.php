@@ -5,6 +5,7 @@ namespace App\Api\MessagesDispatcher\Put;
 use App\Business\MessagesDispatcher\ScheduleDispatcherBusiness;
 use App\Database\Models\MessagesDispatcher\MessagesDispatcherModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PutUseCases
 {
@@ -34,6 +35,10 @@ class PutUseCases
             ScheduleDispatcherBusiness::scheduleDispatcherClients($payload['clients'], $dispatcher);
         }
 
+        NotificationsService::store([
+            "scope" => "dispatcher",
+            "action" => "UPDATE"
+        ]);
         return (object)[
             "success" => lang("Api.dispatcher.success.put")
         ];

@@ -4,7 +4,6 @@ namespace App\Business\Users;
 
 use App\Business\BaseBusiness;
 use App\Database\Entities\Users\UserEntity;
-use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\Users\UsersDataTrait;

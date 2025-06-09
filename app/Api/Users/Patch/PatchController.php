@@ -6,6 +6,7 @@ use App\Api\ExceptionApi;
 use App\Api\Users\Patch\Password\PatchPasswordUseCases;
 use App\Api\Users\Patch\Status\PatchStatusUseCases;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -28,6 +29,10 @@ class PatchController extends BaseController
     public function handle(int $userId = 0)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'UPDATE'
+            ]);
             $payload = (array) $this->request->getVar();
 
             $operation = $payload['operation'];

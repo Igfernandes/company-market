@@ -8,6 +8,7 @@ use App\Database\Entities\MessagesDispatcher\MessageDispatcherEntity;
 use App\Database\Models\MessagesDispatcher\ClientsMessagesDispatcherModel;
 use App\Database\Models\MessagesDispatcher\MessagesDispatcherModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -36,6 +37,10 @@ class DeleteUseCases
         $scheduleDispatcherBusiness->delete($messageDispatcher);
         $messageDispatcherModel->delete($messageDispatcher->toArray(true));
 
+        NotificationsService::store([
+            "scope" => "dispatcher",
+            "action" => "DELETE"
+        ]);
         return (object)[
             "success" => "Api.dispatcher.success.delete"
         ];

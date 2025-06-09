@@ -5,6 +5,7 @@ namespace App\Api\WebHooks\MercadoPago\Post;
 use App\Business\WebHooks\MercadoPagoBusiness;
 use App\Database\Models\Finances\PaymentsModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class PostUseCases
@@ -45,9 +46,13 @@ class PostUseCases
 
         if (!isset($actions[$payload->action]))
             throw new Exceptions(lang("Api.invalid.operation_failed"), BAD_BUSINESS_RULES);
-        
-        $actionCurrent = $actions[$payload->action];
 
+        $actionCurrent = $actions[$payload->action];
+        
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "UPDATE"
+        ]);
         return  $mercadoPagoBusiness->$actionCurrent($payload);
     }
 }

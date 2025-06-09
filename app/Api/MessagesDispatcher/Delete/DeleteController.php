@@ -4,6 +4,7 @@ namespace App\Api\MessagesDispatcher\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,6 +24,10 @@ class DeleteController extends BaseController
     public function handle(int $serviceId = 0)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'dispatchers',
+                'type' => 'DELETE'
+            ]);
             $payload['id'] = $serviceId;
 
             $responseDelete = $this->deleteUseCases->execute($payload);

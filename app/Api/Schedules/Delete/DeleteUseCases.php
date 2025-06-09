@@ -5,6 +5,7 @@ namespace App\Api\Schedules\Delete;
 use App\Database\Models\Schedules\SchedulesModel;
 use App\Database\Models\Schedules\UsersSchedulesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class DeleteUseCases
@@ -37,6 +38,10 @@ class DeleteUseCases
             'schedule_id' => $payload['id']
         ])->delete();
 
+        NotificationsService::store([
+            "scope" => "schedules",
+            "action" => "DELETE"
+        ]);
         return (object)[
             "success" => lang("Api.schedules.success.post")
         ];

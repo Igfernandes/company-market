@@ -5,6 +5,7 @@ namespace App\Api\Schedules\Put;
 use App\Business\Schedules\SchedulesBusiness;
 use App\Database\Entities\Schedules\ScheduleEntity;
 use App\Database\Models\Schedules\SchedulesModel;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class PutUseCases
@@ -39,6 +40,11 @@ class PutUseCases
             $scheduleBusiness = new SchedulesBusiness();
             $scheduleBusiness->storeUsersWithSchedule($payload['linked']);
         }
+
+        NotificationsService::store([
+            "scope" => "schedules",
+            "action" => "UPDATE"
+        ]);
 
         return (object)[
             "success" => lang("Api.schedules.success.post")

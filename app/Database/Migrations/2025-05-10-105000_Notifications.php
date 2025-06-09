@@ -22,7 +22,8 @@ class Notifications extends Migration
                 'null' => true
             ],
             'message' => [
-                'type' => 'VARCHAR(250)'
+                'type' => 'VARCHAR(250)',
+                'null' => true
             ],
             'action' => [
                 'type' => 'VARCHAR(20)'

@@ -7,6 +7,7 @@ use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class PutUseCases
@@ -85,6 +86,12 @@ class PutUseCases
             ChargeScheduleBusiness::delete($chargeEntity);
             ChargeScheduleBusiness::schedule($chargeEntity, $chargeEntity->getStartedAt());
         }
+
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "UPDATE",
+            "key" => $payload['id']
+        ]);
 
         return (object)[
             "success" => lang("Api.charges.success.put")

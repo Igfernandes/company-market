@@ -19,7 +19,10 @@ trait UsersDataTrait
             fn(UserGroupsEntity $userGroupEntity) => $userGroupEntity->getUserId() == $userEntity->getId()
         );
         $groups = \array_map(
-            fn(UserGroupsEntity $userGroupsEntity) => $userGroupsEntity->getGroup()->getName(),
+            fn(UserGroupsEntity $userGroupsEntity) => [
+                "id" => $userGroupsEntity->getGroup()->getId(),
+                "name" => $userGroupsEntity->getGroup()->getName()
+            ],
             $groupsFiltered
         );
 
@@ -31,7 +34,7 @@ trait UsersDataTrait
             "cpf" => $userEntity->getDecryptCpf(),
             "avatar" => $userEntity->getAvatar(),
             "birthdate" => $userEntity->getBirthdate(),
-            "groups" => join(", ", $groups),
+            "groups" => \array_values($groups),
             "status" => $userEntity->getStatus(),
             "created_at" => $userEntity->getCreatedAt(),
             "updated_at" => $userEntity->getUpdatedAt()

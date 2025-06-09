@@ -13,11 +13,11 @@ class GroupsPermissionsSeeder extends Seeder
             "permission" =>  ['CREATE', 'UPDATE', 'DELETE', 'VIEW']
         ],
         [
-            "id" => 2,
+            "group_id" => 2,
             "permission" =>  ['CREATE', 'VIEW']
         ],
         [
-            "id" => 1,
+            "group_id" => 1,
             "permission" =>  ['VIEW']
         ]
     ];
@@ -28,7 +28,7 @@ class GroupsPermissionsSeeder extends Seeder
         $permissionsModel = new PermissionsModel();
 
         foreach ($this->datas as $data) {
-            $foundPermissions = $permissionsModel->whereIn("type", $data['permission'])->where(["scope" => "USER"])->findAll();
+            $foundPermissions = $permissionsModel->whereIn("type", $data['permission'])->findAll();
 
             foreach ($foundPermissions as $permission) {
                 $data = [

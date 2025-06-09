@@ -5,6 +5,7 @@ namespace App\Business\Permissions;
 use App\Business\BaseBusiness;
 use App\Database\Entities\Permissions\GroupPermissionsEntity;
 use App\Database\Entities\Users\GroupEntity;
+use App\Database\Entities\Users\UserGroupsEntity;
 use App\Database\Models\Permissions\GroupsPermissionsModel;
 use App\Database\Models\Permissions\PermissionsModel;
 use App\Database\Models\Users\UsersGroupsModel;
@@ -42,7 +43,7 @@ class PermissionsBusiness
         $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
 
         if (count($permissions) === 0)
-            throw new Exceptions(\lang('Erros.not_permission'), \BAD_AUTH);
+            throw new Exceptions(\lang('Errors.not_permission'), \BAD_AUTH);
     }
 
     /**
@@ -59,7 +60,7 @@ class PermissionsBusiness
         $groupsPermissionsModel = new GroupsPermissionsModel();
 
         $foundPermissions = $groupsPermissionsModel->getGroupsWithPermissions([
-            "in_ids" => \array_map(fn(GroupEntity $group) => $group->getId(), $groups)
+            "in_ids" => \array_map(fn(UserGroupsEntity $userGroup) => $userGroup->getGroupId(), $groups)
         ], $permissionQuery);
 
         return $foundPermissions;

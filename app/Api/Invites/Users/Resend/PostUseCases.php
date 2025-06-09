@@ -8,6 +8,7 @@ use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
 use App\Libraries\Tokens\Tokens;
 use App\Services\Mailer\Mailers\InviteMail;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -51,6 +52,10 @@ class PostUseCases
             "inviteToken" => $tokenInvite
         ]);
 
+        NotificationsService::store([
+            "scope" => "invites",
+            "action" => "UPDATE"
+        ]);
         return (object)[
             "success" => lang("Api.invites.success.resend")
         ];

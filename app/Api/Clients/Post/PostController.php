@@ -28,7 +28,7 @@ class PostController extends BaseController
         try {
             PermissionsBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
-                'actions' => 'CREATE'
+                'type' => 'CREATE'
             ]);
             $validation = \Config\Services::validation();
 

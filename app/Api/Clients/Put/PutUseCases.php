@@ -9,6 +9,7 @@ use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PutUseCases
 {
@@ -72,6 +73,11 @@ class PutUseCases
 
         $clientCategoryModel->set($clientCategoryEntity->toArray(true))->where("client_id", $payload['id'])->update();
 
+        NotificationsService::store([
+            "scope" => "clients",
+            "action" => "UPDATE",
+            "key" =>  $payload['id']
+        ]);
         return (object)[
             "success" => lang("Api.clients.success.post")
         ];

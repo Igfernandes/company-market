@@ -8,6 +8,7 @@ use App\Database\Entities\MessagesDispatcher\ClientMessageDispatcherEntity;
 use App\Database\Models\MessagesDispatcher\ClientsMessagesDispatcherModel;
 use App\Database\Models\MessagesDispatcher\MessagesDispatcherModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -37,6 +38,11 @@ class PostUseCases
         $messagesDispatcherBusiness->send($clientsId, $dispatcher);
         ScheduleDispatcherBusiness::scheduleDispatcherClients($clientsId, $dispatcher);
 
+        NotificationsService::store([
+            "scope" => "dispatchers",
+            "action" => "UPDATE",
+            "Key" => $dispatcher->getId()
+        ]);
         return (object)[
             "success" => lang("Api.message_dispatcher.success.post")
         ];

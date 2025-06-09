@@ -9,6 +9,7 @@ use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -66,6 +67,11 @@ class PostUseCases
 
         $clientCategoryModel->save($clientCategoryEntity);
 
+        NotificationsService::store([
+            "scope" => "clients",
+            "action" => "CREATE",
+            "key" => $clientsModel->getInsertID()
+        ]);
         return (object)[
             "success" => lang("Api.clients.success.post")
         ];

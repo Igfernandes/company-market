@@ -7,6 +7,7 @@ use App\Business\Fields\FieldsBusiness;
 use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Models\Fields\ClientsFieldsModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -56,6 +57,10 @@ class PostUseCases
             $clientsFieldsModel->upsert($where, $clientField);
         endforeach;
 
+        NotificationsService::store([
+            "scope" => "fields",
+            "action" => "CREATE"
+        ]);
         return [
             "success" => "Api.clients.fields.success.post"
         ];

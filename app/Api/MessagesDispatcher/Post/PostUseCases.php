@@ -11,6 +11,7 @@ use App\Libraries\Exceptions\Exceptions;
 use App\Services\CronJob\CronJobService;
 use App\Services\CronJob\Entities\Job;
 use App\Services\CronJob\Entities\Schedule;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use DateTime;
 
@@ -82,6 +83,11 @@ class PostUseCases
 
         if ($startedDate <= new DateTime('now'))
             $messagesDispatcherBusiness->send($payload['clients'], $messageDispatcherEntity);
+
+        NotificationsService::store([
+            "scope" => "dispatcher",
+            "action" => "CREATE"
+        ]);
 
         return (object)[
             "success" => lang("Api.dispatcher.success.post")

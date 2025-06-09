@@ -4,6 +4,7 @@ namespace App\Api\Users\Groups\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,7 +24,10 @@ class DeleteController extends BaseController
     public function handle(int $groupId = 0)
     {
         try {
-
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'DELETE'
+            ]);
             $payload['id'] = $groupId;
 
             $responseDelete = $this->deleteUseCases->execute($payload);

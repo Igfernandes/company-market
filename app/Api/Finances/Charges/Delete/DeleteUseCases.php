@@ -4,6 +4,7 @@ namespace App\Api\Finances\Charges\Delete;
 
 use App\Business\Charges\DeleteChargesBusiness;
 use App\Database\Models\Reports\OperationFailuresModel;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -19,6 +20,10 @@ class DeleteUseCases
         else if (isset($payload['in_charges']))
             $deleteClientBusiness->deleteMultipleCharges($payload['in_charges']);
 
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "DELETE",
+        ]);
         return (object)[
             "success" => lang("Api.charges.success.delete")
         ];

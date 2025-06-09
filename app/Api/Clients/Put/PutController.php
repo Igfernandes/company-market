@@ -4,6 +4,7 @@ namespace App\Api\Clients\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -26,7 +27,7 @@ class PutController extends BaseController
         try {
             PermissionsBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
-                'actions' => 'UPDATE'
+                'type' => 'UPDATE'
             ]);
             $validation = \Config\Services::validation();
 

@@ -10,6 +10,7 @@ use App\Database\Models\Fields\UsersFieldsModel;
 use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -38,6 +39,10 @@ class DeleteUseCases
         $usersFieldsModel->where($queryString)->delete();
         $usersModel->delete($fieldId);
 
+        NotificationsService::store([
+            "scope" => "fields",
+            "action" => "DELETE",
+        ]);
         return (object)[
             "success" => lang("Api.fields.success.delete")
         ];

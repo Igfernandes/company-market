@@ -17,10 +17,15 @@ class NotificationsService
         $this->usersNotificationsModel = new UsersNotificationsModel();
     }
 
-    public function send(NotificationEntity $notification)
+    public static function store(array $notification)
     {
+        $notificationsModel = new NotificationsModel();
+        $session = \session();
 
-        $this->notificationsModel->save($notification);
+        if (!isset($notification['author_id']))
+            $notification['author_id'] = $session->get('userAuthId');
+
+        $notificationsModel->save($notification);
 
         // $PORT = getenv('websocket.port') ?: '8080';
         // $host = '127.0.0.1';

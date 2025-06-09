@@ -4,6 +4,7 @@ namespace App\Api\CustomForms\Delete;
 
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\CustomForms\CustomFormsDataTrait;
 
@@ -25,6 +26,10 @@ class DeleteUseCases
         $formsFillsModel->where("form_id", $filteredPayload['id'])->delete();
         $customFormsModel->delete($filteredPayload['id']);
 
+        NotificationsService::store([
+            "scope" => "forms",
+            "action" => "DELETE"
+        ]);
         return (object)[
             "success" => lang("Api.custom_forms.success.delete")
         ];

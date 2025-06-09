@@ -6,6 +6,7 @@ use App\Business\Users\UsersBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
 
@@ -46,7 +47,11 @@ class PutUseCases
         if (!empty($foundUser->toArray(true)))
             $usersModel->set($foundUser->toArray(true))->where("id", $foundUser->getId())->update();
 
-        \var_dump($foundUser->toArray(true));
+
+        NotificationsService::store([
+            "scope" => "users",
+            "action" => "UPDATE"
+        ]);
         return (object)[
             "success" => lang("Api.users.success.put")
         ];

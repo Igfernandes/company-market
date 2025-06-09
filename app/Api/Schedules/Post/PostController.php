@@ -4,6 +4,7 @@ namespace App\Api\Schedules\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -22,6 +23,10 @@ class PostController extends BaseController
     public function handle()
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'schedules',
+                'type' => 'CREATE'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

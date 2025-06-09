@@ -36,6 +36,7 @@ class DeleteUseCases
         $usersGroupsModel->where($queryString)->delete();
         $groupsModel->delete($groupId);
 
+
         return (object)[
             "success" => lang("Api.groups.success.delete")
         ];

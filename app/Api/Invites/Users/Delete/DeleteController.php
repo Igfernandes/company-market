@@ -4,6 +4,7 @@ namespace App\Api\Invites\Users\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,7 +24,10 @@ class DeleteController extends BaseController
     public function handle(int $inviteId)
     {
         try {
-
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'DELETE'
+            ]);
             $responseDelete = $this->deleteUseCases->execute([
                 "id" => $inviteId
             ]);

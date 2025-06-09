@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Api\Finances\Charges\Post;
+namespace App\Api\Users\Notifications\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
 use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
+use App\Traits\ControllersTrait;
 use Exception;
 
 class PostController extends BaseController
 {
-    use Validation, ExceptionApi, PostDTOs;
+    use Validation, ExceptionApi, ControllersTrait;
 
     private PostUseCases $postUseCases;
 
@@ -23,19 +24,7 @@ class PostController extends BaseController
     public function handle()
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => 'charges',
-                'type' => 'CREATE'
-            ]);
-            $validation = \Config\Services::validation();
-
-            $payload = $this->request->getVar(array_keys($this->rules));
-            $validation->setRules($this->rules);
-
-            if (!$validation->run($payload))
-                throw new Exceptions($validation->getErrors(), BAD_REQUEST);
-
-            $responsePost = $this->postUseCases->execute($payload);
+            $responsePost = $this->postUseCases->execute();
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {

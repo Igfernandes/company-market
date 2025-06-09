@@ -5,6 +5,7 @@ namespace App\Api\Integrations\Post;
 use App\Business\Integrations\IntegrationsBusiness;
 use App\Database\Entities\Integrations\IntegrationEntity;
 use App\Database\Models\Integrations\IntegrationsModel;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -26,6 +27,11 @@ class PostUseCases
         $integrationBusiness = new IntegrationsBusiness();
 
         $integrationBusiness->store($integrationEntity, $integrationModel, $payload);
+
+        NotificationsService::store([
+            "scope" => "integrations",
+            "action" => "UPDATE"
+        ]);
 
         return (object)[
             "success" => lang("Api.integrations.success.post")

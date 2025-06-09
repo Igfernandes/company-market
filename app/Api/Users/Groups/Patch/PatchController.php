@@ -4,6 +4,7 @@ namespace App\Api\Users\Groups\Patch;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,6 +24,10 @@ class PatchController extends BaseController
     public function handle(int $groupId = 0)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'UPDATE'
+            ]);
             $payload['id'] = $groupId;
 
             $responsePatch = $this->patchUseCases->execute($payload);

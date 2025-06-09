@@ -8,6 +8,7 @@ use App\Database\Models\Fields\FieldsGroupsModel;
 use App\Database\Models\Fields\FieldsModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -64,7 +65,11 @@ class PostUseCases
             $fieldBusiness->storeFieldValue($data);
         }
 
-
+        NotificationsService::store([
+            "scope" => "fields",
+            "action" => "CREATE",
+            "key" => $fieldsModel->getInsertID()
+        ]);
         return (object)[
             "success" => lang("Api.fields.success.post")
         ];

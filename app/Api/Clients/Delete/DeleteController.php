@@ -26,7 +26,7 @@ class DeleteController extends BaseController
         try {
             PermissionsBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
-                'actions' => 'DELETE'
+                'type' => 'DELETE'
             ]);
 
             $validation = \Config\Services::validation();

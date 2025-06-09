@@ -6,6 +6,7 @@ use App\Database\Models\Clients\CategoriesModel;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Interfaces\IUseCases;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PatchCategoryUseCases implements IUseCases
 {
@@ -29,6 +30,11 @@ class PatchCategoryUseCases implements IUseCases
             throw new Exceptions(lang('Api.clients.invalid.category'), BAD_BUSINESS_RULES);
 
         $clientsCategoriesModel->set("category_id", $payload['category'])->whereIn('client_id', $payload['clients'])->update();
+
+        NotificationsService::store([
+            "scope" => "clients",
+            "action" => "UPDATE"
+        ]);
 
         return (object)[
             "success" => \str_replace("{name}", $foundCategory->getName(), lang("Api.clients.success.patchCategory"))

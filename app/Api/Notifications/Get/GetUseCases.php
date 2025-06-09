@@ -49,12 +49,12 @@ class GetUseCases
         if (count($types) == 0 && count($scopes) == 0) return [];
 
         $notificationsModel->whereIn("scope", $scopes);
-        $notificationsModel->whereIn("type", $types);
+        $notificationsModel->whereIn("action", $types);
 
         $notificationEntity->store($filteredPayload);
         /** @var array{CategoryEntity}*/
         $foundNotifications = $notificationsModel->where($notificationEntity->toArray())->findAll();
 
-        return array_map(fn(PermissionEntity $notification) => $notification->toArray(), $foundNotifications);
+        return array_map(fn(NotificationEntity $notification) => $notification->toArray(), $foundNotifications);
     }
 }

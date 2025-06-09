@@ -24,7 +24,7 @@ class PatchController extends BaseController
         try {
             PermissionsBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
-                'actions' => 'UPDATE'
+                'type' => 'UPDATE'
             ]);
             $validation = \Config\Services::validation();
 

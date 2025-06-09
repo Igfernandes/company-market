@@ -6,6 +6,7 @@ use App\Business\Charges\ChargesBusiness;
 use App\Business\Clients\ClientsBusiness;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\MercadoPago\MercadoPago;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -54,7 +55,11 @@ class PostUseCases
             "reference" => $payload['product']
         ]);
         $response['success'] = lang("Api.payments.success.post");
-        
+
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "UPDATE"
+        ]);
         return $response;
     }
 }

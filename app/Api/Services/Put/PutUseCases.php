@@ -5,6 +5,7 @@ namespace App\Api\Services\Put;
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
 use stdClass;
@@ -58,6 +59,11 @@ class PutUseCases
 
         $servicesModel->set($serviceEntity->toArray(true))->update($filteredPayload['id']);
 
+        NotificationsService::store([
+            "scope" => "services",
+            "action" => "UPDATE",
+            "key" => $filteredPayload['id']
+        ]);
         return (object)[
             "success" => lang("Api.services.success.put")
         ];

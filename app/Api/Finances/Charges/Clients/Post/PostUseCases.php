@@ -6,6 +6,7 @@ use App\Business\Charges\ChargesBusiness;
 use App\Business\Charges\ChargesNotifications;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class PostUseCases
@@ -37,6 +38,11 @@ class PostUseCases
             $chargesNotifications->sendClients($payload['clients'], $charge->getTitle(), $charge);
         }
 
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "UPDATE",
+            "key" => $payload['charge_id']
+        ]);
         return (object)[
             "success" => lang("Api.charges.clients.success.post")
         ];

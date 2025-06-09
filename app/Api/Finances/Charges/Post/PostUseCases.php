@@ -9,6 +9,7 @@ use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
 class PostUseCases
@@ -59,7 +60,7 @@ class PostUseCases
 
         $chargeEntity->setServiceId($payload['service_id']);
         $chargeEntity->setPrice($payload['price']);
-        
+
         if (!empty($payload['started_at']))
             $chargeEntity->setStartedAt($payload['started_at']);
 
@@ -92,6 +93,11 @@ class PostUseCases
             ChargeScheduleBusiness::schedule($chargeEntity, $chargeEntity->getStartedAt());
         }
 
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "CREATE",
+            "key" => $chargeId
+        ]);
         return (object)[
             "success" => lang("Api.charges.success.post")
         ];

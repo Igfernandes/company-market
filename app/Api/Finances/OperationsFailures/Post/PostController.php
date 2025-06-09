@@ -4,6 +4,7 @@ namespace App\Api\Finances\OperationsFailures\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,6 +24,10 @@ class PostController extends BaseController
     public function handle(int $operationId)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'integrations',
+                'type' => 'CREATE'
+            ]);
             $responsePost = $this->postUseCases->execute([
                 "id" => $operationId
             ]);

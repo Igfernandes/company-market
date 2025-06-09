@@ -3,6 +3,7 @@
 namespace App\Api\Clients\Delete;
 
 use App\Business\Clients\DeleteClientsBusiness;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -18,6 +19,10 @@ class DeleteUseCases
         else if (isset($payload['in_clients']))
             $deleteClientBusiness->deleteMultipleClients($payload['in_clients']);
 
+        NotificationsService::store([
+            "scope" => "clients",
+            "action" => "DELETE"
+        ]);
         return [
             "success" => "Api.clients.success.delete"
         ];

@@ -12,6 +12,7 @@ use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -85,6 +86,10 @@ class PostUseCases
 
         $invitesModel->set(['is_valid' => false])->where("id", $foundInvite->getId())->update();
 
+        NotificationsService::store([
+            "scope" => "users",
+            "action" => "CREATE"
+        ]);
         return (object)[
             "success" => lang("Api.users.success.post")
         ];

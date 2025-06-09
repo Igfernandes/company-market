@@ -5,6 +5,7 @@ namespace App\Api\Invites\Users\Delete;
 use App\Database\Entities\Invites\InviteEntity;
 use App\Database\Models\Invites\InvitesModel;
 use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
 {
@@ -25,6 +26,11 @@ class DeleteUseCases
             throw new Exceptions(\str_replace("{field}", lang("Words.invite"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
 
         $invitesModel->where("id = $inviteId")->delete();
+
+        NotificationsService::store([
+            "scope" => "invites",
+            "action" => "DELETE"
+        ]);
 
         return (object)[
             "success" => lang("Api.invites.success.resend")
