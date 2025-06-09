@@ -12,7 +12,7 @@ trait PostDTOs
             'rules'  => 'string|max_length[35]'
         ],
         'email'     => 'string|valid_email|max_length[255]|permit_empty',
-        'birthdate' => 'string|valid_date[Y-m-d]|permit_empty',
+        'birthdate' => 'string|permit_empty',
         'category'  => 'integer'
     ];
 }
