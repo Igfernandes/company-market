@@ -3,7 +3,7 @@
 namespace App\Api\Clients\Post;
 
 use App\Business\Clients\CategoryBusiness;
-use App\Database\Entities\clients\ClientCategoryEntity;
+use App\Database\Entities\Clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
