@@ -24,13 +24,13 @@ class ClientsMessagesDispatcherModel extends Model
         'status',
         'platform',
         'log_error',
+        'send_at',
         'created_at',
     ];
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';
 
-    protected $skipValidation = true;
 
     public function getClientsWithMessages(array $clientQuery, array $messageQuery = [], array $clientsMessagesQuery = []): array
     {

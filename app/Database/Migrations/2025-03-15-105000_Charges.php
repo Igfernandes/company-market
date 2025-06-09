@@ -33,6 +33,10 @@ class Charges extends Migration
                 'type' => 'DECIMAL(10,2)',
                 'null' => true
             ],
+            'period' => [
+                "type" => 'INT',
+                'null' => true
+            ],
             'service_id' => [
                 'type' => 'INT',
                 'unsigned' => true
@@ -40,6 +44,9 @@ class Charges extends Migration
             'type' => [
                 'type' => 'ENUM("APPELLANT", "PUNCTUAL")',
                 'null' => true
+            ],
+            'started_at' => [
+                'type' => 'datetime'
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'

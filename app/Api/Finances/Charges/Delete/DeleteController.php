@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Charges\Delete;
+namespace App\Api\Finances\Charges\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;

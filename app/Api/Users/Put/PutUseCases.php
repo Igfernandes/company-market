@@ -17,8 +17,7 @@ class PutUseCases
      * @param array{
      *     id: integer,
      *     name: string, 
-     *     cpf: string,
-     *     birthdate: string,
+     *     email: string,
      *     phone: string
      * } $payload
      */
@@ -37,12 +36,17 @@ class PutUseCases
         if (empty($foundUser))
             throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
 
+
+        $foundUser->setEmailSha256(\referenceHash($payload['email']));
+        $foundUser->setEncryptEmail($payload['email']);
         $foundUser->setPhoneSha256(\referenceHash($payload['phone']));
         $foundUser->setEncryptPhone($payload['phone']);
         $foundUser->setName($payload['name']);
 
-        $usersModel->set($foundUser->toArray(true))->where("id", $foundUser->getId())->update();
+        if (!empty($foundUser->toArray(true)))
+            $usersModel->set($foundUser->toArray(true))->where("id", $foundUser->getId())->update();
 
+        \var_dump($foundUser->toArray(true));
         return (object)[
             "success" => lang("Api.users.success.put")
         ];

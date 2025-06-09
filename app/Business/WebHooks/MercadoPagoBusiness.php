@@ -33,7 +33,7 @@ class MercadoPagoBusiness
         $integrationBankModel = new IntegrationsModel();
 
         /** @var IntegrationBankEntity */
-        $foundBank = $integrationBankModel->where(["type" => "MERCADO_PAGO"])->first();
+        $foundBank = $integrationBankModel->where(["provider" => "MERCADO_PAGO"])->first();
 
         if (empty($foundBank))
             throw new Exceptions(\lang("Api.webhook.mercado_pago"), \BAD_BUSINESS_RULES);
@@ -62,7 +62,7 @@ class MercadoPagoBusiness
         $paymentEntity = new PaymentEntity();
 
         /** @var IntegrationBankEntity */
-        $foundBank = $integrationBankModel->where(["type" => "MERCADO_PAGO"])->first();
+        $foundBank = $integrationBankModel->where(["provider" => "MERCADO_PAGO"])->first();
         $paymentId = $payload->data->id;
 
         $paymentEntity->setPaymentId($paymentId);

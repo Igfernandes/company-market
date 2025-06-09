@@ -42,7 +42,7 @@ trait ProductPunctual
             "reference" => $options['reference']
         ]);
         $isLocalhost = \ENVIRONMENT === "development";
-        $baseLocalhost = getenv('system.gateway.host');
+        $baseLocalhost = getenv('globals.href.backend');
 
         $preference->__set("back_urls", [
             "success" => $isLocalhost ? "$baseLocalhost/checkout/success" : base_url("checkout/success"),

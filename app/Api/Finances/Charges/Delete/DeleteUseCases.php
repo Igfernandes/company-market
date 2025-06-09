@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Api\Charges\Delete;
+namespace App\Api\Finances\Charges\Delete;
 
 use App\Business\Charges\DeleteChargesBusiness;
+use App\Database\Models\Reports\OperationFailuresModel;
 
 class DeleteUseCases
 {

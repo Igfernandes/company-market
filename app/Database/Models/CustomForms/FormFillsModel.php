@@ -11,9 +11,9 @@ class FormFillsModel extends Model
     protected $primaryKey       = 'id';
 
     protected $useAutoIncrement = true;
-    protected $returnType       = 'App\Database\Entities\CustomForms\FormFillsEntity';
+    protected $returnType       = 'App\Database\Entities\CustomForms\FormFillEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['form_id', 'field_id', 'value'];
+    protected $allowedFields    = ['form_id', 'field_id',  'package', 'value'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

@@ -30,6 +30,9 @@ class RoutesApi
     $routes->patch("users/groups/(:num)", "Api\Users\Groups\Patch\PatchController::handle/$1", $this->optionsWithAuthentications);
     $routes->get("users/groups", "Api\Users\Groups\Get\GetController::handle", $this->optionsWithAuthentications);
 
+    $routes->get("users/(:num)/notifications/(:num)", "Api\Users\Notifications\Get\GetController::handle/$1/$2", $this->optionsWithAuthentications);
+    $routes->get("users/(:num)/notifications", "Api\Users\Notifications\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+
     /** Invites */
     $routes->post("invites/user", "Api\Invites\Users\Post\PostController::handle", $this->optionsWithAuthentications);
     $routes->post("invites/user/resend/(:num)", "Api\Invites\Users\Resend\PostController::handle/$1", $this->optionsWithAuthentications);
@@ -72,6 +75,10 @@ class RoutesApi
     $routes->get("forms/(:num)", "Api\Forms\Get\GetController::handle/$1");
     $routes->get("forms", "Api\Forms\Get\GetController::handle");
     $routes->post("forms", "Api\Forms\Post\PostController::handle");
+
+    $routes->get("forms/(:num)/fills", "Api\Forms\Fills\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+    $routes->get("forms/(:num)/fills/(:segment)", "Api\Forms\Fills\Get\GetController::handle/$1/$2", $this->optionsWithAuthentications);
+    $routes->delete("forms/(:num)/fills/(:segment)", "Api\Forms\Fills\Delete\DeleteController::handle/$1/$2", $this->optionsWithAuthentications);
 
     /** Services */
     $routes->get("services", "Api\Services\Get\GetController::handle", $this->optionsWithAuthentications);
@@ -128,6 +135,8 @@ class RoutesApi
     $routes->post("schedules", "Api\Schedules\Post\PostController::handle");
     $routes->get("schedules", "Api\Schedules\Get\GetController::handle",  $this->optionsWithAuthentications);
     $routes->get("schedules/(:num)", "Api\Schedules\Get\GetController::handle/$1",  $this->optionsWithAuthentications);
+    $routes->put("schedules/(:num)", "Api\Schedules\Put\PutController::handle/$1",  $this->optionsWithAuthentications);
+    $routes->delete("schedules/(:num)", "Api\Schedules\Delete\DeleteController::handle/$1",  $this->optionsWithAuthentications);
 
     /** MessagesDispatcher */
     $routes->delete("dispatcher/(:num)", "Api\MessagesDispatcher\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
@@ -140,6 +149,7 @@ class RoutesApi
     $routes->post("webhook/mercado-pago", "Api\WebHooks\MercadoPago\Post\PostController::handle");
 
     $routes->post("webhook/tasks/dispatcher", "Api\WebHooks\Tasks\Dispatcher\Post\PostController::handle");
+    $routes->post("webhook/tasks/charge", "Api\WebHooks\Tasks\Charge\Post\PostController::handle");
 
     $routes->get("webhook/meta", "Api\WebHooks\Meta\Get\GetController::handle");
 
@@ -148,6 +158,8 @@ class RoutesApi
     $routes->post("webhook/whatsapp", "Api\WebHooks\WhatsApp\Post\PostController::handle");
     $routes->get("webhook/whatsapp", "Api\WebHooks\WhatsApp\Get\GetController::handle");
 
+    /** Notifications */
+    $routes->get("notifications", "Api\Notifications\Get\GetController::handle");
 
     return $routes;
   }

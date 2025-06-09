@@ -5,6 +5,7 @@ namespace App\Api\Clients\Patch;
 use App\Api\Clients\Patch\Category\PatchCategoryUseCases;
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -21,6 +22,10 @@ class PatchController extends BaseController
     public function handle()
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'clients',
+                'actions' => 'UPDATE'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

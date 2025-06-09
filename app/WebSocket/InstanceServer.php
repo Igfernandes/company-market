@@ -12,28 +12,24 @@ class InstanceServer implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
-        $queryParams = [];
-        parse_str($conn->httpRequest->getUri()->getQuery(), $queryParams);
-        $tokenNavigation = $queryParams['token-navigation'] ?? "";
-        $channel =  $queryParams['channel'] ?? "";
-
-        if (empty($tokenNavigation))
-            return $conn->close();
-
-        $userAuthHistoryBusiness = new UserAuthHistoryBusiness();
-        $isAuthUser = $userAuthHistoryBusiness->handleAuthNavigation($tokenNavigation);
-
-        if ($isAuthUser === false)
-            return $conn->close();
-
-        $this->channels[$channel][$conn->resourceId] = $conn;
-        echo "Usuário $tokenNavigation conectado com ID {$conn->resourceId}\n";
+        echo "Nova conexão ID: {$conn->resourceId}\n";
+        $this->channels['default'][$conn->resourceId] = $conn;
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        // Espera-se que o client nunca envie mensagem neste caso
-        echo "Mensagem recebida: $msg\n";
+        // Enviar para todos no canal
+        foreach ($this->channels as $channel => $connections) {
+            if (isset($connections[$from->resourceId])) {
+                foreach ($connections as $conn) {
+                    if ($conn !== $from) {
+                        $conn->send($msg);
+                    }
+                }
+                break;
+            }
+        }
+        echo "Mensagem retransmitida: $msg\n";
     }
 
     public function onClose(ConnectionInterface $conn)

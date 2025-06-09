@@ -16,6 +16,7 @@ trait ClientsMessagesDataTrait
             "log"             => $clientsMessages->getLogError(),
             "message_id"      => $clientsMessages->getMessageId(),
             "message_title"   => $clientsMessages->getMessage()->getTitle(),
+            "send_at"         => $clientsMessages->getSendAt(),
             "created_at"      => $clientsMessages->getCreatedAt()
         ];
     }

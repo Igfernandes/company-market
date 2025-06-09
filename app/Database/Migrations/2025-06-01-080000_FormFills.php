@@ -21,9 +21,11 @@ class FormFills extends Migration
                 'type' => 'INT',
                 'unsigned' => true
             ],
+            "package" => [
+                'type' => 'VARCHAR(90)'
+            ],
             'field_id' => [
-                'type' => 'INT',
-                'unsigned' => true
+                'type' => 'VARCHAR(100)'
             ],
             'value' => [
                 'type' => 'BLOB'

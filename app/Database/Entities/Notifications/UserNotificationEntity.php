@@ -2,7 +2,7 @@
 
 namespace App\Database\Entities\Notifications;
 
-use App\Database\Entities\Clients\ClientEntity;
+use App\Database\Entities\Users\UserEntity;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 
@@ -12,17 +12,14 @@ class UserNotificationEntity extends Entity
 
     public $attributes = [
         'id'              => null,
-        'client_id'       => null,
-        'message_id'      => null,
-        'status'          => null,
-        'platform'        => null,
-        'log_error'       => null,
+        'user_id'         => null,
+        'notification_id' => null,
         'created_at'      => null,
     ];
 
     public $relations = [
-        'client'       => null,
-        'message'      => null,
+        'user'          => null,
+        'notification'  => null,
     ];
 
     public function getId(): ?int
@@ -34,49 +31,22 @@ class UserNotificationEntity extends Entity
         $this->attributes['id'] = $id;
     }
 
-    public function getClientId(): ?int
+    public function getUserId(): ?int
     {
-        return $this->attributes['client_id'];
+        return $this->attributes['user_id'];
     }
-    public function setClientId(?int $id): void
+    public function setUserId(?int $id): void
     {
-        $this->attributes['client_id'] = $id;
-    }
-
-    public function getMessageId(): ?int
-    {
-        return $this->attributes['message_id'];
-    }
-    public function setMessageId(?int $id): void
-    {
-        $this->attributes['message_id'] = $id;
+        $this->attributes['user_id'] = $id;
     }
 
-    public function getStatus(): ?string
+    public function getNotificationId(): ?int
     {
-        return $this->attributes['status'];
+        return $this->attributes['notification_id'];
     }
-    public function setStatus(?string $status): void
+    public function setNotificationId(?int $id): void
     {
-        $this->attributes['status'] = $status;
-    }
-
-    public function getPlatform(): ?string
-    {
-        return $this->attributes['platform'];
-    }
-    public function setPlatform(?string $platform): void
-    {
-        $this->attributes['platform'] = $platform;
-    }
-
-    public function getLogError(): ?string
-    {
-        return $this->attributes['log_error'];
-    }
-    public function setLogError(?string $error): void
-    {
-        $this->attributes['log_error'] = $error;
+        $this->attributes['notification_id'] = $id;
     }
 
     public function getCreatedAt(): ?string
@@ -88,13 +58,13 @@ class UserNotificationEntity extends Entity
         $this->attributes['created_at'] = $datetime;
     }
 
-    public function getClient(): ?ClientEntity
+    public function getUser(): ?UserEntity
     {
-        return $this->relations['client'];
+        return $this->relations['user'];
     }
-    public function setClient(?ClientEntity $client): void
+    public function setUser(?UserEntity $user): void
     {
-        $this->relations['client'] = $client;
+        $this->relations['user'] = $user;
     }
 
     public function getNotification(): ?NotificationEntity

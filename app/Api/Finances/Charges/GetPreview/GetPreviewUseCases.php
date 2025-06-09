@@ -5,7 +5,6 @@ namespace App\Api\Finances\Charges\GetPreview;
 use App\Business\Charges\ChargesBusiness;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Entities\Services\ServiceEntity;
-use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
 use App\Traits\BusinessTrait;
 use App\Traits\Charges\ChargesDataTrait;
@@ -40,6 +39,7 @@ class GetPreviewUseCases
             "price" => $charge->getPrice(),
             "promotional_price" => $charge->getPromotionalPrice(),
             "amount"        =>  $response['amountAvailable'],
+            "type" => $charge->getType()
         ];
 
         if (!empty($charge->getServiceId())) {

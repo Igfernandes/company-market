@@ -17,6 +17,10 @@ class NotificationsModel extends Model
     protected $allowedFields = [
         'title',
         'message',
+        'action',
+        'scope',
+        'key',
+        'author_id'
     ];
 
     protected $dateFormat    = 'datetime';

@@ -10,6 +10,7 @@ class Job
     private string $title = "";
     private bool $enabled = true;
     private bool $saveResponses = false;
+    private int $nextExecution = 0;
     private int $requestMethod = 1;
     private Schedule $schedule;
 
@@ -21,6 +22,7 @@ class Job
             "enabled" => $this->enabled,
             "requestMethod" => $this->requestMethod,
             "saveResponses" => $this->saveResponses,
+            "nextExecution" => $this->nextExecution,
             "schedule" => $this->schedule->getAttributes()
         ];
     }
@@ -34,6 +36,14 @@ class Job
         $this->title = $title;
     }
 
+    public function getNextExecution(): int
+    {
+        return $this->nextExecution;
+    }
+    public function setNextExecution(int $nextExecution): void
+    {
+        $this->nextExecution = $nextExecution;
+    }
     public function getRequestMethod(): int
     {
         return $this->requestMethod;

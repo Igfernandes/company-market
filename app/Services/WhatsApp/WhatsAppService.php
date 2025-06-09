@@ -147,10 +147,10 @@ class WhatsAppService
             'Authorization: Bearer ' . $this->accessToken,
         ], $payload);
 
-        file_put_contents('webhook.log', "\n" . \json_encode(["POST", $url, [
-            'Content-Type: application/json',
-            'Authorization: Bearer ' . $this->accessToken,
-        ], $payload]), FILE_APPEND);
+        // file_put_contents('webhook.log', "\n" . \json_encode(["POST", $url, [
+        //     'Content-Type: application/json',
+        //     'Authorization: Bearer ' . $this->accessToken,
+        // ], $payload]), FILE_APPEND);
 
         return $response['status'] === OK;
     }

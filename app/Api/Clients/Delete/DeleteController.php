@@ -4,6 +4,7 @@ namespace App\Api\Clients\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,6 +24,11 @@ class DeleteController extends BaseController
     public function handle(int $clientId = 0)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'clients',
+                'actions' => 'DELETE'
+            ]);
+
             $validation = \Config\Services::validation();
 
             $validation->setRules($this->rules);

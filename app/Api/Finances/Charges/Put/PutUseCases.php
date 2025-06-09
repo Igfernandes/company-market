@@ -2,6 +2,7 @@
 
 namespace App\Api\Finances\Charges\Put;
 
+use App\Business\Charges\ChargeScheduleBusiness;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
@@ -22,8 +23,10 @@ class PutUseCases
      *     privacy: 'PUBLIC'|'PRIVATE',
      *     amount: integer,
      *     price: integer, 
+     *     period: integer,
      *     promotional_price: integer,
-     *     expired_at: string, 
+     *     expired_days: string,
+     *     started_at: string, 
      *     clients: array{integer}
      * } $payload
      */
@@ -57,7 +60,14 @@ class PutUseCases
 
         $chargeEntity->setServiceId($payload['service_id']);
         $chargeEntity->setPrice($payload['price']);
-        $chargeEntity->setAmount($payload['amount']);
+        if (!empty($payload['amount']))
+            $chargeEntity->setAmount($payload['amount']);
+
+        if (!empty($payload['started_at']))
+            $chargeEntity->setStartedAt($payload['started_at']);
+
+        if (!empty($payload['period']))
+            $chargeEntity->setPeriod($payload['period']);
 
         if (!empty($payload['promotional_price']))
             $chargeEntity->setPromotionalPrice($payload['promotional_price']);
@@ -66,10 +76,15 @@ class PutUseCases
         $chargeEntity->setType($payload['type']);
         $chargeEntity->setStatus($payload['status']);
 
-        if (!empty($payload['expired_at']))
-            $chargeEntity->setExpiredAt($payload['expired_at']);
+        if (!empty($payload['expired_days']))
+            $chargeEntity->setExpiredDays($payload['expired_days']);
 
         $chargesModel->set($chargeEntity->toArray(true))->where("id", $payload['id'])->update();
+
+        if (isset($payload['period']) && $payload['type'] === "APPELLANT") {
+            ChargeScheduleBusiness::delete($chargeEntity);
+            ChargeScheduleBusiness::schedule($chargeEntity, $chargeEntity->getStartedAt());
+        }
 
         return (object)[
             "success" => lang("Api.charges.success.put")

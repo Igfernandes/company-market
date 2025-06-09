@@ -9,10 +9,15 @@ trait SchedulesDataTrait
 {
     public function builder(ScheduleEntity $schedule, array $userSchedule): Object
     {
+        $session = session();
+
         $foundUsers = \array_map(fn(UserScheduleEntity $userSchedule) => (object)[
             "id" => $userSchedule->getUserId(),
             "name" => $userSchedule->getUser()->getName()
         ], $userSchedule);
+
+        if (!in_array($session->get('userAuthId'), \array_map(fn($linked) => $linked->id, $foundUsers)))
+            return (object)[];
 
         return  (object)[
             "id" => $schedule->getId(),

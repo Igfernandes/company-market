@@ -18,7 +18,7 @@ class AddColumnPrivacyAtCharges extends Migration
             ],
             'amount' => [
                 'type'       => 'Integer',
-                'default'    => '1',
+                'null'       => true,
                 'after'      => 'privacy' // opcional: define onde o campo será inserido
             ],
         ]);

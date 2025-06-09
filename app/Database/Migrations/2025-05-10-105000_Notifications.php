@@ -19,9 +19,25 @@ class Notifications extends Migration
             ],
             'title' => [
                 'type' => 'VARCHAR(200)',
+                'null' => true
             ],
             'message' => [
-                'type' => 'JSON'
+                'type' => 'VARCHAR(250)'
+            ],
+            'action' => [
+                'type' => 'VARCHAR(20)'
+            ],
+            'scope' => [
+                'type' => 'VARCHAR(50)',
+                'null' => true
+            ],
+            'key' => [
+                'type'           => 'INT',
+                'null' => true
+            ],
+            'author_id' => [
+                'type'           => 'INT',
+                'constraint'     => 5,
             ],
             'created_at datetime default current_timestamp'
         ]);

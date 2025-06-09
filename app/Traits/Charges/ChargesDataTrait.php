@@ -38,7 +38,8 @@ trait ChargesDataTrait
                 "id" => $chargeClient->getClientId(),
                 "name" => $chargeClient->attributes['client_name'],
             ], $foundClients),
-            "expired_at" => $chargeEntity->getExpiredAt(),
+            "expired_days" => $chargeEntity->getExpiredDays(),
+            "started_at" => $chargeEntity->getStartedAt(),
             "created_at" => $chargeEntity->getCreatedAt(),
             "updated_at" => $chargeEntity->getUpdatedAt()
         ];

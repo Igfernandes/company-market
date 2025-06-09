@@ -24,6 +24,10 @@ class PutController extends BaseController
     public function handle(int $clientId)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'clients',
+                'actions' => 'UPDATE'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

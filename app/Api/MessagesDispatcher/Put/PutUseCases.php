@@ -30,7 +30,7 @@ class PutUseCases
             "id" => $payload['id']
         ])->update();
 
-        if (\is_array($payload['clients'])) {
+        if (\is_array($payload['clients']) && \count($payload['clients']) > 0) {
             ScheduleDispatcherBusiness::scheduleDispatcherClients($payload['clients'], $dispatcher);
         }
 

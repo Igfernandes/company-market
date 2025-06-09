@@ -18,6 +18,7 @@ class Store
             $clientMessageEntity->setMessageId($messageId);
             $clientMessageEntity->setPlatform("EMAIL");
             $clientMessageEntity->setStatus("SUCCESSFUL");
+            $clientMessageEntity->setSendAt(date('Y-m-d H:i:s'));
 
             $clientMessageEntity->setClientId($clientId);
 

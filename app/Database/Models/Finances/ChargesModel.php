@@ -27,7 +27,9 @@ class ChargesModel extends Model
         'promotional_price',
         'service_id',
         'type',
-        'expired_at'
+        'period',
+        'expired_days',
+        'started_at'
     ];
 
     protected $dateFormat    = 'datetime';

@@ -5,7 +5,7 @@ namespace App\Services\CronJob\Entities;
 class Schedule
 {
     private string $timezone = "America/Sao_Paulo";
-    private int $expiresAt = 0;
+    private string $expiresAt = "0";
     private array $hours = [-1];
     private array $mdays = [-1];
     private array $minutes = [-1];
@@ -36,11 +36,11 @@ class Schedule
         $this->timezone = $timezone;
     }
 
-    public function getExpiresAt(): int
+    public function getExpiresAt(): string
     {
         return $this->expiresAt;
     }
-    public function setExpiresAt(int $expiresAt): void
+    public function setExpiresAt(string $expiresAt): void
     {
         $this->expiresAt = $expiresAt;
     }

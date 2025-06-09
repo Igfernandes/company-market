@@ -50,6 +50,7 @@ class Cors extends \Fluent\Cors\Config\Cors
      * @var array
      */
     public $allowedOrigins = [
+        'http://localhost:8080',
         'http://localhost:3000',
         'https://agmturismomarica.com.br',
     ];

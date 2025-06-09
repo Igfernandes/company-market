@@ -17,6 +17,7 @@ class ClientMessageDispatcherEntity extends Entity
         'status'            => null,
         'platform'          => null,
         'log_error'         => null,
+        'send_at'           => null,
         'created_at'        => null,
     ];
 
@@ -80,6 +81,15 @@ class ClientMessageDispatcherEntity extends Entity
     public function setLogError(?string $logError): void
     {
         $this->attributes['log_error'] = $logError;
+    }
+
+    public function getSendAt(): ?string
+    {
+        return $this->attributes['send_at'];
+    }
+    public function setSendAt(?string $datetime): void
+    {
+        $this->attributes['send_at'] = $datetime;
     }
 
     public function getCreatedAt(): ?string

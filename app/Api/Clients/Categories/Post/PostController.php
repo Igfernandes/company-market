@@ -4,6 +4,7 @@ namespace App\Api\Clients\Categories\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -23,6 +24,11 @@ class PostController extends BaseController
     public function handle()
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'categories',
+                'actions' => 'CREATE'
+            ]);
+
             $validation = \Config\Services::validation();
 
             $payload = (array) $this->request->getVar();

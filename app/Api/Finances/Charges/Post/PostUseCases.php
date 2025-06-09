@@ -4,6 +4,7 @@ namespace App\Api\Finances\Charges\Post;
 
 use App\Business\Charges\ChargesNotifications;
 use App\Business\Clients\ClientsBusiness;
+use App\Business\Charges\ChargeScheduleBusiness;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
@@ -21,10 +22,12 @@ class PostUseCases
      *     service_id: string, 
      *     type: 'APPELLANT'|'PUNCTUAL',
      *     privacy: 'PUBLIC'|'PRIVATE',
+     *     period: integer,
      *     amount: integer,
      *     price: integer, 
      *     promotional_price: integer,
-     *     expired_at: string, 
+     *     expired_days: integer, 
+     *     started_at: string
      *     clients: array{integer}
      * } $payload
      */
@@ -56,7 +59,15 @@ class PostUseCases
 
         $chargeEntity->setServiceId($payload['service_id']);
         $chargeEntity->setPrice($payload['price']);
-        $chargeEntity->setAmount($payload['amount']);
+        
+        if (!empty($payload['started_at']))
+            $chargeEntity->setStartedAt($payload['started_at']);
+
+        if (!empty($payload['amount']))
+            $chargeEntity->setAmount($payload['amount']);
+
+        if (!empty($payload['period']))
+            $chargeEntity->setPeriod($payload['period']);
 
         if (!empty($payload['promotional_price']))
             $chargeEntity->setPromotionalPrice($payload['promotional_price']);
@@ -64,7 +75,7 @@ class PostUseCases
         $chargeEntity->setPrivacy($payload['privacy']);
         $chargeEntity->setType($payload['type']);
 
-        $chargeEntity->setExpiredAt($payload['expired_at']);
+        $chargeEntity->setExpiredDays($payload['expired_days']);
 
         $chargeEntity->setReference(md5($title . date("YmdHS")));
         $chargesModel->save($chargeEntity->toArray(true));
@@ -75,6 +86,10 @@ class PostUseCases
         if (isset($payload['clients']) && !empty($payload['clients'])) {
             $chargesNotifications = new ChargesNotifications();
             $chargesNotifications->sendClients($payload['clients'], $title, $chargeEntity);
+        }
+
+        if (isset($payload['period']) && $payload['type'] === "APPELLANT") {
+            ChargeScheduleBusiness::schedule($chargeEntity, $chargeEntity->getStartedAt());
         }
 
         return (object)[

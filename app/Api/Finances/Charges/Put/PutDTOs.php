@@ -29,9 +29,17 @@ trait PutDTOs
             'label'  => 'status',
             'rules'  => 'string|in_list[ACTIVE, INACTIVE]|required',
         ],
+        'period' => [
+            'label'  => 'period',
+            'rules'  => 'integer|permit_empty',
+        ],
+        'started_at' => [
+            'label' => 'started_at',
+            'rules' => 'string|permit_empty'
+        ],
         'amount' => [
             'label'  => 'amount',
-            'rules'  => 'integer|required',
+            'rules'  => 'integer|permit_empty',
         ],
         'price' => [
             'label'  => 'price',
@@ -41,7 +49,7 @@ trait PutDTOs
             'label'  => 'promotional_price',
             'rules'  => 'integer|permit_empty',
         ],
-        'expired_at' => [
+        'expired_days' => [
             'label' => 'expired_at',
             'rules' => 'string|permit_empty'
         ],

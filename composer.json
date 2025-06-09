@@ -11,7 +11,10 @@
     "pagseguro/pagseguro-php-sdk": "^4.2",
     "dompdf/dompdf": "^2.0",
     "mercadopago/dx-php": "^2.6",
-    "cboden/ratchet": "^0.4.4"
+    "cboden/ratchet": "^0.4.4",
+    "predis/predis": "^3.0",
+    "react/event-loop": "^1.5",
+    "clue/redis-react": "^2.8"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9",

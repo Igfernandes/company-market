@@ -20,6 +20,8 @@ class ClientsBusiness
 
     public function store($payload, $userAuthId): int
     {
+        helper(['crypto']);
+
         $clientEntity = new ClientEntity();
 
         $crypto = new Crypto();
@@ -28,7 +30,7 @@ class ClientsBusiness
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
-        $clientEntity->setPhoneSha256(\Sha256($payload['phone']));
+        $clientEntity->setPhoneSha256(\referenceHash($payload['phone']));
         $clientEntity->setOwnerId($userAuthId);
         $clientEntity->setEncryptPhone($payload['phone']);
 

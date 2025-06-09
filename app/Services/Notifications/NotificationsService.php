@@ -2,45 +2,36 @@
 
 namespace App\Services\Notifications;
 
-use App\Database\Models\Notifications\ClientsNotificationsModel;
+use App\Database\Entities\Notifications\NotificationEntity;
 use App\Database\Models\Notifications\NotificationsModel;
+use App\Database\Models\Notifications\UsersNotificationsModel;
 
-class NotificationService
+class NotificationsService
 {
     protected $notificationsModel;
-    protected $clientsNotificationsModel;
+    protected $usersNotificationsModel;
 
     public function __construct()
     {
         $this->notificationsModel = new NotificationsModel();
-        $this->clientsNotificationsModel = new ClientsNotificationsModel();
+        $this->usersNotificationsModel = new UsersNotificationsModel();
     }
 
-    public function processScheduledNotifications(): void
+    public function send(NotificationEntity $notification)
     {
-        $notifications = $this->notificationsModel->getScheduledToRunNow();
 
-        foreach ($notifications as $notification) {
-            $clients = $this->clientsNotificationsModel
-                ->where('notification_id', $notification->id)
-                ->pending()
-                ->findAll();
+        $this->notificationsModel->save($notification);
 
-            foreach ($clients as $clientNotification) {
-                // Simula envio para cada plataforma
-                $success = $this->sendToPlatform($clientNotification);
+        // $PORT = getenv('websocket.port') ?: '8080';
+        // $host = '127.0.0.1';
 
-                $clientNotification->status = $success ? 'SUCCESSFUL' : 'BLOCKED';
-                $clientNotification->log_error = $success ? null : 'Falha no envio simulado.';
-                $this->clientsNotificationsModel->save($clientNotification);
-            }
-        }
-    }
-
-    protected function sendToPlatform($clientNotification): bool
-    {
-        // Aqui você pode integrar com APIs (Twilio, Meta, WhatsApp Cloud, etc.)
-        // Simulação de sucesso para fins de exemplo
-        return true;
+        // try {
+        //     $client = new Client("ws://$host:$PORT?token-navigation={$props['tokenNavigation']}&channel={$props['channel']}");
+        //     $client->send($props['message']);
+        //     $client->close();
+        //     echo "Mensagem enviada com sucesso\n";
+        // } catch (\Exception $e) {
+        //     echo "Erro no client websocket: " . $e->getMessage() . "\n";
+        // }
     }
 }

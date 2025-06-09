@@ -45,7 +45,8 @@ class PostUseCases
                 "success" => lang("Api.operations_failures.success.post"),
             ];
         } catch (Exception $err) {
-            $operationsFailuresModel->where('id', $payload['id'])->delete();
+            \var_dump($err);
+            // $operationsFailuresModel->where('id', $payload['id'])->delete();
             return [
                 "success" => lang("Api.invalid.operation_failed")
             ];

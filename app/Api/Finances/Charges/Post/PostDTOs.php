@@ -27,7 +27,15 @@ trait PostDTOs
         ],
         'amount' => [
             'label'  => 'amount',
-            'rules'  => 'integer|required',
+            'rules'  => 'integer|permit_empty',
+        ],
+        'period' => [
+            'label'  => 'period',
+            'rules'  => 'integer|permit_empty',
+        ],
+        'started_at' => [
+            'label' => 'started_at',
+            'rules' => 'string|permit_empty'
         ],
         'price' => [
             'label'  => 'price',
@@ -37,7 +45,7 @@ trait PostDTOs
             'label'  => 'promotional_price',
             'rules'  => 'integer|permit_empty',
         ],
-        'expired_at' => [
+        'expired_days' => [
             'label' => 'expired_at',
             'rules' => 'string|permit_empty'
         ],

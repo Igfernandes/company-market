@@ -2,15 +2,15 @@
 
 namespace App\Api\Schedules\Post;
 
+use App\Business\Schedules\SchedulesBusiness;
 use App\Database\Entities\Schedules\ScheduleEntity;
 use App\Database\Models\Schedules\SchedulesModel;
 use App\Database\Models\Schedules\UsersSchedulesModel;
 use App\Traits\BusinessTrait;
-use App\Traits\Services\ServicesDataTrait;
 
 class PostUseCases
 {
-    use ServicesDataTrait, BusinessTrait;
+    use BusinessTrait;
 
     /**
      * @param array{
@@ -24,6 +24,7 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
+        $session = session();
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $schedulesModel = new SchedulesModel();
@@ -33,17 +34,12 @@ class PostUseCases
 
         $schedulesModel->save($scheduleEntity);
 
-        $usersScheduleModel = new UsersSchedulesModel();
+        \array_push($payload['linked'], $session->get('userAuthId'));
 
         if (\is_array($payload['linked'])) {
-            foreach ($payload['linked'] as $user) {
-                $usersScheduleModel->save([
-                    "user_id" => $user,
-                    "schedule_id" => $schedulesModel->getInsertID()
-                ]);
-            }
+            $scheduleBusiness = new SchedulesBusiness();
+            $scheduleBusiness->storeUsersWithSchedule($payload['linked']);
         }
-
 
         return (object)[
             "success" => lang("Api.schedules.success.post")

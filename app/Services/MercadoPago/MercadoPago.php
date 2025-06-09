@@ -3,7 +3,7 @@
 namespace App\Services\MercadoPago;
 
 use App\Database\Entities\Finances\ChargeEntity;
-use App\Database\Models\Integrations\IntegrationBanksModel;
+use App\Database\Models\Integrations\IntegrationsModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\MercadoPago\Operations\Authentication;
 use App\Services\MercadoPago\Operations\ProductAppellant;
@@ -27,9 +27,9 @@ class MercadoPago
 
     function getInstance(): string
     {
-        $integrationBankModel = new IntegrationBanksModel();
+        $integrationBankModel = new IntegrationsModel();
         /** @var IntegrationBankEntity */
-        $foundBank = $integrationBankModel->where(["type" => "MERCADO_PAGO"])->first();
+        $foundBank = $integrationBankModel->where(["provider" => "MERCADO_PAGO"])->first();
 
         if (empty($foundBank))
             throw new Exceptions(\str_replace("{field}", lang("Words.bank"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
@@ -45,7 +45,6 @@ class MercadoPago
      */
     public function storeCharge(ChargeEntity $chargeEntity, array $options): array
     {
-
         $title = $chargeEntity->getTitle();
         \MercadoPago\SDK::setAccessToken($this->accessToken);
         $priceFiltered = $chargeEntity->getPromotionalPrice() > 0 ? $chargeEntity->getPromotionalPrice() : $chargeEntity->getPrice();
@@ -55,10 +54,8 @@ class MercadoPago
 
         $response = [];
 
-        if ($chargeEntity->getType() === "PUNCTUAL")
-            $response['product_id'] =  $this->createPunctual($chargeEntity, $options);
-        else
-            $response['product_url'] = $this->createAppellant($chargeEntity, $options);
+        $response['product_id'] =  $this->createPunctual($chargeEntity, $options);
+
 
         return $response;
     }

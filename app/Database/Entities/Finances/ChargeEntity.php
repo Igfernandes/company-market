@@ -21,7 +21,9 @@ class ChargeEntity extends Entity
         'type'              => null,
         'status'            => null,
         'privacy'           => null,
-        'expired_at'        => null,
+        'period'            => null,
+        'expired_day'       => null,
+        'started_at'        => null,
         'created_at'        => null,
         'updated_at'        => null,
     ];
@@ -112,6 +114,16 @@ class ChargeEntity extends Entity
             $this->attributes['privacy'] = $privacy;
     }
 
+    public function getPeriod(): ?int
+    {
+        return $this->attributes['period'];
+    }
+
+    public function setPeriod(?int $period): void
+    {
+        $this->attributes['period'] = $period;
+    }
+
     public function getAmount(): ?int
     {
         return $this->attributes['amount'];
@@ -166,16 +178,25 @@ class ChargeEntity extends Entity
         }
     }
 
-    public function getExpiredAt(): ?string
+    public function getExpiredDays(): ?string
     {
-        return $this->attributes['expired_at'];
+        return $this->attributes['expired_days'];
     }
 
-    public function setExpiredAt(?string $expiredAt): void
+    public function setExpiredDays(?string $expiredDays): void
     {
-        $this->attributes['expired_at'] = $expiredAt;
+        $this->attributes['expired_days'] = $expiredDays;
     }
 
+    public function getStartedAt(): ?string
+    {
+        return $this->attributes['started_at'];
+    }
+
+    public function setStartedAt(?string $startedAt): void
+    {
+        $this->attributes['started_at'] = $startedAt;
+    }
 
     public function getCreatedAt(): ?string
     {

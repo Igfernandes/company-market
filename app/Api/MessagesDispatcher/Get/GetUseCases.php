@@ -65,26 +65,17 @@ class GetUseCases
             $dispatcherId = $dispatcher->getId();
 
             $clientsIdsAlreadyCountable[$dispatcherId] = [];
+            $dispatcherData['linked'] = 0;
+            foreach ($foundClientsMessage as $clientDispatcher) {
+                if (
+                    $dispatcher->getId() == $clientDispatcher->getMessageId()
+                    && !in_array($clientDispatcher->getClientId(), $clientsIdsAlreadyCountable[$dispatcher->getId()])
+                ) {
+                    array_push($clientsIdsAlreadyCountable[$dispatcher->getId()], $clientDispatcher->getClientId());
 
-            $amountClientsLinked = \array_reduce(
-                $foundClientsMessage,
-                function ($amountClientsLinked, ClientMessageDispatcherEntity $clientDispatcher)
-                use ($dispatcher, $clientsIdsAlreadyCountable) {
-                    if (
-                        $dispatcher->getId() == $clientDispatcher->getMessageId()
-                        && !in_array($clientDispatcher->getClientId(), $clientsIdsAlreadyCountable[$dispatcher->getId()])
-                    ) {
-                        array_push($clientsIdsAlreadyCountable[$dispatcher->getId()], $clientDispatcher->getClientId());
-
-                        return $amountClientsLinked += 1;
-                    }
-
-                    return $amountClientsLinked;
+                    $dispatcherData['linked'] += 1;
                 }
-            );
-
-            $dispatcherData['linked'] = $amountClientsLinked ?? 0;
-
+            }
 
             return $dispatcherData;
         }, $found);

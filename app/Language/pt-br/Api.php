@@ -93,6 +93,9 @@ return [
     ],
     "custom_forms" => [
         "post" => "O formulário foi criado com sucesso.",
+        "fills" => [
+            "delete" => "O registro foi deletado com sucesso"
+        ]
     ],
     "integrations" => [
         "success" => [
@@ -105,6 +108,7 @@ return [
         ]
     ],
     "charges" => [
+        "again_submit" => "Sua página continha recursos desatualizados, mas já resolvemos. Envie novamente o formulário",
         "invalid" => [
             "not_available" => "A cobrança já excedeu a quantidade disponível ou está expirada",
             "not_found_service_or_name" => "É obrigatório preencher o nome da cobrança ou selecionar um serviço"

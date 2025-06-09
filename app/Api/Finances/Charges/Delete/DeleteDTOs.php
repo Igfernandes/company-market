@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Charges\Delete;
+namespace App\Api\Finances\Charges\Delete;
 
 trait DeleteDTOs
 {

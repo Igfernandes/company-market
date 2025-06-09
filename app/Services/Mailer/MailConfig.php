@@ -44,7 +44,7 @@ class MailConfig
     {
         $mail->setLanguage('br');
         $mail->CharSet = $this->getEnv('system.mail.charset', 'UTF-8');
-        $mail->SMTPDebug = 1;
+        $mail->SMTPDebug = (int) $this->getEnv('system.mail.smtpdebug', SMTP::DEBUG_OFF);
         $mail->isSMTP();
         $mail->Host = $this->getEnv('system.mail.host');
         $mail->SMTPAuth = filter_var($this->getEnv('system.mail.smtpauth', true), FILTER_VALIDATE_BOOLEAN);

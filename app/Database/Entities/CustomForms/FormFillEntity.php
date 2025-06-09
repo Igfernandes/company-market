@@ -6,16 +6,12 @@ use CodeIgniter\Entity\Entity;
 
 class FormFillEntity extends Entity
 {
+    protected $dates = [];
     protected $attributes = [
         'id'           => null,
         'form_id'      => null,
-        'field_id'     => null,
-        'client_id'    => null,
-        'value_text'   => null,
-        'value_short'  => null,
-        'value_number' => null,
-        'value_date'   => null,
-        'value_file'   => null,
+        'Packet'       => null,
+        'value'        => null,
         'created_at'   => null
     ];
 
@@ -65,6 +61,16 @@ class FormFillEntity extends Entity
         if (!empty($clientId)) {
             $this->attributes['client_id'] = $clientId;
         }
+    }
+
+    public function getPackage(): ?string
+    {
+        return $this->attributes['package'];
+    }
+
+    public function setPackage(?string $package)
+    {
+        $this->attributes['package'] = $package;
     }
 
     public function getValue(): ?string

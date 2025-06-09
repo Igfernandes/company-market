@@ -26,6 +26,7 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
+        helper("crypto");
         if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
             throw new Exceptions(lang("Validation.recaptcha"), BAD_REQUEST);
 
@@ -48,6 +49,7 @@ class PostUseCases
 
         $formsFill = new FormFillsModel();
         $crypto = new Crypto();
+        $package = \referenceHash(date("YYYY-MM-DD H:i:s"));
 
         foreach ($payload as $name => $value) {
             $id = \str_replace("input_", "", $name);
@@ -63,12 +65,13 @@ class PostUseCases
                 continue;
 
             $formFillEntity->setFieldId($id);
+            $formFillEntity->setPackage($package);
             $formFillEntity->setFormId($payload['form_id']);
 
             if ($currentField->element == "file")
                 $value = FileFormFillBusiness::upload($files[$name]);
 
-            $valueEncrypted = $crypto->encrypt($value, getenv('system.encrypted_key'));
+            $valueEncrypted = $crypto->encrypt($value, "$package" . getenv('system.encrypted_key'));
             $formFillEntity->setValue($valueEncrypted);
 
 

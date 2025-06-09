@@ -26,20 +26,20 @@ class GroupsPermissionsModel extends Model
 
     public function getGroupsWithPermissions(array $groupQuery, array $permissionQuery = []): array
     {
+        $inGroupIds = isset($groupQuery['in_ids']) ? $groupQuery['in_ids'] : [];
+        unset($groupQuery['in_ids']);
+
+        $inPermissionIds = isset($permissionQuery['in_ids']) ? $permissionQuery['in_ids'] : [];
+        unset($permissionQuery['in_ids']);
+
         $groupQueryUpdated = $this->addPrefixInQuery($groupQuery, "groups");
         $permissionQueryUpdated = $this->addPrefixInQuery($permissionQuery, "permissions");
 
-        $inUserIds = isset($groupQuery['in_ids']) ? $groupQuery['in_ids'] : [];
-        unset($groupQuery['in_ids']);
-
-        if (count($inUserIds) > 0)
-            $this->whereIn("user_id", $inUserIds);
-
-        $inGroupIds = isset($permissionQuery['in_ids']) ? $permissionQuery['in_ids'] : [];
-        unset($permissionQuery['in_ids']);
-
         if (count($inGroupIds) > 0)
             $this->whereIn("group_id", $inGroupIds);
+
+        if (count($inPermissionIds) > 0)
+            $this->whereIn("permission_id", $inPermissionIds);
 
         $founds = $this->Select("groups.*, permissions.*,
         groups.name as group_name, groups.id as group_id, groups.created_at as group_created_at, 
