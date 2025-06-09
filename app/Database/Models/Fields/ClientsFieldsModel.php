@@ -10,7 +10,6 @@ use CodeIgniter\Model;
 
 class ClientsFieldsModel extends Model
 {
-
     use ModelTrait;
 
     protected $DBGroup          = 'default';
