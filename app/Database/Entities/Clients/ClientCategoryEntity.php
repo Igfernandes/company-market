@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Entities\clients;
+namespace App\Database\Entities\Clients;
 
 use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
