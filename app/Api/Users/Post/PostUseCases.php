@@ -66,7 +66,7 @@ class PostUseCases
         $userEntity->setCPFSha256(\referenceHash($payload['cpf']));
         $userEntity->setEmailSha256(\referenceHash($dataInvite->email));
 
-        $usersModel->save($userEntity);
+        $usersModel->save($userEntity->toArray(true));
 
         $usersGroupsModel = new UsersGroupsModel();
         $groupsModel = new GroupsModel();
