@@ -85,10 +85,6 @@ class PostUseCases
 
         $invitesModel->set(['is_valid' => false])->where("id", $foundInvite->getId())->update();
 
-        NotificationsService::store([
-            "scope" => "users",
-            "action" => "CREATE"
-        ]);
         return (object)[
             "success" => lang("Api.users.success.post")
         ];
