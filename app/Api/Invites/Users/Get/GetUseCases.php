@@ -39,7 +39,7 @@ class GetUseCases
 
         $filteredPayload['owner_id'] = $userAuthId;
 
-        $foundInvite = $invitesModel->where($filteredPayload)->orderBy('created_at', 'DESC')->findAll();
+        $foundInvite = $invitesModel->where($filteredPayload)->findAll();
 
         $invitesData = array_map(
             fn(InviteEntity $invite) => $this->builder($invite),
