@@ -46,7 +46,6 @@ class PostUseCases
         /** @var object{email:string,name:string,phone:string,group:array{int}} */
         $dataInvite = (object)\json_decode($crypto->decrypt($foundInvite->getData(),  getenv('system.encrypted_key')));
 
-        \var_dump($dataInvite->email);
         $usersModel = new UsersModel();
         $userEntity = new UserEntity();
 

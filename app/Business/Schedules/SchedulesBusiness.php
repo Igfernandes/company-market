@@ -20,13 +20,13 @@ class SchedulesBusiness
         $this->usersSchedulesModel = new UsersSchedulesModel();
     }
 
-    public function storeUsersWithSchedule(array $users)
+    public function storeUsersWithSchedule(array $users, int $scheduleId)
     {
         foreach ($users as $user) {
             $userScheduleEntity = new UserScheduleEntity();
             $userScheduleEntity->store([
                 "user_id" => $user,
-                "schedule_id" => $this->schedulesModel->getInsertID()
+                "schedule_id" => $scheduleId
             ]);
 
             $this->usersSchedulesModel->upsert($userScheduleEntity->toArray(true), $userScheduleEntity);

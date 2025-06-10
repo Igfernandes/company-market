@@ -39,9 +39,9 @@ class PostUseCases
 
         if (\is_array($payload['linked'])) {
             $scheduleBusiness = new SchedulesBusiness();
-            $scheduleBusiness->storeUsersWithSchedule($payload['linked']);
+            $scheduleBusiness->storeUsersWithSchedule($payload['linked'], $schedulesModel->getInsertID());
         }
-        
+
         NotificationsService::store([
             "scope" => "schedules",
             "action" => "CREATE"

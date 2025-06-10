@@ -25,10 +25,6 @@ class PostController extends BaseController
     public function handle()
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => 'users',
-                'type' => 'CREATE'
-            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

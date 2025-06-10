@@ -9,6 +9,7 @@ class Uploads extends BaseController
     public function image($filename)
     {
         $path = WRITEPATH . 'uploads/' . basename($filename);
+      
         $response = service('response');
 
         if (!is_file($path)) {
