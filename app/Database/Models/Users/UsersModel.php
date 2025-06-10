@@ -45,6 +45,7 @@ class UsersModel extends Model
         groups.updated_at as group_updated_at")
             ->join("users_groups", "users.id = users_groups.user_id", "left")
             ->join("groups", "groups.id = users_groups.group_id", "left")
+            ->orderBy('created_at', 'DESC')
             ->where($usersQueryUpdated)->findAll();
 
         return array_map(function (UserEntity $userData) {
