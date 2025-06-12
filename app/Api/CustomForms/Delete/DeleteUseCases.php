@@ -31,7 +31,7 @@ class DeleteUseCases
             "action" => "DELETE"
         ]);
         return (object)[
-            "success" => lang("Api.custom_forms.success.delete")
+            "success" => "Api.custom_forms.success.delete"
         ];
     }
 }

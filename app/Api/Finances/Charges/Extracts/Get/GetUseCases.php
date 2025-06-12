@@ -25,7 +25,7 @@ class GetUseCases
         $mercadoPagoBusiness = new MercadoPagoBusiness();
 
         if (!$chargesBusiness->hasCharge($payload['id']) == false)
-            throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+            throw new Exceptions("Api.charges.extracts.not_found", BAD_REQUEST);
 
         $paymentsModel = new PaymentsModel();
 
@@ -37,7 +37,7 @@ class GetUseCases
             ]
         )->first();
         if (empty($payment))
-            throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+            throw new Exceptions("Api.charges.extracts.not_found", BAD_REQUEST);
 
         $mercadoPago = $mercadoPagoBusiness->getInstance();
 

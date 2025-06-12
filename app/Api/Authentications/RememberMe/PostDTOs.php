@@ -6,10 +6,10 @@ trait PostDTOs
 {
     protected array $rules = [
         'reference-token' => [
-            'label'  => 'reference-token',
             'rules'  => 'string|required',
             'errors' => [
-                'string' => 'Validation.string',
+                'string' => 'Api.remember.invalid.token',
+                'required' => 'Api.remember.invalid.token',
             ],
         ],
     ];

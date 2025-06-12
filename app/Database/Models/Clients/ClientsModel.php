@@ -2,10 +2,12 @@
 
 namespace App\Database\Models\Clients;
 
+use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
 class ClientsModel extends Model
 {
+    use ModelTrait;
     protected $DBGroup          = 'default';
     protected $table            = 'clients';
     protected $primaryKey       = 'id';

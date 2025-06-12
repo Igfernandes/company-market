@@ -6,36 +6,49 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.clients.categories.invalid.id',
+            ],
         ],
-        'in_ids.*' => [
-            'label'  => 'in_ids',
-            'rules'  => 'numeric|permit_empty',
+        'in_ids' => [
+            'rules'  => 'permit_empty'
         ],
         'client_id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.clients.categories.invalid.client_id',
+            ],
         ],
         'name' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.categories.invalid.name',
+            ],
         ],
         'name_contains' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.categories.invalid.name_contains',
+            ],
         ],
         'description_contains' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.categories.invalid.description_contains',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
             'rules'  => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.clients.categories.valid_date.created_at',
+            ],
         ],
         'updated_at' => [
-            'label'  => 'updated_at',
             'rules'  => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.clients.categories.valid_date.updated_at',
+            ],
         ]
     ];
 }

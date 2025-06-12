@@ -10,6 +10,7 @@ class ChargeClientEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'client_id'  => null,
         'charge_id'  => null,

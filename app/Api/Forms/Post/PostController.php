@@ -23,7 +23,6 @@ class PostController extends BaseController
     public function handle()
     {
         try {
-
             $payload = $this->request->getVar();
             $payload['files'] = $this->request->getFiles();
 

@@ -8,6 +8,8 @@ use CodeIgniter\Entity\Entity;
 
 class ClientCategoryEntity extends Entity
 {
+
+    protected $dates = [];
     public $attributes = [
         'category_id'        => null,
         'client_id'          => null,

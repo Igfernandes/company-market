@@ -10,7 +10,8 @@ use Exception;
 class UserEntity extends Entity
 {
     use EntityEnhancerTrait, CryptoEntityTrait;
-
+    
+    protected $dates = [];
     public $attributes = [
         'id'               => null,
         'name'             => null,
@@ -73,7 +74,7 @@ class UserEntity extends Entity
      * @param String|null $name
      * @return void
      */
-    public function setName(?String $name)
+    public function setName(?String $name = "")
     {
         $NAME_TRANSLATE = lang('Words.name');
 

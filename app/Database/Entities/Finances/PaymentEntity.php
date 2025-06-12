@@ -9,6 +9,7 @@ class PaymentEntity extends Entity
 {
     use CryptoEntityTrait;
 
+    protected $dates = [];
     protected $attributes = [
         'id'           => null,
         'payment_id'   => null,

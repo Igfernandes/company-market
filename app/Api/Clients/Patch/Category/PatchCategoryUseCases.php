@@ -19,7 +19,7 @@ class PatchCategoryUseCases implements IUseCases
     public function execute(array $payload): object
     {
         if (!isset($payload['clients']) || count($payload['clients']) == 0)
-            throw new Exceptions(lang('Api.clients.invalid.required_clients'), BAD_BUSINESS_RULES);
+            throw new Exceptions('Api.clients.invalid.required_clients', BAD_BUSINESS_RULES);
 
         $clientsCategoriesModel = new ClientsCategoriesModel();
         $categoryModel = new CategoriesModel();
@@ -27,7 +27,7 @@ class PatchCategoryUseCases implements IUseCases
         $foundCategory = $categoryModel->where("id", $payload['category'])->first();
 
         if (empty($foundCategory))
-            throw new Exceptions(lang('Api.clients.invalid.category'), BAD_BUSINESS_RULES);
+            throw new Exceptions('Api.clients.invalid.category', BAD_BUSINESS_RULES);
 
         $clientsCategoriesModel->set("category_id", $payload['category'])->whereIn('client_id', $payload['clients'])->update();
 
@@ -37,7 +37,7 @@ class PatchCategoryUseCases implements IUseCases
         ]);
 
         return (object)[
-            "success" => \str_replace("{name}", $foundCategory->getName(), lang("Api.clients.success.patchCategory"))
+            "success" => "Api.clients.categories.success.patch"
         ];
     }
 }

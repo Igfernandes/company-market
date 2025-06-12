@@ -7,15 +7,14 @@ use Exception;
 
 class SettingPrivacyEntity extends Entity
 {
-    protected $dates = [
-        'created_at'      => null,
-        'updated_at'      => null
-    ];
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'title'           => null,
         'describes'       => null,
-        'path'            => null
+        'path'            => null,
+        'created_at'      => null,
+        'updated_at'      => null
     ];
 
     /**

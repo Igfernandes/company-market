@@ -6,8 +6,11 @@ trait GetPreviewDTOs
 {
     protected array $rules = [
         'phone' => [
-            'label'  => 'phone',
-            'rules'  => 'string|required',
-        ]
+            'rules' => 'string|required',
+            'errors' => [
+                'string'  => 'Api.clients.invalid.phone',
+                'required' => 'Api.clients.invalid.phone',
+            ],
+        ],
     ];
 }

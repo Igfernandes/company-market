@@ -39,7 +39,7 @@ class UserSingleBusiness
         $users = \array_values($users);
 
         if (count($users) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         return $this->builder($users[0], $foundUserGroup);
     }

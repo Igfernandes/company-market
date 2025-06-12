@@ -6,32 +6,46 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.invites.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
             'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.invites.invalid.in_ids',
+            ],
         ],
         'email' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.invites.invalid.email',
+            ],
         ],
         'email_contains' => [
-            'label'  => 'phone',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.invites.invalid.email_contains',
+            ],
         ],
-        'is_valid' =>  [
-            'label'  => 'status',
+        'is_valid' => [
             'rules'  => 'in_list[0, 1]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.invites.invalid.is_valid',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
             'rules'  => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.invites.invalid.created_at',
+            ],
         ],
         'expired_at' => [
-            'label'  => 'updated_at',
             'rules'  => 'valid_date|permit_empty',
-        ]
+            'errors' => [
+                'valid_date' => 'Api.invites.invalid.expired_at',
+            ],
+        ],
     ];
 }

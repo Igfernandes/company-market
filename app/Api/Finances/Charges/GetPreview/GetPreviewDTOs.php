@@ -5,17 +5,23 @@ namespace App\Api\Finances\Charges\GetPreview;
 trait GetPreviewDTOs
 {
     protected array $rules = [
-        'title'      => [
-            'label'  => 'title',
+        'title' => [
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.title',
+            ],
         ],
         'service_id' => [
-            'label'  => 'int',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.service_id',
+            ],
         ],
         'reference' => [
-            'label'  => 'int',
             'rules'  => 'string|permit_empty',
-        ]
+            'errors' => [
+                'string' => 'Api.charges.invalid.reference',
+            ],
+        ],
     ];
 }

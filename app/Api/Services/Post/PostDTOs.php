@@ -6,44 +6,72 @@ trait PostDTOs
 {
     protected array $rules = [
         'file' => [
-            'label'  => 'photo',
-            'rules'  => 'uploaded[photo]|max_size[photo,1024]|mime_in[photo,image/png,image/jpeg]|permit_empty'
+            'rules'  => 'uploaded[photo]|max_size[photo,1024]|mime_in[photo,image/png,image/jpeg]|permit_empty',
+            'errors' => [
+                'uploaded' => 'Api.services.invalid.photo',
+                'max_size' => 'Api.services.invalid.photo_max_size_1024',
+                'mime_in'  => 'Api.services.invalid.photo_mime_type',
+            ],
         ],
         'name' => [
-            'label'  => 'name',
             'rules'  => 'string|required',
+            'errors' => [
+                'string'   => 'Api.services.invalid.name',
+                'required' => 'Api.services.invalid.name',
+            ],
         ],
         'type' => [
-            'label'  => 'type',
             'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|required',
+            'errors' => [
+                'string'   => 'Api.services.invalid.type',
+                'in_list'  => 'Api.services.invalid.type',
+                'required' => 'Api.services.invalid.type',
+            ],
         ],
         'description' => [
-            'label'  => 'description',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.description',
+            ],
         ],
         'privacy' => [
-            'label'  => 'privacy',
             'rules'  => 'in_list[PUBLIC, PRIVATE]|required',
+            'errors' => [
+                'in_list'  => 'Api.services.invalid.privacy',
+                'required' => 'Api.services.invalid.privacy',
+            ],
         ],
         'stock' => [
-            'label'  => 'stock',
             'rules'  => 'integer|is_natural|permit_empty',
+            'errors' => [
+                'integer'    => 'Api.services.invalid.stock',
+                'is_natural' => 'Api.services.invalid.stock',
+            ],
         ],
         'reservations' => [
-            'label'  => 'reservations',
             'rules'  => 'integer|is_natural|permit_empty',
+            'errors' => [
+                'integer'    => 'Api.services.invalid.reservations',
+                'is_natural' => 'Api.services.invalid.reservations',
+            ],
         ],
         'address' => [
-            'label'  => 'address',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.address',
+            ],
         ],
         'realized_at' => [
-            'label'  => 'realized_at',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.realized_at',
+            ],
         ],
         'expired_at' => [
-            'label'  => 'expired_at',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.expired_at',
+            ],
         ],
     ];
 }

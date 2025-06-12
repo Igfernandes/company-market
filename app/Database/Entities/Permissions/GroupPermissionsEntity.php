@@ -9,6 +9,7 @@ use CodeIgniter\Entity\Entity;
 
 class GroupPermissionsEntity extends Entity implements IPermissions
 {
+    protected $dates = [];
     public $attributes = [
         'permission_id'   => null,
         'group_id'         => null,

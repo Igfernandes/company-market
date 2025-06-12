@@ -26,24 +26,25 @@ class DeleteUseCases
         $usersScheduleModel = new UsersSchedulesModel();
 
         $foundAuthorInSchedule = $usersScheduleModel->where([
-            'schedule_id' => $payload['id'],
+            'schedule_id' => $filteredPayload['id'],
             'user_id' =>  $session->get('userAuthId')
         ])->first();
 
         if (empty($foundAuthorInSchedule))
-            throw new Exceptions(\str_replace("{field}", "Agendamento", lang('Validation.not_found')), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.schedules.invalid.not_found", \BAD_BUSINESS_RULES);
 
-        $schedulesModel->where($payload)->delete();
+        $schedulesModel->where($filteredPayload)->delete();
         $usersScheduleModel->where([
-            'schedule_id' => $payload['id']
+            'schedule_id' => $filteredPayload['id']
         ])->delete();
 
         NotificationsService::store([
             "scope" => "schedules",
             "action" => "DELETE"
         ]);
+
         return (object)[
-            "success" => lang("Api.schedules.success.post")
+            "success" => "Api.schedules.success.post"
         ];
     }
 }

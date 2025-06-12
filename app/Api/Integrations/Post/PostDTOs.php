@@ -5,11 +5,43 @@ namespace App\Api\Integrations\Post;
 trait PostDTOs
 {
     protected array $rules = [
-        'type'              => 'string|required',
-        'provider'          => 'string|required',
-        'public_token'      => 'string|permit_empty',
-        'private_token'     => 'string|permit_empty',
-        'status'            => 'in_list[ACTIVE,INACTIVE]|permit_empty',
-        'username'          => 'string|permit_empty',
+        'type' => [
+            'rules'  => 'string|required',
+            'errors' => [
+                'string' => 'Api.integrations.invalid.type',
+                'required' => 'Api.integrations.invalid.type',
+            ],
+        ],
+        'provider' => [
+            'rules'  => 'string|required',
+            'errors' => [
+                'string' => 'Api.integrations.invalid.provider',
+                'required' => 'Api.integrations.invalid.provider',
+            ],
+        ],
+        'public_token' => [
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.integrations.invalid.public_token',
+            ],
+        ],
+        'private_token' => [
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.integrations.invalid.private_token',
+            ],
+        ],
+        'status' => [
+            'rules'  => 'in_list[ACTIVE,INACTIVE]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.integrations.invalid.status',
+            ],
+        ],
+        'username' => [
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.integrations.invalid.username',
+            ],
+        ],
     ];
 }

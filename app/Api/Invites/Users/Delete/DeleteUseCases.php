@@ -23,7 +23,7 @@ class DeleteUseCases
         $foundInvite = $invitesModel->where("id = $inviteId")->first();
 
         if (empty($foundInvite))
-            throw new Exceptions(\str_replace("{field}", lang("Words.invite"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions( "Api.invites.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $invitesModel->where("id = $inviteId")->delete();
 
@@ -33,7 +33,7 @@ class DeleteUseCases
         ]);
 
         return (object)[
-            "success" => lang("Api.invites.success.resend")
+            "success" => "Api.invites.success.delete"
         ];
     }
 }

@@ -24,8 +24,8 @@ class PostUseCases
         $groupEntity = new GroupEntity();
         $permissionsBusiness = new PermissionsBusiness();
 
-        if (!$permissionsBusiness->hasPermissions($payload['permissions']))
-            throw new Exceptions(\str_replace("{field}", "permissions", lang("Validation.invalid_list")), \BAD_BUSINESS_RULES);
+        if (!$permissionsBusiness->hasPermissionsAvailable($payload['permissions']))
+            throw new Exceptions("Api.users.groups.invalid.not_found_permission", \BAD_BUSINESS_RULES);
 
         $groupEntity->store($payload);
         $groupEntity->setStatus("ACTIVE");
@@ -40,7 +40,7 @@ class PostUseCases
         $permissionsBusiness->store($payload['permissions'], $groupPermissionEntity, $groupsPermissionsModel);
 
         return (object)[
-            "success" => lang("Api.groups.success.post")
+            "success" => "Api.users.groups.success.post"
         ];
     }
 }

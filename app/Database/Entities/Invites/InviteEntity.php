@@ -7,7 +7,7 @@ use Exception;
 
 class InviteEntity extends Entity
 {
-
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'token'           => null,
@@ -93,7 +93,7 @@ class InviteEntity extends Entity
      */
     public function getData(): ?String
     {
-        return $this->attributes['data'] ;
+        return $this->attributes['data'];
     }
 
     /**

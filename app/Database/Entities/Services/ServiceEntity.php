@@ -10,6 +10,7 @@ class ServiceEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'             => null,
         'name'           => null,

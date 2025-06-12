@@ -28,23 +28,23 @@ class DeleteUseCases
         if (!$fieldsBusiness->hasField([
             "id" => $fieldId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.field"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.fields.invalid.not_found", \BAD_BUSINESS_RULES);
 
-        $usersModel = new FieldsModel();
+        $fieldsModel = new FieldsModel();
         $usersFieldsModel = new UsersFieldsModel();
         $clientsFieldsModel = new ClientsFieldsModel();
         $queryString = "field_id = $fieldId";
 
         $clientsFieldsModel->where($queryString)->delete();
         $usersFieldsModel->where($queryString)->delete();
-        $usersModel->delete($fieldId);
+        $fieldsModel->delete($fieldId);
 
         NotificationsService::store([
             "scope" => "fields",
             "action" => "DELETE",
         ]);
         return (object)[
-            "success" => lang("Api.fields.success.delete")
+            "success" => "Api.fields.success.delete"
         ];
     }
 }

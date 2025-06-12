@@ -13,7 +13,7 @@ class MetaMessages
         return "Olá {$client->getName()}, tudo bem? 😊
             Estamos passando para lembrar que a fatura referente ao {$charge->getTitle()} está disponível. 
 
-            🗓 Vencimento: {$charge->getExpiredAt()}  
+            🗓 Vencimento: {$charge->getExpiredDays()}  
             💰 Valor: {$charge->getAmount()}
 
             Você pode acessar o boleto e realizar o pagamento através do link abaixo:  

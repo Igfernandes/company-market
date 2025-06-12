@@ -6,16 +6,22 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.notifications.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
             'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.notifications.invalid.in_ids',
+            ],
         ],
         'author_id' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.notifications.invalid.author_id',
+            ],
         ],
     ];
 }

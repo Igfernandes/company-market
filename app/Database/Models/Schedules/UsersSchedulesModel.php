@@ -24,6 +24,7 @@ class UsersSchedulesModel extends Model
 
     protected $useTimestamps = false;
     protected $skipValidation = true;
+    protected $createdField = '';
 
 
     public function getUsersWithSchedules(array $userQuery, array $scheduleQuery = [], array $usersSchedulesQuery = []): array

@@ -5,15 +5,52 @@ namespace App\Api\Clients\Put;
 trait PutDTOs
 {
     protected array $rules = [
-        'id'        => 'integer|required',
-        'name'      => 'string|max_length[100]',
-        'avatar'    => 'string|permit_empty',
-        'phone'     => [
-            'label'  => 'phone',
-            'rules'  => 'string|max_length[35]'
+        'id' => [
+            'rules' => 'integer|required',
+            'errors' => [
+                'integer'  => 'Api.clients.invalid.id',
+                'required' => 'Api.clients.invalid.id',
+            ],
         ],
-        'email'     => 'string|valid_email|max_length[255]|permit_empty',
-        'birthdate' => 'string|permit_empty',
-        'category'  => 'integer|permit_empty'
+        'name' => [
+            'rules' => 'string|max_length[100]',
+            'errors' => [
+                'string'     => 'Api.clients.invalid.name',
+                'max_length' => 'Api.clients.invalid.name_max_length_100',
+            ],
+        ],
+        'avatar' => [
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.invalid.avatar',
+            ],
+        ],
+        'phone' => [
+            'rules' => 'string|max_length[35]',
+            'errors' => [
+                'string'     => 'Api.clients.invalid.phone',
+                'max_length' => 'Api.clients.invalid.phone_max_length_35',
+            ],
+        ],
+        'email' => [
+            'rules' => 'string|valid_email|max_length[255]|permit_empty',
+            'errors' => [
+                'string'      => 'Api.clients.invalid.email',
+                'valid_email' => 'Api.clients.invalid.email',
+                'max_length'  => 'Api.clients.invalid.email_max_length_255',
+            ],
+        ],
+        'birthdate' => [
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.invalid.birthdate',
+            ],
+        ],
+        'category' => [
+            'rules' => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.clients.invalid.category',
+            ],
+        ],
     ];
 }

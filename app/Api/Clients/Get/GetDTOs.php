@@ -5,37 +5,47 @@ namespace App\Api\Clients\Get;
 trait GetDTOs
 {
     protected array $rules = [
-        'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
-        ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
-            'rules'  => 'numeric|permit_empty',
+            'rules' => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.clients.invalid.in_ids',
+            ],
         ],
         'name' => [
-            'label'  => 'name',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.invalid.name',
+            ],
         ],
         'phone' => [
-            'label'  => 'phone',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.clients.invalid.phone',
+            ],
         ],
         'birthdate' => [
-            'label'  => 'birthdate',
-            'rules'  => 'valid_date|permit_empty',
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.clients.invalid.birthdate',
+            ],
         ],
-        'status' =>  [
-            'label'  => 'status',
-            'rules'  => 'in_list[ACTIVE, INACTIVE]|permit_empty',
+        'status' => [
+            'rules' => 'in_list[ACTIVE, INACTIVE]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.clients.invalid.status',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
-            'rules'  => 'valid_date|permit_empty',
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.clients.invalid.created_at',
+            ],
         ],
         'updated_at' => [
-            'label'  => 'updated_at',
-            'rules'  => 'valid_date|permit_empty',
-        ]
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.clients.invalid.updated_at',
+            ],
+        ],
     ];
 }

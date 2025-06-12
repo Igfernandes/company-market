@@ -20,7 +20,7 @@ class GetController extends BaseController
         helper('crypto');
     }
 
-    public function handle()
+    public function handle(int $clientId = 0)
     {
         try {
             $validation = \Config\Services::validation();
@@ -28,6 +28,9 @@ class GetController extends BaseController
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
 
+            if ($clientId > 0)
+                $payload['id'] = $clientId;
+            
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 

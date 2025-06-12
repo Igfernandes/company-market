@@ -4,6 +4,7 @@ namespace App\Api\Clients\Fields\Post;
 
 use App\Business\Clients\ClientsBusiness;
 use App\Business\Fields\FieldsBusiness;
+use App\Business\Fields\FieldsFilesBusiness;
 use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Models\Fields\ClientsFieldsModel;
 use App\Libraries\Exceptions\Exceptions;
@@ -32,27 +33,30 @@ class PostUseCases
 
             return $field['id'];
         }, $payload['fields'])))
-            throw new Exceptions(lang("Api.fields.invalid.id"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.fields.invalid.id", BAD_BUSINESS_RULES);
 
         if (!$ClientsBusiness->hasClient($payload['client']))
-            throw new Exceptions(lang("Api.clients.fields.invalid.client_id"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.fields.invalid.client_id", BAD_BUSINESS_RULES);
 
         $clientsFieldsModel = new ClientsFieldsModel();
 
-        foreach ($payload['fields'] as $index => $fields):
-            if (empty($fields['value']) || $fields['value'] == "undefined")
+        foreach ($payload['fields'] as $index => $field):
+            $field['value'] = isset($files[$index]['value']) ? $files[$index]['value'] : $field;
+
+            if (empty($field['value']) || $field['value'] == "undefined")
                 continue;
 
             $clientField = new ClientFieldEntity();
 
             $clientField->setClientId($payload['client']);
-            $clientField->setFieldId($fields['id']);
+            $clientField->setFieldId($field['id']);
 
             $where = $clientField->toArray(true);
 
-            if (isset($files[$index]) && isset($files[$index]['value']))
-                $clientField->setValue($fieldBusiness->upload($files[$index]['value']));
-            else $clientField->setValue($fields['value']);
+            if (isset($files[$index])) {
+                FieldsFilesBusiness::validateFileSize($field['value']);
+                $clientField->setValue(FieldsFilesBusiness::upload($field['value']));
+            } else $clientField->setValue($field['value']);
 
             $clientsFieldsModel->upsert($where, $clientField);
         endforeach;

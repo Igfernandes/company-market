@@ -15,6 +15,7 @@ class NotificationEntity extends Entity
         'id'            => null,
         'title'         => null,
         'message'       => null,
+        'scope'         => null,
         'action'        => null,
         'key'           => null,
         'author_id'     => null,

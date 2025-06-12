@@ -59,7 +59,7 @@ class PostUseCases
             "key" => $servicesModel->getInsertID()
         ]);
         return (object)[
-            "success" => lang("Api.services.success.post")
+            "success" => "Api.services.success.post"
         ];
     }
 }

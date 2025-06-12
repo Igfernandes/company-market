@@ -28,6 +28,9 @@ class PostController extends BaseController
 
             $data = json_decode($json);
 
+            if (empty($data))
+                throw new Exceptions("Api.webhooks.not_found", \NOT_FOUND);
+
             $responsePost = $this->postUseCases->execute($data);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
@@ -36,7 +39,7 @@ class PostController extends BaseController
 
             if (isset($data->action) && !empty($data->action)) {
                 $operationFailure = new OperationFailureEntity();
-                
+
                 $operationFailure->store([
                     'operation_type'     => $data->action ?? "none",
                     'provider'           => "MERCADO_PAGO",

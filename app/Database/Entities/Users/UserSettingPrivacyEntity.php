@@ -8,16 +8,15 @@ use Exception;
 
 class UserSettingPrivacyEntity extends Entity
 {
-    protected $dates = [
-        'created_at'            => null
-    ];
+    protected $dates = [];
     public $attributes = [
         'user_id'               => null,
         'settings_privacy_id'   => null,
         'ip'                    => null,
         'browser'               => null,
         'user'                  => null,
-        'settings_privacy'      => null
+        'settings_privacy'      => null,
+        'created_at'            => null
     ];
 
     /**

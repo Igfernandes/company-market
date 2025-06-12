@@ -44,7 +44,7 @@ class GetUseCases
         if (!empty($payload['id']) && count($services) > 0)
             return $this->builder($services[0]);
         else if (!empty($payload['id']) && \count($services) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.services.invalid.not_found", \NOT_FOUND);
 
         $servicesData = array_map(
             fn(ServiceEntity $service) => $this->builder($service),

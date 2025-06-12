@@ -14,10 +14,13 @@ class DeleteUseCases
     {
         $deleteClientBusiness = new DeleteClientsBusiness();
 
-        if (isset($payload['client_id']))
-            $deleteClientBusiness->deleteSingleClient($payload);
-        else if (isset($payload['in_clients']))
+        if (!empty($payload['in_clients']) && \is_array($payload['in_clients'])) {
             $deleteClientBusiness->deleteMultipleClients($payload['in_clients']);
+        } else if (!empty($payload['client_id'])) {
+            unset($payload['in_clients']);
+            $deleteClientBusiness->deleteSingleClient($payload);
+        }
+
 
         NotificationsService::store([
             "scope" => "clients",

@@ -9,6 +9,7 @@ class OperationFailureEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     protected $attributes = [
         'id'                 => null,
         'operation_type'     => null,

@@ -22,7 +22,7 @@ class DeleteUseCases
         $formsFillsModel->where($payload)->delete();
 
         return (object)[
-            "success" => lang("Api.custom_forms.fills.success.delete")
+            "success" => "Api.custom_forms.fills.success.delete"
         ];
     }
 }

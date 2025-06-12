@@ -28,7 +28,7 @@ class PostUseCases
         ]);
 
         if ($response == false)
-            throw new Exceptions(\lang("charges.invalid.not_available"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.charges.invalid.not_available", \BAD_BUSINESS_RULES);
 
         /** @var chargeEntity */
         $charge = $response['charge'];
@@ -44,7 +44,7 @@ class PostUseCases
             "key" => $payload['charge_id']
         ]);
         return (object)[
-            "success" => lang("Api.charges.clients.success.post")
+            "success" => "Api.charges.clients.success.post"
         ];
     }
 }

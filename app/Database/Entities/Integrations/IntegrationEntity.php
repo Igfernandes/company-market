@@ -10,6 +10,7 @@ class IntegrationEntity extends Entity
 {
     use CryptoEntityTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'            => null,
         'provider'      => null,

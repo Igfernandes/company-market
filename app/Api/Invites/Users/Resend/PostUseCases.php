@@ -26,7 +26,7 @@ class PostUseCases
         $foundInvite = $invitesModel->where("id = $inviteId")->first();
 
         if (empty($foundInvite))
-            throw new Exceptions(\str_replace("{field}", lang("Words.invite"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.invites.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $crypto = new Crypto();
         $token = new Tokens();
@@ -57,7 +57,7 @@ class PostUseCases
             "action" => "UPDATE"
         ]);
         return (object)[
-            "success" => lang("Api.invites.success.resend")
+            "success" => "Api.invites.success.resend"
         ];
     }
 }

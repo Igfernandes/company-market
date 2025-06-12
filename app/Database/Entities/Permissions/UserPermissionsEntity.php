@@ -8,6 +8,7 @@ use CodeIgniter\Entity\Entity;
 
 class UserPermissionsEntity extends Entity
 {
+    protected $dates = [];
     public $attributes = [
         'permission_id'   => null,
         'user_id'         => null,

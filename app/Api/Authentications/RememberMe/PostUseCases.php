@@ -20,22 +20,21 @@ class PostUseCases
 
         $rememberEntity->setToken($payload['reference-token']);
         $foundRemember = $rememberModel->where($rememberEntity->toArray(true))->first();
-        
+
         if (empty($foundRemember))
-            throw new Exceptions((lang("Api.authentications.remember.post.token_invalid")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.remember.invalid.token_invalid", BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
         $foundUser = $usersModel->first($foundRemember->getUserId());
 
         if (empty($foundUser))
-            throw new Exceptions((lang("Api.authentications.remember.post.token_invalid")), BAD_BUSINESS_RULES);
+            throw new Exceptions((lang("Api.remember.invalid.token_invalid")), BAD_BUSINESS_RULES);
 
         $session->set("userAuth", $foundUser);
 
         $response = (object)[
-            "success" =>  "Api.authentications.remember.post.success",
+            "success" => "Api.remember.success.post",
         ];
-
 
         return $response;
     }

@@ -21,7 +21,7 @@ class PatchStatusUseCases
         if (!$usersBusiness->hasUser([
             "id" => $userId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
 
@@ -32,7 +32,7 @@ class PatchStatusUseCases
         $usersModel->set("status", $statusUpdate)->update($userId);
 
         return (object)[
-            "success" => lang("Api.users.success.patch_status")
+            "success" => "Api.users.success.patch_status"
         ];
     }
 }

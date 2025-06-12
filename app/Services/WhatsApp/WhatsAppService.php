@@ -58,6 +58,8 @@ class WhatsAppService
                 ]
             ];
 
+            sleep(180);
+
             $url = $this->api . "/{$this->phoneId}/messages";
 
             $response = HttpClient::request("POST", $url, [

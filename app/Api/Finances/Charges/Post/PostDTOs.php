@@ -5,53 +5,80 @@ namespace App\Api\Finances\Charges\Post;
 trait PostDTOs
 {
     protected array $rules = [
-        'title'      => [
-            'label'  => 'title',
+        'title' => [
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.title',
+            ],
         ],
         'description' => [
-            'label'  => 'description',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.description',
+            ],
         ],
         'service_id' => [
-            'label'  => 'service_id',
             'rules'  => 'integer|required',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.service_id',
+                'required' => 'Api.charges.invalid.service_id',
+            ],
         ],
         'privacy' => [
-            'label'  => 'privacy',
             'rules'  => 'string|in_list[PUBLIC, PRIVATE]|required',
+            'errors' => [
+                'string' => 'Api.charges.invalid.privacy',
+                'in_list' => 'Api.charges.invalid.privacy',
+                'required' => 'Api.charges.invalid.privacy',
+            ],
         ],
         'type' => [
-            'label'  => 'type',
             'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|required',
+            'errors' => [
+                'string' => 'Api.charges.invalid.type',
+                'in_list' => 'Api.charges.invalid.type',
+                'required' => 'Api.charges.invalid.type',
+            ],
         ],
         'amount' => [
-            'label'  => 'amount',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.amount',
+            ],
         ],
         'period' => [
-            'label'  => 'period',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.period',
+            ],
         ],
         'started_at' => [
-            'label' => 'started_at',
-            'rules' => 'string|permit_empty'
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.started_at',
+            ],
         ],
         'price' => [
-            'label'  => 'price',
             'rules'  => 'integer|required',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.price',
+                'required' => 'Api.charges.invalid.price',
+            ],
         ],
         'promotional_price' => [
-            'label'  => 'promotional_price',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.promotional_price',
+            ],
         ],
         'expired_days' => [
-            'label' => 'expired_at',
-            'rules' => 'string|permit_empty'
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.expired_days',
+            ],
         ],
         'clients' => [
-            'label'  => 'clients',
             'rules'  => 'permit_empty',
-        ]
+        ],
     ];
 }

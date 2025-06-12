@@ -21,10 +21,10 @@ class DeleteUseCases
 
         $groupId = $payload['id'];
 
-        if (!$groupsBusiness->hasClub([
+        if (!$groupsBusiness->hasGroup([
             "id" => $groupId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.group"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
 
         $groupsPermissionsModel = new GroupsPermissionsModel();
@@ -38,7 +38,7 @@ class DeleteUseCases
 
 
         return (object)[
-            "success" => lang("Api.groups.success.delete")
+            "success" => "Api.users.groups.success.delete"
         ];
     }
 }

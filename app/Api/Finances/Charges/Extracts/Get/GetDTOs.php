@@ -6,12 +6,18 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|required'
+            'rules'  => 'integer|required',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.id',
+                'required' => 'Api.charges.required.id',
+            ],
         ],
-       'payment_id' => [
-            'label' => 'payment_id',
-            'rules' => 'integer|required'
-       ]
+        'payment_id' => [
+            'rules'  => 'integer|required',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.payment_id',
+                'required' => 'Api.charges.required.payment_id',
+            ],
+        ],
     ];
 }

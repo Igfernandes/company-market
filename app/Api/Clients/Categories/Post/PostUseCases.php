@@ -25,10 +25,10 @@ class PostUseCases
         $categoriesBusiness = new CategoryBusiness();
 
         $categoriesExclude = $categoriesBusiness->getCategoriesExclude(array_map(fn($category) => $category->name, $categories));
-        $categoriesExcludeName = $categoriesBusiness->hasClientsRelations($categoriesExclude);
+        $categoriesAvailable = $categoriesBusiness->hasClientsRelations($categoriesExclude);
 
-        if (count($categoriesExcludeName) > 0)
-            throw new Exceptions(\str_replace("{categories}", \join(", ", $categoriesExcludeName), lang("Api.categories.alerts.has_clients")), BAD_BUSINESS_RULES);
+        if (count($categoriesAvailable) > 0)
+            throw new Exceptions("Api.clients.categories.invalid.linked_category", BAD_BUSINESS_RULES);
 
         if (count($categoriesExclude) > 0)
             $categoriesModel->whereIn("name", \array_map(fn($category) => $category->getName(), $categoriesExclude))->delete();
@@ -38,7 +38,7 @@ class PostUseCases
             $categoryEntity = new CategoryEntity();
 
             if (!isset($category->name) || empty($category->name))
-                throw new Exceptions(\str_replace("{field}", "name",  lang("Validations.required")), BAD_BUSINESS_RULES);
+                throw new Exceptions("Api.clients.categories.invalid.name", BAD_BUSINESS_RULES);
 
             $categoryEntity->setName($category->name);
             $categoryEntity->setDescription(isset($category->description) ? $category->description : "");
@@ -53,7 +53,7 @@ class PostUseCases
         ]);
 
         return [
-            "success" => "Api.categories.success.post"
+            "success" => "Api.clients.categories.success.post"
         ];
     }
 }

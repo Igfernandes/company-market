@@ -4,7 +4,6 @@ namespace App\Traits;
 
 trait EntityEnhancerTrait
 {
-
     /**
      * Converte a entidade em um array, opcionalmente filtrando valores vazios.
      *
@@ -23,6 +22,11 @@ trait EntityEnhancerTrait
         });
 
         return $data;
+    }
+
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
 

@@ -7,17 +7,16 @@ use Exception;
 
 class SocialAuthEntity extends Entity
 {
-    protected $dates = [
-        "created_at"      => null,
-        "updated_at"      => null
-    ];
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'type'            => null,
         'external_id'     => null,
         'email'           => null,
         'configs'         => null,
-        'user_id'         => null
+        'user_id'         => null,
+        'created_at'      => null,
+        'updated_at'      => null
     ];
 
     /**

@@ -24,8 +24,9 @@ class DeleteUseCases
             "scope" => "charges",
             "action" => "DELETE",
         ]);
+        
         return (object)[
-            "success" => lang("Api.charges.success.delete")
+            "success" => "Api.charges.success.delete"
         ];
     }
 }

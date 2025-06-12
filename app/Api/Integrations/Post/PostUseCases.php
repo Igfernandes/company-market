@@ -34,7 +34,7 @@ class PostUseCases
         ]);
 
         return (object)[
-            "success" => lang("Api.integrations.success.post")
+            "success" => "Api.integrations.success.post"
         ];
     }
 }

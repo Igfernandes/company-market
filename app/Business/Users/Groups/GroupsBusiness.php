@@ -52,12 +52,12 @@ class GroupsBusiness
     }
 
 
-    public function hasClub($query): bool
+    public function hasGroup($query): bool
     {
         $groupModel = new GroupsModel();
 
-        $foundClub = $groupModel->where($query)->find();
+        $foundGroup = $groupModel->where($query)->find();
 
-        return !empty($foundClub);
+        return !empty($foundGroup);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Api\Permissions\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -22,6 +23,10 @@ class GetController extends BaseController
     public function handle()
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'UPDATE'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

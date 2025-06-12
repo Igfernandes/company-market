@@ -52,4 +52,10 @@ trait ModelTrait
 
         return $clientQueryUpdated;
     }
+
+    protected function initialize()
+    {
+        if (!empty($this->createdField))
+            $this->orderBy($this->table . '.created_at', 'DESC');
+    }
 }

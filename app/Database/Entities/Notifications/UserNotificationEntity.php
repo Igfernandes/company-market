@@ -10,6 +10,7 @@ class UserNotificationEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'user_id'         => null,

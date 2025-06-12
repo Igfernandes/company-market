@@ -17,7 +17,7 @@ class PostUseCases
     public function execute(array $payload, object $userSettings)
     {
         if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
-            throw new Exceptions(lang("Validation.recaptcha"), BAD_REQUEST);
+            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         $authenticationBusiness = new AuthenticationBusiness();
 
@@ -33,12 +33,12 @@ class PostUseCases
         $foundUser = $userModel->where($userEntity->toArray(true))->first();
 
         if (empty($foundUser))
-            throw new Exceptions(lang("Api.authentications.auth.post.credentials_invalid"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.auth.invalid.credentials", BAD_BUSINESS_RULES);
 
         $tokenNavigation = $authenticationBusiness->createTokenNavigation($foundUser, $userSettings);
 
         $response = (object)[
-            "success" => "Api.authentications.auth.post.success",
+            "success" => "Api.auth.success.post",
             "token_navigation" => $tokenNavigation
         ];
 

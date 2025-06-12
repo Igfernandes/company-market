@@ -28,7 +28,7 @@ class PostUseCases
         ])->first();
 
         if (empty($charge))
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.tasks.charge.not_found", \NOT_FOUND);
 
         $chargesClientsModel = new ChargesClientsModel();
 
@@ -46,7 +46,7 @@ class PostUseCases
         ChargeScheduleBusiness::schedule($charge);
 
         return (object)[
-            "success" => lang("Api.charge.success.post")
+            "success" => "Api.tasks.charge.success.post"
         ];
     }
 }

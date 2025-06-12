@@ -33,7 +33,6 @@ class PostController extends BaseController
             $payload = $this->request->getVar();
             $validation->setRules($this->rules);
             $filesData = $this->request->getFiles();
-
             $payload['client'] =  $ClientId;
 
             if (!$validation->run($payload))

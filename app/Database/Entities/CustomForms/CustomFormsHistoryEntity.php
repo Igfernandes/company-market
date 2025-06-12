@@ -9,6 +9,8 @@ use Exception;
 
 class CustomFormsHistoryEntity extends Entity
 {
+
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'description'     => null,
@@ -100,7 +102,7 @@ class CustomFormsHistoryEntity extends Entity
      *
      * @return CustomFormsEntity|null
      */
-    public function getForm(): ?CustomFormsEntity
+    public function getForm(): ?CustomFormEntity
     {
         return $this->attributes['form'];
     }
@@ -111,7 +113,7 @@ class CustomFormsHistoryEntity extends Entity
      * @param CustomFormsEntity|null $user
      * @return void
      */
-    public function setForm(CustomFormsEntity $form)
+    public function setForm(CustomFormEntity $form)
     {
         if (!empty($form))
             $this->attributes['form'] = $form;

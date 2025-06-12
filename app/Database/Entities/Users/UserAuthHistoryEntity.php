@@ -7,9 +7,7 @@ use Exception;
 
 class UserAuthHistoryEntity extends Entity
 {
-    protected $dates = [
-        'created_at'      => null
-    ];
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'ip'              => null,
@@ -17,6 +15,7 @@ class UserAuthHistoryEntity extends Entity
         'token'           => null,
         'user_id'         => null,
         'user'            => null,
+        'created_at'      => null
     ];
 
     /**
@@ -186,7 +185,7 @@ class UserAuthHistoryEntity extends Entity
     public function setCreatedAt(?String $createdAt)
     {
         if (!empty($createdAt))
-            $this->dates['created_at'] = $createdAt;
+            $this->attributes['created_at'] = $createdAt;
     }
 
     /**
@@ -196,6 +195,6 @@ class UserAuthHistoryEntity extends Entity
      */
     public function getCreatedAt(): ?String
     {
-        return $this->dates['created_at'];
+        return $this->attributes['created_at'];
     }
 }

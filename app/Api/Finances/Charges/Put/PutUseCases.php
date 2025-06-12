@@ -39,12 +39,12 @@ class PutUseCases
         $foundService =  $serviceModel->where(['id' => $payload['service_id']])->first();
 
         if (empty($foundService) && !isset($payload['title']))
-            throw new Exceptions(\lang("Api.charges.invalid.not_found_service_or_name"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.charges.invalid.name_or_service", BAD_BUSINESS_RULES);
 
         $foundCharge = $chargesModel->where("id", $payload['id'])->first();
 
         if (empty($foundCharge))
-            throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+            throw new Exceptions("Api.charges.invalid.not_found", BAD_REQUEST);
 
         $chargeEntity = new ChargeEntity();
 
@@ -94,7 +94,7 @@ class PutUseCases
         ]);
 
         return (object)[
-            "success" => lang("Api.charges.success.put")
+            "success" => "Api.charges.success.put"
         ];
     }
 }

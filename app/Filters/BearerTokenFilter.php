@@ -43,6 +43,7 @@ class BearerTokenFilter implements FilterInterface
             return $errorResponse;
 
         $session->set('userAuthId', $userAuthId);
+        $session->set('tokenNavigation', $token);
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

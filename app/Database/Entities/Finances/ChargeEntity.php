@@ -3,12 +3,14 @@
 namespace App\Database\Entities\Finances;
 
 use App\Traits\CryptoEntityTrait;
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 
 class ChargeEntity extends Entity
 {
-    use CryptoEntityTrait;
+    use EntityEnhancerTrait, CryptoEntityTrait;
 
+    protected $dates = [];
     protected $attributes = [
         'id'                 => null,
         'title'             => null,
@@ -22,7 +24,7 @@ class ChargeEntity extends Entity
         'status'            => null,
         'privacy'           => null,
         'period'            => null,
-        'expired_day'       => null,
+        'expired_days'       => null,
         'started_at'        => null,
         'created_at'        => null,
         'updated_at'        => null,

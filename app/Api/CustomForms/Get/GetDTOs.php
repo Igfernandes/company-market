@@ -6,48 +6,71 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules' => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.custom_forms.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
-            'rules'  => 'numeric|permit_empty',
+            'rules' => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.custom_forms.invalid.in_ids',
+            ],
         ],
         'name' => [
-            'label'  => 'name',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.name',
+            ],
         ],
         'name_contains' => [
-            'label'  => 'name',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.name_contains',
+            ],
         ],
         'slug' => [
-            'label'  => 'slug',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.slug',
+            ],
         ],
         'slug_contains' => [
-            'label'  => 'slug',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.slug_contains',
+            ],
         ],
         'type' => [
-            'label'  => 'type',
-            'rules'  => 'string|in_list[PEOPLE, COMPANY]|permit_empty',
+            'rules' => 'string|in_list[PEOPLE, COMPANY]|permit_empty',
+            'errors' => [
+                'string'   => 'Api.custom_forms.invalid.type',
+                'in_list'  => 'Api.custom_forms.invalid.type',
+            ],
         ],
         'description_contains' => [
-            'label'  => 'description',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.description_contains',
+            ],
         ],
-        'status' =>  [
-            'label'  => 'status',
-            'rules'  => 'in_list[ACTIVE, INACTIVE]|permit_empty',
+        'status' => [
+            'rules' => 'in_list[ACTIVE, INACTIVE]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.status',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
-            'rules'  => 'valid_date|permit_empty',
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.custom_forms.invalid.created_at',
+            ],
         ],
         'updated_at' => [
-            'label'  => 'updated_at',
-            'rules'  => 'valid_date|permit_empty',
-        ]
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.custom_forms.invalid.updated_at',
+            ],
+        ],
     ];
 }

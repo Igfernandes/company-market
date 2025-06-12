@@ -9,6 +9,7 @@ class PermissionEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'             => null,
         'name'           => null,

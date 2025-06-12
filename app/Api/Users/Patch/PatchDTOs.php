@@ -5,6 +5,12 @@ namespace App\Api\Users\Patch;
 trait PatchDTOs
 {
     protected array $rules = [
-        'operation'  => 'string|required',
+        'operation' => [
+            'rules'  => 'string|required',
+            'errors' => [
+                'string'   => 'Api.users.invalid.operation',
+                'required' => 'Api.users.invalid.operation',
+            ],
+        ],
     ];
 }

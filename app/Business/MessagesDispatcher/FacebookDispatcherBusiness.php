@@ -35,21 +35,21 @@ class FacebookDispatcherBusiness
         }
 
         // file_put_contents('webhook.log', "\n" . \json_encode($response), FILE_APPEND);
-        // if ($response['status'] !== OK) {
-        //     $operationFailure = new OperationFailureEntity();
+        if ($response['status'] !== OK) {
+            $operationFailure = new OperationFailureEntity();
 
-        //     $operationFailure->store([
-        //         'operation_type'     => "Received PSID",
-        //         'provider'           => "META",
-        //         'error_code'         => $err->getCode(),
-        //         'error_message'      => $err->getMessage(),
-        //         'response_received'  => \json_encode($err),
-        //         'payload_sent'       => $payload,
-        //         'attempt_number'     => 0,
-        //         'should_retry'       => true,
-        //         'status'             => "PENDING",
-        //     ]);
-        //     Cerberus::report($operationFailure);
-        // }
+            $operationFailure->store([
+                'operation_type'     => "Received PSID",
+                'provider'           => "META",
+                'error_code'         => $response['status'],
+                'error_message'      => "Api.dispatchers.invalid.facebook_error",
+                'response_received'  => \json_encode(isset($response['response']) ? $response['response'] : []),
+                'payload_sent'       => \json_encode($messageDispatcherEntity->toArray(true)),
+                'attempt_number'     => 0,
+                'should_retry'       => true,
+                'status'             => "PENDING",
+            ]);
+            Cerberus::report($operationFailure);
+        }
     }
 }

@@ -25,7 +25,7 @@ class DeleteUseCases
         if (!$usersBusiness->hasUser([
             "id" => $userId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $usersFieldsModel = new UsersFieldsModel();
         $usersGroupsModel = new UsersGroupsModel();
@@ -41,7 +41,7 @@ class DeleteUseCases
             "action" => "DELETE"
         ]);
         return (object)[
-            "success" => lang("Api.users.success.delete")
+            "success" => "Api.users.success.delete"
         ];
     }
 }

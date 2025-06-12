@@ -34,6 +34,11 @@ class PutUseCases
         $servicesModel = new ServicesModel();
         $serviceEntity = new ServiceEntity();
 
+        $foundService = $servicesModel->where("id", $filteredPayload['id'])->first();
+
+        if (empty($foundService))
+            throw new Exceptions("Api.services.invalid.not_found");
+
         if (isset($filteredPayload['photo'])) {
             if (isset($filteredPayload['photo']->base64)) {
                 $idFile = uniqid("preview-service-") . date("Y-m-d-H-S");
@@ -65,7 +70,7 @@ class PutUseCases
             "key" => $filteredPayload['id']
         ]);
         return (object)[
-            "success" => lang("Api.services.success.put")
+            "success" => "Api.services.success.put"
         ];
     }
 }

@@ -10,6 +10,7 @@ class UserScheduleEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'user_id'         => null,
         'schedule_id'     => null,

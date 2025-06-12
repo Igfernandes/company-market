@@ -6,24 +6,34 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.fields.groups.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
             'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.fields.groups.invalid.in_ids',
+            ],
         ],
-        "name" => [
-            'label'  => 'name',
+        'name' => [
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.fields.groups.invalid.name',
+            ],
         ],
-        "name_contains" => [
-            'label'  => 'name',
+        'name_contains' => [
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.fields.groups.invalid.name_contains',
+            ],
         ],
-        "scope" => [
-            'label'  => 'status',
+        'scope' => [
             'rules'  => 'in_list[USER, CLIENT, COMPANY]|permit_empty',
-        ]
+            'errors' => [
+                'in_list' => 'Api.fields.groups.invalid.scope',
+            ],
+        ],
     ];
 }

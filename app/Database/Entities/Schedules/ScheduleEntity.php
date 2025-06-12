@@ -9,6 +9,7 @@ class ScheduleEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'            => null,
         'title'         => null,

@@ -20,12 +20,10 @@ class UsersModel extends Model
     protected $returnType       = 'App\Database\Entities\Users\UserEntity';
     protected $protectFields    = true;
     protected $allowedFields    = ['name', 'username', 'email', 'password', 'photo', 'cpf', 'phone', 'birthdate', 'keyword', 'status', 'email_sha256', 'phone_sha256', 'cpf_sha256', 'twof_secret', 'system_key', 'created_at', 'updated_at'];
-    protected $useSoftDeletes = true;
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     public function getUsersWithGroup(array $usersQuery): array
     {

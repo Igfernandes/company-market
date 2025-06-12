@@ -10,7 +10,7 @@ class FileFormFillBusiness
     public static function upload(UploadedFile $photo): string
     {
         if (!$photo->isValid())
-            throw new Exceptions(lang("Api.services.invalid.photo"));
+            throw new Exceptions("Api.services.invalid.file");
 
         $extension = $photo->getExtension();
         $photoName = date("Y_m_d-H_i_s") . "_file.$extension";

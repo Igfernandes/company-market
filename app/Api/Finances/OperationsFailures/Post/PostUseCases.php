@@ -25,13 +25,13 @@ class PostUseCases
             $foundOperation = $operationsFailuresModel->where('id', $payload['id'])->first();
 
             if (empty($foundOperation))
-                throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+                throw new Exceptions("Api.operations_failures.invalid.not_found", BAD_REQUEST);
 
             $payloadSent = $foundOperation->getPayloadSent();
 
             if (empty($payload)) {
                 $operationsFailuresModel->where('id', $payload['id'])->delete();
-                throw new Exceptions(\lang("Api.invalid.operation_failed"), OK);
+                throw new Exceptions("Api.operations_failures.invalid.operation_failed", OK);
             }
 
             $MercadoPagoUseCase = new PostPostUseCases();
@@ -42,13 +42,13 @@ class PostUseCases
             $operationsFailuresModel->set(["status" => "RESOLVED", "resolved_at" => date('Y-m-d H:i:s')])->where("id", $payload['id'])->update();
 
             return (object)[
-                "success" => lang("Api.operations_failures.success.post"),
+                "success" => "Api.operations_failures.success.post",
             ];
         } catch (Exception $err) {
-            \var_dump($err);
-            // $operationsFailuresModel->where('id', $payload['id'])->delete();
+            // \var_dump($err);
+            $operationsFailuresModel->where('id', $payload['id'])->delete();
             return [
-                "success" => lang("Api.invalid.operation_failed")
+                "success" => "Api.operations_failures.invalid.operation_failed"
             ];
         }
     }

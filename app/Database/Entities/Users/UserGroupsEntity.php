@@ -6,6 +6,7 @@ use CodeIgniter\Entity\Entity;
 
 class UserGroupsEntity extends Entity
 {
+    protected $dates = [];
     public $attributes = [
         'group_id'        => null,
         'group'           => null,

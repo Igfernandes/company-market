@@ -5,7 +5,6 @@ namespace App\Api\Schedules\Post;
 use App\Business\Schedules\SchedulesBusiness;
 use App\Database\Entities\Schedules\ScheduleEntity;
 use App\Database\Models\Schedules\SchedulesModel;
-use App\Database\Models\Schedules\UsersSchedulesModel;
 use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 
@@ -47,7 +46,7 @@ class PostUseCases
             "action" => "CREATE"
         ]);
         return (object)[
-            "success" => lang("Api.schedules.success.post")
+            "success" => "Api.schedules.success.post"
         ];
     }
 }

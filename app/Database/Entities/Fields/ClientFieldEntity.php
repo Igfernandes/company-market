@@ -10,6 +10,7 @@ class ClientFieldEntity extends Entity
 {
     use EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'client_id'       => null,
         'field_id'        => null,

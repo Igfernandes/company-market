@@ -9,7 +9,6 @@ use App\Database\Models\Fields\FieldsGroupsModel;
 use App\Database\Models\Fields\FieldsModel;
 use App\Database\Models\Fields\UsersFieldsModel;
 use App\Libraries\Exceptions\Exceptions;
-use CodeIgniter\HTTP\Files\UploadedFile;
 
 class FieldsBusiness
 {
@@ -79,19 +78,5 @@ class FieldsBusiness
         $foundFields = $fieldModel->whereIn("id", $fieldsId)->findAll();
 
         return count($foundFields) == \count($fieldsId);
-    }
-
-    public function upload(UploadedFile $file): string
-    {
-        \var_dump($file);
-        if (!$file->isValid())
-            throw new Exceptions(lang("Api.files.invalid.file"), \BAD_BUSINESS_RULES);
-
-        $extension = $file->getExtension();
-        $fileName = date("Y_m_d-H_i_s") . "_field.$extension";
-
-        $file->move(WRITEPATH . 'uploads', $fileName);
-
-        return WRITEPATH . "uploads/$fileName";
     }
 }

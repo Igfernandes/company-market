@@ -29,7 +29,7 @@ class PostUseCases
         $categoryBusiness = new CategoryBusiness();
 
         if (!$categoryBusiness->hasCategory($payload['category']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.category"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.not_found_category", BAD_BUSINESS_RULES);
 
         $clientsModel = new  ClientsModel();
         $clientCategoryModel = new ClientsCategoriesModel();
@@ -50,7 +50,7 @@ class PostUseCases
 
         $foundClientWithPhone = $clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
         if (!empty($foundClientWithPhone))
-            throw new Exceptions(\str_replace("{field}", lang("Words.phone"),  lang("Api.clients.invalid.phone")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.phone", BAD_BUSINESS_RULES);
 
         if (!empty($payload['birthdate']))
             $clientEntity->setBirthdate($payload['birthdate']);
@@ -72,7 +72,7 @@ class PostUseCases
             "key" => $clientsModel->getInsertID()
         ]);
         return (object)[
-            "success" => lang("Api.clients.success.post")
+            "success" => "Api.clients.success.post"
         ];
     }
 }

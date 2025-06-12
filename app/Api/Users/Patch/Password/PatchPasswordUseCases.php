@@ -25,10 +25,10 @@ class PatchPasswordUseCases
         if (!$usersBusiness->hasUser([
             "id" => $userId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         if (!preg_match(\VALIDATE_PASSWORD, $payload['current_password']) || !preg_match(\VALIDATE_PASSWORD, $payload['password']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.password"), lang("Validation.invalid_field")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.incorrect_password_formatted", \BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
 
@@ -36,7 +36,7 @@ class PatchPasswordUseCases
         $foundUser = $usersModel->where(["id" => $userId])->first();
 
         if (empty($foundUser))
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $email = $foundUser->getDecryptEmail();
         $newUser = $usersBusiness->updateEncryptionReferences($foundUser, $payload['password'], $email);
@@ -46,12 +46,12 @@ class PatchPasswordUseCases
         $systemKey = $crypto->encrypt("$email:" . $payload['current_password'], getenv('system.encrypted_key'));
 
         if ($foundUser->getSystemKey() !==  $systemKey)
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $usersModel->save($newUser);
 
         return (object)[
-            "success" => lang("Api.users.success.patch_password")
+            "success" => "Api.users.success.patch_password"
         ];
     }
 }

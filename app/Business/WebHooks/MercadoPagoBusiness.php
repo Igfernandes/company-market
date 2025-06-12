@@ -12,7 +12,6 @@ use App\Database\Entities\Finances\PaymentEntity;
 use App\Database\Models\Clients\ClientsModel;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Finances\PaymentsModel;
-use App\Database\Models\Integrations\IntegrationBanksModel;
 use App\Database\Models\Integrations\IntegrationsModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\MercadoPago\MercadoPago;
@@ -68,13 +67,13 @@ class MercadoPagoBusiness
         $paymentEntity->setPaymentId($paymentId);
 
         if (empty($foundBank))
-            throw new Exceptions(\lang("Api.webhook.mercado_pago"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.webhooks.mercado_pago", \BAD_BUSINESS_RULES);
 
         $mercadoPago = new MercadoPago($foundBank->getDecryptPrivateToken());
         $payment = $mercadoPago->getPayment($payload->data->id);
 
         if (empty($payment))
-            throw new Exceptions(\lang("Api.payment.invalid.not_found"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.payment.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $paymentEntity->setBankId($foundBank->getId());
         $paymentEntity->setPaidAmount($payment->__get('transaction_amount'));
@@ -88,7 +87,7 @@ class MercadoPagoBusiness
         $foundClientByEmail = $clientsModel->where(["id" => $metadata->client_id])->first();
 
         if (empty($foundClientByEmail))
-            throw new Exceptions(lang("Api.webhook.mercado_pago.client_not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.webhooks.mercado_pago.client_not_found", \NOT_FOUND);
 
         $reference = $metadata->reference;
         $paymentEntity->setClientId($foundClientByEmail->getId());
@@ -98,7 +97,7 @@ class MercadoPagoBusiness
         $foundCharge = $chargesModel->where("reference", $reference)->first();
 
         if (empty($foundCharge))
-            throw new Exceptions(lang("Api.webhook.mercado_pago.charge_not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.webhooks.mercado_pago.charge_not_found", \NOT_FOUND);
 
         $paymentEntity->setChargeId($foundCharge->getId());
 
@@ -127,7 +126,7 @@ class MercadoPagoBusiness
         $paymentsModel->save($paymentEntity);
 
         return (object)[
-            "success" => lang("Api.webhooks.mercado_pago.success")
+            "success" => "Api.webhooks.mercado_pago.success"
         ];
     }
 
@@ -155,7 +154,7 @@ class MercadoPagoBusiness
         ])->update();
 
         return (object)[
-            "success" => lang("Api.webhooks.mercado_pago.success")
+            "success" => "Api.webhooks.mercado_pago.success"
         ];
     }
 }

@@ -42,7 +42,7 @@ class PostUseCases
     {
 
         if (!isset($payload->entry))
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.whatsApp.invalid.not_found", \NOT_FOUND);
 
         $integrationsModel = new IntegrationsModel();
 

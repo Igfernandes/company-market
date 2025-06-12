@@ -4,7 +4,6 @@ namespace App\Api\Notifications\Get;
 
 use App\Business\Permissions\PermissionsBusiness;
 use App\Database\Entities\Notifications\NotificationEntity;
-use App\Database\Entities\Permissions\PermissionEntity;
 use App\Database\Models\Notifications\NotificationsModel;
 use App\Traits\BusinessTrait;
 
@@ -52,9 +51,19 @@ class GetUseCases
         $notificationsModel->whereIn("action", $types);
 
         $notificationEntity->store($filteredPayload);
-        /** @var array{CategoryEntity}*/
-        $foundNotifications = $notificationsModel->where($notificationEntity->toArray())->findAll();
+        /** @var array{NotificationEntity}*/
+        $foundNotifications = $notificationsModel->getNotificationWithAuthor($notificationEntity->toArray());
 
-        return array_map(fn(NotificationEntity $notification) => $notification->toArray(), $foundNotifications);
+        return array_map(function (NotificationEntity $notification) {
+            $notificationData = $notification->toArray();
+
+            $author = $notification->getAuthor();
+            $notificationData['author'] = [
+                "id" => $author->getId(),
+                "name" => $author->getName()
+            ];
+
+            return $notificationData;
+        }, $foundNotifications);
     }
 }

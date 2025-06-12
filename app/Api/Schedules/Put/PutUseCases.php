@@ -38,7 +38,7 @@ class PutUseCases
 
         if (\is_array($payload['linked'])) {
             $scheduleBusiness = new SchedulesBusiness();
-            $scheduleBusiness->storeUsersWithSchedule($payload['linked']);
+            $scheduleBusiness->storeUsersWithSchedule($payload['linked'], $filteredPayload['id']);
         }
 
         NotificationsService::store([
@@ -47,7 +47,7 @@ class PutUseCases
         ]);
 
         return (object)[
-            "success" => lang("Api.schedules.success.post")
+            "success" => "Api.schedules.success.put"
         ];
     }
 }

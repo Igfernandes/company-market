@@ -45,7 +45,7 @@ class CronJobService
     public function delete(string $jobId)
     {
         if (empty($jobId))
-            throw new Exceptions(\str_replace("{field}", "jobId", lang("Validation.invalid_field")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.cronjob.invalid_field", \BAD_BUSINESS_RULES);
 
         $response = HttpClient::request("DELETE", "{$this->url}/jobs/{$jobId}", [
             'Content-Type: application/json',

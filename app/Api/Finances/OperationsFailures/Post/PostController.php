@@ -24,10 +24,6 @@ class PostController extends BaseController
     public function handle(int $operationId)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => 'integrations',
-                'type' => 'CREATE'
-            ]);
             $responsePost = $this->postUseCases->execute([
                 "id" => $operationId
             ]);

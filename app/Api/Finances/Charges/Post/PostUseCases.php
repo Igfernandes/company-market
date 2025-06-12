@@ -37,12 +37,17 @@ class PostUseCases
         $serviceModel = new ServicesModel();
         $clientsBusiness = new ClientsBusiness();
 
-        $foundService =  $serviceModel->where(['id' => $payload['service_id']])->first();
+        if (!empty($payload['service_id'])) {
+            $foundService =  $serviceModel->where(['id' => $payload['service_id']])->first();
+
+            if (empty($foundService))
+                throw new Exceptions("Api.services.invalid.not_found", BAD_BUSINESS_RULES);
+        }
 
         if (empty($foundService) && !isset($payload['title']))
-            throw new Exceptions(\lang("Api.charges.invalid.not_found_service_or_name"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.charges.invalid.name_or_service", BAD_BUSINESS_RULES);
         if (!empty($payload['clients']) && !$clientsBusiness->hasClients($payload['clients']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.client"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.charges.invalid.not_found_client", BAD_BUSINESS_RULES);
 
         $chargesModel = new ChargesModel();
         $chargeEntity = new ChargeEntity();
@@ -99,7 +104,7 @@ class PostUseCases
             "key" => $chargeId
         ]);
         return (object)[
-            "success" => lang("Api.charges.success.post")
+            "success" => "Api.charges.success.post"
         ];
     }
 }

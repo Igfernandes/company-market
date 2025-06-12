@@ -6,48 +6,72 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
             'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.charges.invalid.in_ids',
+            ],
         ],
-        'title'      => [
-            'label'  => 'title',
+        'title' => [
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.title',
+            ],
         ],
         'description' => [
-            'label'  => 'description',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.description',
+            ],
         ],
         'status' => [
-            'label'  => 'status',
             'rules'  => 'string|in_list[ACTIVE, INACTIVE]|permit_empty',
+            'errors' => [
+                'string'  => 'Api.charges.invalid.status',
+                'in_list' => 'Api.charges.invalid.status',
+            ],
         ],
         'service_id' => [
-            'label'  => 'int',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.charges.invalid.service_id',
+            ],
         ],
         'type' => [
-            'label'  => 'type',
             'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|permit_empty',
+            'errors' => [
+                'string'  => 'Api.charges.invalid.type',
+                'in_list' => 'Api.charges.invalid.type',
+            ],
         ],
         'price' => [
-            'label'  => 'description',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.price',
+            ],
         ],
         'promotional_price' => [
-            'label'  => 'privacy',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.promotional_price',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
             'rules'  => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.charges.invalid.created_at',
+            ],
         ],
         'updated_at' => [
-            'label'  => 'updated_at',
             'rules'  => 'valid_date|permit_empty',
-        ]
+            'errors' => [
+                'valid_date' => 'Api.charges.invalid.updated_at',
+            ],
+        ],
     ];
 }

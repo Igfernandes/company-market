@@ -5,13 +5,8 @@ namespace App\Business\Charges;
 use App\Business\BaseBusiness;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Models\Finances\ChargesModel;
-use App\Helpers\Validates\Date;
-use App\Services\CronJob\CronJobService;
-use App\Services\CronJob\Entities\Job;
-use App\Services\CronJob\Entities\Schedule;
 use DateInterval;
 use DateTime;
-use DateTimeZone;
 
 class ChargesBusiness
 {
@@ -53,15 +48,24 @@ class ChargesBusiness
     public function getAvailableCharge(?array $query = [], int $amountCurrent = 1): array|false
     {
         /** @var array{ChargeEntity} */
-        $founds = $this->chargesModel->select("charges.*")->join("payments", "payments.charge_id = charges.id", "left")
+        $founds = $this->chargesModel->select("charges.*, payments.payment_id")->join("payments", "payments.charge_id = charges.id", "left")
             ->where($query)->findAll();
 
         if (!isset($founds[0])) return false;
 
+        $payments = [];
+        foreach ($founds as $found) {
+            $attributes = $found->toRawArray();
+
+            if (!empty($attributes['payment_id']))
+                \array_push($payments, $attributes['payment_id']);
+        }
+
         $amounts = 1;
         $charge = $founds[0];
+
         if (empty($charge->getAmount())) {
-            $amountBusy = count($founds) + $amountCurrent;
+            $amountBusy = count($payments) + $amountCurrent;
             $amounts = $charge->getAmount() - $amountBusy;
             $isAmountAvailableCharges = count($founds) > $amounts;
         } else {
@@ -73,7 +77,7 @@ class ChargesBusiness
 
         return [
             "charge" => $founds[0],
-            "amountAvailable" => $amounts
+            "amountAvailable" => $amounts < 0 ? 0 : $amounts
         ];
     }
 }

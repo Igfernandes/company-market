@@ -6,33 +6,31 @@ trait PostDTOs
 {
     protected array $rules = [
         'login' => [
-            'label'  => 'email',
             'rules'  => 'string|required|regex_match[' . VALIDATE_EMAIL . ']',
             'errors' => [
-                'required' => 'Validation.invalid_email',
-                'regex_match' => 'Validation.invalid_email'
+                'string' => 'Api.invalid.email',
+                'required' => 'Api.invalid.email',
+                'regex_match' => 'Api.invalid.email',
             ],
         ],
         'password' => [
-            'label'  => 'password',
             'rules'  => 'string|required|regex_match[' . VALIDATE_PASSWORD . ']',
             'errors' => [
-                'string' => 'Validation.string',
-                'regex_match' => 'Validation.login_invalid'
+                'string' => 'Api.auth.invalid.password',
+                'string' => 'Api.auth.invalid.password',
+                'regex_match' => 'Api.auth.invalid.password'
             ],
         ],
         'rememberMe' => [
-            'label'  => 'rememberMe',
             'rules'  => 'in_list[0,1]|',
             'errors' => [
-                'string' => 'Validation.string',
+                'in_list' => 'Api.auth.invalid.rememberMe',
             ],
         ],
         'g-recaptcha-response' => [
-            'label'  => 'g-recaptcha-response',
             'rules'  => 'string',
             'errors' => [
-                'string' => 'Validation.string',
+                'string' => 'Api.auth.invalid.recaptcha',
             ],
         ],
     ];

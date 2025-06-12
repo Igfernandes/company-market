@@ -6,8 +6,10 @@ trait GetDTOs
 {
     protected array $rules = [
         'form_id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.forms.invalid.form_id',
+            ],
         ],
     ];
 }

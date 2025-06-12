@@ -6,16 +6,22 @@ trait GetPreviewDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
             'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.services.preview.invalid.id',
+            ],
         ],
         'charge' => [
-            'label'  => 'charge',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.preview.invalid.charge',
+            ],
         ],
         'form' => [
-            'label'  => 'int',
             'rules'  => 'string|permit_empty',
-        ]
+            'errors' => [
+                'string' => 'Api.services.preview.invalid.form',
+            ],
+        ],
     ];
 }

@@ -5,13 +5,14 @@ namespace App\Api\Finances\Charges\Clients\Post;
 trait PostDTOs
 {
     protected array $rules = [
-        'charge_id'      => [
-            'label'  => 'title',
-            'rules'  => 'string|permit_empty',
+        'charge_id' => [
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.charges.invalid.charge_id',
+            ],
         ],
         'clients' => [
-            'label'  => 'stock',
-            'rules'  => 'permit_empty',
-        ]
+            'rules' => 'permit_empty',
+        ],
     ];
 }

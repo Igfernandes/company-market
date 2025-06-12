@@ -25,7 +25,7 @@ class GetUseCases
         $customForm = $customFormModel->where($filteredPayload)->first();
 
         if (empty($customForm))
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.forms.invalid.not_found", \NOT_FOUND);
 
         return $customForm;
     }

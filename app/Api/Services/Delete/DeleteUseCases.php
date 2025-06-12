@@ -23,7 +23,7 @@ class DeleteUseCases
         if (!$servicesBusiness->hasService([
             "id" => $serviceId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.service"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.services.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $servicesModel = new ServicesModel();
 
@@ -34,7 +34,7 @@ class DeleteUseCases
             "action" => "DELETE"
         ]);
         return (object)[
-            "success" => lang("Api.services.success.delete")
+            "success" => "Api.services.success.delete"
         ];
     }
 }

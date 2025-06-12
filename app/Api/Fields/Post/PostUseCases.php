@@ -33,7 +33,7 @@ class PostUseCases
         $fieldBusiness = new FieldsBusiness();
 
         if (!$fieldBusiness->hasGroup($payload['group_id']))
-            throw new Exceptions(lang("Api.fields.invalid.group"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.fields.invalid.not_found_group", BAD_BUSINESS_RULES);
 
         if ($payload["type"] === "FILE") {
             $fieldsGroupsModel = new FieldsGroupsModel();
@@ -43,7 +43,6 @@ class PostUseCases
         }
 
         $fieldsEntity->store($payload);
-
         $fieldsModel->save($fieldsEntity);
 
         if (isset($payload["relation_id"]) && isset($payload['value'])) {
@@ -71,7 +70,7 @@ class PostUseCases
             "key" => $fieldsModel->getInsertID()
         ]);
         return (object)[
-            "success" => lang("Api.fields.success.post")
+            "success" => "Api.fields.success.post"
         ];
     }
 }

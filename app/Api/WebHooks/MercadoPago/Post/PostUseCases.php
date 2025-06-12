@@ -32,7 +32,7 @@ class PostUseCases
         $paymentsModel = new PaymentsModel();
 
         if (property_exists((object)$payload, "data") === false)
-            throw new Exceptions(lang("Api.invalid.operation_failed"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.mercado_pago.invalid.operation_failed", BAD_BUSINESS_RULES);
 
         $foundPayments = $paymentsModel->where(["payment_id" => $payload->data->id])->first();
 
@@ -45,7 +45,7 @@ class PostUseCases
         ];
 
         if (!isset($actions[$payload->action]))
-            throw new Exceptions(lang("Api.invalid.operation_failed"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.mercado_pago.invalid.operation_failed", BAD_BUSINESS_RULES);
 
         $actionCurrent = $actions[$payload->action];
         

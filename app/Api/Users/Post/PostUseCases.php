@@ -29,7 +29,7 @@ class PostUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isCPFAvailable($payload['cpf']))
-            throw new Exceptions(\lang(\str_replace("{field}", "email", lang("Validation.already_exists"))), BAD_AUTH);
+            throw new Exceptions("Api.users.invalid.already_exists_cpf", BAD_AUTH);
 
         $invitesModel = new InvitesModel();
 
@@ -40,7 +40,7 @@ class PostUseCases
         ])->first();
 
         if (empty($foundInvite))
-            throw new Exceptions(\str_replace("{field}", lang("Words.invite"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found_invite", \BAD_BUSINESS_RULES);
 
         $crypto = new Crypto();
         /** @var object{email:string,name:string,phone:string,group:array{int}} */
@@ -86,7 +86,7 @@ class PostUseCases
         $invitesModel->set(['is_valid' => false])->where("id", $foundInvite->getId())->update();
 
         return (object)[
-            "success" => lang("Api.users.success.post")
+            "success" => "Api.users.success.post"
         ];
     }
 }

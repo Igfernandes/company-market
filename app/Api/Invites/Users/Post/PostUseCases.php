@@ -31,13 +31,13 @@ class PostUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isEmailAvailable($payload['email']))
-            throw new Exceptions(\lang(\str_replace("{field}", "email", lang("Validation.already_exists"))), BAD_REQUEST);
+            throw new Exceptions("Api.invites.invalid.already_exists_email", BAD_REQUEST);
 
         if (!$usersBusiness->isPhoneAvailable($payload['phone']))
-            throw new Exceptions(\lang(\str_replace("{field}", lang("Words.phone"), lang("Validation.already_exists"))), BAD_REQUEST);
+            throw new Exceptions("Api.invites.invalid.already_exists_phone", BAD_REQUEST);
 
         if (isset($payload['group']) && !$usersGroupsBusiness->hasGroups($payload['group']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.group"), lang("Validation.invalid_list")), BAD_REQUEST);
+            throw new Exceptions("Api.invites.invalid..invalid_group", BAD_REQUEST);
 
         $invitesModel = new InvitesModel();
         $inviteEntity = new InviteEntity();
@@ -73,7 +73,7 @@ class PostUseCases
         ]);
 
         return (object)[
-            "success" => lang("Api.users.success.store")
+            "success" => "Api.invites.success.post"
         ];
     }
 }

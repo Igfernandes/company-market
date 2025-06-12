@@ -28,14 +28,15 @@ class PostUseCases
     {
         helper("crypto");
         if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
-            throw new Exceptions(lang("Validation.recaptcha"), BAD_REQUEST);
+            throw new Exceptions("Api.invalid.recaptcha", BAD_REQUEST);
 
         unset($payload['g-recaptcha-response']);
         $files = $payload['files'];
+        $payload = array_merge($files, $payload);
         unset($payload['files']);
 
         if (!isset($payload['form_id']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.form"),  lang("Validation.not_found")), \NOT_FOUND);
+            throw new Exceptions("Api.custom_forms.invalid.not_found", \NOT_FOUND);
 
         $customFormModel = new CustomFormsModel();
 
@@ -43,7 +44,7 @@ class PostUseCases
         $found = $customFormModel->where('id', $payload['form_id'])->first();
 
         if (empty($found))
-            throw new Exceptions(\str_replace("{field}", lang("Words.form"),  lang("Validation.not_found")), \NOT_FOUND);
+            throw new Exceptions("Api.custom_forms.invalid.not_found", \NOT_FOUND);
 
         $fields = \json_decode($found->getComponents());
 
@@ -69,18 +70,16 @@ class PostUseCases
             $formFillEntity->setFormId($payload['form_id']);
 
             if ($currentField->element == "file")
-                $value = FileFormFillBusiness::upload($files[$name]);
+                $value = FileFormFillBusiness::upload($value);
 
             $valueEncrypted = $crypto->encrypt($value, "$package" . getenv('system.encrypted_key'));
             $formFillEntity->setValue($valueEncrypted);
-
-
 
             $formsFill->save($formFillEntity);
         }
 
         return (object)[
-            "success" => lang("Api.custom_forms.success.post")
+            "success" => "Api.custom_forms.success.post"
         ];
     }
 }

@@ -9,6 +9,8 @@ use function PHPUnit\Framework\isJson;
 
 class CustomFormEntity extends Entity
 {
+
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'name'            => null,
@@ -74,7 +76,7 @@ class CustomFormEntity extends Entity
             $this->attributes['name'] = $name;
     }
 
-    
+
     /**
      * getSlug function
      *

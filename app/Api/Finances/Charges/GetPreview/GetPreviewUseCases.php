@@ -47,11 +47,13 @@ class GetPreviewUseCases
 
             /** @var ServiceEntity */
             $foundService = $servicesModel->where("id", $charge->getServiceId())->first();
-            $data['service'] = [
-                "name" => $foundService->getName(),
-                "description" => $foundService->getDescription(),
-                "photo" => $foundService->getPhoto()
-            ];
+
+            if (!empty($foundService))
+                $data['service'] = [
+                    "name" => $foundService->getName(),
+                    "description" => $foundService->getDescription(),
+                    "photo" => $foundService->getPhoto()
+                ];
         }
 
         return $data;

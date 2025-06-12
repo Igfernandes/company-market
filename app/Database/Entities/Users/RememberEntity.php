@@ -7,14 +7,13 @@ use Exception;
 
 class RememberEntity extends Entity
 {
-    protected $dates = [
-        'created_at'      => null
-    ];
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'token'           => null,
         'ip'              => null,
         'user_id'         => null,
+        'created_at'      => null
     ];
     public $entities = [
         "user" => null

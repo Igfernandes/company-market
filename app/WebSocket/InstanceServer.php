@@ -2,7 +2,7 @@
 
 namespace App\WebSocket;
 
-use App\Business\Authentication\UserAuthHistoryBusiness;
+use CodeIgniter\CLI\CLI;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
@@ -12,12 +12,13 @@ class InstanceServer implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
-        echo "Nova conexão ID: {$conn->resourceId}\n";
+        CLI::write("Nova conexão ID: {$conn->resourceId}\n", 'yellow');
         $this->channels['default'][$conn->resourceId] = $conn;
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
+        CLI::write("FROM: {$from}, MESSAGE: {$msg}\n", 'yellow');
         // Enviar para todos no canal
         foreach ($this->channels as $channel => $connections) {
             if (isset($connections[$from->resourceId])) {
@@ -29,7 +30,8 @@ class InstanceServer implements MessageComponentInterface
                 break;
             }
         }
-        echo "Mensagem retransmitida: $msg\n";
+
+        CLI::write("MESSAGE_SEND\n", 'yellow');
     }
 
     public function onClose(ConnectionInterface $conn)
@@ -45,7 +47,8 @@ class InstanceServer implements MessageComponentInterface
 
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
-        echo "Erro: {$e->getMessage()}\n";
+
+        CLI::write("CLOSED CONNECT", 'yellow');
         $conn->close();
     }
 
@@ -56,5 +59,6 @@ class InstanceServer implements MessageComponentInterface
                 $conn->send($message);
             }
         }
+        CLI::write("SEND MESSAGE");
     }
 }

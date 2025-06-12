@@ -6,20 +6,30 @@ trait PutDTOs
 {
     protected array $rules = [
         'name' => [
-            'label'  => 'name',
-            'rules'  => 'string|required'
+            'rules' => 'string|required',
+            'errors' => [
+                'string'   => 'Api.custom_forms.invalid.name',
+                'required' => 'Api.custom_forms.invalid.name',
+            ],
         ],
         'components' => [
-            'label'  => 'components',
-            'rules'  => 'string|required',
+            'rules' => 'string|required',
+            'errors' => [
+                'string'   => 'Api.custom_forms.invalid.components',
+                'required' => 'Api.custom_forms.invalid.components',
+            ],
         ],
         'description' => [
-            'label'  => 'description',
-            'rules'  => 'string|permit_empty',
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.custom_forms.invalid.description',
+            ],
         ],
         'status' => [
-            'label'  => 'status',
-            'rules'  => 'in_list[PUBLISHED, DRAFT]|permit_empty',
+            'rules' => 'in_list[PUBLISHED, DRAFT]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.status',
+            ],
         ],
     ];
 }

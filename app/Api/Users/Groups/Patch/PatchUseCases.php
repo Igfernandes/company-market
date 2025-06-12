@@ -19,10 +19,10 @@ class PatchUseCases
 
         $groupId = $payload['id'];
 
-        if (!$groupsBusiness->hasClub([
+        if (!$groupsBusiness->hasGroup([
             "id" => $groupId
         ]))
-            throw new Exceptions(\str_replace("{field}", lang("Words.group"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.groups.invalid.not_found", \BAD_BUSINESS_RULES);
 
         $groupsModel = new GroupsModel();
 
@@ -33,7 +33,7 @@ class PatchUseCases
         $groupsModel->set("status", $statusUpdate)->update($groupId);
 
         return (object)[
-            "success" => lang("Api.groups.success.status")
+            "success" => "Api.users.groups.success.status"
         ];
     }
 }

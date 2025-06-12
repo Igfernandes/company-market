@@ -43,7 +43,7 @@ class PostUseCases
             "key" =>  $customFormsModel->getInsertID()
         ]);
         return (object)[
-            "success" => lang("Api.custom_forms.success.post")
+            "success" => "Api.custom_forms.success.post"
         ];
     }
 }

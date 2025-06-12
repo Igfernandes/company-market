@@ -43,7 +43,7 @@ class GetUseCases
         if (!empty($payload['id']) && count($payments) > 0)
             return $this->builder($payments[0]);
         else if (!empty($payload['id']) && \count($payments) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.payments.invalid.not_found", \NOT_FOUND);
 
         $paymentsData = array_map(
             fn(PaymentEntity $payment) => $this->builder($payment),

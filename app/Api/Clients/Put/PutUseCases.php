@@ -31,7 +31,7 @@ class PutUseCases
         $categoryBusiness = new CategoryBusiness();
 
         if (!$categoryBusiness->hasCategory($payload['category']))
-            throw new Exceptions(\str_replace("{field}", lang("Words.category"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.not_found_category", BAD_BUSINESS_RULES);
 
         $clientsModel = new  ClientsModel();
         $clientCategoryModel = new ClientsCategoriesModel();
@@ -79,7 +79,7 @@ class PutUseCases
             "key" =>  $payload['id']
         ]);
         return (object)[
-            "success" => lang("Api.clients.success.post")
+            "success" => "Api.clients.success.put"
         ];
     }
 }

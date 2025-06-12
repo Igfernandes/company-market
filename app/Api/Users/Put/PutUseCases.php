@@ -27,7 +27,7 @@ class PutUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isPhoneAvailable($payload['phone'], $payload['id']))
-            throw new Exceptions(\lang(\str_replace("{field}", "phone", lang("Validation.already_exists"))), BAD_AUTH);
+            throw new Exceptions("Api.users.invalid.already_exists_phone", BAD_AUTH);
 
         $usersModel = new UsersModel();
 
@@ -35,7 +35,7 @@ class PutUseCases
         $foundUser = $usersModel->where("id", $payload['id'])->first();
 
         if (empty($foundUser))
-            throw new Exceptions(\str_replace("{field}", lang("Words.user"), lang("Validation.not_found")), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
 
         $foundUser->setEmailSha256(\referenceHash($payload['email']));
@@ -53,7 +53,7 @@ class PutUseCases
             "action" => "UPDATE"
         ]);
         return (object)[
-            "success" => lang("Api.users.success.put")
+            "success" => "Api.users.success.put"
         ];
     }
 }

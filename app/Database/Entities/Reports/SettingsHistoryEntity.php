@@ -6,6 +6,7 @@ use CodeIgniter\Entity\Entity;
 
 class SettingsHistoryEntity extends Entity
 {
+    protected $dates = [];
     public $attributes = [
         'id'            => null,
         'module'        => null,

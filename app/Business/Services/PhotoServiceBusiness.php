@@ -10,13 +10,13 @@ class PhotoServiceBusiness
     public function upload(UploadedFile $photo): string
     {
         if (!$photo->isValid())
-            throw new Exceptions(lang("Api.services.invalid.photo"));
+            throw new Exceptions("Api.services.invalid.photo");
 
         $extension = $photo->getExtension();
-        $photoName = date("Y_m_d-H_i_s") . "_service.$extension";
+        $photoName = date("Y_m_d-H_i_s") . ".$extension";
 
-        $photo->move(WRITEPATH . 'uploads', $photoName);
+        $photo->move(WRITEPATH . 'uploads/services', $photoName);
 
-        return WRITEPATH . "uploads\\$photoName";
+        return WRITEPATH . "uploads\\services\\$photoName";
     }
 }

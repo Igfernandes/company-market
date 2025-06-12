@@ -26,7 +26,7 @@ class PostUseCases
         ])->first();
 
         if (empty($dispatcher))
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.tasks.dispatcher.not_found", \NOT_FOUND);
 
         $clientsMessagesModel = new ClientsMessagesDispatcherModel();
 
@@ -44,7 +44,7 @@ class PostUseCases
             "Key" => $dispatcher->getId()
         ]);
         return (object)[
-            "success" => lang("Api.message_dispatcher.success.post")
+            "success" => "Api.tasks.dispatcher.success"
         ];
     }
 }

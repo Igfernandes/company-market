@@ -4,10 +4,10 @@ namespace App\Business\Permissions;
 
 use App\Business\BaseBusiness;
 use App\Database\Entities\Permissions\GroupPermissionsEntity;
-use App\Database\Entities\Users\GroupEntity;
 use App\Database\Entities\Users\UserGroupsEntity;
 use App\Database\Models\Permissions\GroupsPermissionsModel;
 use App\Database\Models\Permissions\PermissionsModel;
+use App\Database\Models\Permissions\UsersPermissionsModel;
 use App\Database\Models\Users\UsersGroupsModel;
 use App\Interfaces\IPermissions;
 use App\Libraries\Exceptions\Exceptions;
@@ -19,7 +19,7 @@ class PermissionsBusiness
     /**
      * @param array{Int} $permissions
      */
-    public function hasPermissions($permissions): bool
+    public function hasPermissionsAvailable($permissions): bool
     {
         $permissionsModel = new PermissionsModel();
         if (!is_array($permissions)) return false;
@@ -37,6 +37,32 @@ class PermissionsBusiness
             $model->upsert($entity->toArray(true), $entity);
         }
     }
+
+    public static function hasPermissionUser(string $scope, string $type, int $userId)
+    {
+        $usersPermissions = new UsersPermissionsModel();
+        $groupsPermissionsModel = new GroupsPermissionsModel();
+
+        $foundPermissions = $usersPermissions
+            ->join("permissions", "permissions.id = users_permissions.permission_id")
+            ->where([
+                "users_permissions.user_id" => $userId,
+                "permissions.scope" => $scope,
+                "permissions.type" => $type
+            ])->findAll();
+
+        $foundGroupPermissions = $groupsPermissionsModel
+            ->join("users_groups", "users_groups.group_id = groups_permissions.group_id")
+            ->join("permissions", "permissions.id = groups_permissions.permission_id")
+            ->where([
+                "users_groups.user_id" => $userId,
+                "permissions.scope" => $scope,
+                "permissions.type" => $type
+            ])->findAll();
+
+        return count($foundPermissions) > 0 || \count($foundGroupPermissions) > 0;
+    }
+
 
     public static function hasPermissionUserAuth(array $permissionQuery = [])
     {

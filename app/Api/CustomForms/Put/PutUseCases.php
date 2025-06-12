@@ -43,7 +43,7 @@ class PutUseCases
             "key" => $filteredPayload['id']
         ]);
         return (object)[
-            "success" => lang("Api.custom_forms.success.put")
+            "success" => "Api.custom_forms.success.put"
         ];
     }
 }

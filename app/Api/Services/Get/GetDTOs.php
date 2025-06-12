@@ -6,44 +6,65 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'label'  => 'id',
-            'rules'  => 'integer|permit_empty'
+            'rules'  => 'integer|permit_empty',
+            'errors' => [
+                'integer' => 'Api.services.invalid.id',
+            ],
         ],
         'in_ids.*' => [
-            'label'  => 'in_ids',
             'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.services.invalid.in_ids',
+            ],
         ],
         'name' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.name',
+            ],
         ],
         'name_contains' => [
-            'label'  => 'name',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.name_contains',
+            ],
         ],
         'type' => [
-            'label'  => 'type',
-            'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|permit_empty',
+            'rules'  => 'string|in_list[APPELLANT,PUNCTUAL]|permit_empty',
+            'errors' => [
+                'string'  => 'Api.services.invalid.type',
+                'in_list' => 'Api.services.invalid.type',
+            ],
         ],
         'description_contains' => [
-            'label'  => 'description',
             'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.description_contains',
+            ],
         ],
-        'status' =>  [
-            'label'  => 'status',
-            'rules'  => 'in_list[ACTIVE, INACTIVE]|permit_empty',
+        'status' => [
+            'rules'  => 'in_list[ACTIVE,INACTIVE]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.services.invalid.status',
+            ],
         ],
         'privacy' => [
-            'label'  => 'status',
-            'rules'  => 'in_list[PUBLIC, PRIVATE]|permit_empty',
+            'rules'  => 'in_list[PUBLIC,PRIVATE]|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.services.invalid.privacy',
+            ],
         ],
         'created_at' => [
-            'label'  => 'created_at',
             'rules'  => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.services.invalid.created_at',
+            ],
         ],
         'updated_at' => [
-            'label'  => 'updated_at',
             'rules'  => 'valid_date|permit_empty',
-        ]
+            'errors' => [
+                'valid_date' => 'Api.services.invalid.updated_at',
+            ],
+        ],
     ];
 }

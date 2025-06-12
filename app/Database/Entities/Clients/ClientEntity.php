@@ -12,6 +12,7 @@ class ClientEntity extends Entity
 {
     use CryptoEntityTrait, EntityEnhancerTrait;
 
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'name'            => null,

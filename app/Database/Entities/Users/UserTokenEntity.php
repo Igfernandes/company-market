@@ -3,6 +3,7 @@
 namespace App\Database\Entities\Users;
 
 use App\Traits\EntityEnhancerTrait;
+use App\Database\Entities\BaseEntity;
 use CodeIgniter\Entity\Entity;
 use Exception;
 
@@ -10,8 +11,9 @@ use function PHPUnit\Framework\isJson;
 
 class UserTokenEntity extends Entity
 {
-   use EntityEnhancerTrait;
-   
+    use EntityEnhancerTrait;
+
+    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'token'           => null,
@@ -51,7 +53,7 @@ class UserTokenEntity extends Entity
             $this->attributes['id'] = $id;
     }
 
-        /**
+    /**
      * getToken function
      *
      * @return string|null
@@ -123,7 +125,7 @@ class UserTokenEntity extends Entity
      *
      * @return String|null
      */
-    public function getData(): String|Object|Array|null
+    public function getData(): String|Object|array|null
     {
         return json_decode($this->attributes['data']);
     }
@@ -134,15 +136,12 @@ class UserTokenEntity extends Entity
      * @param String|null $data
      * @return void
      */
-    public function setData(Object|Array|string|null $data)
+    public function setData(Object|array|string|null $data)
     {
         $session = session();
-        $LANGUAGE = $session->get("language");
 
         if (!isJson($data))
-            throw new Exception(lang('Validation.invalid_json', [
-                "json" => "Data"
-            ], $LANGUAGE), INTERNAL_ERROR);
+            throw new Exception('Validation.invalid_json', INTERNAL_ERROR);
 
         if (!empty($data))
             $this->attributes['data'] = $data;

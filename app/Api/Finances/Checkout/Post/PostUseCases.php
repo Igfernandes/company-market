@@ -26,11 +26,11 @@ class PostUseCases
         $session = session();
 
         if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
-            throw new Exceptions(lang("Api.charges.again_submit"), BAD_REQUEST);
+            throw new Exceptions("Api.charges.again_submit", BAD_REQUEST);
 
         $hasAmountsNotNumbers = \array_filter($payload['amounts'], fn($amount) => !is_int($amount));
         if (count($hasAmountsNotNumbers) > 0)
-            throw new Exceptions(lang("Validation.invalid.field"), BAD_REQUEST);
+            throw new Exceptions("Validation.invalid.field", BAD_REQUEST);
         $userAuthId = $session->get('userAuthId');
 
         $amount = isset($payload['amounts'][0]) ? $payload['amounts'][0] : 1;
@@ -43,7 +43,7 @@ class PostUseCases
         ], $amount);
 
         if ($response == false)
-            throw new Exceptions(\lang("Errors.not_found"), BAD_REQUEST);
+            throw new Exceptions("Errors.not_found", BAD_REQUEST);
 
         $charge = $response['charge'];
 
@@ -54,7 +54,7 @@ class PostUseCases
             "client_id" => $clientId,
             "reference" => $payload['product']
         ]);
-        $response['success'] = lang("Api.payments.success.post");
+        $response['success'] = "Api.payments.success.post";
 
         NotificationsService::store([
             "scope" => "charges",
