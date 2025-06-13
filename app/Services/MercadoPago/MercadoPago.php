@@ -32,7 +32,7 @@ class MercadoPago
         $foundBank = $integrationBankModel->where(["provider" => "MERCADO_PAGO"])->first();
 
         if (empty($foundBank))
-            throw new Exceptions(\str_replace("{field}", lang("Words.bank"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.integrations.invalid.not_found_bank", BAD_BUSINESS_RULES);
 
         return $foundBank->getDecryptPrivateToken();
     }

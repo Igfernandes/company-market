@@ -8,7 +8,7 @@ trait GetDTOs
         'id'            => [
             "rules" => 'integer|permit_empty',
             'errors' => [
-                'integer' => 'Api.clients.dispatchers.invalid.client',
+                'integer' => 'Api.clients.dispatchers.invalid.dispatcher',
             ],
         ],
         'status'        => [

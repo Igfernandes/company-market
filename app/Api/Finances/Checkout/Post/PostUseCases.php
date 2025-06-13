@@ -30,7 +30,7 @@ class PostUseCases
 
         $hasAmountsNotNumbers = \array_filter($payload['amounts'], fn($amount) => !is_int($amount));
         if (count($hasAmountsNotNumbers) > 0)
-            throw new Exceptions("Validation.invalid.field", BAD_REQUEST);
+            throw new Exceptions("Api.charges.invalid.amounts", BAD_REQUEST);
         $userAuthId = $session->get('userAuthId');
 
         $amount = isset($payload['amounts'][0]) ? $payload['amounts'][0] : 1;
@@ -43,7 +43,7 @@ class PostUseCases
         ], $amount);
 
         if ($response == false)
-            throw new Exceptions("Errors.not_found", BAD_REQUEST);
+            throw new Exceptions("Api.charges.invalid.not_found", BAD_REQUEST);
 
         $charge = $response['charge'];
 

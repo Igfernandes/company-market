@@ -10,5 +10,7 @@ class NotificationsRoutes extends BaseRoutes
     {
         /** Notifications */
         $routes->get("notifications", "Api\Notifications\Get\GetController::handle");
+
+        $routes->post("notifications/subscribe", "Api\Notifications\Subscribes\Post\PostController::handle");
     }
 }

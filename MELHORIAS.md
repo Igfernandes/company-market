@@ -4,14 +4,6 @@
 - **Aplicar as validações necessárias nos dtos (Melhorar as validações)**
 - Implementar a lógica de disparo no instagram
 - **Implementar lógica para envio de disparos pós, para não ter que esperar na hora de criar**
-- Implementar lógica de notificação própria aceitando via navegador
-
-Public Key:
-BHavvzm_fbV6GOLDvlixuUK-iZUaVWxg3\_\_apyArnrxGlULe_69EcLfvYimeDjcsy6GZnFzUdB_rHGr1sbCG3xc
-
-Private Key:
-A2_TLM5k235f4gVF3NVA9HkIiJiGgiXE907K2musOw0
-
-=======================================
+- **Implementar lógica de notificação própria aceitando via navegador**
 
 - **Testar o upload e o armazenamento de arquivos via custom-forms pelo cliente.**

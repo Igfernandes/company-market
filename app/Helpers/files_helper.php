@@ -9,6 +9,6 @@ if (!function_exists('getPublicUrl')) {
 
         $image = $arrUrl[1];
 
-        return getenv('CI_ENVIRONMENT') === 'development' ? getenv('globals.href.backend') . "/uploads/image/$image" :  base_url("/uploads/image/$image");
+        return getenv('CI_ENVIRONMENT') === 'development' ? getenv('globals.href.backend') . "/uploads/$image" :  base_url("/uploads/image/$image");
     }
 }

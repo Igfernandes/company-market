@@ -46,7 +46,7 @@ class GetUseCases
         if (!empty($payload['id']) && count($operationsFailures) > 0)
             return $this->builder($operationsFailures[0]);
         else if (!empty($payload['id']) && \count($operationsFailures) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.charges.operations_failures.not_found", \NOT_FOUND);
 
         $operationsFailuresData = array_map(
             fn(OperationFailureEntity $operationFailure) => $this->builder($operationFailure),

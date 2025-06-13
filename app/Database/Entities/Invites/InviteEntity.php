@@ -127,13 +127,8 @@ class InviteEntity extends Entity
      */
     public function setIsValid(?bool $isValid)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-
         if (!is_bool($isValid))
-            throw new Exception(lang('Validation.invalid_field', [
-                "field" => "is_valid"
-            ], $LANGUAGE), INTERNAL_ERROR);
+            throw new Exception("Api.invites.invalid.is_valid", INTERNAL_ERROR);
 
         $this->attributes['is_valid'] = $isValid;
     }

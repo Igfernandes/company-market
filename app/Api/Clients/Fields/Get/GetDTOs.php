@@ -29,19 +29,13 @@ trait GetDTOs
             "rules" => 'string|max_length[50]|permit_empty',
             'errors' => [
                 'string' => 'Api.clients.fields.invalid.type',
-                'max_length' => 'Api.clients.fields.invalid.type_max_length_100',
+                'max_length' => 'Api.clients.fields.invalid.type_max_length_50',
             ],
         ],
         'scope'    => [
             "rules" => 'in_list[USER,CLIENT,COMPANY]|permit_empty',
             'errors' => [
                 'in_list' => 'Api.clients.fields.invalid.scope'
-            ],
-        ],
-        'is_file'       =>  [
-            "rules" => 'in_list[0,1]|permit_empty',
-            'errors' => [
-                'in_list' => 'Api.clients.fields.invalid.is_file'
             ],
         ],
         'is_required'   => [

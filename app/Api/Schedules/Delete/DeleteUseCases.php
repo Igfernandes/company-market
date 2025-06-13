@@ -44,7 +44,7 @@ class DeleteUseCases
         ]);
 
         return (object)[
-            "success" => "Api.schedules.success.post"
+            "success" => "Api.schedules.success.delete"
         ];
     }
 }

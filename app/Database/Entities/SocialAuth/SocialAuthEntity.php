@@ -62,7 +62,7 @@ class SocialAuthEntity extends Entity
         $session = session();
 
         if (!empty($type) && array_search($type, ['GOOGLE', 'FACEBOOK']) === false)
-            throw new Exception(lang('Validation.enum_invalid', ["field" => "type"], $session->get("language")), BAD_REQUEST);
+            throw new Exception("Api.social_auth.invalid.type", BAD_REQUEST);
 
         if (!empty($type))
             $this->attributes['type'] = $type;
@@ -89,10 +89,7 @@ class SocialAuthEntity extends Entity
         $session = session();
 
         if (!empty($email) && strlen($externalId) > 150)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "External_id",
-                "param" => 150
-            ], $session->get("language")), INTERNAL_ERROR);
+            throw new Exception("Api.social_auth.invalid.external_id", INTERNAL_ERROR);
 
         if (!empty($externalId))
             $this->attributes['external_id'] = $externalId;
@@ -109,7 +106,7 @@ class SocialAuthEntity extends Entity
         $session = session();
 
         if (!empty($email) && preg_match(VALIDATE_EMAIL, $email) === false)
-            throw new Exception(lang('Validation.invalid_email', [], $session->get("language")), BAD_REQUEST);
+            throw new Exception("Api.social_auth.invalid.email", BAD_REQUEST);
 
         if (!empty($email))
             $this->attributes['email'] = strtolower($email);

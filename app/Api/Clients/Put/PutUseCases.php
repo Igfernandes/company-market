@@ -56,7 +56,7 @@ class PutUseCases
             ]
         )->first();
         if (!empty($foundClientWithPhone))
-            throw new Exceptions(\str_replace("{field}", lang("Words.phone"),  lang("Api.clients.invalid.phone")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.phone", BAD_BUSINESS_RULES);
 
         if (!empty($payload['birthdate']))
             $clientEntity->setBirthdate($payload['birthdate']);

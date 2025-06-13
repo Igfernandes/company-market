@@ -58,13 +58,8 @@ class UserAuthHistoryEntity extends Entity
      */
     public function setIp(?String $ip)
     {
-        $session = session();
-
         if (strlen($ip) > 30)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "Ip",
-                "param" => 30
-            ], $session->get("language")), BAD_REQUEST);
+            throw new Exception("Api.user_auth_history.invalid.ip_max_length_30", BAD_REQUEST);
 
         if (!empty($ip))
             $this->attributes['ip'] = $ip;
@@ -89,15 +84,8 @@ class UserAuthHistoryEntity extends Entity
      */
     public function setBrowser(?String $browser)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $BROWSER_NAME_TRANSLATE = lang('Words.name_browser', [], $LANGUAGE);
-
         if (strlen($browser) > 150)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $BROWSER_NAME_TRANSLATE,
-                "param" => 150
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.user_auth_history.invalid.browser_max_length_150", BAD_REQUEST);
 
         if (!empty($browser))
             $this->attributes['browser'] = $browser;
@@ -123,10 +111,7 @@ class UserAuthHistoryEntity extends Entity
     public function setToken(?String $token)
     {
         if (strlen($token) > 50)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => 'token',
-                "param" => 50
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception("Api.user_auth_history.invalid.token_max_length_30", BAD_BUSINESS_RULES);
 
         if (!empty($token))
             $this->attributes['token'] = $token;

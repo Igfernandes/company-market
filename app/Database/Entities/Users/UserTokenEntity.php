@@ -166,13 +166,6 @@ class UserTokenEntity extends Entity
      */
     public function setIsValid(?bool $isValid)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-
-        if (!is_bool($isValid))
-            throw new Exception(lang('Validation.invalid_field', [
-                "field" => "is_valid"
-            ], $LANGUAGE), INTERNAL_ERROR);
 
         if (!empty($isValid))
             $this->attributes['is_valid'] = $isValid;
@@ -196,15 +189,6 @@ class UserTokenEntity extends Entity
      */
     public function setAccessibility(?bool $accessibility)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $ACCESSIBILITY_TRANSLATE = lang('Words.accessibility', [], $LANGUAGE);
-
-        if (array_search($accessibility, ['PUBLIC', 'PRIVATE']) === false)
-            throw new Exception(lang('Validation.invalid_field', [
-                "field" => $ACCESSIBILITY_TRANSLATE
-            ], $LANGUAGE), INTERNAL_ERROR);
-
         if (!empty($accessibility))
             $this->attributes['accessibility'] = $accessibility;
     }

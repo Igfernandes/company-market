@@ -29,8 +29,8 @@ trait PostDTOs
             'rules'  => 'string|valid_email|max_length[255]|permit_empty',
             'errors' => [
                 'string'     => 'Api.checkout.invalid.email',
-                'valid_email'=> 'Api.checkout.invalid.email',
-                'max_length' => 'Api.checkout.invalid.email_max_length_35',
+                'valid_email' => 'Api.checkout.invalid.email',
+                'max_length' => 'Api.checkout.invalid.email_max_length_255',
             ],
         ],
         'birthdate' => [
@@ -49,7 +49,7 @@ trait PostDTOs
         'g-recaptcha-response' => [
             'rules'  => 'string',
             'errors' => [
-                'string' => 'Validation.string',
+                'string' => 'Api.charges.invalid.recaptcha',
             ],
         ],
     ];

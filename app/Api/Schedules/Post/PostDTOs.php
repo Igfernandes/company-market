@@ -40,7 +40,7 @@ trait PostDTOs
             'label'  => 'end_date',
             'rules'  => 'string|permit_empty',
             'errors' => [
-                'string' => 'Api.schedules.invalid.end_date',
+                'string' => 'Api.schedules.invalid."end_date"',
             ],
         ],
         'linked' => [

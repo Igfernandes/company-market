@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities\Users;
 
+use App\Libraries\Exceptions\Exceptions;
 use App\Traits\CryptoEntityTrait;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
@@ -10,7 +11,7 @@ use Exception;
 class UserEntity extends Entity
 {
     use EntityEnhancerTrait, CryptoEntityTrait;
-    
+
     protected $dates = [];
     public $attributes = [
         'id'               => null,
@@ -76,13 +77,9 @@ class UserEntity extends Entity
      */
     public function setName(?String $name = "")
     {
-        $NAME_TRANSLATE = lang('Words.name');
 
         if (strlen($name) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $NAME_TRANSLATE,
-                "param" => 100
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception("Api.users.invalid.name_max_length_100", BAD_BUSINESS_RULES);
 
         if (!empty($name))
             $this->attributes['name'] = $name;
@@ -111,7 +108,7 @@ class UserEntity extends Entity
     {
 
         if (preg_match(VALIDATE_EMAIL, $email) === false)
-            throw new Exception(lang('Validation.invalid_email'), BAD_REQUEST);
+            throw new Exceptions("Api.users.invalid.email", BAD_REQUEST);
 
         if (!empty($email))
             $this->attributes['email'] = $this->cryptoLibrary->encrypt(strtolower($email), $this->getEncryptedKey());
@@ -158,13 +155,8 @@ class UserEntity extends Entity
      */
     public function setEncryptPassword(?string $password)
     {
-        $PASSWORD_TRANSLATE = lang('Words.password');
-
         if (strlen($password) > 20)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $PASSWORD_TRANSLATE,
-                "param" => 20
-            ]), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.password_max_length_20", BAD_REQUEST);
 
         if (!empty($password))
             $this->attributes['password'] = $this->cryptoLibrary->encrypt($password, $this->getEncryptedKey());
@@ -235,10 +227,7 @@ class UserEntity extends Entity
         $cpf = str_replace([".", "-"], "", $cpf);
 
         if (strlen($cpf) > 11)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "Cpf",
-                "param" => 11
-            ]), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.cpf_max_length_11", BAD_REQUEST);
 
         if (!empty($cpf))
             $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->getEncryptedKey());;
@@ -286,10 +275,7 @@ class UserEntity extends Entity
     public function setEncryptPhone(?string $phone)
     {
         if (strlen($phone) > 20)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "phone",
-                "param" => 20
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception("Api.users.invalid.phone_max_length_20", BAD_BUSINESS_RULES);
 
         if (!empty($phone))
             $this->attributes['phone'] = $this->cryptoLibrary->encrypt(str_replace(['-', ' ', '(', ')'], '', $phone), $this->getEncryptedKey());
@@ -360,7 +346,7 @@ class UserEntity extends Entity
     {
 
         if (array_search($status, ["ACTIVE", "INACTIVE", "ANALYSIS"]) === false)
-            throw new Exception(lang('Validation.enum_invalid'), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.status", BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;
@@ -386,13 +372,8 @@ class UserEntity extends Entity
      */
     public function setEncryptKeyword(?string $keyword)
     {
-        $KEYWORD_TRANSLATE = lang('Words.keyword');
-
         if (strlen($keyword) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $KEYWORD_TRANSLATE,
-                "param" => 100
-            ]), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.keyword_max_100", BAD_REQUEST);
 
         if (!empty($keyword))
             $this->attributes['keyword'] = $this->cryptoLibrary->encrypt($keyword, $this->getEncryptedKey());
@@ -497,10 +478,7 @@ class UserEntity extends Entity
     {
 
         if (strlen($twofSecretEnc ?? "") > 250)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "twof_secret",
-                "param" => 250
-            ]), BAD_REQUEST);
+            throw new Exceptions("Api.users.invalid.twof_secret_max_length_250", BAD_REQUEST);
 
         if (!empty($twofSecretEnc))
             $this->attributes['twof_secret'] = $twofSecretEnc;
@@ -526,7 +504,7 @@ class UserEntity extends Entity
     {
 
         if (gettype($isSocial) != 'boolean')
-            throw new Exception(lang('Validation.invalid_field', ["field" => "is_social"]), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.is_social", BAD_REQUEST);
 
         if (!empty($isSocial))
             $this->attributes['is_social'] = $isSocial;
@@ -552,10 +530,7 @@ class UserEntity extends Entity
     {
 
         if (strlen($systemKey) > 400)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "system_key",
-                "param" => 400
-            ]), BAD_REQUEST);
+            throw new Exception("Api.users.invalid.system_key_max_length_250", BAD_REQUEST);
 
         if (!empty($systemKey))
             $this->attributes['system_key'] = $systemKey;

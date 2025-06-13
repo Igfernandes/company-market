@@ -82,14 +82,6 @@ class UserSettingPrivacyEntity extends Entity
      */
     public function setIp(?String $ip)
     {
-        $session = session();
-
-        if (strlen($ip) > 30)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "Ip",
-                "param" => 30
-            ], $session->get("language")), BAD_REQUEST);
-
         if (!empty($ip))
             $this->attributes['ip'] = $ip;
     }
@@ -113,16 +105,6 @@ class UserSettingPrivacyEntity extends Entity
      */
     public function setBrowser(?String $browser)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $BROWSER_NAME_TRANSLATE = lang('Words.name_browser', [], $LANGUAGE);
-
-        if (strlen($browser) > 150)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $BROWSER_NAME_TRANSLATE,
-                "param" => 150
-            ], $LANGUAGE), BAD_REQUEST);
-
         if (!empty($browser))
             $this->attributes['browser'] = $browser;
     }

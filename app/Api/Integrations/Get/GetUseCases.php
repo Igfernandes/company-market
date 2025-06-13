@@ -38,7 +38,7 @@ class GetUseCases
         if (!empty($payload['id']) && count($banks) > 0)
             return $this->builder($banks[0]);
         else if (!empty($payload['id']) && \count($banks) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.integrations.invalid.not_found", \NOT_FOUND);
 
         $banksData = array_map(
             fn(IntegrationEntity $integration) => $this->builder($integration),

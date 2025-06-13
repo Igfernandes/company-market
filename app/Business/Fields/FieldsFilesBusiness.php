@@ -36,7 +36,7 @@ class FieldsFilesBusiness
     public static function upload(UploadedFile $file): string
     {;
         if (!$file->isValid())
-            throw new Exceptions(lang("Api.files.invalid.file"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.files.invalid.file", \BAD_BUSINESS_RULES);
 
         $extension = $file->getExtension();
         $fileName = date("Y_m_d-H_i_s") . "_field.$extension";

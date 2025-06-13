@@ -19,7 +19,7 @@ class PatchCategoryUseCases implements IUseCases
     public function execute(array $payload): object
     {
         if (!isset($payload['clients']) || count($payload['clients']) == 0)
-            throw new Exceptions('Api.clients.invalid.required_clients', BAD_BUSINESS_RULES);
+            throw new Exceptions('Api.clients.invalid.clients', BAD_BUSINESS_RULES);
 
         $clientsCategoriesModel = new ClientsCategoriesModel();
         $categoryModel = new CategoriesModel();
