@@ -47,7 +47,7 @@ class PatchController extends BaseController
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
             if (!isset($this->operations[$operation]))
-                throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+                throw new Exceptions("Api.users.invalid.operation", \NOT_FOUND);
 
             $responsePatch = $this->operations[$operation]->execute((array)$data);
 

@@ -15,7 +15,7 @@ trait PostDTOs
             ],
         ],
         'birthdate' => [
-            'rules'  => 'string|required',
+            'rules'  => 'valid_date|required',
             'errors' => [
                 'string'   => 'Api.users.invalid.birthdate',
                 'required' => 'Api.users.invalid.birthdate',

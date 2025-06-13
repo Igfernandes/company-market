@@ -59,13 +59,8 @@ class RememberEntity extends Entity
      */
     public function setToken(?String $token)
     {
-        $session = session();
-
         if (strlen($token) > 20)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "token",
-                "param" => 20
-            ], $session->get("language")), BAD_BUSINESS_RULES);
+            throw new Exception("Api.remember.invalid.token_max_length_20", BAD_BUSINESS_RULES);
 
         if (!empty($token))
             $this->attributes['token'] = $token;
@@ -89,13 +84,8 @@ class RememberEntity extends Entity
      */
     public function setIp(?String $ip)
     {
-        $session = session();
-
         if (strlen($ip) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "ip",
-                "param" => 100
-            ], $session->get("language")), BAD_BUSINESS_RULES);
+            throw new Exception("Api.remember.invalid.token_max_length_100", BAD_BUSINESS_RULES);
 
         if (!empty($ip))
             $this->attributes['ip'] = $ip;

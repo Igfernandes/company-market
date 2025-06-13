@@ -8,7 +8,6 @@ use App\Database\Models\Clients\ClientsModel;
 use App\Libraries\Exceptions\Exceptions;
 use MercadoPago\Item;
 use MercadoPago\Preapproval;
-use MercadoPago\Preference;
 
 
 trait ProductAppellant
@@ -33,7 +32,7 @@ trait ProductAppellant
             "transaction_amount" => $options['price'],
             "currency_id" => "BRL",
             "start_date" => date('c'),
-            "end_date" => date('c', strtotime($charge->getExpiredAt() ?: '+1 year'))
+            "end_date" => date('c', strtotime($charge->getExpiredDays() ?: '+1 year'))
         ];
 
         $clientModel = new ClientsModel();
@@ -43,18 +42,15 @@ trait ProductAppellant
 
         // Salva a preferência
         if (empty($foundClient))
-            throw new Exceptions(lang("Validation.user_invalid"), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.not_found", BAD_BUSINESS_RULES);
 
 
         $preapproval->back_url = base_url("checkout/success");
         $preapproval->payer_email = $foundClient->getDecryptEmail();
 
-
-    
         // Salva a preferência
         if (!$preapproval->save())
-            throw new Exceptions(\str_replace("{field}", lang("Words.bank"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
-
+            throw new Exceptions("Api.integrations.invalid.not_found", BAD_BUSINESS_RULES);
 
         return $preapproval->init_point;
     }

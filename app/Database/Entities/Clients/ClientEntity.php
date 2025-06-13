@@ -74,13 +74,8 @@ class ClientEntity extends Entity
      */
     public function setName(?string $name)
     {
-        $NAME_TRANSLATE = lang('Words.name');
-
         if (!empty($name) && strlen($name) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $NAME_TRANSLATE,
-                "param" => 100
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.name_max_length_100', BAD_BUSINESS_RULES);
 
         if (!empty($name)) {
             $this->attributes['name'] = $name;
@@ -105,12 +100,8 @@ class ClientEntity extends Entity
      */
     public function setAvatar(?string $avatar)
     {;
-
         if (!empty($avatar) && !strlen($avatar) > 500)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "avatar",
-                "param" => 500
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception("Api.clients.avatar_max_length_500", BAD_BUSINESS_RULES);
 
         if (!empty($avatar)) {
             $this->attributes['avatar'] = $avatar;
@@ -145,13 +136,11 @@ class ClientEntity extends Entity
      */
     public function setPhone(?string $phone)
     {
-        $PHONE_TRANSLATE = lang('Words.phone');
-
-        if (!empty($phone) && strlen($phone) > 255)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $PHONE_TRANSLATE,
-                "param" => 255
-            ]), BAD_BUSINESS_RULES);
+        if (!empty($phone) && strlen($phone) > 35)
+            throw new Exception(
+                "Api.clients.phone_max_length_35",
+                BAD_BUSINESS_RULES
+            );
 
         if (!empty($phone)) {
             $this->attributes['phone'] = $phone;
@@ -198,13 +187,8 @@ class ClientEntity extends Entity
      */
     public function setEmail(?string $email)
     {
-        $EMAIL_TRANSLATE = lang('Words.email');
-
         if (!empty($email) && strlen($email) > 255)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $EMAIL_TRANSLATE,
-                "param" => 255
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception("Api.clients.email_max_length_255", BAD_BUSINESS_RULES);
 
         $this->attributes['email'] = $email;
     }

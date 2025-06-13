@@ -57,15 +57,8 @@ class SettingPrivacyEntity extends Entity
      */
     public function setTitle(?String $title)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $CONFIGURATION_PRIVACY_TRANSLATE = lang('Words.configuration_privacy', [], $LANGUAGE);
-
         if (strlen($title) > 250)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $CONFIGURATION_PRIVACY_TRANSLATE,
-                "value" => 250
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.settings_privacy.invalid.title_max_length_200", BAD_REQUEST);
 
         if (!empty($title))
             $this->attributes['title'] = $title;

@@ -35,7 +35,7 @@ class MercadoPagoBusiness
         $foundBank = $integrationBankModel->where(["provider" => "MERCADO_PAGO"])->first();
 
         if (empty($foundBank))
-            throw new Exceptions(\lang("Api.webhook.mercado_pago"), \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.webhook.mercado_pago", \BAD_BUSINESS_RULES);
 
         $mercadoPago = new MercadoPago($foundBank->getDecryptPrivateToken());
         return $mercadoPago;

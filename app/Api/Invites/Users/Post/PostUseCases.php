@@ -37,7 +37,7 @@ class PostUseCases
             throw new Exceptions("Api.invites.invalid.already_exists_phone", BAD_REQUEST);
 
         if (isset($payload['group']) && !$usersGroupsBusiness->hasGroups($payload['group']))
-            throw new Exceptions("Api.invites.invalid..invalid_group", BAD_REQUEST);
+            throw new Exceptions("Api.invites.invalid.invalid_group", BAD_REQUEST);
 
         $invitesModel = new InvitesModel();
         $inviteEntity = new InviteEntity();

@@ -37,9 +37,6 @@ class PutUseCases
         if (empty($foundUser))
             throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
-
-        $foundUser->setEmailSha256(\referenceHash($payload['email']));
-        $foundUser->setEncryptEmail($payload['email']);
         $foundUser->setPhoneSha256(\referenceHash($payload['phone']));
         $foundUser->setEncryptPhone($payload['phone']);
         $foundUser->setName($payload['name']);

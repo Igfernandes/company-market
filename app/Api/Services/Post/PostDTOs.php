@@ -62,13 +62,13 @@ trait PostDTOs
             ],
         ],
         'realized_at' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'valid_date|permit_empty',
             'errors' => [
                 'string' => 'Api.services.invalid.realized_at',
             ],
         ],
         'expired_at' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'valid_date|permit_empty',
             'errors' => [
                 'string' => 'Api.services.invalid.expired_at',
             ],

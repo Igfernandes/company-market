@@ -62,15 +62,8 @@ class CustomFormEntity extends Entity
      */
     public function setName(?String $name)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $PAGE_TRANSLATE = lang('Words.name', [], $LANGUAGE);
-
         if (strlen($name) > 200)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $PAGE_TRANSLATE,
-                "param" => 250
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.custom_forms.invalid.name_max_length_200", BAD_REQUEST);
 
         if (!empty($name))
             $this->attributes['name'] = $name;
@@ -95,15 +88,8 @@ class CustomFormEntity extends Entity
      */
     public function setSlug(?String $slug)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $PAGE_TRANSLATE = lang('Words.slug', [], $LANGUAGE);
-
         if (strlen($slug) > 200)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $PAGE_TRANSLATE,
-                "param" => 250
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.custom_forms.invalid.slug_max_length_200", BAD_REQUEST);
 
         if (!empty($slug))
             $this->attributes['slug'] = $slug;
@@ -127,13 +113,8 @@ class CustomFormEntity extends Entity
      */
     public function setComponents(?String $components)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-
         if (!isJson($components))
-            throw new Exception(lang('Validation.invalid_json', [
-                "json" => "components"
-            ], $LANGUAGE), INTERNAL_ERROR);
+            throw new Exception("Api.custom_forms.invalid.json", INTERNAL_ERROR);
 
         if (!empty($components))
             $this->attributes['components'] = $components;
@@ -157,14 +138,8 @@ class CustomFormEntity extends Entity
      */
     public function setDescription(?String $description)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-
         if (strlen($description) > 250)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => "description",
-                "param" => 250
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.custom_forms.invalid.description_max_length_250", BAD_REQUEST);
 
         if (!empty($description))
             $this->attributes['description'] = $description;
@@ -188,10 +163,8 @@ class CustomFormEntity extends Entity
      */
     public function setStatus(String $status)
     {
-        $session = session();
-
         if (array_search($status, ["PUBLISHED", "DRAFT"]) === false)
-            throw new Exception(lang('Validation.enum_invalid', [], $session->get("language")), BAD_REQUEST);
+            throw new Exception("Api.custom_forms.invalid.status", BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;

@@ -61,15 +61,8 @@ class CustomFormsHistoryEntity extends Entity
      */
     public function setDescription(?String $description)
     {
-        $session = session();
-        $LANGUAGE = $session->get("language");
-        $KIN_NAME_TRANSLATE = lang('Words.description', [], $LANGUAGE);
-
         if (strlen($description) > 150)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $KIN_NAME_TRANSLATE,
-                "param" => 250
-            ], $LANGUAGE), BAD_REQUEST);
+            throw new Exception("Api.custom_forms_history.invalid.description_max_length_150", BAD_REQUEST);
 
         if (!empty($description))
             $this->attributes['description'] = $description;

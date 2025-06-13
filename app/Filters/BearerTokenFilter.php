@@ -17,7 +17,7 @@ class BearerTokenFilter implements FilterInterface
 
         $errorResponse = service('response')->setStatusCode(NOT_FOUND)
             ->setJSON([
-                'errors' => lang("Errors.not_found"),
+                'errors' => "Api.not_found_route",
             ]);
         // Recupera o token Bearer do cabeçalho da requisição
         $authorizationHeader = $request->getHeader('Authorization');

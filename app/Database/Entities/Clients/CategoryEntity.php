@@ -10,7 +10,7 @@ use Exception;
 class CategoryEntity extends Entity
 {
     use EntityEnhancerTrait;
-    
+
     protected $dates = [];
     public $attributes = [
         'id'              => null,
@@ -61,13 +61,9 @@ class CategoryEntity extends Entity
      */
     public function setName(?string $name)
     {
-        $NAME_TRANSLATE = lang('Words.name');
 
         if (strlen($name) > 100)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $NAME_TRANSLATE,
-                "param" => 100
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.categories.name_max_length_100', BAD_BUSINESS_RULES);
 
         if (!empty($name)) {
             $this->attributes['name'] = $name;
@@ -113,13 +109,8 @@ class CategoryEntity extends Entity
      */
     public function setDescription(?string $description)
     {
-        $DESCRIPTION_TRANSLATE = lang('Words.description');
-
         if (strlen($description) > 300)
-            throw new Exception(lang('Validation.max_length', [
-                "field" => $DESCRIPTION_TRANSLATE,
-                "param" => 300
-            ]), BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.categories.name_max_length_100', BAD_BUSINESS_RULES);
 
         if (!empty($description)) {
             $this->attributes['description'] = $description;

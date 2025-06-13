@@ -8,7 +8,7 @@ trait PostDTOs
         'client' => [
             'rules' => 'integer',
             'errors' => [
-                'integer' => 'Api.clients.fields.invalid.client',
+                'integer' => 'Api.clients.fields.invalid.client_id',
             ],
         ],
     ];

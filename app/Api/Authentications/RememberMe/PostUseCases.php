@@ -22,13 +22,13 @@ class PostUseCases
         $foundRemember = $rememberModel->where($rememberEntity->toArray(true))->first();
 
         if (empty($foundRemember))
-            throw new Exceptions("Api.remember.invalid.token_invalid", BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.remember.invalid.token", BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
         $foundUser = $usersModel->first($foundRemember->getUserId());
 
         if (empty($foundUser))
-            throw new Exceptions((lang("Api.remember.invalid.token_invalid")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.remember.invalid.token", BAD_BUSINESS_RULES);
 
         $session->set("userAuth", $foundUser);
 

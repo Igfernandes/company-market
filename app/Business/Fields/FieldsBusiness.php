@@ -41,7 +41,7 @@ class FieldsBusiness
         $keyEntity = \strtolower($payload['scope']) . "_id";
 
         if (!isset($model[$payload["scope"]]))
-            throw new Exceptions("Fields Case:" . lang("Errors.operation_invalid"));
+            throw new Exceptions("Fields Case: Api.fields.invalid.operation_invalid");
 
         $data = [
             "field_id"  => $payload["field_id"],

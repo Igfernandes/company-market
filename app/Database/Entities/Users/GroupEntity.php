@@ -2,6 +2,7 @@
 
 namespace App\Database\Entities\Users;
 
+use App\Libraries\Exceptions\Exceptions;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 use Exception;
@@ -104,10 +105,8 @@ class GroupEntity extends Entity
      */
     public function setStatus(?String $status)
     {
-        $session = session();
-
         if (array_search($status, ["ACTIVE", "INACTIVE", "ANALYSIS"]) === false)
-            throw new Exception(lang('Validation.enum_invalid', [], $session->get("language")), BAD_REQUEST);
+            throw new Exceptions("Api.group.invalid.status", BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;

@@ -50,10 +50,10 @@ trait GetDTOs
                 'integer' => 'Api.dispatchers.invalid.service_id',
             ],
         ],
-        'scheduled_at' => [
+        'scheduled_day' => [
             'rules' => 'string|permit_empty',
             'errors' => [
-                'string' => 'Api.dispatchers.invalid.scheduled_at',
+                'string' => 'Api.dispatchers.invalid.scheduled_day',
             ],
         ],
         'started_at' => [

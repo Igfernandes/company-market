@@ -54,7 +54,7 @@ trait ProductPunctual
 
         // Salva a preferência
         if (!$preference->save()) {
-            throw new Exceptions(\str_replace("{field}", lang("Words.bank"),  lang("Validation.not_found")), BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.integrations.invalid.not_found_bank", BAD_BUSINESS_RULES);
         }
 
         return $preference->id;

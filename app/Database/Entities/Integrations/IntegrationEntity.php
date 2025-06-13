@@ -262,7 +262,7 @@ class IntegrationEntity extends Entity
     {
 
         if (array_search($status, ["ACTIVE", "INACTIVE", "ANALYSIS"]) === false)
-            throw new Exceptions(lang('Validation.enum_invalid'), BAD_REQUEST);
+            throw new Exceptions("Api.integrations.invalid.status_max_length_200", BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;

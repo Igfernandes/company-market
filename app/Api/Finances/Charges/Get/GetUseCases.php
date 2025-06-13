@@ -60,7 +60,7 @@ class GetUseCases
         if (!empty($payload['id']) && count($charges) > 0)
             return $this->builder($charges[0], $foundServices, $foundChargesClients);
         else if (!empty($payload['id']) && \count($charges) == 0)
-            throw new Exceptions(lang("Errors.not_found"), \NOT_FOUND);
+            throw new Exceptions("Api.charges.invalid.id", \NOT_FOUND);
 
         $chargesData = array_map(
             fn(ChargeEntity $charge) => $this->builder($charge, $foundServices, $foundChargesClients),

@@ -22,7 +22,7 @@ trait InvitesDataTrait
         $data = \json_decode((string) $dataDecrypted);
 
         if (!isset($data->email))
-            throw new Exception(lang("error: data->email"), \INTERNAL_ERROR);
+            throw new Exception("Api.invites.invalid.email", \INTERNAL_ERROR);
 
         return  (object)[
             "id" => $inviteEntity->getId(),

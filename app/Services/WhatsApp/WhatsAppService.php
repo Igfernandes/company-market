@@ -33,7 +33,7 @@ class WhatsAppService
         $integrationWhatsApp = $integrationsModel->where("provider", "WHATSAPP")->first();
 
         if (empty($integrationWhatsApp->getDecryptPublicToken()) || empty($integrationWhatsApp->getDecryptPrivateToken()))
-            throw new Exceptions(\str_replace("{field}", "credentials", lang("Validation.not_found")), \BAD_AUTH);
+            throw new Exceptions("Api.integrations.invalid.not_found_whatsapp", \BAD_AUTH);
 
         $this->accessToken = $integrationWhatsApp->getDecryptPrivateToken();
         $this->phoneId = $integrationWhatsApp->getDecryptPublicToken();

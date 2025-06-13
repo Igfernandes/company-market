@@ -36,7 +36,8 @@ class MessagesDispatcherBusiness
         $actions = [
             "EMAIL" => new EmailDispatcherBusiness(),
             "WHATSAPP" => new WhatsAppDispatcherBusiness(),
-            "FACEBOOK" => new FacebookDispatcherBusiness()
+            "FACEBOOK" => new FacebookDispatcherBusiness(),
+            "DEVICE" => new DeviceDispatcherBusiness()
         ];
 
         $platforms = \explode(",", $messageDispatcherEntity->getPlatforms());
