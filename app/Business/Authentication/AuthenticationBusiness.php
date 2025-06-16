@@ -70,4 +70,22 @@ class AuthenticationBusiness
 
         return $tokenRemember;
     }
+
+    public static function hasCSRFAvailable()
+    {
+        $request = service('request');
+        $security = service('security');
+
+        // Obter o nome do token (ex.: 'X-CSRF-TOKEN')
+        $tokenName = $security->getCSRFTokenName();
+        $tokenNamePartes = \explode("_", $tokenName);
+        $tokenNameUcfirst = \array_map(fn($word) => \ucfirst($word), $tokenNamePartes);
+        $tokenFixedName = join("-", $tokenNameUcfirst);
+
+        // Obter o valor enviado no header ou no body
+        $token = $request->getHeaderLine($tokenFixedName);
+        $hash = $security->getCSRFHash();
+        
+        return !hash_equals($hash, $token);
+    }
 }

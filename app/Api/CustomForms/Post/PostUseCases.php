@@ -15,6 +15,7 @@ class PostUseCases
     /**
      * @param array{
      *     name: string, 
+     *     status: string,
      *     type: 'PEOPLE'|'COMPANY', 
      *     description: string, 
      *     components: string,
@@ -32,6 +33,14 @@ class PostUseCases
         $customFormEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
+
+        if (isset($filteredPayload['started_at']))
+            $customFormEntity->setStartedAt($filteredPayload['started_at']);
+
+        if (isset($filteredPayload['expired_at']))
+            $customFormEntity->setExpiredAt($filteredPayload['expired_at']);
+
+        $customFormEntity->setStatus($filteredPayload['status']);
         $customFormEntity->setComponents($filteredPayload['components']);
         $customFormEntity->setSlug("form_" . date("his"));
 

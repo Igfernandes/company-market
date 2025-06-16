@@ -13,7 +13,7 @@ class CustomFormsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\CustomForms\CustomFormEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'slug', 'description', 'components', 'status'];
+    protected $allowedFields    = ['name', 'slug', 'description', 'components', 'status', 'started_at', 'expired_at'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

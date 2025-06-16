@@ -21,8 +21,18 @@ class GetUseCases
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $customFormModel = new CustomFormsModel();
-
-        $customForm = $customFormModel->where($filteredPayload)->first();
+        $now = date("Y-m-d H:i:s");
+        
+        $customForm = $customFormModel->groupStart()
+            ->where('started_at <=', $now)
+            ->orWhere('started_at IS NULL')
+            ->groupEnd()
+            ->groupStart()
+            ->where('expired_at >', $now)
+            ->orWhere('expired_at IS NULL')
+            ->groupEnd()->where([
+                "status" => "PUBLISHED"
+            ])->where($filteredPayload)->first();
 
         if (empty($customForm))
             throw new Exceptions("Api.forms.invalid.not_found", \NOT_FOUND);

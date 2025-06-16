@@ -31,7 +31,7 @@ class HttpClient
             case 'POST':
                 curl_setopt($ch, CURLOPT_POST, true);
                 if ($body !== null) {
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($body) ? json_encode($body) : $body);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($body) ? json_encode($body) : (array)$body);
                 }
                 break;
 

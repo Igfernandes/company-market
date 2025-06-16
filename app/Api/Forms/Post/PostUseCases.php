@@ -2,9 +2,11 @@
 
 namespace App\Api\Forms\Post;
 
+use App\Business\Clients\ClientsBusiness;
 use App\Business\CustomForms\FileFormFillBusiness;
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Entities\CustomForms\FormFillEntity;
+use App\Database\Entities\Fields\FieldEntity;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
 use App\Libraries\Crypto\Crypto;
@@ -27,8 +29,10 @@ class PostUseCases
     public function execute(array $payload)
     {
         helper("crypto");
-        if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
-            throw new Exceptions("Api.invalid.recaptcha", BAD_REQUEST);
+        if (!isset($payload['recaptcha']) || !validateRecaptcha([
+            "token" => $payload['recaptcha']
+        ]))
+            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         unset($payload['g-recaptcha-response']);
         $files = $payload['files'];
@@ -52,6 +56,8 @@ class PostUseCases
         $crypto = new Crypto();
         $package = \referenceHash(date("YYYY-MM-DD H:i:s"));
 
+        $clientData = [];
+
         foreach ($payload as $name => $value) {
             $id = \str_replace("input_", "", $name);
             $possibleFields = \array_values(array_filter($fields, fn($field) => $field->id === $id));
@@ -60,10 +66,14 @@ class PostUseCases
             if (\count($possibleFields) == 0)
                 continue;
 
+            /** @var FieldEntity */
             $currentField = $possibleFields[0];
 
             if (!isset($currentField->element))
                 continue;
+
+            if (\array_search($currentField->element, ['email', 'phone', 'birthdate', 'name']) !== false)
+                $clientData[$currentField->element] = $value;
 
             $formFillEntity->setFieldId($id);
             $formFillEntity->setPackage($package);
@@ -76,6 +86,12 @@ class PostUseCases
             $formFillEntity->setValue($valueEncrypted);
 
             $formsFill->save($formFillEntity);
+        }
+
+        if (isset($clientData['phone']) && isset($clientData['name'])) {
+            $session = \session();
+            $clientBusiness = new ClientsBusiness();
+            $clientBusiness->store($clientData, $session->get("userAuthId"));
         }
 
         return (object)[

@@ -10,6 +10,7 @@ class AuthenticationsRoutes extends BaseRoutes
     {
         /** Authentications */
         $routes->post("auth", "Api\Authentications\Auth\PostController::handle");
+        $routes->post("csrf", "Api\Authentications\CSRF\PostController::handle");
         $routes->post("remember-me", "Api\Authentications\RememberMe\PostController::handle");
     }
 }

@@ -41,9 +41,9 @@ class PostUseCases
         $clientsFieldsModel = new ClientsFieldsModel();
 
         foreach ($payload['fields'] as $index => $field):
-            $field['value'] = isset($files[$index]['value']) ? $files[$index]['value'] : $field;
+            $field['data'] = isset($files[$index]['value']) ? $files[$index]['value'] : $field;
 
-            if (empty($field['value']) || $field['value'] == "undefined")
+            if (empty($field['data']) || $field['data'] == "undefined")
                 continue;
 
             $clientField = new ClientFieldEntity();
@@ -54,9 +54,9 @@ class PostUseCases
             $where = $clientField->toArray(true);
 
             if (isset($files[$index])) {
-                FieldsFilesBusiness::validateFileSize($field['value']);
-                $clientField->setValue(FieldsFilesBusiness::upload($field['value']));
-            } else $clientField->setValue($field['value']);
+                FieldsFilesBusiness::validateFileSize($field['data']);
+                $clientField->setValue(FieldsFilesBusiness::upload($field['data']));
+            } else $clientField->setValue($field['data']['value']);
 
             $clientsFieldsModel->upsert($where, $clientField);
         endforeach;

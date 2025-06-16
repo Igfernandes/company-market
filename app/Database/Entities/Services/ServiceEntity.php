@@ -14,12 +14,9 @@ class ServiceEntity extends Entity
     public $attributes = [
         'id'             => null,
         'name'           => null,
-        'type'           => null,
         'description'    => null,
         'status'         => null,
-        'privacy'        => null,
         'stock'          => null,
-        'reservations'   => null,
         'photo'          => null,
         'address'        => null,
         'expired_at'     => null,
@@ -71,29 +68,7 @@ class ServiceEntity extends Entity
         if (!empty($name))
             $this->attributes['name'] = $name;
     }
-
-    /**
-     * getType function
-     *
-     * @return String|null
-     */
-    public function getType(): ?String
-    {
-        return $this->attributes['type'];
-    }
-
-    /**
-     * setType function
-     *
-     * @param String|null $type
-     * @return void
-     */
-    public function setType(?String $type)
-    {
-        if (!empty($type))
-            $this->attributes['type'] = $type;
-    }
-
+    
     /**
      * getDescription function
      *
@@ -139,28 +114,6 @@ class ServiceEntity extends Entity
     }
 
     /**
-     * getPrivacy function
-     *
-     * @return String|null
-     */
-    public function getPrivacy(): ?String
-    {
-        return $this->attributes['privacy'];
-    }
-
-    /**
-     * setPrivacy function
-     *
-     * @param String|null $privacy
-     * @return void
-     */
-    public function setPrivacy(?String $privacy)
-    {
-        if (!empty($privacy))
-            $this->attributes['privacy'] = $privacy;
-    }
-
-    /**
      * getStock function
      *
      * @return Int|null
@@ -182,30 +135,6 @@ class ServiceEntity extends Entity
             $this->attributes['stock'] = $stock;
         else
             throw new Exception("Stock cannot be negative.");
-    }
-
-    /**
-     * getReservations function
-     *
-     * @return Int|null
-     */
-    public function getReservations(): ?Int
-    {
-        return $this->attributes['reservations'];
-    }
-
-    /**
-     * setReservations function
-     *
-     * @param Int|null $reservations
-     * @return void
-     */
-    public function setReservations(?Int $reservations)
-    {
-        if (!is_null($reservations) && $reservations >= 0)
-            $this->attributes['reservations'] = $reservations;
-        else
-            throw new Exception("Reservations cannot be negative.");
     }
 
     /**

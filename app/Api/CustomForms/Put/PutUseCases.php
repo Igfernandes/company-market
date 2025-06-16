@@ -15,6 +15,8 @@ class PutUseCases
     /**
      * @param array{
      *     name: string, 
+     *     status: 'PUBLISHED'|'DRAFT',
+     *     status: string,
      *     type: 'PEOPLE'|'COMPANY', 
      *     description: string, 
      *     components: string,
@@ -35,6 +37,13 @@ class PutUseCases
             $customFormEntity->setDescription($filteredPayload['description']);
         $customFormEntity->setComponents($filteredPayload['components']);
 
+        if (isset($filteredPayload['started_at']))
+            $customFormEntity->setStartedAt($filteredPayload['started_at']);
+
+        if (isset($filteredPayload['expired_at']))
+            $customFormEntity->setExpiredAt($filteredPayload['expired_at']);
+
+        $customFormEntity->setStatus($filteredPayload['status']);
         $customFormsModel->set($customFormEntity->toArray(true))->update($filteredPayload['id']);
 
         NotificationsService::store([

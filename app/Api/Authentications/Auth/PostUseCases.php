@@ -16,7 +16,10 @@ class PostUseCases
      */
     public function execute(array $payload, object $userSettings)
     {
-        if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
+        if (!validateRecaptcha([
+            "token" => $payload['recaptcha'],
+            "userId" => $userSettings->ip
+        ]))
             throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         $authenticationBusiness = new AuthenticationBusiness();

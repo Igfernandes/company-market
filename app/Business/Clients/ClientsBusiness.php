@@ -18,9 +18,12 @@ class ClientsBusiness
         $this->clientsModel = new ClientsModel();
     }
 
-    public function store($payload, $userAuthId): int
+    public function store($payload, $userAuthId): int|false
     {
         helper(['crypto']);
+
+        if (!$this->hasClientByPhone($payload['phone']))
+            return false;
 
         $clientEntity = new ClientEntity();
 
@@ -50,6 +53,17 @@ class ClientsBusiness
 
         return $this->clientsModel->getInsertID();
     }
+
+    public function hasClientByPhone(string $phone): bool
+    {
+        \helper(['crypto']);
+        $clientsModel = new ClientsModel();
+
+        $foundClient = $clientsModel->where("phone_sha256", \referenceHash($phone))->first();
+
+        return !empty($foundClient);
+    }
+
 
     public function hasClient(int $clientId): bool
     {

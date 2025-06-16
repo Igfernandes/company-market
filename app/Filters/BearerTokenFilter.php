@@ -14,11 +14,17 @@ class BearerTokenFilter implements FilterInterface
         /** @var Request $request */
         $request = $request;  // Isso assegura que a tipagem seja resolvida corretamente
         $session = session();
-
-        $errorResponse = service('response')->setStatusCode(NOT_FOUND)
+        $origin = env('globals.href.frontend', '*');
+        
+        $errorResponse = service('response')
+            ->setHeader('Access-Control-Allow-Origin', $origin)
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+            ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED)
             ->setJSON([
-                'errors' => "Api.not_found_route",
+                'errors' => 'Api.unauthorized',
             ]);
+
         // Recupera o token Bearer do cabeçalho da requisição
         $authorizationHeader = $request->getHeader('Authorization');
 

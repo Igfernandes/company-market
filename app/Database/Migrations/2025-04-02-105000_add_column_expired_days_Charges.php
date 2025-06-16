@@ -12,7 +12,7 @@ class AddColumnExpiredDaysCharges extends Migration
     {
         $this->forge->addColumn($this->tb_name, [
             'expired_days' => [
-                'type'       => 'DATE',
+                'type'       => 'INT',
                 'null'       => true,
                 'after'      => 'type' // opcional: define onde o campo será inserido
             ],

@@ -27,7 +27,7 @@ trait PostDTOs
                 'in_list' => 'Api.auth.invalid.rememberMe',
             ],
         ],
-        'g-recaptcha-response' => [
+        'recaptcha' => [
             'rules'  => 'string',
             'errors' => [
                 'string' => 'Api.auth.invalid.recaptcha',
