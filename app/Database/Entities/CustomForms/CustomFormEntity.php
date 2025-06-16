@@ -18,6 +18,8 @@ class CustomFormEntity extends Entity
         'components'      => null,
         'description'     => null,
         'status'          => null,
+        'started_at'      => null,
+        'expired_at'      => null,
         'created_at'      => null,
         'updated_at'      => null
     ];
@@ -168,6 +170,50 @@ class CustomFormEntity extends Entity
 
         if (!empty($status))
             $this->attributes['status'] = $status;
+    }
+
+    /**
+     * setStartedAt function
+     *
+     * @param String|null $startedAt
+     * @return void
+     */
+    public function setStartedAt(?String $startedAt)
+    {
+        if (!empty($startedAt))
+            $this->attributes['started_at'] = $startedAt;
+    }
+
+    /**
+     * getStartedAt function
+     *
+     * @return String|null
+     */
+    public function getStartedAt(): ?String
+    {
+        return $this->attributes['started_at'];
+    }
+
+    /**
+     * setExpiredAt function
+     *
+     * @param String|null $expiredAt
+     * @return void
+     */
+    public function setExpiredAt(?String $expiredAt)
+    {
+        if (!empty($expiredAt))
+            $this->attributes['expired_at'] = $expiredAt;
+    }
+
+    /**
+     * getExpiredAt function
+     *
+     * @return String|null
+     */
+    public function getExpiredAt(): ?String
+    {
+        return $this->attributes['expired_at'];
     }
 
     /**

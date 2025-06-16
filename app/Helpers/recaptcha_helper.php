@@ -1,16 +1,20 @@
 <?php
 
+use App\Libraries\HttpClient\HttpClient;
 use Config\Recaptcha;
 
 if (!function_exists('validateRecaptcha')) {
     /**
-     * Valida um token do reCAPTCHA v3 usando a API do Google.
+     * Valida um token do reCAPTCHA usando a API do CloudFlare.
      *
      * Essa função envia uma requisição HTTP POST para a API do Google reCAPTCHA 
      * para verificar a validade do token fornecido. Retorna verdadeiro se o 
-     * token for válido e a pontuação for maior ou igual a 0.5, caso contrário, retorna falso.
+     * token for válido.
      *
-     * @param string $token O token do reCAPTCHA v3 a ser validado.
+     * @param array{
+     *      ip: string,
+     *      token: string
+     * } $props O token do reCAPTCHA a ser validado e o ip do usuário.
      * @return bool Retorna `true` se o token for válido e a pontuação >= 0.5, caso contrário, retorna `false`.
      *
      * @throws \RuntimeException Se a requisição cURL falhar.
@@ -23,36 +27,27 @@ if (!function_exists('validateRecaptcha')) {
      *     echo "Falha na verificação do reCAPTCHA.";
      * }
      */
-    function validateRecaptcha(string $token): bool
+    function validateRecaptcha(array $props): bool
     {
         $config = new Recaptcha();
-        // URL da API de verificação do reCAPTCHA v3
-        $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+        // URL da API de verificação do reCAPTCHA
+        $verifyURL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-        // Inicializando o cURL
-        $ch = curl_init();
-
-        // Configurando as opções do cURL
-        curl_setopt($ch, CURLOPT_URL, $verifyURL);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+        $payload = (object)[
             'secret' =>   $config->secretKey,
-            'response' => $token
-        ]));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            'response' => $props['token']
+        ];
 
-        // Ignorando a verificação do SSL (não recomendado em produção)
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        if (isset($props['userId']))
+            $payload->remoteip = $props['userId'];
 
         // Executando a requisição
-        $response = curl_exec($ch);
+        $data =   HttpClient::request("POST", $verifyURL, [
+            "Content-Type" => "multipart/form-data"
+        ],  $payload);
 
-        // Fechando o cURL
-        curl_close($ch);
+        $response = json_decode($data["response"]);
 
-        // Decodificando a resposta JSON da API
-        $responseKeys = json_decode($response, true);
-
-        return $responseKeys["success"] && $responseKeys["score"] >= 0.5;
+        return isset($response->success) && $response->success;
     }
 }

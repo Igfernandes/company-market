@@ -12,7 +12,6 @@ use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
-use App\Services\Notifications\NotificationsService;
 
 class PostUseCases
 {
@@ -48,6 +47,9 @@ class PostUseCases
 
         $usersModel = new UsersModel();
         $userEntity = new UserEntity();
+
+        if (!$usersBusiness->isEmailAvailable($dataInvite->email))
+            throw new Exceptions("Api.users.invalid.already_exists_email", BAD_AUTH);
 
         $encryptedKey = $dataInvite->email . ":" . $payload['password'];
         $systemKey = $crypto->encrypt($encryptedKey, getenv('system.encrypted_key'));

@@ -12,6 +12,15 @@ trait PostDTOs
                 'required' => 'Api.custom_forms.invalid.name',
             ],
         ],
+        'status' => [
+            'label'  => 'status',
+            'rules'  => 'string|in_list[PUBLISHED,DRAFT]|required',
+            'errors' => [
+                'string'   => 'Api.services.invalid.status',
+                'in_list'  => 'Api.services.invalid.status',
+                'required' => 'Api.services.invalid.status',
+            ],
+        ],
         'components' => [
             'rules' => 'string|required',
             'errors' => [
@@ -29,6 +38,18 @@ trait PostDTOs
             'rules' => 'in_list[PUBLISHED, DRAFT]|permit_empty',
             'errors' => [
                 'in_list' => 'Api.custom_forms.invalid.status',
+            ],
+        ],
+        'started_at' => [
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'valid_date' => 'Api.custom_forms.invalid.started_at',
+            ],
+        ],
+        'expired_at' => [
+            'rules' => 'valid_date|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.expired_at',
             ],
         ],
     ];

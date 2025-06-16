@@ -20,25 +20,10 @@ trait PostDTOs
                 'required' => 'Api.services.invalid.name',
             ],
         ],
-        'type' => [
-            'rules'  => 'string|in_list[APPELLANT, PUNCTUAL]|required',
-            'errors' => [
-                'string'   => 'Api.services.invalid.type',
-                'in_list'  => 'Api.services.invalid.type',
-                'required' => 'Api.services.invalid.type',
-            ],
-        ],
         'description' => [
             'rules'  => 'string|permit_empty',
             'errors' => [
                 'string' => 'Api.services.invalid.description',
-            ],
-        ],
-        'privacy' => [
-            'rules'  => 'in_list[PUBLIC, PRIVATE]|required',
-            'errors' => [
-                'in_list'  => 'Api.services.invalid.privacy',
-                'required' => 'Api.services.invalid.privacy',
             ],
         ],
         'stock' => [
@@ -46,13 +31,6 @@ trait PostDTOs
             'errors' => [
                 'integer'    => 'Api.services.invalid.stock',
                 'is_natural' => 'Api.services.invalid.stock',
-            ],
-        ],
-        'reservations' => [
-            'rules'  => 'integer|is_natural|permit_empty',
-            'errors' => [
-                'integer'    => 'Api.services.invalid.reservations',
-                'is_natural' => 'Api.services.invalid.reservations',
             ],
         ],
         'address' => [

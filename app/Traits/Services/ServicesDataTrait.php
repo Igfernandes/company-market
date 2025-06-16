@@ -11,12 +11,9 @@ trait ServicesDataTrait
         return  (Object)[
             "id" => $serviceEntity->getId(),
             "name" => $serviceEntity->getName(),
-            "type" => $serviceEntity->getType(),
-            "privacy" => $serviceEntity->getPrivacy(),
             "description" => $serviceEntity->getDescription(),
             "photo" => getPublicUrl($serviceEntity->getPhoto() ?? ""),
             "stock" => $serviceEntity->getStock(),
-            "reservations" => $serviceEntity->getReservations(),
             "realized_at" => $serviceEntity->getRealizedAt(),
             "expired_at" => $serviceEntity->getExpiredAt(),
             "address" => $serviceEntity->getAddress(),

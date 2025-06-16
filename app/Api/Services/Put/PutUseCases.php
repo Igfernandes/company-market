@@ -19,12 +19,11 @@ class PutUseCases
      *     id: integer,
      *     name: string, 
      *     photo: stdClass,
-     *     type: 'APPELLANT'|'PUNCTUAL', 
      *     description_contains: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
-     *     privacy: 'PUBLIC'|'PRIVATE',
      *     stock: integer,
-     *     reservations: integer
+     *     realized_at: string,
+     *     expired_at: string
      * } $payload
      */
     public function execute(array $payload)
@@ -57,11 +56,9 @@ class PutUseCases
         $serviceEntity->store($filteredPayload);
         $serviceEntity->setName($filteredPayload['name']);
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
-        $serviceEntity->setType($filteredPayload['type']);
 
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
-        $serviceEntity->setReservations(isset($filteredPayload['reservations']) ? $filteredPayload['reservations'] : 0);
-
+        
         $servicesModel->set($serviceEntity->toArray(true))->update($filteredPayload['id']);
 
         NotificationsService::store([

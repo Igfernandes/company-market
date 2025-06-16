@@ -25,11 +25,12 @@ class Cors implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        header("Access-Control-Allow-Origin: ");
+        header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Headers: Content-Type, Accept, Access-Control-Requested-Method");
         header("Access-Control-Allow-Methods: GET");
+
         $method = $_SERVER['REQUEST_METHOD'];
-        if($method == "OPTIONS"){
+        if ($method == "OPTIONS") {
             die();
         }
     }

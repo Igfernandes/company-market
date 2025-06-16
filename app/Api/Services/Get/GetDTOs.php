@@ -29,13 +29,6 @@ trait GetDTOs
                 'string' => 'Api.services.invalid.name_contains',
             ],
         ],
-        'type' => [
-            'rules'  => 'string|in_list[APPELLANT,PUNCTUAL]|permit_empty',
-            'errors' => [
-                'string'  => 'Api.services.invalid.type',
-                'in_list' => 'Api.services.invalid.type',
-            ],
-        ],
         'description_contains' => [
             'rules'  => 'string|permit_empty',
             'errors' => [
@@ -46,12 +39,6 @@ trait GetDTOs
             'rules'  => 'in_list[ACTIVE,INACTIVE]|permit_empty',
             'errors' => [
                 'in_list' => 'Api.services.invalid.status',
-            ],
-        ],
-        'privacy' => [
-            'rules'  => 'in_list[PUBLIC,PRIVATE]|permit_empty',
-            'errors' => [
-                'in_list' => 'Api.services.invalid.privacy',
             ],
         ],
         'created_at' => [

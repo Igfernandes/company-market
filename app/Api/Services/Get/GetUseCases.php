@@ -17,10 +17,8 @@ class GetUseCases
      *     id: int,
      *     in_ids: array<int>, 
      *     name: string, 
-     *     type: 'APPELLANT'|'PUNCTUAL', 
      *     description_contains: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
-     *     privacy: 'PUBLIC'|'PRIVATE'
      *     created_at: string, 
      *     updated_at: string 
      * } $payload
