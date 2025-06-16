@@ -46,10 +46,10 @@ trait PostDTOs
                 'required' => 'Api.checkout.invalid.product',
             ],
         ],
-        'g-recaptcha-response' => [
+        'recaptcha' => [
             'rules'  => 'string',
             'errors' => [
-                'string' => 'Api.charges.invalid.recaptcha',
+                'string' => 'Api.auth.invalid.recaptcha',
             ],
         ],
     ];

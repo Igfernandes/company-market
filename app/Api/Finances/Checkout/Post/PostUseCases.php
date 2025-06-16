@@ -25,8 +25,8 @@ class PostUseCases
     {
         $session = session();
 
-        if ($payload['g-recaptcha-response'] != \getenv('globals.recaptcha.tokenTest') & !validateRecaptcha($payload['g-recaptcha-response']))
-            throw new Exceptions("Api.charges.again_submit", BAD_REQUEST);
+        if (!validateRecaptcha(["token" => $payload['recaptcha']]))
+            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         $hasAmountsNotNumbers = \array_filter($payload['amounts'], fn($amount) => !is_int($amount));
         if (count($hasAmountsNotNumbers) > 0)
