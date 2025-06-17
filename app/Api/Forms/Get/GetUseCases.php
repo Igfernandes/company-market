@@ -22,7 +22,7 @@ class GetUseCases
 
         $customFormModel = new CustomFormsModel();
         $now = date("Y-m-d H:i:s");
-        
+
         $customForm = $customFormModel->groupStart()
             ->where('started_at <=', $now)
             ->orWhere('started_at IS NULL')
@@ -37,6 +37,6 @@ class GetUseCases
         if (empty($customForm))
             throw new Exceptions("Api.forms.invalid.not_found", \NOT_FOUND);
 
-        return $customForm;
+        return $customForm->toArray();
     }
 }

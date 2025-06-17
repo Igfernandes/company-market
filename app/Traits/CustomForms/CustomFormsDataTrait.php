@@ -15,6 +15,8 @@ trait CustomFormsDataTrait
             "description" => $customFormsEntity->getDescription(),
             "components" => $customFormsEntity->getComponents(),
             "status" => $customFormsEntity->getStatus(),
+            "started_at" => $customFormsEntity->getStartedAt(),
+            "expired_at" => $customFormsEntity->getExpiredAt(),
             "created_at" => $customFormsEntity->getCreatedAt(),
             "updated_at" => $customFormsEntity->getUpdatedAt()
         ];
