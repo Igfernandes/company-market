@@ -37,5 +37,17 @@ return [
     ],
     "footer" => [
         "text" => " Se você acha que recebeu este e-mail por engano, entre em contato conosco em"
+    ],
+    "inscribes" => [
+        "title" => "CONFIRMAÇÃO DE VAGA",
+        "subtitle" => "LEIA COM ATENÇÃO",
+        "text_about_button" => "Para confirmar a sua presença, clique no botão abaixo.",
+        "text_button" => "Confirmar Presença",
+        "text_about_problems_button" => "Caso ocorra algum problema quanto ao uso do botão, acesse o link abaixo para prosseguir.",
+    ],
+    "unsubscribe" => [
+        "title" => "EXCLUSÃO DO EVENTO",
+        "subtitle" => "Você foi removido da atividade da lista de participantes do evento:",
+        "text_contact" => "Para mais detalhes, entre em contato com a central por vias de contatos disponíveis."
     ]
 ];

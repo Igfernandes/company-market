@@ -19,6 +19,7 @@ class PostUseCases
      *     name: string, 
      *     photo: UploadedFile,
      *     description: string, 
+     *     alerts: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
      *     stock: integer,
      *     address: string,
@@ -46,7 +47,7 @@ class PostUseCases
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
 
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
-        
+
         $servicesModel->save($serviceEntity);
 
         NotificationsService::store([

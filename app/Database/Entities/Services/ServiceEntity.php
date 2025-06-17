@@ -15,6 +15,7 @@ class ServiceEntity extends Entity
         'id'             => null,
         'name'           => null,
         'description'    => null,
+        'alerts'         => null,
         'status'         => null,
         'stock'          => null,
         'photo'          => null,
@@ -68,7 +69,7 @@ class ServiceEntity extends Entity
         if (!empty($name))
             $this->attributes['name'] = $name;
     }
-    
+
     /**
      * getDescription function
      *
@@ -89,6 +90,28 @@ class ServiceEntity extends Entity
     {
         if (!empty($description))
             $this->attributes['description'] = $description;
+    }
+
+    /**
+     * getAlerts function
+     *
+     * @return String|null
+     */
+    public function getAlerts(): ?String
+    {
+        return $this->attributes['alerts'];
+    }
+
+    /**
+     * setAlerts function
+     *
+     * @param String|null $alerts
+     * @return void
+     */
+    public function setAlerts(?String $alerts)
+    {
+        if (!empty($alerts))
+            $this->attributes['alerts'] = $alerts;
     }
 
     /**

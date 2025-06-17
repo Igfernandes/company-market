@@ -102,5 +102,9 @@ return [
     "service" => "serviço",
     "country_region" => "País/região",
     "charge" => "Cobrança",
-    "bank" => "Banco"
+    "bank" => "Banco",
+    "realized_at" => "Realizado em",
+    "end_at" => "Termino em",
+    "date" => "Data",
+    "meeting_point" => "Ponto de Encontro"
 ];

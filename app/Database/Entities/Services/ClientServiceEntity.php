@@ -1,67 +1,67 @@
 <?php
 
-namespace App\Database\Entities\Clients;
+namespace App\Database\Entities\Services;
 
-use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
+use App\Database\Entities\Services\ServiceEntity;
 use CodeIgniter\Entity\Entity;
 
-class ClientCategoryEntity extends Entity
+class ClientServiceEntity extends Entity
 {
 
     protected $dates = [];
     public $attributes = [
-        'category_id'        => null,
+        'service_id'        => null,
         'client_id'          => null,
         "created_at"         => null
     ];
     public $relations = [
         'client' => null,
-        'category' => null
+        'service' => null
     ];
 
     /**
-     * getCategoryId function
+     * getServiceId function
      *
      * @return Int|null
      */
-    public function getCategoryId(): ?Int
+    public function getServiceId(): ?Int
     {
-        return $this->attributes['category_id'];
+        return $this->attributes['service_id'];
     }
 
     /**
-     * setCategoryId function
+     * setServiceId function
      *
-     * @param Int|null $categoryId
+     * @param Int|null $serviceId
      * @return void
      */
-    public function setCategoryId(Int $categoryId)
+    public function setServiceId(Int $serviceId)
     {
-        if (!empty($categoryId))
-            $this->attributes['category_id'] = $categoryId;
+        if (!empty($serviceId))
+            $this->attributes['service_id'] = $serviceId;
     }
 
     /**
-     * getCategory function
+     * getService function
      *
-     * @return CategoryEntity|null
+     * @return ServiceEntity|null
      */
-    public function getCategory(): ?CategoryEntity
+    public function getService(): ?ServiceEntity
     {
-        return $this->relations['category'];
+        return $this->relations['service'];
     }
 
     /**
-     * setCategory function
+     * setService function
      *
-     * @param CategoryEntity|null $category
+     * @param ServiceEntity|null $service
      * @return void
      */
-    public function setCategory(CategoryEntity $category)
+    public function setService(ServiceEntity $service)
     {
-        if (!empty($category))
-            $this->relations['category'] = $category;
+        if (!empty($service))
+            $this->relations['service'] = $service;
     }
 
     /**

@@ -13,7 +13,7 @@ class ServicesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Services\ServiceEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description', 'status','stock', 'photo', 'realized_at', 'expired_at', 'address'];
+    protected $allowedFields    = ['name', 'description', 'alerts', 'status', 'stock', 'photo', 'realized_at', 'expired_at', 'address'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

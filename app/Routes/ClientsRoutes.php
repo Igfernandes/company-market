@@ -25,6 +25,8 @@ class ClientsRoutes extends BaseRoutes
         $routes->get("clients/(:num)/fields", "Api\Clients\Fields\Get\GetController::handle/$1", $this->optionsWithAuthentications);
         $routes->get("clients/preview", "Api\Clients\GetPreview\GetPreviewController::handle");
 
+        $routes->post("clients/services/(:num)", "Api\Clients\Services\Post\PostController::handle/$1", $this->optionsWithAuthentications);
+
         $routes->get("clients/categories", "Api\Clients\Categories\Get\GetController::handle", $this->optionsWithAuthentications);
         $routes->post("clients/categories", "Api\Clients\Categories\Post\PostController::handle", $this->optionsWithAuthentications);
     }

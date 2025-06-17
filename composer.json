@@ -15,7 +15,8 @@
     "predis/predis": "^3.0",
     "react/event-loop": "^1.5",
     "clue/redis-react": "^2.8",
-    "minishlink/web-push": "^9.0"
+    "minishlink/web-push": "^9.0",
+    "react/socket": "^1.16"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9",

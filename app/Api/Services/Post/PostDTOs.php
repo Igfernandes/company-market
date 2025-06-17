@@ -26,6 +26,12 @@ trait PostDTOs
                 'string' => 'Api.services.invalid.description',
             ],
         ],
+        'alerts' => [
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.services.invalid.alerts',
+            ],
+        ],
         'stock' => [
             'rules'  => 'integer|is_natural|permit_empty',
             'errors' => [
