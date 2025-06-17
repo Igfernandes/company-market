@@ -11,5 +11,12 @@ trait GetDTOs
                 'integer' => 'Api.forms.invalid.id',
             ],
         ],
+        'slug' => [
+            'rules'  => 'string|permit_empty',
+            'errors' => [
+                'string' => 'Api.forms.invalid.id',
+            ],
+        ],
+        
     ];
 }
