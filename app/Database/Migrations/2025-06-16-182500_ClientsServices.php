@@ -22,7 +22,7 @@ class ClientsServices extends Migration
             'created_at datetime default current_timestamp'
         ]);
 
-        $this->forge->addKey(['client_id', 'service_id'], true);
+        $this->forge->addKey(['client_id', 'service_id']);
 
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
         $this->forge->addForeignKey("service_id", "services", ["id"]);
