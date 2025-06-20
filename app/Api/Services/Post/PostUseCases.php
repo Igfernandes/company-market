@@ -3,6 +3,7 @@
 namespace App\Api\Services\Post;
 
 use App\Business\Services\PhotoServiceBusiness;
+use App\Business\Services\ServicesRulesBusiness;
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
 use App\Services\Notifications\NotificationsService;
@@ -24,7 +25,8 @@ class PostUseCases
      *     stock: integer,
      *     address: string,
      *     realized_at: string,
-     *     expired_at: string
+     *     expired_at: string,
+     *     gratuity: integer
      * } $payload
      */
     public function execute(array $payload)
@@ -49,6 +51,9 @@ class PostUseCases
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
 
         $servicesModel->save($serviceEntity);
+
+        $servicesRulesBusiness = new ServicesRulesBusiness();
+        $servicesRulesBusiness->gratuity($servicesModel->getInsertID(), $filteredPayload['gratuity']);
 
         NotificationsService::store([
             "scope" => "services",

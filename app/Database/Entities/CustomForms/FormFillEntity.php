@@ -51,18 +51,6 @@ class FormFillEntity extends Entity
         }
     }
 
-    public function getClientId(): ?int
-    {
-        return $this->attributes['client_id'];
-    }
-
-    public function setClientId(?int $clientId)
-    {
-        if (!empty($clientId)) {
-            $this->attributes['client_id'] = $clientId;
-        }
-    }
-
     public function getPackage(): ?string
     {
         return $this->attributes['package'];

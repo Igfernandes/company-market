@@ -30,8 +30,8 @@ class NotificationsService
 
         HttpClient::request("POST", "$URL_BASE/api/tasks/notifications", [
             'Content-Type' => 'application/json'
-        ], json_encode([
+        ], [
             "token_navigation" => $session->get('tokenNavigation')
-        ]));
+        ]);
     }
 }

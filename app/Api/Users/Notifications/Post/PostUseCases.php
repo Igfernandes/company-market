@@ -36,7 +36,6 @@ class PostUseCases
         $foundNotifications = $usersNotificationsModel->where("user_id", $userAuthId)->findAll();
         $notificationIdsAlreadySaved = \array_map(fn(UserNotificationEntity $userNotification) => $userNotification->getNotificationId(), $foundNotifications);
 
-        \var_dump($notificationIdsAlreadySaved);
         $notificationsNotSaved = [];
         /** @var NotificationEntity */
         foreach ($notifications as $notification) {
@@ -48,7 +47,6 @@ class PostUseCases
                 "notification_id" => $notification->getId()
             ]);
         }
-        \var_dump($notificationsNotSaved);
 
         if (\count($notificationsNotSaved) > 0)
             $usersNotificationsModel->insertBatch($notificationsNotSaved);

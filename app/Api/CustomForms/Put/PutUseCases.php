@@ -21,6 +21,9 @@ class PutUseCases
      *     description: string, 
      *     components: string,
      *     status: 'PUBLISHED' | 'DRAFT',
+     *     service_id: int,
+     *     started_at: string,
+     *     expired_at: string
      * } $payload
      */
     public function execute(array $payload)
@@ -36,6 +39,9 @@ class PutUseCases
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
         $customFormEntity->setComponents($filteredPayload['components']);
+
+        if (isset($filteredPayload['service_id']))
+            $customFormEntity->setServiceId($filteredPayload['service_id']);
 
         if (isset($filteredPayload['started_at']))
             $customFormEntity->setStartedAt($filteredPayload['started_at']);

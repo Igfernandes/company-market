@@ -87,6 +87,7 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
  */
 
 define("OK", 200);
+define("ACCEPTED", 202);
 define("BAD_REQUEST", 400);
 define("BAD_AUTH", 401);
 define("NOT_FOUND", 404);

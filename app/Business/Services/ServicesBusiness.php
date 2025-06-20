@@ -5,6 +5,7 @@ namespace App\Business\Services;
 use App\Business\BaseBusiness;
 use App\Business\Clients\ClientsBusiness;
 use App\Database\Entities\Services\ClientServiceEntity;
+use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ClientsServicesModel;
 use App\Database\Models\Services\ServicesModel;
 use PhpParser\Node\Expr\Cast\Array_;
@@ -27,6 +28,15 @@ class ServicesBusiness
         return !empty($foundUsers);
     }
 
+    public function getAvailableService($query): null|ServiceEntity
+    {
+        $foundUsers = $this->serviceModel->where($query)->where([
+            "status" => "ACTIVE"
+        ])->first();
+
+        return $foundUsers;
+    }
+
     /**
      * 
      * @param array{
@@ -36,14 +46,16 @@ class ServicesBusiness
      * 
      * @return false|array{
      *      inscribes: array{int},
-     *      excludes: array{int}
+     *      excludes: array{int},
+     *      service: ServiceEntity
      * }
      */
     public function inscribe(array $props)
     {
-        if (!$this->hasService([
+        $service = $this->getAvailableService([
             "id" => $props['service_id']
-        ]))
+        ]);
+        if (empty($service))
             return false;
 
         $clientsBusiness = new ClientsBusiness();
@@ -70,12 +82,15 @@ class ServicesBusiness
 
         $clientsExcluded = \array_filter($clientsIdsRegistered, fn(int $clientRegisteredId) => \array_search($clientRegisteredId, $props['client_ids']) === false);
 
-        $clientsServicesModel->whereIn("client_id", $clientsExcluded)->delete();
-        $clientsServicesModel->insertBatch($clientsServiceData);
+        if (\count($clientsExcluded) > 0)
+            $clientsServicesModel->whereIn("client_id", $clientsExcluded)->delete();
+        if (\count($clientsServiceData) > 0)
+            $clientsServicesModel->insertBatch($clientsServiceData);
 
         return [
             "inscribes" => $props['client_ids'],
-            "excludes" => $clientsExcluded
+            "excludes" => $clientsExcluded,
+            "service" => $service
         ];
     }
 }

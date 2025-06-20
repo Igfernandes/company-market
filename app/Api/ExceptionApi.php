@@ -23,6 +23,6 @@ trait ExceptionApi
 
     protected function getCodeError($err)
     {
-        return $err->getCode() >= BAD_REQUEST && $err->getCode() <= INTERNAL_ERROR ? $err->getCode() : INTERNAL_ERROR;
+        return $err->getCode() >= ACCEPTED && $err->getCode() <= INTERNAL_ERROR ? $err->getCode() : INTERNAL_ERROR;
     }
 }

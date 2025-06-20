@@ -19,25 +19,28 @@ class ClientsServicesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Services\ClientServiceEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['service_id', 'client_id'];
+    protected $allowedFields    = ['service_id', 'client_id', 'is_confirm'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
 
-    public function getClientsWithCategory(array $clientQuery, array $serviceQuery = []): array
+    public function getClientsWithServices(array $clientQuery, array $serviceQuery = []): array
     {
         $clientQueryUpdated = $this->addPrefixInQuery($clientQuery, "clients");
         $serviceQueryUpdated = $this->addPrefixInQuery($serviceQuery, "services");
 
-        $founds = $this->Select(" clients.*, services.*,
+        $model = $this->Select(" clients.*, services.*,
         clients.name as client_name, clients.id as client_id, clients.created_at as client_created_at, 
         clients.updated_at as client_updated_at,
         services.name as service_name, services.id as service_id, services.created_at as service_created_at,
         services.updated_at as service_updated_at")
             ->join("clients", "clients.id = clients_services.client_id")
-            ->join("categories", "services.id = clients_services.service_id")
-            ->where($clientQueryUpdated)
-            ->where($serviceQueryUpdated)->findAll();
+            ->join("services", "services.id = clients_services.service_id");
+
+        if (\count($clientQueryUpdated) > 0)
+            $model->where($clientQueryUpdated);
+
+        $founds = $model->where($serviceQueryUpdated)->findAll();
 
         return array_map(function (ClientServiceEntity $clientServiceData) {
             $clientService = new ClientServiceEntity();

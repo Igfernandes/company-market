@@ -14,8 +14,8 @@ trait PostDTOs
         'service_id' => [
             'rules' => 'integer|required',
             'errors' => [
-                'integer'  => 'Api.clients.invalid.id',
-                'required' => 'Api.clients.invalid.id',
+                'integer'  => 'Api.services.invalid.id',
+                'required' => 'Api.services.invalid.id',
             ],
         ],
     ];

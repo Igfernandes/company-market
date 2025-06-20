@@ -1,4 +1,7 @@
 <?= view('mails/_header') ?>
+<?php
+$link = getenv('globals.href.frontend') . "/services/confirmation?key={$service->getId()}&client={$clientId}";
+?>
 <tbody>
     <tr>
         <td style="
@@ -81,7 +84,7 @@
                     max-width: 390px;
                     margin: 1.75rem auto;
                 ">
-                <a href="<?= getenv('globals.href.frontend') ?>/services/confirmation?key=<?= $service->getId() ?>" target="_blank" rel="noopener noreferrer"
+                <a href="<?= $link ?>" target="_blank" rel="noopener noreferrer"
                     style="
                         background: #BC2224;
                         padding: .75rem 5rem;
@@ -104,12 +107,12 @@
                     max-width: 390px;
                     margin: 0 auto;
                     ">
-                <a href="<?= getenv('globals.href.frontend') ?>/services/confirmation?key=<?= $service->getId() ?>" target="_blank" rel="noopener noreferrer"
+                <a href="<?= $link ?>" target="_blank" rel="noopener noreferrer"
                     style="
                         color: #101010;
                         text-decoration: none;
                         font-size: .8rem;">
-                    <?= getenv('globals.href.frontend') ?>/services?key=<?= $service->getId() ?>
+                    <?= $link ?>
                 </a>
             </div>
         </td>

@@ -4,9 +4,11 @@ namespace App\Api\Forms\Post;
 
 use App\Business\Clients\ClientsBusiness;
 use App\Business\CustomForms\FileFormFillBusiness;
+use App\Database\Entities\CustomForms\ClientFormHistoryEntity;
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Entities\CustomForms\FormFillEntity;
 use App\Database\Entities\Fields\FieldEntity;
+use App\Database\Models\CustomForms\ClientsFormsHistoryModel;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
 use App\Libraries\Crypto\Crypto;
@@ -89,9 +91,17 @@ class PostUseCases
         }
 
         if (isset($clientData['phone']) && isset($clientData['name'])) {
-            $session = \session();
             $clientBusiness = new ClientsBusiness();
-            $clientBusiness->store($clientData, $session->get("userAuthId"));
+            $clientId = $clientBusiness->store($clientData);
+
+            $clientsFormsHistory = new ClientsFormsHistoryModel();
+            $clientFormHistoryEntity = new ClientFormHistoryEntity();
+
+            $clientFormHistoryEntity->setClientId($clientId);
+            $clientFormHistoryEntity->setFormId($payload['form_id']);
+            $clientFormHistoryEntity->setPackage($package);
+            
+            $clientsFormsHistory->save($clientFormHistoryEntity);
         }
 
         return (object)[

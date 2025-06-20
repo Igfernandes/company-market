@@ -2,6 +2,7 @@
 
 namespace App\Services\Mailer;
 
+use App\Libraries\Exceptions\Exceptions;
 use PHPMailer\PHPMailer\Exception;
 
 /**
@@ -24,6 +25,9 @@ class MailService extends MailConfig
 
             // Adiciona os destinatários
             foreach ($options->recipients as $recipient) {
+                if (empty($recipient['email']) || !filter_var($recipient['email'], FILTER_VALIDATE_EMAIL))
+                    throw new Exceptions("Api.mailer.invalid.email", \ACCEPTED);
+
                 $mail->addAddress($recipient['email'], $recipient['name']);
             }
 
@@ -37,13 +41,15 @@ class MailService extends MailConfig
 
             // Envia o e-mail
             if (!$mail->send()) {
-                error_log('Erro ao enviar e-mail: ' . $mail->ErrorInfo);
+                // error_log('Erro ao enviar e-mail: ' . $mail->ErrorInfo);
                 return false;
             }
 
             return true;
         } catch (Exception $e) {
-            error_log('Exceção ao enviar e-mail: ' . $e->getMessage());
+            if (\strrpos($e->getMessage(), "e-mail inválido"))
+                throw new Exceptions(lang("Api.mailer.invalid.email"), ACCEPTED);
+            // error_log('Exceção ao enviar e-mail: ' . $e->getMessage());
             return false;
         }
     }

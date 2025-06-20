@@ -20,6 +20,9 @@ class PostUseCases
      *     description: string, 
      *     components: string,
      *     status: 'PUBLISHED' | 'DRAFT',
+     *     service_id: int,
+     *     started_at: string,
+     *     expired_at: string
      * } $payload
      */
     public function execute(array $payload)
@@ -33,6 +36,9 @@ class PostUseCases
         $customFormEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
         if (isset($filteredPayload['description']))
             $customFormEntity->setDescription($filteredPayload['description']);
+
+        if (isset($filteredPayload['service_id']))
+            $customFormEntity->setServiceId($filteredPayload['service_id']);
 
         if (isset($filteredPayload['started_at']))
             $customFormEntity->setStartedAt($filteredPayload['started_at']);

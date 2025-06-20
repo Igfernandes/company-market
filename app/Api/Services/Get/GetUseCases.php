@@ -4,6 +4,7 @@ namespace App\Api\Services\Get;
 
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
+use App\Database\Models\Services\ServicesRulesModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
@@ -38,14 +39,17 @@ class GetUseCases
         $servicesModel = $this->builderClauseWithContains($payload, $servicesModel);
 
         $services = $servicesModel->where($filteredPayload)->findAll();
+        $servicesRulesModel = new ServicesRulesModel();
+
+        $rules = $servicesRulesModel->whereIn("service_id", \array_map(fn(ServiceEntity $service) => $service->getId(), $services))->findAll();
 
         if (!empty($payload['id']) && count($services) > 0)
-            return $this->builder($services[0]);
+            return $this->builder($services[0], $rules);
         else if (!empty($payload['id']) && \count($services) == 0)
             throw new Exceptions("Api.services.invalid.not_found", \NOT_FOUND);
 
         $servicesData = array_map(
-            fn(ServiceEntity $service) => $this->builder($service),
+            fn(ServiceEntity $service) => $this->builder($service, $rules),
             $services
         );
 

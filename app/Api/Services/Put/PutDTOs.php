@@ -29,7 +29,7 @@ trait PutDTOs
                 'string' => 'Api.services.invalid.description',
             ],
         ],
-         'alerts' => [
+        'alerts' => [
             'label'  => 'alerts',
             'rules'  => 'string|permit_empty',
             'errors' => [
@@ -42,6 +42,13 @@ trait PutDTOs
             'errors' => [
                 'integer'    => 'Api.services.invalid.stock',
                 'is_natural' => 'Api.services.invalid.stock',
+            ],
+        ],
+        'gratuity' => [
+            'rules'  => 'integer|is_natural|permit_empty',
+            'errors' => [
+                'integer'    => 'Api.services.invalid.gratuity',
+                'is_natural' => 'Api.services.invalid.gratuity',
             ],
         ],
         'address' => [

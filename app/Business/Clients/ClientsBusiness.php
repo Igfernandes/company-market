@@ -18,29 +18,30 @@ class ClientsBusiness
         $this->clientsModel = new ClientsModel();
     }
 
-    public function store($payload, $userAuthId): int|false
+    public function store($payload, $userAuthId = null): int|false
     {
         helper(['crypto']);
 
-        if (!$this->hasClientByPhone($payload['phone']))
-            return false;
-
         $clientEntity = new ClientEntity();
 
+        $phone = str_replace(['+', '-', ' ', '(', ')'], '', $payload['phone']);
+        $phoneSha256 = referenceHash($phone);
+
+        /** @var ClientEntity */
+        $found = $this->clientsModel->where("phone_sha256", $phoneSha256)->first();
+
+        if (!empty($found))
+            return $found->getId();
+
         $crypto = new Crypto();
-        $systemKey = $crypto->encrypt($payload['name'] . ":" . $payload['phone'], getenv('system.encrypted_key'));
+        $systemKey = $crypto->encrypt($payload['name'] . ":" . $phone, getenv('system.encrypted_key'));
 
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
-        $clientEntity->setPhoneSha256(\referenceHash($payload['phone']));
+        $clientEntity->setPhoneSha256($phoneSha256);
         $clientEntity->setOwnerId($userAuthId);
-        $clientEntity->setEncryptPhone($payload['phone']);
-
-        /** @var ClientEntity */
-        $foundClientWithPhone = $this->clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
-        if (!empty($foundClientWithPhone))
-            return $foundClientWithPhone->getId();
+        $clientEntity->setEncryptPhone($phone);
 
         if (!empty($payload['birthdate']))
             $clientEntity->setBirthdate($payload['birthdate']);

@@ -30,7 +30,8 @@ class DeviceNotificationsService
      * @param array{int} $clientIds
      * @param array{
      *     title: string,
-     *     content: string
+     *     content: string,
+     *      url: string
      * } $notification
      */
     public function handle(array $clientIds, array $notification)
@@ -46,13 +47,19 @@ class DeviceNotificationsService
             foreach ($subscribes as $subscribe) {
                 $data = json_decode($subscribe->getData());
                 $subscription = Subscription::create([
-                    'endpoint' => json_decode($data['endpoint'], true),
-                    'keys' => json_decode($data['keys'], true),
+                    'endpoint' => $data->endpoint,
+                    'publicKey' => $data->keys->p256dh ?? null,
+                    'authToken' => $data->keys->auth ?? null,
+                    'contentEncoding' => 'aes128gcm'
                 ]);
 
                 $this->webPush->queueNotification(
                     $subscription,
-                    json_encode(['title' => $notification['title'], 'body' => $notification['content']])
+                    json_encode([
+                        'title' => $notification['title'],
+                        'body' => $notification['content'],
+                        'url' => $notification['url'] ?? '/', // default para home
+                    ])
                 );
             }
 
@@ -77,6 +84,7 @@ class DeviceNotificationsService
                 Cerberus::report($operationFailure);
             }
         } catch (Exception $err) {
+
         }
     }
 }

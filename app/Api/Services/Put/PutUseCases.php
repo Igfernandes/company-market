@@ -2,6 +2,7 @@
 
 namespace App\Api\Services\Put;
 
+use App\Business\Services\ServicesRulesBusiness;
 use App\Database\Entities\Services\ServiceEntity;
 use App\Database\Models\Services\ServicesModel;
 use App\Libraries\Exceptions\Exceptions;
@@ -23,7 +24,8 @@ class PutUseCases
      *     status: 'ACTIVE' | 'INACTIVE', 
      *     stock: integer,
      *     realized_at: string,
-     *     expired_at: string
+     *     expired_at: string,
+     *     gratuity: integer
      * } $payload
      */
     public function execute(array $payload)
@@ -58,8 +60,11 @@ class PutUseCases
         $serviceEntity->setStatus(isset($filteredPayload['status']) ? $filteredPayload['status'] : "ACTIVE");
 
         $serviceEntity->setStock(isset($filteredPayload['stock']) ? $filteredPayload['stock'] : 0);
-        
+
         $servicesModel->set($serviceEntity->toArray(true))->update($filteredPayload['id']);
+
+        $servicesRulesBusiness = new ServicesRulesBusiness();
+        $servicesRulesBusiness->gratuity($filteredPayload['id'], $filteredPayload['gratuity']);
 
         NotificationsService::store([
             "scope" => "services",

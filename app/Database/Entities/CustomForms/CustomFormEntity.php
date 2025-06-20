@@ -18,10 +18,15 @@ class CustomFormEntity extends Entity
         'components'      => null,
         'description'     => null,
         'status'          => null,
+        'service_id'      => null,
         'started_at'      => null,
         'expired_at'      => null,
         'created_at'      => null,
         'updated_at'      => null
+    ];
+
+    public $relations = [
+        "service"       => null
     ];
 
     /**
@@ -216,6 +221,16 @@ class CustomFormEntity extends Entity
         return $this->attributes['expired_at'];
     }
 
+    public function getServiceId(): ?int
+    {
+        return $this->attributes['service_id'];
+    }
+
+    public function setServiceId(?int $serviceId): void
+    {
+        $this->attributes['service_id'] = $serviceId;
+    }
+
     /**
      * setCreatedAt function
      *
@@ -258,5 +273,15 @@ class CustomFormEntity extends Entity
     public function getUpdatedAt(): ?String
     {
         return $this->attributes['updated_at'];
+    }
+
+    public function getService(): ?int
+    {
+        return $this->relations['service'];
+    }
+
+    public function setService(?int $service): void
+    {
+        $this->relations['service'] = $service;
     }
 }

@@ -27,7 +27,8 @@ class PostUseCases
         $subscribesModels = new SubscribesModel();
         $subscribeEntity  = new SubscribeEntity();
 
-        $subscribeEntity->setPhoneSha256(\referenceHash($filteredPayload['phone']));
+        $phone = str_replace(['+', '-', ' ', '(', ')'], '', $filteredPayload['phone']);
+        $subscribeEntity->setPhoneSha256(\referenceHash($phone));
         $subscribeEntity->setType($filteredPayload['type']);
         $subscribeEntity->setData(isJson($filteredPayload['data']) ? $filteredPayload['data'] : \json_decode($filteredPayload['data']));
 
@@ -36,7 +37,7 @@ class PostUseCases
         ], $subscribeEntity);
 
         return (object)[
-            "success" => "Api.services.success.post"
+            "success" => "Api.subscribe.success.post"
         ];
     }
 }

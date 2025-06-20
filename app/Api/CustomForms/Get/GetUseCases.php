@@ -23,6 +23,9 @@ class GetUseCases
      *     type: 'PEOPLE'|'COMPANY', 
      *     description_contains: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
+     *     service_id: int,
+     *     started_at: string,
+     *     expired_at: string,
      *     created_at: string, 
      *     updated_at: string 
      * } $payload

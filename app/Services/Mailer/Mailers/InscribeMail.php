@@ -31,14 +31,15 @@ class InscribeMail
 
         foreach ($payload['recipients'] as $recipient) {
             $optionsMail->recipients = [$recipient];
-         
+
             $optionsMail->html = (string) view('mails/inscribe', [
                 'service' => $service,
-                'client' => $recipient['name']
+                'client' => $recipient['name'],
+                'clientId' => $recipient['client_id']
             ]);
-            $optionsMail->textHtml = "
-            Olá, sua inscrição está confirmada para o evento {$service->getName()}.
-             Acesse o link para confirmação a inscrição: " . getenv('globals.href.frontend') . "/services/confirmation?key={$service->getId()}";
+            
+            $optionsMail->textHtml = "Olá, sua inscrição está confirmada para o evento {$service->getName()}.
+             Acesse o link para confirmação a inscrição: " . getenv('globals.href.frontend') . "/services/confirmation?key={$service->getId()}&client=" . $recipient['client_id'];
 
             $mailService->send($optionsMail);
         }

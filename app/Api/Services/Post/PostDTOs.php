@@ -39,6 +39,13 @@ trait PostDTOs
                 'is_natural' => 'Api.services.invalid.stock',
             ],
         ],
+        'gratuity' => [
+            'rules'  => 'integer|is_natural|permit_empty',
+            'errors' => [
+                'integer'    => 'Api.services.invalid.gratuity',
+                'is_natural' => 'Api.services.invalid.gratuity',
+            ],
+        ],
         'address' => [
             'rules'  => 'string|permit_empty',
             'errors' => [

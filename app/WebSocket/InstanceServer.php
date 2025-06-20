@@ -18,7 +18,7 @@ class InstanceServer implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        CLI::write("FROM: {$from}, MESSAGE: {$msg}\n", 'yellow');
+        CLI::write("FROM: {$from->resourceId}, MESSAGE: {$msg}\n", 'yellow');
         // Enviar para todos no canal
         foreach ($this->channels as $channel => $connections) {
             if (isset($connections[$from->resourceId])) {

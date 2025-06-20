@@ -28,7 +28,6 @@ class GetUseCases
         $in_ids = isset($filteredPayload['in_ids']) ? $filteredPayload['in_ids'] : [];
         unset($filteredPayload['in_ids']);
 
-
         if (count($in_ids) > 0)
             $groupsModel->whereIn("id", $in_ids);
 
@@ -52,7 +51,7 @@ class GetUseCases
                 continue;
             }
 
-            if (!isset($amountUsersInGroup[$groupData['user_id']]))
+            if (!isset($amountUsersInGroup[$group->getId()]))
                 $amountUsersInGroup[$group->getId()] = 1;
             else $amountUsersInGroup[$group->getId()] += 1;
         }

@@ -30,16 +30,10 @@ class PostController extends BaseController
                 'scope' => 'services',
                 'type' => 'UPDATE'
             ]);
-            $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
             $payload['service_id'] = $serviceId;
             
-            $validation->setRules($this->rules);
-
-            if (!$validation->run($payload))
-                throw new Exceptions($validation->getErrors(), BAD_REQUEST);
-
             $responsePost = $this->postUseCases->execute($payload);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);

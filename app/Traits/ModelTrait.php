@@ -46,6 +46,8 @@ trait ModelTrait
     {
         $clientQueryUpdated = [];
 
+        if (\count($clientQuery) == 0) return [];
+
         foreach ($clientQuery as $fieldKey => $fieldValue) {
             $clientQueryUpdated[$prefix . "." . $fieldKey] = $fieldValue;
         }

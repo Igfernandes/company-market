@@ -13,6 +13,7 @@ class ClientServiceEntity extends Entity
     public $attributes = [
         'service_id'        => null,
         'client_id'          => null,
+        'is_confirm'        => null,
         "created_at"         => null
     ];
     public $relations = [
@@ -85,6 +86,29 @@ class ClientServiceEntity extends Entity
         if (!empty($clientId))
             $this->attributes['client_id'] = $clientId;
     }
+
+    /**
+     * getIsConfirm function
+     *
+     * @return bool|null
+     */
+    public function getIsConfirm(): ?bool
+    {
+        return $this->attributes['is_confirm'];
+    }
+
+    /**
+     * setIsConfirm function
+     *
+     * @param bool|null $isConfirm
+     * @return void
+     */
+    public function setIsConfirm(bool $isConfirm)
+    {
+        if (!empty($isConfirm))
+            $this->attributes['is_confirm'] = $isConfirm;
+    }
+
 
     /**
      * getClient function

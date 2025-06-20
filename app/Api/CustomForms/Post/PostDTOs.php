@@ -40,6 +40,12 @@ trait PostDTOs
                 'in_list' => 'Api.custom_forms.invalid.status',
             ],
         ],
+        'service_id' => [
+            'rules' => 'integer|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.service_id',
+            ],
+        ],
         'started_at' => [
             'rules' => 'valid_date|permit_empty',
             'errors' => [
