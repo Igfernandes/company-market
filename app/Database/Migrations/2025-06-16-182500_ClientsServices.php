@@ -19,14 +19,10 @@ class ClientsServices extends Migration
                 'type' => 'INT',
                 'unsigned' => true
             ],
-            'created_at' => [
-                'type'    => 'TIMESTAMP',
-                'null'    => false,
-                'default' => 'CURRENT_TIMESTAMP',
-            ],
+            'created_at datetime default current_timestamp'
         ]);
 
-        $this->forge->addKey(['client_id', 'service_id']);
+        $this->forge->addKey(['client_id', 'service_id'], true);
 
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
         $this->forge->addForeignKey("service_id", "services", ["id"]);
