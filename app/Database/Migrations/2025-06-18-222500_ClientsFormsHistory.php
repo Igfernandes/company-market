@@ -28,7 +28,7 @@ class ClientsFormsHistory extends Migration
         $this->forge->addKey(['client_id', 'form_id'], true);
 
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
-        $this->forge->addForeignKey("form_id", "custom-forms", ["id"]);
+        $this->forge->addForeignKey("form_id", "custom_forms", ["id"]);
 
         $this->forge->createTable($this->tb_name);
     }
