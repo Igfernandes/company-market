@@ -19,7 +19,7 @@ class AddColumnServiceIdInCustomForms extends Migration
             ],
         ]);
         $db = \Config\Database::connect();
-        $this->db->query("ALTER TABLE {$db->getPrefix()}{$this->tb_name} ADD CONSTRAINT fk_service_id FOREIGN KEY (service_id) REFERENCES services(id)");
+        $this->db->query("ALTER TABLE {$db->getPrefix()}{$this->tb_name} ADD CONSTRAINT fk_service_id FOREIGN KEY (service_id) REFERENCES {$db->getPrefix()}services(id)");
     }
 
     public function down()
