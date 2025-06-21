@@ -43,7 +43,7 @@ trait PutDTOs
         'service_id' => [
             'rules' => 'integer|permit_empty',
             'errors' => [
-                'in_list' => 'Api.custom_forms.invalid.service_id',
+                'integer' => 'Api.custom_forms.invalid.service_id',
             ],
         ],
         'started_at' => [
@@ -55,7 +55,7 @@ trait PutDTOs
         'expired_at' => [
             'rules' => 'valid_date|permit_empty',
             'errors' => [
-                'in_list' => 'Api.custom_forms.invalid.expired_at',
+                'valid_date' => 'Api.custom_forms.invalid.expired_at',
             ],
         ],
     ];

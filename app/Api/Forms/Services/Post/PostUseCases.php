@@ -30,7 +30,7 @@ class PostUseCases
         ])->first();
 
         if (empty($clientFormHistoryEntity))
-            throw new Exceptions("Api.custom_forms.invalid.client");
+            throw new Exceptions("Api.custom_forms.invalid.client", \BAD_REQUEST);
 
         /** @var ClientEntity */
         $clientEntity = new ClientEntity();
