@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Filters\BearerTokenFilter;
 use App\Filters\Cors;
+use App\Filters\CSRFHashFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -20,14 +21,15 @@ class Filters extends BaseConfig
      * @var array
      */
     public $aliases = [
-        'csrf'          => CSRF::class,
+        'csrf'          => CSRFHashFilter::class,
         'toolbar'       => DebugToolbar::class,
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'cors' => \Fluent\Cors\Filters\CorsFilter::class,
         'language' => \App\Filters\LanguageFilter::class,
-        'bearerToken' => \App\Filters\BearerTokenFilter::class
+        'bearerToken' => \App\Filters\BearerTokenFilter::class,
+
     ];
 
     /**

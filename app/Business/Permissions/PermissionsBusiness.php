@@ -69,7 +69,7 @@ class PermissionsBusiness
         $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
 
         if (count($permissions) === 0)
-            throw new Exceptions('Api.users.invalid.not_permission', \BAD_AUTH);
+            throw new Exceptions('Api.users.invalid.not_permission', FORBIDDEN_ERROR);
     }
 
     /**

@@ -15,6 +15,7 @@ use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\CustomForms\CustomFormsDataTrait;
+use DateTime;
 
 class PostUseCases
 {
@@ -31,12 +32,7 @@ class PostUseCases
     public function execute(array $payload)
     {
         helper("crypto");
-        if (!isset($payload['recaptcha']) || !validateRecaptcha([
-            "token" => $payload['recaptcha']
-        ]))
-            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
-        unset($payload['g-recaptcha-response']);
         $files = $payload['files'];
         $payload = array_merge($files, $payload);
         unset($payload['files']);
@@ -74,6 +70,11 @@ class PostUseCases
             if (!isset($currentField->element))
                 continue;
 
+            if (\array_search($currentField->element, ['birthdate', 'date'])) {
+                $dateObject = DateTime::createFromFormat('d/m/Y', $value);
+                $value = $dateObject ? $dateObject->format('Y-m-d') : $value;
+            }
+
             if (\array_search($currentField->element, ['email', 'phone', 'birthdate', 'name']) !== false)
                 $clientData[$currentField->element] = $value;
 
@@ -100,7 +101,7 @@ class PostUseCases
             $clientFormHistoryEntity->setClientId($clientId);
             $clientFormHistoryEntity->setFormId($payload['form_id']);
             $clientFormHistoryEntity->setPackage($package);
-            
+
             $clientsFormsHistory->save($clientFormHistoryEntity);
         }
 
