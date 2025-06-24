@@ -26,7 +26,7 @@ class UnsubscribeMail
         /** @var ServiceEntity */
         $service = $payload['service'];
 
-        $optionsMail->title = "Confirmação da Inscrição - " . \getenv('system.mail.author');
+        $optionsMail->title = lang("Mails.unsubscribe.subject") . " - " . \getenv('system.mail.author');
 
         foreach ($payload['recipients'] as $recipient) {
             $optionsMail->recipients = [$recipient];
@@ -35,7 +35,7 @@ class UnsubscribeMail
                 'service' => $service,
                 'client' => $recipient['name']
             ]);
-            $optionsMail->textHtml = "Olá, sua inscrição está confirmada para o evento {$service->getName()}";
+            $optionsMail->textHtml = \str_replace("{serviceName}", $service->getName(),  lang("Mails.unsubscribe.text_aux"));
 
             $mailService->send($optionsMail);
         }

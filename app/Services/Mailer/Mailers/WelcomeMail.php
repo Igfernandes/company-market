@@ -36,12 +36,12 @@ class WelcomeMail
             ]
         );
 
-        $optionsMail->title = "Mensagens de Boas Vindas - " . \getenv('system.mail.author');
+        $optionsMail->title = lang("Mails.welcome.subject") . " - " . \getenv('system.mail.author');
         $optionsMail->recipients = [$payload['recipient']];
 
         $optionsMail->html = $view;
         $inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=" . $payload['invite_token'];
-        $optionsMail->textHtml = "Olá, você foi convidado a fazer parte da plataforma da AGM! Acesse o link: $inviteLink";
+        $optionsMail->textHtml = str_replace("{inviteLink}", $inviteLink, lang("Mails.welcome.text_aux"));
 
         $mailService->send($optionsMail);
 

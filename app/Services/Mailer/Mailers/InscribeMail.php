@@ -26,7 +26,7 @@ class InscribeMail
         /** @var ServiceEntity */
         $service = $payload['service'];
 
-        $optionsMail->title = "Confirmação da Inscrição - " . \getenv('system.mail.author');
+        $optionsMail->title = lang("Mails.inscribe.subject") . \getenv('system.mail.author');
         $optionsMail->recipients = $payload['recipients'];
 
         foreach ($payload['recipients'] as $recipient) {
@@ -37,9 +37,9 @@ class InscribeMail
                 'client' => $recipient['name'],
                 'clientId' => $recipient['client_id']
             ]);
-            
-            $optionsMail->textHtml = "Olá, sua inscrição está confirmada para o evento {$service->getName()}.
-             Acesse o link para confirmação a inscrição: " . getenv('globals.href.frontend') . "/services/confirmation?key={$service->getId()}&client=" . $recipient['client_id'];
+            $link =  getenv('globals.href.frontend') . "/services/confirmation?key={$service->getId()}&client=" . $recipient['client_id'];
+
+            $optionsMail->textHtml =  \str_replace(["{serviceName}", "{link}"], [$service->getName(), $link],  lang("Mails.inscribe.text_aux"));
 
             $mailService->send($optionsMail);
         }

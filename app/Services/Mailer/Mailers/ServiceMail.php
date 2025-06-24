@@ -47,7 +47,7 @@ class ServiceMail
             'image' => \getPublicUrl($service->getPhoto())
         ]);
 
-        $optionsMail->textHtml = "Olá, você recebeu um cobrança da plataforma " . \getenv('system.mail.author') . "! Acesse o link: $link";
+        $optionsMail->textHtml =  \str_replace(["{company}", "{link}"], [\getenv('system.mail.author'), $link],  lang("Mails.unsubscribe.text_aux"));
 
         $mailService->send($optionsMail);
 

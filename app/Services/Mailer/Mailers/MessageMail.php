@@ -22,14 +22,14 @@ class MessageMail
         $mailService = new MailService();
         $optionsMail = new OptionsMail();
 
-        $optionsMail->title = "Notificação - " . \getenv('system.mail.author');
+        $optionsMail->title =  lang("Mails.message.subject") . \getenv('system.mail.author');
         $optionsMail->recipients = $payload['recipients'];
 
         $optionsMail->html = (string) view('mails/messages', [
             "content" => $payload['content']
         ]);
 
-        $optionsMail->textHtml = "Olá, você recebeu uma nova notificação da plataforma " . \getenv('system.mail.author');
+        $optionsMail->textHtml = lang("Mails.message.text_aux") . \getenv('system.mail.author');
 
         $mailService->send($optionsMail);
 

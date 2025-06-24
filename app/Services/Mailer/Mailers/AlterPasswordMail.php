@@ -22,10 +22,9 @@ class AlterPasswordMail
     public function send(array $payload): bool
     {
         $mailService = new MailService();
-
         $optionsMail = new OptionsMail();
 
-        $optionsMail->title = "Confirmação de alteração de senha - " . \getenv('system.mail.author');
+        $optionsMail->title = lang("Mails.alter_password.subject") . " - " . \getenv('system.mail.author');
         $optionsMail->recipients = $payload['recipients'];
 
         $optionsMail->html = (string) view('mails/alter_password', [
@@ -37,7 +36,7 @@ class AlterPasswordMail
             'ipAddress' => $payload['ipAddress'],
         ]);
 
-        $optionsMail->textHtml = "A sua senha foi alterada com sucesso. Acesse a área de login e conecte-se";
+        $optionsMail->textHtml = lang("Mails.alter_password.text_aux");
 
         $mailService->send($optionsMail);
 

@@ -23,7 +23,7 @@ class RequestPasswordMail
 
         $optionsMail = new OptionsMail();
 
-        $optionsMail->title = "Alteração de senha - " . \getenv('system.mail.author');
+        $optionsMail->title =  lang("Mails.recover_password.subject") . " - " . \getenv('system.mail.author');
         $optionsMail->recipients = $payload['recipients'];
 
         $optionsMail->html = (string) view('mails/recover_password', [
@@ -31,7 +31,7 @@ class RequestPasswordMail
             'recoverToken' => $payload['recoverToken']
         ]);
         $recoverLink = getenv('globals.href.frontend') . "/?alter-password=" . $payload['recoverToken'];
-        $optionsMail->textHtml = "Olá, você recebeu uma solicitação para alteração de senha da plataforma " . \getenv('system.mail.author') . "! Acesse o link: $recoverLink";
+        $optionsMail->textHtml = \str_replace(["{company}", "{link}"], [\getenv('system.mail.author'), $recoverLink],  lang("Mails.recover_password.text_aux"));
 
         $mailService->send($optionsMail);
 

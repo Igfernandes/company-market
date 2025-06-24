@@ -36,7 +36,7 @@ class ChargeMail
             'chargeLink' => $chargeLink
         ]);
 
-        $optionsMail->textHtml = "Olá, você recebeu um cobrança da plataforma " . \getenv('system.mail.author') . "! Acesse o link: $chargeLink";
+        $optionsMail->textHtml =  \str_replace(["{company}", "{link}"], [\getenv('system.mail.author'), $chargeLink],  lang("Mails.charges.text_aux"));
 
         $mailService->send($optionsMail);
 
