@@ -39,11 +39,11 @@ class PostUseCases
         switch ($payload['type']):
             case "PDF":
                 $data = $exportData->getData($payload['in_ids'] ?? []);
-                $file = ExportsBusiness::pdf($payload['entity'], $data);
+                $file = ExportsBusiness::pdf(strtolower($payload['entity']), $data);
                 break;
             case "EXCEL":
                 $data = $exportData->getData($payload['in_ids'] ?? []);
-                $file = ExportsBusiness::excel($payload['entity'], $data);
+                $file = ExportsBusiness::excel(strtolower($payload['entity']), $data);
         endswitch;
 
         return (object)[
