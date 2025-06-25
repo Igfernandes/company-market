@@ -1,5 +1,5 @@
 - Implementar a lógica de disparo no instagram
-- Rever os e-mails para adicionar a tradução
+- **Rever os e-mails para adicionar a tradução**
 - Adicionar lógica de exportação de dados
 - Implementar a possibilidade de retornar o formulário que foi preenchido para a inscrição do cliente nos serviços
 - Implementar possibilidade de desfazer inscrição direto no formulário.

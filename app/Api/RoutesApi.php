@@ -8,6 +8,7 @@ use App\Routes\CheckoutRoutes;
 use App\Routes\ClientsRoutes;
 use App\Routes\CustomFormsRoutes;
 use App\Routes\DispatchersRoutes;
+use App\Routes\ExportsRoutes;
 use App\Routes\FieldsRoutes;
 use App\Routes\FormsRoutes;
 use App\Routes\IntegrationsRoutes;
@@ -83,6 +84,9 @@ class RoutesApi
 
     $webhooks = new WebhooksRoutes();
     $webhooks->load($routes);
+
+    $exports = new ExportsRoutes();
+    $exports->load($routes);
 
     return $routes;
   }

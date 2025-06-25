@@ -9,6 +9,7 @@ return [
     "login" => "login",
     "cpf" => "cpf",
     "cnpj" => "cnpj",
+    "years_old" => "Idade",
     "rg" => "rg",
     "groups" => "grupos",
     "phone" => "Telefone",

@@ -16,7 +16,8 @@
     "react/event-loop": "^1.5",
     "clue/redis-react": "^2.8",
     "minishlink/web-push": "^9.0",
-    "react/socket": "^1.16"
+    "react/socket": "^1.16",
+    "phpoffice/phpspreadsheet": "^4.4"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9",

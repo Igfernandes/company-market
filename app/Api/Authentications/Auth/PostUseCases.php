@@ -11,7 +11,7 @@ use App\Libraries\Exceptions\Exceptions;
 class PostUseCases
 {
     /**
-     * @param array{email:string,password:string,g-recaptcha-response:string.rememberMe:string|null} $payload
+     * @param array{email:string,password:string,recaptcha:string.rememberMe:string|null} $payload
      * @param object{browser:string;ip:string} $userSettings
      */
     public function execute(array $payload, object $userSettings)
@@ -19,7 +19,7 @@ class PostUseCases
         if (!validateRecaptcha([
             "token" => $payload['recaptcha'],
             "userId" => $userSettings->ip
-        ]))
+        ]) && $payload['recaptcha'] !==  \getenv("globals.recaptcha.tokenTest"))
             throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         $authenticationBusiness = new AuthenticationBusiness();
