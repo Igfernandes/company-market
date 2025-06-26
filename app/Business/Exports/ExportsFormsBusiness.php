@@ -5,7 +5,6 @@ namespace App\Business\Exports;
 use App\Business\BaseBusiness;
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Entities\CustomForms\FormFillEntity;
-use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
 use App\Libraries\Crypto\Crypto;
@@ -61,7 +60,7 @@ class ExportsFormsBusiness
             if ($fieldRef[0]->element === "birthdate") {
                 array_push($formsData[$field->getPackage()], [
                     "name" => lang("Words.years_old"),
-                    "value" => getYearsOldByBrazilianDate($value),
+                    "value" => getYearsOldByDate($value),
                 ]);
             }
 
@@ -72,6 +71,7 @@ class ExportsFormsBusiness
         }
 
         return [
+            "title" => $foundForm->getName(),
             "form" => \array_values($formsData)
         ];
     }

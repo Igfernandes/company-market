@@ -4,7 +4,6 @@ namespace App\Business\Exports;
 
 use App\Business\BaseBusiness;
 use Dompdf\Dompdf;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -58,8 +57,9 @@ class ExportsBusiness
         $reader = new HtmlReader();
         $spreadsheet = $reader->loadFromString(view("excels/$entity", $data));
 
+        $title = $data['title'] ?: "export";
         // Define o nome e caminho do arquivo Excel
-        $filename = 'tabela_' . time() . '.xlsx';
+        $filename = "{$title}_" . time() . '.xlsx';
         $path = WRITEPATH . '/uploads/excels/' . $filename; // Pasta local
 
         // Garante que a pasta exista
