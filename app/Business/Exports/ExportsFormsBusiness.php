@@ -27,7 +27,7 @@ class ExportsFormsBusiness
      */
     public function getData(array $formIds): array
     {
-        helper(['dates']);
+        helper(['dates', 'string']);
         /** 
          * @var CustomFormEntity
          */
@@ -71,7 +71,7 @@ class ExportsFormsBusiness
         }
 
         return [
-            "title" => $foundForm->getName(),
+            "title" => cleanString($foundForm->getName()),
             "form" => \array_values($formsData)
         ];
     }
