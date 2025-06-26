@@ -61,6 +61,7 @@ return [
         "title" => "clube"
     ],
     "clubs" => "Clubes",
+    "inscribed_at" => "Inscrito em",
     "federation" => [
         "name" => "Nome da Federação",
         "title" => "federação"

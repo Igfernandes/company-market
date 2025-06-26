@@ -56,7 +56,8 @@ class ExportsFormsBusiness
             if (!isset($formsData[$field->getPackage()])) {
                 $dataObj = new DateTime($field->getCreatedAt());
                 $formsData[$field->getPackage()] = [
-                    "inscrito em:" =>  $dataObj->format('d/m/Y H:i:s')
+                    "name" => lang("Words.inscribed_at"),
+                    "value"  =>  $dataObj->format('d/m/Y H:i:s')
                 ];
             }
 
