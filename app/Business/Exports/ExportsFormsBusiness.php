@@ -54,8 +54,7 @@ class ExportsFormsBusiness
                 continue;
 
             if (!isset($formsData[$field->getPackage()])) {
-                $data = $field->getCreatedAt(); // ex: "2025-06-26 14:35:12"
-                $dataObj = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+                $dataObj = new DateTime($field->getCreatedAt());
                 $formsData[$field->getPackage()] = [
                     "inscrito em:" =>  $dataObj->format('d/m/Y H:i:s')
                 ];
