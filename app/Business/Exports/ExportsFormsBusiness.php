@@ -8,6 +8,7 @@ use App\Database\Entities\CustomForms\FormFillEntity;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
 use App\Libraries\Crypto\Crypto;
+use DateTime;
 
 class ExportsFormsBusiness
 {
@@ -46,14 +47,19 @@ class ExportsFormsBusiness
         $formsData = [];
 
         $crypto = new Crypto();
-        foreach ($foundFills as $field) {
+        foreach ($foundFills as $index => $field) {
             $fieldRef = \array_values(array_filter($fields, fn($ref) => $ref->id == $field->getFieldId()));
 
             if (!isset($fieldRef[0]))
                 continue;
 
-            if (!isset($formsData[$field->getPackage()]))
-                $formsData[$field->getPackage()] = [];
+            if (!isset($formsData[$field->getPackage()])) {
+                $data = $field->getCreatedAt(); // ex: "2025-06-26 14:35:12"
+                $dataObj = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+                $formsData[$field->getPackage()] = [
+                    "inscrito em:" =>  $dataObj->format('d/m/Y H:i:s')
+                ];
+            }
 
             $value = $crypto->decrypt($field->getValue(), $field->getPackage() . getenv('system.encrypted_key'));
 
