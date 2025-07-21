@@ -1,0 +1,64 @@
+@keyframes reducer{
+    from{
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }to{
+        transform: scale3d(.1, .1, .1);
+        opacity: 0;
+        right: -100px;
+        bottom: -150px;
+    }
+}
+@keyframes increase{
+    from{
+        transform: scale3d(.1, .1, .1);
+        opacity: 0;
+        right: -100px;
+        bottom: -150px;
+    }to{
+        
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@keyframes minimizer{
+    from{
+        transform: translateY(0%) scale3d(1, 1, 1);
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }to{
+        transform: translateY(88%) scale3d(1, 1, 1);
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }
+}
+@keyframes maximize{
+    from{
+        transform: translateY(88%) scale3d(1, 1, 1);;
+        opacity: 1;
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }to{
+        transform: translateY(0%) scale3d(1, 1, 1);
+        opacity: 1;
+        opacity: 1;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@keyframes cute{
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,15 @@
+.token-box{
+    display: flex;
+    height: 95vh;
+    justify-content: center;
+    align-items: center;
+    .card{
+        width: 25% !important;
+        @include mq("lg", max){
+            width: 50% !important;
+        }
+        @include mq("sm", max){
+            width: 100% !important;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+$font-sizes: xs, sm, md, lg, xl, xxl;
+
+@each $size in $font-sizes {
+  .text-#{$size} {
+    font-size: var(--font-#{$size});
+  }
+
+  .header-#{$size} {
+    font-size: var(--heading-#{$size});
+    font-weight: bold;
+  }
+}

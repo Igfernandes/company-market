@@ -1,0 +1,51 @@
+$colors: "red", "blue", "green", "pink", "white", "yellow", "orange", "black",
+  "gray", "opaque";
+$levels: "100", "200", "300", "400", "500", "600", "700", "800", "900";
+
+@each $color in $colors {
+  @each $level in $levels {
+    .bg-#{$color}-#{$level} {
+      background-color: var(--#{$color}-#{$level});
+    }
+    .text-#{$color}-#{$level} {
+      color: var(--#{$color}-#{$level});
+    }
+    .border-#{$color}-#{$level} {
+      border-color: var(--#{$color}-#{$level});
+    }
+    .shadow-#{$color}-#{$level} {
+      box-shadow: 0 4px 6px var(--#{$color}-#{$level});
+    }
+  }
+}
+
+$extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled";
+// Loop para cores fixas (sem nível)
+@each $name in $extra-colors {
+  .bg-#{$name} {
+    background-color: var(--bg-#{$name});
+  }
+  .text-#{$name} {
+    color: var(--text-#{$name});
+  }
+  .border-#{$name} {
+    border-color: var(--border-#{$name});
+  }
+  .shadow-#{$name} {
+    box-shadow: 0 4px 6px var(--shadow-#{$name});
+  }
+}
+
+@each $color in $colors {
+  @each $level in $levels {
+    .hover\:bg-#{$color}-#{$level}:hover {
+      background-color: var(--#{$color}-#{$level});
+    }
+    .hover\:text-#{$color}-#{$level}:hover {
+      color: var(--#{$color}-#{$level});
+    }
+    .hover\:border-#{$color}-#{$level}:hover {
+      border-color: var(--#{$color}-#{$level});
+    }
+  }
+}
