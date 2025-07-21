@@ -29,6 +29,7 @@ class AuthenticationBusiness
      */
     public function createTokenNavigation(UserEntity $user, Object $userSettings): string
     {
+        helper('cache');
         $userAuthHistory = new UserAuthHistoryEntity();
         $userAuthHistoryModel = new UsersAuthHistoryModel();
 
@@ -85,7 +86,7 @@ class AuthenticationBusiness
         // Obter o valor enviado no header ou no body
         $token = $request->getHeaderLine($tokenFixedName);
         $hash = $security->getCSRFHash();
-        
+
         return !hash_equals($hash, $token);
     }
 }

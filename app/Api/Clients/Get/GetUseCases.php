@@ -2,7 +2,6 @@
 
 namespace App\Api\Clients\Get;
 
-use App\Business\Permissions\PermissionsBusiness;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
@@ -38,11 +37,6 @@ class GetUseCases
         $in_ids = isset($filteredPayload['in_ids']) ? $filteredPayload['in_ids'] : [];
         unset($filteredPayload['in_ids']);
 
-        $hasPermissionToView = PermissionsBusiness::hasPermissionUser("clients", "VIEW", $userAuthId);
-
-        if (!$hasPermissionToView)
-            $clientsModel->where("owner_id", $session->get('userAuthId'));
-
         if (isset($filteredPayload['phone'])) {
             $filteredPayload['phone_sha256'] = referenceHash($filteredPayload['phone']);
             unset($filteredPayload['phone']);
@@ -51,7 +45,6 @@ class GetUseCases
         $clientsModel->where($filteredPayload);
         if (count($in_ids) > 0)
             $clientsModel->whereIn("id", $in_ids);
-
 
         $clientsModel = $this->builderClauseWithContains($filteredPayload, $clientsModel);
         $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($filteredPayload);

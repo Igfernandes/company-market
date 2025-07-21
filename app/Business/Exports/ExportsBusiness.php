@@ -4,6 +4,7 @@ namespace App\Business\Exports;
 
 use App\Business\BaseBusiness;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use PhpOffice\PhpSpreadsheet\Reader\Html as HtmlReader;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -18,7 +19,11 @@ class ExportsBusiness
     public static function pdf(string $entity, array $data): string
     {
         helper("files");
-        $dompdf = new Dompdf();
+
+        $options = new Options();
+        $options->set('isRemoteEnabled', true); // Necessário até para file:// em alguns casos
+
+        $dompdf = new Dompdf($options);
 
         $dompdf->loadHtml(view("pdfs/$entity", $data));
 
@@ -57,7 +62,7 @@ class ExportsBusiness
         $reader = new HtmlReader();
         $spreadsheet = $reader->loadFromString(view("excels/$entity", $data));
 
-        $title = $data['title'] ?: "export";
+        $title = isset($data['title']) ? $data['title'] : "export";
         // Define o nome e caminho do arquivo Excel
         $filename = "{$title}_" . time() . '.xlsx';
         $path = WRITEPATH . '/uploads/excels/' . $filename; // Pasta local

@@ -21,7 +21,7 @@ class MetaService
         $integrationWhatsApp = $integrationsModel->where("provider", $platform)->first();
 
         if (empty($integrationWhatsApp->getDecryptPublicToken()) || empty($integrationWhatsApp->getDecryptPrivateToken()))
-            throw new Exceptions("Api.integrations.not_found_meta", \BAD_AUTH);
+            throw new Exceptions("Api.integrations.not_found_meta", \FORBIDDEN_ERROR);
 
         $this->accessToken = $integrationWhatsApp->getDecryptPrivateToken();
         $this->pageId = $integrationWhatsApp->getDecryptPublicToken();

@@ -47,8 +47,7 @@ class GetUseCases
         }
         if (count($types) == 0 && count($scopes) == 0) return [];
 
-        $notificationsModel->whereIn("scope", $scopes);
-        $notificationsModel->whereIn("action", $types);
+        $notificationsModel->whereIn("scope", $scopes)->whereIn("action", $types);
 
         $notificationEntity->store($filteredPayload);
         /** @var array{NotificationEntity}*/

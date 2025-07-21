@@ -23,12 +23,11 @@ class PostController extends BaseController
     public function handle()
     {
         try {
-            $payload = $this->request->getVar();
-            $payload['files'] = $this->request->getFiles();
+            $payload = (array)$this->request->getVar();
 
             $responsePost = $this->postUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

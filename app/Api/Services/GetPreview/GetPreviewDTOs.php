@@ -17,10 +17,10 @@ trait GetPreviewDTOs
                 'string' => 'Api.services.preview.invalid.charge',
             ],
         ],
-        'form' => [
-            'rules'  => 'string|permit_empty',
+        'in_forms' => [
+            'rules'  => 'permit_empty',
             'errors' => [
-                'string' => 'Api.services.preview.invalid.form',
+                'string' => 'Api.services.preview.invalid.forms',
             ],
         ],
     ];

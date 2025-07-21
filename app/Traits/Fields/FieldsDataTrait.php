@@ -11,19 +11,19 @@ trait FieldsDataTrait
 {
     public function fieldWithClients(FieldEntity $field, array $clientFields): Object
     {
+        \helper('files');
         $foundClientField = \array_values(\array_filter($clientFields, fn(ClientFieldEntity $clientField) => $clientField->getFieldId() == $field->getId()));
-        $data = isset($foundClientField[0]) ? $foundClientField[0]->getValue() : null;
+        $value = isset($foundClientField[0]) ? $foundClientField[0]->getValue() : null;
 
-        $encodeData = !empty($data) && $data != "null"  ? \json_decode($data) : (object)["data" => null];
-
-        if ($field->getIsSensitive() && isset($foundClientField[0])) {
+        if ($field->getIsSensitive() === 1 && isset($foundClientField[0])) {
             $crypto = new Crypto();
             $encryptedKey = $foundClientField[0]->getClientId() . ":" . getenv('system.encrypted_key');
 
             $value = $crypto->decrypt($foundClientField[0]->getValueEncrypted(),  $encryptedKey);
-        } else {
-            $value = $encodeData->data;
         }
+
+        if ($field->getType() === "FILE")
+            $value = \getPublicUrl($value);
 
         return  (object)[
             "id"            => $field->getId(),

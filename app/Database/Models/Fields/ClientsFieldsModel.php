@@ -26,9 +26,15 @@ class ClientsFieldsModel extends Model
 
     public function getClientsWithFields(array $clientQuery, array $fieldsQuery = []): array
     {
+        $inClientIds = isset($clientQuery['in_ids']) ? $clientQuery['in_ids'] : [];
+        unset($clientQuery['in_ids']);
+
         $clientQueryUpdated = $this->addPrefixInQuery($clientQuery, "clients");
         $fieldQueryUpdated = $this->addPrefixInQuery($fieldsQuery, "fields");
 
+        if (count($inClientIds) > 0)
+            $this->whereIn("client_id", $inClientIds);
+        
         $founds = $this->Select(" clients.*, fields.*, clients_fields.value, clients_fields.value_encrypted,
         clients.name as client_name, clients.id as client_id, clients.created_at as client_created_at, 
         clients.updated_at as client_updated_at,

@@ -49,7 +49,7 @@ class Payments extends Migration
         $this->forge->addForeignKey("bank_id", "integrations", ["id"]);
         $this->forge->addForeignKey("charge_id", "charges", ["id"]);
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

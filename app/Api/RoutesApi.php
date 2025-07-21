@@ -10,6 +10,7 @@ use App\Routes\CustomFormsRoutes;
 use App\Routes\DispatchersRoutes;
 use App\Routes\ExportsRoutes;
 use App\Routes\FieldsRoutes;
+use App\Routes\FilesRoutes;
 use App\Routes\FormsRoutes;
 use App\Routes\IntegrationsRoutes;
 use App\Routes\InvitesRoutes;
@@ -26,68 +27,35 @@ use CodeIgniter\Router\RouteCollection;
 
 class RoutesApi
 {
+  private $routesInstances = [
+    AuthenticationsRoutes::class,
+    ChargesRoutes::class,
+    CheckoutRoutes::class,
+    ClientsRoutes::class,
+    CustomFormsRoutes::class,
+    DispatchersRoutes::class,
+    FieldsRoutes::class,
+    FormsRoutes::class,
+    IntegrationsRoutes::class,
+    InvitesRoutes::class,
+    NotificationsRoutes::class,
+    OperationsFailuresRoutes::class,
+    PaymentsRoutes::class,
+    PermissionsRoutes::class,
+    RecoversRoutes::class,
+    SchedulesRoutes::class,
+    ServicesRoutes::class,
+    UsersRoutes::class,
+    WebhooksRoutes::class,
+    ExportsRoutes::class,
+    FilesRoutes::class
+  ];
   public function init(RouteCollection $routes)
   {
-    $authentications = new AuthenticationsRoutes();
-    $authentications->load($routes);
-
-    $charges = new ChargesRoutes();
-    $charges->load($routes);
-
-    $checkout = new CheckoutRoutes();
-    $checkout->load($routes);
-
-    $clients = new ClientsRoutes();
-    $clients->load($routes);
-
-    $customForms = new CustomFormsRoutes();
-    $customForms->load($routes);
-
-    $dispatchers = new DispatchersRoutes();
-    $dispatchers->load($routes);
-
-    $fields = new FieldsRoutes();
-    $fields->load($routes);
-
-    $forms = new FormsRoutes();
-    $forms->load($routes);
-
-    $integrations = new IntegrationsRoutes();
-    $integrations->load($routes);
-
-    $invites = new InvitesRoutes();
-    $invites->load($routes);
-
-    $notifications = new NotificationsRoutes();
-    $notifications->load($routes);
-
-    $operationsFailures = new OperationsFailuresRoutes();
-    $operationsFailures->load($routes);
-
-    $payments = new PaymentsRoutes();
-    $payments->load($routes);
-
-    $permissions = new PermissionsRoutes();
-    $permissions->load($routes);
-
-    $recovers = new RecoversRoutes();
-    $recovers->load($routes);
-
-    $schedules = new SchedulesRoutes();
-    $schedules->load($routes);
-
-    $services = new ServicesRoutes();
-    $services->load($routes);
-
-    $users = new UsersRoutes();
-    $users->load($routes);
-
-    $webhooks = new WebhooksRoutes();
-    $webhooks->load($routes);
-
-    $exports = new ExportsRoutes();
-    $exports->load($routes);
-
+    foreach ($this->routesInstances as $instance) {
+      $routeClass = new $instance();
+      $routeClass->load($routes);
+    }
     return $routes;
   }
 }

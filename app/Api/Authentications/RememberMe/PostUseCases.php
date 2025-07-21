@@ -2,6 +2,7 @@
 
 namespace App\Api\Authentications\RememberMe;
 
+use App\Business\Authentication\AuthenticationBusiness;
 use App\Database\Entities\Users\RememberEntity;
 use App\Database\Models\Users\RememberModel;
 use App\Database\Models\Users\UsersModel;
@@ -12,9 +13,8 @@ class PostUseCases
     /**
      * @param array{referente-token:string} $payload
      */
-    public function execute(array $payload)
+    public function execute(array $payload, object $userSettings)
     {
-        $session = session();
         $rememberEntity = new RememberEntity();
         $rememberModel = new RememberModel();
 
@@ -25,17 +25,17 @@ class PostUseCases
             throw new Exceptions("Api.remember.invalid.token", BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
-        $foundUser = $usersModel->first($foundRemember->getUserId());
-
+        $foundUser = $usersModel->where("id", $foundRemember->getUserId())->first();
+        
         if (empty($foundUser))
             throw new Exceptions("Api.remember.invalid.token", BAD_BUSINESS_RULES);
 
-        $session->set("userAuth", $foundUser);
+        $authenticationBusiness = new AuthenticationBusiness();
+        $tokenNavigation = $authenticationBusiness->createTokenNavigation($foundUser, $userSettings);
 
-        $response = (object)[
+        return (object)[
             "success" => "Api.remember.success.post",
+            "token_navigation" => $tokenNavigation
         ];
-
-        return $response;
     }
 }

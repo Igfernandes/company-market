@@ -2,16 +2,10 @@
 
 namespace App\Api\Forms\Post;
 
-use App\Business\Clients\ClientsBusiness;
-use App\Business\CustomForms\FileFormFillBusiness;
-use App\Database\Entities\CustomForms\ClientFormHistoryEntity;
+use App\Business\CustomForms\FormFillBusiness;
 use App\Database\Entities\CustomForms\CustomFormEntity;
-use App\Database\Entities\CustomForms\FormFillEntity;
-use App\Database\Entities\Fields\FieldEntity;
-use App\Database\Models\CustomForms\ClientsFormsHistoryModel;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
-use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;
 use App\Traits\CustomForms\CustomFormsDataTrait;
@@ -31,11 +25,7 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
-        helper("crypto");
-
-        $files = $payload['files'];
-        $payload = array_merge($files, $payload);
-        unset($payload['files']);
+        helper(["crypto", "array"]);
 
         if (!isset($payload['form_id']))
             throw new Exceptions("Api.custom_forms.invalid.not_found", \NOT_FOUND);
@@ -48,61 +38,35 @@ class PostUseCases
         if (empty($found))
             throw new Exceptions("Api.custom_forms.invalid.not_found", \NOT_FOUND);
 
-        $fields = \json_decode($found->getComponents());
+        $components = \json_decode($found->getComponents());
 
-        $formsFill = new FormFillsModel();
-        $crypto = new Crypto();
+        $formsFillsModel = new FormFillsModel();
         $package = \referenceHash(date("YYYY-MM-DD H:i:s"));
 
         $clientData = [];
 
         foreach ($payload as $name => $value) {
+            $field = FormFillBusiness::store([
+                "name" => $name,
+                "value" => $value,
+                "package" => $package,
+                "form_id" => $payload['form_id']
+            ], $components);
+
+            if (empty($field))
+                continue;
+
             $id = \str_replace("input_", "", $name);
-            $possibleFields = \array_values(array_filter($fields, fn($field) => $field->id === $id));
-            $formFillEntity = new FormFillEntity();
+            $component = FormFillBusiness::getComponent($id, $components);
 
-            if (\count($possibleFields) == 0)
-                continue;
+            if (\array_search($component->element, ['email', 'phone', 'birthdate', 'name']) !== false)
+                $clientData[$component->element] = $value;
 
-            /** @var FieldEntity */
-            $currentField = $possibleFields[0];
-
-            if (!isset($currentField->element))
-                continue;
-
-            if (\array_search($currentField->element, ['birthdate', 'date'])) {
-                $dateObject = DateTime::createFromFormat('d/m/Y', $value);
-                $value = $dateObject ? $dateObject->format('Y-m-d') : $value;
-            }
-
-            if (\array_search($currentField->element, ['email', 'phone', 'birthdate', 'name']) !== false)
-                $clientData[$currentField->element] = $value;
-
-            $formFillEntity->setFieldId($id);
-            $formFillEntity->setPackage($package);
-            $formFillEntity->setFormId($payload['form_id']);
-
-            if ($currentField->element == "file")
-                $value = FileFormFillBusiness::upload($value);
-
-            $valueEncrypted = $crypto->encrypt($value, "$package" . getenv('system.encrypted_key'));
-            $formFillEntity->setValue($valueEncrypted);
-
-            $formsFill->save($formFillEntity);
+            $formsFillsModel->save($field);
         }
 
-        if (isset($clientData['phone']) && isset($clientData['name'])) {
-            $clientBusiness = new ClientsBusiness();
-            $clientId = $clientBusiness->store($clientData);
-
-            $clientsFormsHistory = new ClientsFormsHistoryModel();
-            $clientFormHistoryEntity = new ClientFormHistoryEntity();
-
-            $clientFormHistoryEntity->setClientId($clientId);
-            $clientFormHistoryEntity->setFormId($payload['form_id']);
-            $clientFormHistoryEntity->setPackage($package);
-
-            $clientsFormsHistory->save($clientFormHistoryEntity);
+        if (isValidIndexInArray("phone", $clientData)  && isValidIndexInArray("name", $clientData)) {
+            FormFillBusiness::clientCreate($clientData, $payload['form_id'], $package);
         }
 
         return (object)[

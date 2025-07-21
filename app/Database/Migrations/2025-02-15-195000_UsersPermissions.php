@@ -26,7 +26,7 @@ class UsersPermissions extends Migration
         $this->forge->addForeignKey("permission_id", "permissions", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

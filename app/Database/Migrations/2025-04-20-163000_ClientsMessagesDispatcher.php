@@ -42,7 +42,7 @@ class ClientsMessagesDispatcher extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
         $this->forge->addForeignKey("message_id", "messages_dispatcher", ["id"]);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

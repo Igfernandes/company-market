@@ -25,7 +25,7 @@ class UsersNotifications extends Migration
         $this->forge->addKey(['user_id', 'notification_id'], true);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
         $this->forge->addForeignKey("notification_id", "notifications", ["id"]);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

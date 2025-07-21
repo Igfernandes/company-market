@@ -87,10 +87,12 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
  */
 
 define("OK", 200);
+define("CREATED", 201);
 define("ACCEPTED", 202);
+define("NO_CONTENT", 204);
 define("BAD_REQUEST", 400);
-define("FORBIDDEN_ERROR", 403);
 define("BAD_AUTH", 401);
+define("FORBIDDEN_ERROR", 403);
 define("NOT_FOUND", 404);
 define("BAD_BUSINESS_RULES", 406);
 define("INTERNAL_ERROR", 500);

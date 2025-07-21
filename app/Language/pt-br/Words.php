@@ -108,5 +108,17 @@ return [
     "realized_at" => "Realizado em",
     "end_at" => "Termino em",
     "date" => "Data",
-    "meeting_point" => "Ponto de Encontro"
+    "meeting_point" => "Ponto de Encontro",
+    "report" => "Relatório",
+    "attachments" => "Anexos",
+    "event" => "Evento",
+    "description" => "Descrição",
+    "filled_at" => "Preenchido em",
+    "others" => "Outros",
+    "family" => "Família",
+    "social" => "Social",
+    "finance" => "Financeiro",
+    "address" => "Endereço",
+    "attachments" => "Anexos",
+    "basic" => "Básico"
 ];

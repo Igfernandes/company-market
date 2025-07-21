@@ -18,7 +18,7 @@ class GetPreviewUseCases
     /**
      * @param array{
      *     charge: string,
-     *     form: string, 
+     *     in_forms: string, 
      * } $payload
      */
     public function execute(array $payload)

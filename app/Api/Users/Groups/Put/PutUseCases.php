@@ -47,6 +47,7 @@ class PutUseCases
         $groupPermissionEntity = new GroupPermissionsEntity();
 
         $groupPermissionEntity->setGroupId($groupId);
+        $groupsPermissionsModel->where("group_id", $groupId)->delete();
 
         $permissionsBusiness->store($payload['permissions'], $groupPermissionEntity, $groupsPermissionsModel);
 

@@ -27,11 +27,11 @@ trait PostDTOs
                 'in_list' => 'Api.auth.invalid.rememberMe',
             ],
         ],
-        'recaptcha' => [
-            'rules'  => 'string',
-            'errors' => [
-                'string' => 'Api.auth.invalid.recaptcha',
-            ],
-        ],
+        // 'recaptcha' => [
+        //     'rules'  => 'string',
+        //     'errors' => [
+        //         'string' => 'Api.auth.invalid.recaptcha',
+        //     ],
+        // ],
     ];
 }

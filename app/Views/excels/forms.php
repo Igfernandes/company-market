@@ -1,5 +1,5 @@
 <?php
-$headers = array_map(fn(array $field) => $field['name'], $form[0]);
+$headers = array_map(fn(array $field) => $field['name'], $forms[0]);
 ?>
 
 <table>
@@ -10,11 +10,15 @@ $headers = array_map(fn(array $field) => $field['name'], $form[0]);
             </th>
         <?php endforeach; ?>
     </tr>
-    <?php foreach ($form as $row): ?>
+    <?php foreach ($forms as $row): ?>
         <tr>
             <?php foreach ($row as $td): ?>
                 <td>
-                    <?= $td['value'] ?>
+                    <?php if (strstr($td['value'], "writable")): ?>
+                       <span>ANEXO [BAIXE DIRETAMENTE NO REGISTRO]</span>
+                    <?php else : ?>
+                        <?= $td['value'] ?>
+                    <?php endif; ?>
                 </td>
             <?php endforeach; ?>
         </tr>

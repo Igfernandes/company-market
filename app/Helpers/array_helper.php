@@ -22,3 +22,9 @@ if (!function_exists('removeDuplicatesInArray')) {
         return $filtered;
     }
 }
+if (!function_exists('isValidIndexInArray')) {
+    function isValidIndexInArray(string $index, array $list)
+    {
+        return isset($list[$index]) && !empty($list[$index]);
+    }
+}

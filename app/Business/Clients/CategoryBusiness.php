@@ -25,13 +25,13 @@ class CategoryBusiness
         return !empty($foundCategory);
     }
 
-    public function getCategoriesExclude($categories): array
+    public function getCategoriesExclude(array $categories): array
     {
         $categoriesModel = new CategoriesModel();
 
         /** @var array{foundCategories:CategoryEntity} */
         $foundCategories = $categoriesModel->findAll();
-        $excludeCategories = \array_filter($foundCategories, fn($category) => array_search($category->getName(), $categories) === false);
+        $excludeCategories = \array_filter($foundCategories, fn($category) => array_search($category->getId(), $categories) === false);
 
         return $excludeCategories;
     }
@@ -44,7 +44,7 @@ class CategoryBusiness
 
         /** @var array{foundClientCategory:CategoryEntity} */
         $foundCategoriesRelationWithClient = $categoriesModel->join('clients_categories', 'categories.id = clients_categories.category_id')
-            ->whereIn("name", array_map(fn($category) => $category->getName(), $categoriesExclude))->findAll();
+            ->whereIn("id", array_map(fn($category) => $category->getId(), $categoriesExclude))->findAll();
         $categoriesExcludeName = [];
 
         foreach ($foundCategoriesRelationWithClient as $category) {

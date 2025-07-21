@@ -4,6 +4,7 @@ namespace App\Api\Exports\Post;
 
 use App\Business\Exports\ExportsBusiness;
 use App\Business\Exports\ExportsClientsBusiness;
+use App\Business\Exports\ExportsFormFillsBusiness;
 use App\Business\Exports\ExportsFormsBusiness;
 use App\Libraries\Exceptions\Exceptions;
 
@@ -11,7 +12,8 @@ class PostUseCases
 {
     private array $instances = [
         "CLIENTS" => ExportsClientsBusiness::class,
-        "FORMS" =>  ExportsFormsBusiness::class
+        "FORMS" =>  ExportsFormsBusiness::class,
+        "FORMS_FILLS" => ExportsFormFillsBusiness::class
     ];
     private int $maxIds = 500;
 
@@ -25,14 +27,14 @@ class PostUseCases
     public function execute(array $payload)
     {
         if (!isset($this->instances[$payload['entity']]))
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_AUTH);
+            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
 
         $entityInstance = $this->instances[$payload['entity']];
 
         if (empty($entityInstance) || !$entityInstance)
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_AUTH);
+            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
         if (count($payload['in_ids']) > $this->maxIds)
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_AUTH);
+            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
 
         $exportData = new $entityInstance();
 

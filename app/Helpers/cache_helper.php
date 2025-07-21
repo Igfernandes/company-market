@@ -10,7 +10,7 @@ if (!function_exists('deleteCacheWithPrefix')) {
 
         // Filtra os arquivos com o prefixo fornecido
         foreach ($files as $file) {
-            if (strpos($file, $prefix) === 0) {
+            if (strpos($file, $prefix) === 0 && is_file($cacheDir . '/' . $file)) {
                 unlink($cacheDir . '/' . $file); // Exclui o arquivo de cache com esse prefixo
             }
         }

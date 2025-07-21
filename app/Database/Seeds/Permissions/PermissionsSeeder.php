@@ -11,7 +11,7 @@ class PermissionsSeeder extends Seeder
         $prefix = getenv('database.default.DBPrefix');
         $ACTIONS = ['CREATE', 'UPDATE', 'DELETE', 'VIEW'];
 
-        $permissionsGroup = ["users", "forms", "services", "dispatchers", "schedules", "clients", "categories", "charges", "integrations", "fields"];
+        $permissionsGroup = ["users", "forms", "forms_fills", "services", "dispatchers", "schedules", "clients", "categories", "charges", "integrations", "fields"];
 
         foreach ($permissionsGroup as $permissionGroup) {
             foreach ($ACTIONS as $action) {

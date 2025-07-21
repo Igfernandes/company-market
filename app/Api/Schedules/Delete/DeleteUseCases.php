@@ -31,12 +31,12 @@ class DeleteUseCases
         ])->first();
 
         if (empty($foundAuthorInSchedule))
-            throw new Exceptions("Api.schedules.invalid.not_found", \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.schedules.invalid.not_found_or_permission", \BAD_BUSINESS_RULES);
 
-        $schedulesModel->where($filteredPayload)->delete();
         $usersScheduleModel->where([
             'schedule_id' => $filteredPayload['id']
         ])->delete();
+        $schedulesModel->where($filteredPayload)->delete();
 
         NotificationsService::store([
             "scope" => "schedules",

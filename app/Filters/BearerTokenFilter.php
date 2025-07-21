@@ -6,6 +6,7 @@ use App\Business\Authentication\UserAuthHistoryBusiness;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
+use Config\Services;
 
 class BearerTokenFilter implements FilterInterface
 {
@@ -15,7 +16,7 @@ class BearerTokenFilter implements FilterInterface
         $request = $request;  // Isso assegura que a tipagem seja resolvida corretamente
         $session = session();
         $origin = env('globals.href.frontend', '*');
-        
+
         $errorResponse = service('response')
             ->setHeader('Access-Control-Allow-Origin', $origin)
             ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
@@ -48,6 +49,9 @@ class BearerTokenFilter implements FilterInterface
         if ($userAuthId == false)
             return $errorResponse;
 
+        $cache = Services::cache();
+
+        $cache->save('userAuthId', $userAuthId);
         $session->set('userAuthId', $userAuthId);
         $session->set('tokenNavigation', $token);
     }

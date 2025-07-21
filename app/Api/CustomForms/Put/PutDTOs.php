@@ -46,6 +46,18 @@ trait PutDTOs
                 'integer' => 'Api.custom_forms.invalid.service_id',
             ],
         ],
+        'color_mark' => [
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.color_mark',
+            ],
+        ],
+        'thanks_message' => [
+            'rules' => 'string|permit_empty',
+            'errors' => [
+                'in_list' => 'Api.custom_forms.invalid.thanks_message',
+            ],
+        ],
         'started_at' => [
             'rules' => 'valid_date|permit_empty',
             'errors' => [

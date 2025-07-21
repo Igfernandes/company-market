@@ -23,19 +23,23 @@ class GetController extends BaseController
     public function handle()
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => 'users',
-                'type' => 'VIEW'
-            ]);
+
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
-            if (isset($payload['current']))
+            if (isset($payload['current'])) {
                 $payload['current']  = $payload['current'] == true ? 1 : 0;
+            } else PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'VIEW'
+            ]);
+
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
+
+
 
             $responseGet = $this->getUseCases->execute($payload);
 

@@ -37,7 +37,7 @@ class CustomFormsHistory extends Migration
 
         $this->forge->addForeignKey("form_id", "custom_forms", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

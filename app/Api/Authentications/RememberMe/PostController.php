@@ -24,14 +24,19 @@ class PostController extends BaseController
     {
         try {
             $validation = \Config\Services::validation();
-
+            $request = service('request');
+            
             $payload = $this->request->getVar(array_keys($this->rules));
             $validation->setRules($this->rules);
 
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $responsePost = $this->postUseCases->execute($payload);
+            $browser = $request->getUserAgent()->getBrowser();
+            $responsePost = $this->postUseCases->execute($payload, (object)[
+                "ip" => $request->getIPAddress() ?? "127.0.0.1",
+                "browser" => !empty($browser) ? $browser : "Postman"
+            ]);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {

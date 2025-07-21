@@ -37,7 +37,7 @@ class PostController extends BaseController
 
             $responsePost = $this->postUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

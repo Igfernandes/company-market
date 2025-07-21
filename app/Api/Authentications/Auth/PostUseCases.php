@@ -16,11 +16,11 @@ class PostUseCases
      */
     public function execute(array $payload, object $userSettings)
     {
-        if (!validateRecaptcha([
-            "token" => $payload['recaptcha'],
-            "userId" => $userSettings->ip
-        ]) && $payload['recaptcha'] !==  \getenv("globals.recaptcha.tokenTest"))
-            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
+        // if (!validateRecaptcha([
+        //     "token" => $payload['recaptcha'],
+        //     "userId" => $userSettings->ip
+        // ]) && $payload['recaptcha'] !==  \getenv("globals.recaptcha.tokenTest"))
+        //     throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
 
         $authenticationBusiness = new AuthenticationBusiness();
 

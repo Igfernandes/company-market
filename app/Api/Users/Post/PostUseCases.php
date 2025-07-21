@@ -28,7 +28,7 @@ class PostUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isCPFAvailable($payload['cpf']))
-            throw new Exceptions("Api.users.invalid.already_exists_cpf", BAD_AUTH);
+            throw new Exceptions("Api.users.invalid.already_exists_cpf", BAD_BUSINESS_RULES);
 
         $invitesModel = new InvitesModel();
 
@@ -49,7 +49,7 @@ class PostUseCases
         $userEntity = new UserEntity();
 
         if (!$usersBusiness->isEmailAvailable($dataInvite->email))
-            throw new Exceptions("Api.users.invalid.already_exists_email", BAD_AUTH);
+            throw new Exceptions("Api.users.invalid.already_exists_email", BAD_BUSINESS_RULES);
 
         $encryptedKey = $dataInvite->email . ":" . $payload['password'];
         $systemKey = $crypto->encrypt($encryptedKey, getenv('system.encrypted_key'));

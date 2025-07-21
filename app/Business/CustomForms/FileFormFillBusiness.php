@@ -15,8 +15,8 @@ class FileFormFillBusiness
         $extension = $photo->getExtension();
         $photoName = date("Y_m_d-H_i_s") . "_file.$extension";
 
-        $photo->move(WRITEPATH . 'uploads\forms', $photoName);
+        $photo->move(WRITEPATH . 'uploads/forms', $photoName);
 
-        return WRITEPATH . "uploads\forms\\$photoName";
+        return WRITEPATH . "uploads/forms/$photoName";
     }
 }

@@ -38,7 +38,7 @@ class Cerberus
         $foundOperation = $operationFailureModel->where($filteredWhere)->first();
 
         if (!empty($foundOperation) && $foundOperation->getAttemptNumber() > ATTEMPT_CHANCES)
-            throw new Exceptions($operationFailure->getErrorMessage(), \BAD_AUTH);
+            throw new Exceptions($operationFailure->getErrorMessage(), \FORBIDDEN_ERROR);
 
         if (!empty($foundOperation)) {
             $operationFailureModel->set(["attempt_number" => $foundOperation->getAttemptNumber() + 1])->update($foundOperation->getId());

@@ -30,7 +30,7 @@ class ClientsFields extends Migration
         $this->forge->addForeignKey("field_id", "fields", ["id"]);
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

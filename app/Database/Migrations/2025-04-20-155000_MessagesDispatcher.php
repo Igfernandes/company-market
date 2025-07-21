@@ -71,7 +71,7 @@ class MessagesDispatcher extends Migration
         $this->forge->addForeignKey("service_id", "services", ["id"]);
         $this->forge->addForeignKey("charge_id", "charges", ["id"]);
         $this->forge->addForeignKey("author_id", "users", ["id"]);
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

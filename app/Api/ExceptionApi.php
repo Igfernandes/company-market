@@ -11,7 +11,7 @@ trait ExceptionApi
     {
         helper('objects');
 
-        if (getenv("CI_ENVIRONMENT") == 'development' && $err->getCode() < BAD_REQUEST || $err->getCode() >= INTERNAL_ERROR)
+        if (getenv("CI_ENVIRONMENT") == 'development' && !$err->getCode() || $err->getCode() >= INTERNAL_ERROR)
             return var_dump($err);
 
         if ($err instanceof Exceptions  && !empty($err->getErrors()))

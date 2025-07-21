@@ -32,11 +32,6 @@ class PostController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => $payload['entity'],
-                'type' => 'VIEW'
-            ]);
-
             $responsePost = $this->postUseCases->execute($payload);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);

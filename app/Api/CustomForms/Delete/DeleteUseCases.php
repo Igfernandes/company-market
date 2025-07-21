@@ -2,6 +2,7 @@
 
 namespace App\Api\CustomForms\Delete;
 
+use App\Database\Models\CustomForms\ClientsFormsHistoryModel;
 use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\CustomForms\FormFillsModel;
 use App\Services\Notifications\NotificationsService;
@@ -22,8 +23,11 @@ class DeleteUseCases
 
         $customFormsModel = new CustomFormsModel();
         $formsFillsModel = new FormFillsModel();
+        $clientFormHistoryModel = new ClientsFormsHistoryModel();
 
         $formsFillsModel->where("form_id", $filteredPayload['id'])->delete();
+        $clientFormHistoryModel->where("form_id", $filteredPayload['id'])->delete();
+        $customFormsModel->delete($filteredPayload['id']);
         $customFormsModel->delete($filteredPayload['id']);
 
         NotificationsService::store([

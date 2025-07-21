@@ -4,6 +4,7 @@ namespace App\Api\Clients\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -30,9 +31,14 @@ class GetController extends BaseController
 
             if ($clientId > 0)
                 $payload['id'] = $clientId;
-            
+
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
+
+            $payload = PermissionsBusiness::applyOwnershipRestriction([
+                'scope' => 'clients',
+                'type' => 'VIEW'
+            ], $payload);
 
             $responseGet = $this->getUseCases->execute($payload);
 

@@ -21,6 +21,8 @@ class PutUseCases
      *     description: string, 
      *     components: string,
      *     status: 'PUBLISHED' | 'DRAFT',
+     *     color_mark: string,
+     *     thanks_message: string,
      *     service_id: int,
      *     started_at: string,
      *     expired_at: string
@@ -48,6 +50,12 @@ class PutUseCases
 
         if (isset($filteredPayload['expired_at']))
             $customFormEntity->setExpiredAt($filteredPayload['expired_at']);
+
+        if (isset($filteredPayload['thanks_message']))
+            $customFormEntity->setThanksMessage($filteredPayload['thanks_message']);
+
+        if (isset($filteredPayload['color_mark']))
+            $customFormEntity->setColorMark($filteredPayload['color_mark']);
 
         $customFormEntity->setStatus($filteredPayload['status']);
         $customFormsModel->set($customFormEntity->toArray(true))->update($filteredPayload['id']);

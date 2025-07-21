@@ -23,10 +23,7 @@ class GetController extends BaseController
     public function handle(Int $groupId = 0)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
-                'scope' => 'users',
-                'type' => 'UPDATE'
-            ]);
+            
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));

@@ -26,7 +26,7 @@ class GroupsPermissions extends Migration
         $this->forge->addForeignKey("permission_id", "permissions", ["id"]);
         $this->forge->addForeignKey("group_id", "groups", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

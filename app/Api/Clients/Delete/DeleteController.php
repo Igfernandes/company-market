@@ -32,7 +32,7 @@ class DeleteController extends BaseController
             $validation = \Config\Services::validation();
 
             $validation->setRules($this->rules);
-            $payload = $this->request->getVar(['in_clients']);
+            $payload = (array)$this->request->getVar();
 
             if ($clientId > 0)
                 $payload["client_id"] = $clientId;

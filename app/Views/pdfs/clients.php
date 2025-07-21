@@ -1,59 +1,148 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <style>
-        @page {
-            margin: 100px 50px;
-            /* espaço para cabeçalho e rodapé */
-        }
-
-        header {
-            position: fixed;
-            top: -80px;
-            left: 0;
-            right: 0;
-            height: 60px;
-            text-align: center;
-            line-height: 35px;
-            font-size: 18px;
-            border-bottom: 1px solid #000;
-        }
-
-        footer {
-            position: fixed;
-            bottom: -60px;
-            left: 0;
-            right: 0;
-            height: 50px;
-            text-align: center;
-            font-size: 14px;
-            border-top: 1px solid #000;
-        }
-
         body {
-            font-family: DejaVu Sans, sans-serif;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 80px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background-color: #8B0000;
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        td,
+        th {
+            border: 1px solid #ccc;
+            padding: 8px;
+            vertical-align: top;
+            word-break: break-word;
+        }
+
+        .section-header {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+        }
+
+        .label {
+            font-weight: bold;
+            width: 30%;
+            background-color: #f9f9f9;
+        }
+
+        .value {
+            width: 70%;
+            white-space: pre-wrap;
+        }
+
+        .fixed-footer {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 5px;
         }
     </style>
 </head>
 
 <body>
+    <?php if (is_array($clients)):
+        foreach ($clients as $index => $client): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">Informações do Cliente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $fieldsGroup =  [];
+                    if (isset($client['fields'])) {
+                        $fieldsGroup =  $client['fields'];
+                        unset($client['fields']);
+                    }
+                    if (isset($fieldsGroup['ATTACHMENTS'])) {
+                        $files = $fieldsGroup['ATTACHMENTS'];
+                        unset($fieldsGroup['ATTACHMENTS']);
+                    } else
+                        $files = [];
+                    ?>
 
-    <header>
-        Cabeçalho do Documento
-    </header>
-
-    <footer>
-        Rodapé - Página {PAGE_NUM} de {PAGE_COUNT}
-    </footer>
-
-    <main>
-        <h1>Conteúdo principal</h1>
-        <p>Texto repetido para testar a quebra de página...</p>
-        ' . str_repeat("<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>", 50) . '
-    </main>
-
+                    <?php foreach ($client as $key => $value): ?>
+                        <?php if (is_array($value) || is_object($value)): ?>
+                            <tr>
+                                <td class="label"><?= ucfirst($key) ?></td>
+                                <td class="value">
+                                    <pre><?= json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?></pre>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <tr>
+                                <td class="label"><?= ucfirst($key) ?></td>
+                                <td class="value"><?= $value ?></td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php endforeach;
+                    if (is_array($fieldsGroup)):
+                        foreach ($fieldsGroup as $groupField => $fields):
+                        ?>
+                            <tr>
+                                <td colspan="2" class="section-header"><?= lang("Words." . strtolower($groupField)) ?></td>
+                            </tr>
+                            <?php if (is_array($fields)):
+                                foreach ($fields as $field): ?>
+                                    <tr>
+                                        <td class="label"><?= $field->name ?? 'Inválido' ?></td>
+                                        <td class="value"><?= $field->value ?></td>
+                                    </tr>
+                        <?php
+                                endforeach;
+                            endif;
+                        endforeach;
+                    endif;
+                    if (!empty($files) && is_array($files)): ?>
+                        <tr>
+                            <td colspan="2" class="section-header"><?= lang("Words.attachments") ?></td>
+                        </tr>
+                        <?php foreach ($files as $file): ?>
+                            <tr>
+                                <td class="label"><?= $file->name ?? 'Arquivo' ?></td>
+                                <td class="value"><?= $file->value ?? 'Indisponível' ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+            <?php if ($index < count($clients) - 1): ?>
+                <div style="page-break-after: always;"></div>
+            <?php endif; ?>
+    <?php endforeach;
+    endif; ?>
+    <div class="fixed-footer">
+        © <?= date("Y") ?> <?= getenv("globals.company.name") ?> LTDA. CNPJ <?= getenv("globals.company.cnpj") ?><br>
+        <?= getenv("globals.company.phone") ?> | <?= getenv("globals.company.email") ?>
+    </div>
 </body>
 
 </html>

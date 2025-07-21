@@ -6,6 +6,20 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Uploads extends BaseController
 {
+    private function handleFile()
+    {
+        $path = WRITEPATH . $this->request->getUri()->getPath();
+
+        $response = service('response');
+
+        if (!is_file($path)) {
+            return $response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
+        }
+        
+        return $response
+            ->setHeader('Content-Type', mime_content_type($path))
+            ->setBody(file_get_contents($path));
+    }
     public function image($filename)
     {
         $path = WRITEPATH . 'uploads/images/' . basename($filename);
@@ -51,9 +65,19 @@ class Uploads extends BaseController
             ->setBody(file_get_contents($path));
     }
 
-    public function pdfs($filename)
+    public function attempts()
     {
-        $path = WRITEPATH . 'uploads/pdfs/' . basename($filename);
+        return $this->handleFile();
+    }
+    public function files()
+    {
+        return $this->handleFile();
+    }
+
+    public function pdfs($path, $name)
+    {
+        $file = "$path/$name";
+        $path = WRITEPATH . 'uploads/pdfs/' . $file;
 
         $response = service('response');
 

@@ -29,7 +29,7 @@ class UsersFields extends Migration
         $this->forge->addForeignKey("field_id", "fields", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

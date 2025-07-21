@@ -27,7 +27,7 @@ class ClientsServices extends Migration
         $this->forge->addForeignKey("client_id", "clients", ["id"]);
         $this->forge->addForeignKey("service_id", "services", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()

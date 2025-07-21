@@ -51,9 +51,7 @@ class FieldsBusiness
         if (!isset($payload['value_encrypted']) || empty($payload['value_encrypted']))
             $valueData =  [
                 "column" => "value",
-                "value" => \json_encode((object)[
-                    "data" => $payload['value']
-                ])
+                "value" => $payload['value']
             ];
         else $valueData = [
             "column" => "value_encrypted",

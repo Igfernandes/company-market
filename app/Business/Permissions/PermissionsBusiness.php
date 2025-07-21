@@ -63,13 +63,23 @@ class PermissionsBusiness
         return count($foundPermissions) > 0 || \count($foundGroupPermissions) > 0;
     }
 
-
     public static function hasPermissionUserAuth(array $permissionQuery = [])
     {
         $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
 
         if (count($permissions) === 0)
             throw new Exceptions('Api.users.invalid.not_permission', FORBIDDEN_ERROR);
+    }
+
+    public static function applyOwnershipRestriction(array $permissionQuery = [], array $payload = [])
+    {
+        $session = session();
+        $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
+
+        if (count($permissions) === 0)
+            $payload['owner_id'] = $session->get('userAuthId');
+
+        return $payload;
     }
 
     /**

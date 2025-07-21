@@ -28,7 +28,7 @@ class PostController extends BaseController
                 "id" => $operationId
             ]);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

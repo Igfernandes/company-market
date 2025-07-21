@@ -13,6 +13,7 @@ class PostUseCases
     /**
      * @param array{
      *   categories: array<object{
+     *     id: integer,
      *     name: string,
      *     description: string
      *   }>
@@ -24,14 +25,14 @@ class PostUseCases
         $categories = $payload['categories'];
         $categoriesBusiness = new CategoryBusiness();
 
-        $categoriesExclude = $categoriesBusiness->getCategoriesExclude(array_map(fn($category) => $category->name, $categories));
+        $categoriesExclude = $categoriesBusiness->getCategoriesExclude(array_map(fn($category) => $category->id, $categories));
         $categoriesAvailable = $categoriesBusiness->hasClientsRelations($categoriesExclude);
 
         if (count($categoriesAvailable) > 0)
             throw new Exceptions("Api.clients.categories.invalid.linked_category", BAD_BUSINESS_RULES);
 
         if (count($categoriesExclude) > 0)
-            $categoriesModel->whereIn("name", \array_map(fn($category) => $category->getName(), $categoriesExclude))->delete();
+            $categoriesModel->whereIn("id", \array_map(fn($category) => $category->getId(), $categoriesExclude))->delete();
 
         foreach ($categories as $position => $category) {
 
@@ -44,7 +45,7 @@ class PostUseCases
             $categoryEntity->setDescription(isset($category->description) ? $category->description : "");
             $categoryEntity->setPosition($position + 1);
 
-            $categoriesModel->upsert(["name" => $category->name], $categoryEntity);
+            $categoriesModel->upsert(["id" => $category->id], $categoryEntity);
         }
 
         NotificationsService::store([

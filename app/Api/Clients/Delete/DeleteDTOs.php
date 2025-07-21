@@ -11,6 +11,6 @@ trait DeleteDTOs
                 'integer' => 'Api.clients.invalid.client',
             ],
         ],
-        "in_clients"    => 'permit_empty'
+        "in_clients" => 'permit_empty'
     ];
 }

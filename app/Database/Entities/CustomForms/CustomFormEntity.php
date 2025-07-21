@@ -18,6 +18,8 @@ class CustomFormEntity extends Entity
         'components'      => null,
         'description'     => null,
         'status'          => null,
+        'thanks_message'  => null,
+        'color_mark'      => null,
         'service_id'      => null,
         'started_at'      => null,
         'expired_at'      => null,
@@ -150,6 +152,53 @@ class CustomFormEntity extends Entity
 
         if (!empty($description))
             $this->attributes['description'] = $description;
+    }
+
+    /**
+     * getColorMark function
+     *
+     * @return String|null
+     */
+    public function getColorMark(): ?String
+    {
+        return $this->attributes['color_mark'];
+    }
+
+    /**
+     * setColorMark function
+     *
+     * @param String|null $status
+     * @return void
+     */
+    public function setColorMark(String $colorMark)
+    {
+        if (strlen($colorMark) > 10)
+            throw new Exception("Api.custom_forms.invalid.color_mark", BAD_REQUEST);
+
+        if (!empty($colorMark))
+            $this->attributes['color_mark'] = $colorMark;
+    }
+
+    /**
+     * getThanksMessage function
+     *
+     * @return String|null
+     */
+    public function getThanksMessage(): ?String
+    {
+        return $this->attributes['thanks_message'];
+    }
+
+    /**
+     * setThanksMessage function
+     *
+     * @param String|null $thanksMessage
+     * @return void
+     */
+    public function setThanksMessage(String $thanksMessage)
+    {
+        if (!empty($thanksMessage))
+            $this->attributes['thanks_message'] = $thanksMessage;
     }
 
     /**

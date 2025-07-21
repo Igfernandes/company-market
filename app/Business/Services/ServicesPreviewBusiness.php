@@ -4,8 +4,10 @@ namespace App\Business\Services;
 
 use App\Business\BaseBusiness;
 use App\Business\Charges\ChargesBusiness;
+use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Entities\Finances\ChargeEntity;
 use App\Database\Entities\Services\ServiceEntity;
+use App\Database\Models\CustomForms\CustomFormsModel;
 use App\Database\Models\Finances\ChargesModel;
 use App\Database\Models\Services\ServicesModel;
 
@@ -26,14 +28,16 @@ class ServicesPreviewBusiness
     {
         /** @var ChargeEntity */
         $charge = $this->chargesModel->where([
-            "reference" => $query['charge']
+            "reference" => $query['charge'],
+            "status" => "ACTIVE"
         ])->first();
 
         if (empty($charge)) return null;
 
         /** @var ServiceEntity */
         $service = $this->servicesModel->where([
-            "id" => $charge->getServiceId()
+            "id" => $charge->getServiceId(),
+            "status" => "ACTIVE"
         ])->first();
 
         if (empty($service)) return null;
@@ -62,7 +66,26 @@ class ServicesPreviewBusiness
 
     public function getServiceWithForm($query): array|null
     {
-        $service = $this->servicesModel->where($query)->first();
+        $service = $this->servicesModel->where([
+            "id" => $query['id'],
+            "status" => "ACTIVE"
+        ])->first();
+
+        $customFormsModel = new CustomFormsModel();
+        $forms = [];
+
+        if (isset($query['in_forms']))
+            $customFormsModel->whereIn("id", $query['in_forms']);
+
+        $foundForm = $customFormsModel->Where([
+            "service_id" => $query['id'],
+            "status" => "PUBLISHED"
+        ])->findAll();
+
+        $forms = \array_map(fn(CustomFormEntity $form) => (object)[
+            "name" => $form->getName(),
+            "slug" => $form->getSlug()
+        ], $foundForm);
 
         return  [
             "name" => $service->getName(),
@@ -70,6 +93,7 @@ class ServicesPreviewBusiness
             "photo" => getPublicUrl($service->getPhoto()),
             "realized_at" => $service->getRealizedAt(),
             "expired_at" => $service->getExpiredAt(),
+            "forms" => $forms,
             "address" => $service->getAddress(),
         ];
     }

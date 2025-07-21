@@ -9,7 +9,8 @@
  */
 ini_set('display_errors', '0');
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
-
+ini_set('upload_max_filesize', '80M');
+ini_set('post_max_size', '80M');
 /*
  |--------------------------------------------------------------------------
  | DEBUG MODE

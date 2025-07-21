@@ -10,7 +10,8 @@
  */
 error_reporting(-1);
 ini_set('display_errors', '1');
-
+ini_set('upload_max_filesize', '80M');
+ini_set('post_max_size', '80M');
 /*
  |--------------------------------------------------------------------------
  | DEBUG BACKTRACES

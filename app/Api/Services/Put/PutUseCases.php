@@ -51,7 +51,8 @@ class PutUseCases
             /** @var ServiceEntity */
             $service = $servicesModel->where("id", $filteredPayload['id'])->first();
 
-            unlink($service->getPhoto());
+            if (!empty($service->getPhoto()))
+                unlink($service->getPhoto());
         }
         unset($filteredPayload['photo']);
 
@@ -64,7 +65,8 @@ class PutUseCases
         $servicesModel->set($serviceEntity->toArray(true))->update($filteredPayload['id']);
 
         $servicesRulesBusiness = new ServicesRulesBusiness();
-        $servicesRulesBusiness->gratuity($filteredPayload['id'], $filteredPayload['gratuity']);
+        if (isset($filteredPayload['gratuity']))
+            $servicesRulesBusiness->gratuity($filteredPayload['id'], $filteredPayload['gratuity']);
 
         NotificationsService::store([
             "scope" => "services",

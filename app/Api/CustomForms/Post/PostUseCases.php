@@ -20,6 +20,8 @@ class PostUseCases
      *     description: string, 
      *     components: string,
      *     status: 'PUBLISHED' | 'DRAFT',
+     *     color_mark: string,
+     *     thanks_message: string,
      *     service_id: int,
      *     started_at: string,
      *     expired_at: string
@@ -42,6 +44,10 @@ class PostUseCases
 
         if (isset($filteredPayload['started_at']))
             $customFormEntity->setStartedAt($filteredPayload['started_at']);
+
+        $customFormEntity->setColorMark($filteredPayload['color_mark']);
+        if (isset($filteredPayload['thanks_message']))
+            $customFormEntity->setThanksMessage($filteredPayload['thanks_message']);
 
         if (isset($filteredPayload['expired_at']))
             $customFormEntity->setExpiredAt($filteredPayload['expired_at']);

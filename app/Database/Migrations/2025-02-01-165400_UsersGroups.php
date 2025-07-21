@@ -26,7 +26,7 @@ class UsersGroups extends Migration
         $this->forge->addForeignKey("group_id", "groups", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
 
-        $this->forge->createTable($this->tb_name);
+        $this->forge->createTable($this->tb_name, true);
     }
 
     public function down()
