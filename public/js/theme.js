@@ -1,0 +1,28 @@
+import { exports } from "./exports/index.js";
+import { resolvesPath } from "./helpers/resolvesPath.js";
+import "/js/libs/swiper/swiper-bundle.min.js";
+import "/js/helpers/initHtml.js";
+
+const path = resolvesPath(exports, window.location.pathname) ?? [];
+
+if (!path)
+  throw new Error(
+    `${path}: Não foi possível encontrar a referência da página para serem feitas as importações`
+  );
+
+path.push("/js/modules/Others/ClearUrl/init.js");
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  path.map(async (currentImport) => {
+    try {
+      const targetImport = await import(`${currentImport}`);
+
+      targetImport.init();
+    } catch (err) {
+      throw new Error(`"${currentImport}" -> \n ${err}`);
+    }
+  });
+});
+
+// import * as internitCookie from './main/cookie/_cookie.js';
