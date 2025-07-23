@@ -19,7 +19,7 @@ $levels: "100", "200", "300", "400", "500", "600", "700", "800", "900";
   }
 }
 
-$extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled";
+$extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled", "laboratory";
 // Loop para cores fixas (sem nível)
 @each $name in $extra-colors {
   .bg-#{$name} {

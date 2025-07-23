@@ -7,6 +7,8 @@
 //SETTINGS
 @import "./settings/colors.scss";
 @import "./settings/fonts";
+@import "./settings/sizes";
+@import "./settings/utils/utils";
 @import "./settings/tags.scss";
 
 //SWIPER
@@ -23,6 +25,7 @@
 @import "./components/index";
 
 //LAYOUT
+@import "./layouts/layouts";
 @import "./layouts/404.scss";
 @import "./layouts/terms.scss";
 @import "./layouts/validation.scss";
