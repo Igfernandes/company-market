@@ -20,10 +20,5 @@
     "plataform"
   ],
   "author": "Igor Fernandes",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://bitbucket.org/Octavios23/nautiSys/issues"
-  },
-  "homepage": "https://bitbucket.org/Octavios23/nautiSys#readme",
-  "devDependencies": {}
+  "license": "ISC"
 }
