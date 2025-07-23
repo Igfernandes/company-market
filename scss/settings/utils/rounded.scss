@@ -1,0 +1,29 @@
+@for $i from 0 through 100 {
+  $value: #{$i + "%"};
+
+  // Todos os lados
+  .rounded-#{$i} {
+    border-radius: $value;
+  }
+
+  // Lados individuais
+  .rounded-t-#{$i} {
+    border-top-left-radius: $value;
+    border-top-right-radius: $value;
+  }
+
+  .rounded-r-#{$i} {
+    border-top-right-radius: $value;
+    border-bottom-right-radius: $value;
+  }
+
+  .rounded-b-#{$i} {
+    border-bottom-left-radius: $value;
+    border-bottom-right-radius: $value;
+  }
+
+  .rounded-l-#{$i} {
+    border-top-left-radius: $value;
+    border-bottom-left-radius: $value;
+  }
+}

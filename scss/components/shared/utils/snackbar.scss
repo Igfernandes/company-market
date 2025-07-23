@@ -1,0 +1,11 @@
+.snackbar {
+  .success,
+  .failed,
+  .notice {
+    display: none;
+    
+    &.is-feedback {
+      display: block;
+    }
+  }
+}

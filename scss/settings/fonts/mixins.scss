@@ -1,4 +1,4 @@
-$font-sizes: xs, sm, md, lg, xl, xxl;
+$font-sizes: xs, sm, md, lg, xl, xxl, 2xl;
 
 @each $size in $font-sizes {
   .text-#{$size} {
@@ -8,5 +8,11 @@ $font-sizes: xs, sm, md, lg, xl, xxl;
   .header-#{$size} {
     font-size: var(--heading-#{$size});
     font-weight: bold;
+  }
+}
+
+@for $i from 100 through 900 {
+  .font-#{$i} {
+    font-weight: $i;
   }
 }

@@ -10,9 +10,6 @@ if (!path)
     `${path}: Não foi possível encontrar a referência da página para serem feitas as importações`
   );
 
-path.push("/js/modules/Others/ClearUrl/init.js");
-
-
 document.addEventListener("DOMContentLoaded", () => {
   path.map(async (currentImport) => {
     try {

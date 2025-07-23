@@ -1,9 +1,12 @@
  <?= view('components/public/header/index') ?>
- <div class="laboratory">
+ <div class="laboratory bg-laboratory">
 
-     <?= view("components/laboratory/header") ?>
-     <div class="content">
-         <?= view("components/laboratory/sidebar") ?>
+     <?= view("laboratory/header") ?>
+     <div class="content d-flex">
+         <?= view("laboratory/sidebar") ?>
+         <?= view("laboratory/preview") ?>
      </div>
  </div>
+
+ <script type="module" src="/js/tests/execute.js"></script>
  <?= view('components/public/footer/index') ?>
