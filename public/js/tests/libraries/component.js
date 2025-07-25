@@ -15,7 +15,7 @@ export async function loadComponent(component) {
   
   window.history.pushState("update current component", "Query Component", url);
 
-  const resp = await fetch(`/laboratory/${component}`);
+  const resp = await fetch(`/laboratory/${component}?mock=true`);
   const html = await resp.text();
 
   document.querySelector("#render").innerHTML = html;
