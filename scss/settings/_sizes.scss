@@ -1,17 +1,14 @@
-// base: 1 = 0.25rem (igual ao Tailwind)
-$unit: 0.25rem;
-
 // Width classes: w-1 até w-100 (25rem)
 @for $i from 1 through 100 {
   .w-#{$i} {
-    width: $i * $unit;
+    width: $i + 0%;
   }
 }
 
 // Height classes: h-1 até h-100 (25rem)
 @for $i from 1 through 100 {
   .h-#{$i} {
-    height: $i * $unit;
+    height: $i + 0%;
   }
 }
 
@@ -28,16 +25,26 @@ $unit: 0.25rem;
   }
 }
 
-
 // Height classes: h-1 até h-100 (100vh)
 @for $i from 1 through 100 {
-  .h-\[#{$i}%\] {
-    height: #{$i + 0%};
+  .h-\[#{$i}rem\] {
+    height: #{$i}rem;
+  }
+  @for $d from 1 through 9 {
+    .h-\[#{ $i }\.#{ $d }rem\] {
+      height: #{"#{$i}.#{$d}rem"};
+    }
   }
 }
 // Height classes: w-[1vw] até w-[100vw] (100vw)
 @for $i from 1 through 100 {
-  .w-\[#{$i}%\] {
-    width: #{$i + 0%};
+  .w-\[#{ $i }rem\] {
+    width: #{$i}rem;
+  }
+
+  @for $d from 1 through 9 {
+    .w-\[#{ $i }\.#{ $d }rem\] {
+      width: #{"#{$i}.#{$d}rem"};
+    }
   }
 }
