@@ -1,13 +1,13 @@
 <main class="preview">
     <div class="content">
-        <div class="render">
-            <div class="position-relative h-83 mt-4 d-flex w-100 justify-content-center align-items-center">
-                <div id="render" style="transform: scale(1)"></div>
+        <div class="render w-[100%]">
+            <div class="relative h-83 w-full mt-4 flex w-[100%] justify-content-center align-items-center">
+                <div id="render" class="w-[100%]" style="transform: scale(1)"></div>
             </div>
         </div>
         <div class="actions shadow-md bg-gray-200">
-            <div class="row">
-                <div class="col-12 col-md-6">
+            <div class="flex">
+                <div class="w-[50%]">
                     <div>
                         <ul class="text-sm list-unstyled flex justify-content-around pt-2 ps-2">
                             <li>
@@ -26,7 +26,7 @@
                         <button class="btn btn-success" data-component='action'>Teste Único</button>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="w-[50%]">
                     <div>
                         <div class="bg-laboratory h-37 mt-1 overflow-y-scroll w-full ps-2" data-log>
                         </div>

@@ -27,3 +27,42 @@
     border-bottom-left-radius: $value;
   }
 }
+
+// _rounded.scss
+
+$rounded-sizes: (
+  xs: 2px,
+  sm: 4px,
+  md: 6px,
+  lg: 8px,
+  xl: 12px,
+  2xl: 16px
+);
+
+@each $name, $value in $rounded-sizes {
+  // Todos os lados
+  .rounded-#{$name} {
+    border-radius: $value;
+  }
+
+  // Lados individuais
+  .rounded-t-#{$name} {
+    border-top-left-radius: $value;
+    border-top-right-radius: $value;
+  }
+
+  .rounded-r-#{$name} {
+    border-top-right-radius: $value;
+    border-bottom-right-radius: $value;
+  }
+
+  .rounded-b-#{$name} {
+    border-bottom-left-radius: $value;
+    border-bottom-right-radius: $value;
+  }
+
+  .rounded-l-#{$name} {
+    border-top-left-radius: $value;
+    border-bottom-left-radius: $value;
+  }
+}

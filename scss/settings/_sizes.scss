@@ -27,3 +27,17 @@ $unit: 0.25rem;
     width: #{$i}vw;
   }
 }
+
+
+// Height classes: h-1 até h-100 (100vh)
+@for $i from 1 through 100 {
+  .h-\[#{$i}%\] {
+    height: #{$i + 0%};
+  }
+}
+// Height classes: w-[1vw] até w-[100vw] (100vw)
+@for $i from 1 through 100 {
+  .w-\[#{$i}%\] {
+    width: #{$i + 0%};
+  }
+}
