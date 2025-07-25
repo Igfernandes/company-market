@@ -12,11 +12,16 @@ export async function loadComponent(component) {
 
   const initialTab = document.querySelector(`[data-component='${component}']`);
   initialTab.classList.add("is_active");
-  
+
   window.history.pushState("update current component", "Query Component", url);
 
+  const start = performance.now();
   const resp = await fetch(`/laboratory/${component}`);
+  const end = performance.now();
+  const duration = end - start;
+
   const html = await resp.text();
+  console.log(duration.toFixed(2));
 
   document.querySelector("#render").innerHTML = html;
 

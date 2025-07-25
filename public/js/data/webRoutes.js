@@ -5,5 +5,5 @@ export const webRoutes = {
 };
 
 export const frontEndRoutes = {
-  base: "https://brasilarco.org.br",
+  base: "",
 };

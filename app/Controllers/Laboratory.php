@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
 use Exception;
@@ -12,10 +14,10 @@ class Laboratory extends BaseController
         return view('laboratory', $data);
     }
 
-    public function components(string $path, string $name)
+    public function components(...$args)
     {
         try {
-            return view("components/shared/$path/$name");
+            return view("components/shared/" . join("/", $args));
         } catch (Exception $err) {
             throw new Exception("COMPONENT NOT FOUND", \NOT_FOUND);
         }

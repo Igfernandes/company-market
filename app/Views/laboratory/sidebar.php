@@ -3,9 +3,9 @@
         <ul class="list-unstyled pt-4">
             <li class="pointer-event rounded-3">
                 <span class="text-white text-lg ps-3 d-block rounded-3"><strong>Formulário</strong></span>
-                <ul class="menu-components">
-                    <li data-component="">
-
+                <ul class="menu-components text-white">
+                    <li data-navbar='component' data-component="components/forms/password/simple">
+                        <span><i>Password Simple</i></span>
                     </li>
                 </ul>
             </li>
