@@ -1,0 +1,25 @@
+.laboratory {
+  height: 100vh;
+  overflow: hidden;
+  .sidebar {
+    .content {
+      width: 20vw;
+      height: 88vh;
+      .is_active{
+        text-decoration: underline;
+      }
+    }
+  }
+  .preview {
+    .content {
+      width: 80vw;
+      .components-list {
+        height: 10vh;
+      }
+      .actions {
+        height: 28vh;
+        background-color: var(--bg-light);
+      }
+    }
+  }
+}

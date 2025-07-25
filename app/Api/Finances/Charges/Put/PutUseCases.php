@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Api\Finances\Charges\Put;
+
+use App\Business\Charges\ChargeScheduleBusiness;
+use App\Database\Entities\Finances\ChargeEntity;
+use App\Database\Models\Finances\ChargesModel;
+use App\Database\Models\Services\ServicesModel;
+use App\Libraries\Exceptions\Exceptions;
+use App\Services\Notifications\NotificationsService;
+use App\Traits\BusinessTrait;
+
+class PutUseCases
+{
+    use BusinessTrait;
+
+    /**
+     * @param array{
+     *     id: integer,
+     *     title: string,
+     *     description: string,
+     *     service_id: string, 
+     *     type: 'APPELLANT'|'PUNCTUAL',
+     *     privacy: 'PUBLIC'|'PRIVATE',
+     *     amount: integer,
+     *     price: integer, 
+     *     period: integer,
+     *     promotional_price: integer,
+     *     expired_days: string,
+     *     started_at: string, 
+     *     clients: array{integer}
+     * } $payload
+     */
+    public function execute(array $payload)
+    {
+        $serviceModel = new ServicesModel();
+        $chargesModel = new ChargesModel();
+
+        $foundService =  $serviceModel->where(['id' => $payload['service_id']])->first();
+
+        if (empty($foundService) && !isset($payload['title']))
+            throw new Exceptions("Api.charges.invalid.name_or_service", BAD_BUSINESS_RULES);
+
+        $foundCharge = $chargesModel->where("id", $payload['id'])->first();
+
+        if (empty($foundCharge))
+            throw new Exceptions("Api.charges.invalid.not_found", BAD_REQUEST);
+
+        $chargeEntity = new ChargeEntity();
+
+        if (isset($payload['title']) && !empty($payload['title']))
+            $title = $payload['title'];
+        else {
+            $title = $foundService->getName();
+        }
+
+        $chargeEntity->setTitle($title);
+
+        if (!empty($payload['description']))
+            $chargeEntity->setDescription($payload['description']);
+
+        $chargeEntity->setServiceId($payload['service_id']);
+        $chargeEntity->setPrice($payload['price']);
+        if (!empty($payload['amount']))
+            $chargeEntity->setAmount($payload['amount']);
+
+        if (!empty($payload['started_at']))
+            $chargeEntity->setStartedAt($payload['started_at']);
+
+        if (!empty($payload['period']))
+            $chargeEntity->setPeriod($payload['period']);
+
+        if (!empty($payload['promotional_price']))
+            $chargeEntity->setPromotionalPrice($payload['promotional_price']);
+
+        $chargeEntity->setPrivacy($payload['privacy']);
+        $chargeEntity->setType($payload['type']);
+        $chargeEntity->setStatus($payload['status']);
+
+        if (!empty($payload['expired_days']))
+            $chargeEntity->setExpiredDays($payload['expired_days']);
+
+        $chargesModel->set($chargeEntity->toArray(true))->where("id", $payload['id'])->update();
+
+        if (isset($payload['period']) && $payload['type'] === "APPELLANT") {
+            ChargeScheduleBusiness::delete($chargeEntity);
+            ChargeScheduleBusiness::schedule($chargeEntity, $chargeEntity->getStartedAt());
+        }
+
+        NotificationsService::store([
+            "scope" => "charges",
+            "action" => "UPDATE",
+            "key" => $payload['id']
+        ]);
+
+        return (object)[
+            "success" => "Api.charges.success.put"
+        ];
+    }
+}

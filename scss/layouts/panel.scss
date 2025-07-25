@@ -1,0 +1,318 @@
+.info-column.box-counters {
+  width: 17%;
+}
+.user-panel {
+  .info {
+    a {
+      h4 {
+        font-size: 1rem !important;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+.wrapper {
+  .preloader {
+    .animation__wobble {
+      width: 11%;
+      height: 186px;
+      object-fit: contain;
+    }
+  }
+}
+
+.content-wrapper {
+  .info-box {
+    &-content {
+      text-align: center;
+    }
+
+    &-icon {
+      padding: 4%;
+
+      @include mq("sm", max) {
+        width: 100%;
+      }
+    }
+
+    &-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+
+    &-number {
+      font-size: 1.5rem;
+    }
+  }
+
+  &.administrador {
+    .info-column {
+      width: 23%;
+
+      @include mq("sm", max) {
+        width: 100%;
+      }
+    }
+
+    .info-box {
+      &-icon {
+        width: 35%;
+        padding: 10% 4%;
+
+        @include mq("xl", min) {
+          padding: 2% 5%;
+        }
+
+        @include mq("sm", max) {
+          padding: 7% 4%;
+        }
+
+        i {
+          font-size: 1.5rem;
+
+          @include mq("lg", max) {
+            font-size: 1.5rem;
+          }
+
+          @include mq("md", max) {
+            font-size: 1.5rem;
+          }
+
+          @include mq("sm", max) {
+            font-size: 2.5rem;
+          }
+        }
+      }
+
+      &-text {
+        font-size: 0.9rem;
+      }
+
+      &-number {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .content {
+    &-atleta {
+      a.card-atleta {
+        text-decoration: none;
+        color: #000;
+        background-color: #fff;
+        width: 30%;
+        box-shadow: 8px 8px 20px -2px rgba(0, 0, 0, 0.26);
+
+        @include mq("lg", max) {
+          width: 47%;
+        }
+
+        @include mq("sm", max) {
+          width: 100%;
+        }
+
+        .box {
+          &-card {
+            &-item {
+              width: 100%;
+
+              .card {
+                &-item {
+                  &-head {
+                    border-bottom: 2px solid #9c9c9c;
+                    padding: 2% 3%;
+
+                    .box {
+                      &-card {
+                        &-title {
+                          width: 90%;
+
+                          p {
+                            font-size: 1.3rem;
+
+                            @include mq("xxl", max) {
+                              font-size: 1rem;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  &-body {
+                    padding: 2%;
+
+                    .box {
+                      &-card {
+                        &-logo {
+                          width: 17%;
+                        }
+
+                        &-trophy {
+                          width: 13%;
+                        }
+
+                        &-message {
+                          width: 70%;
+                        }
+
+                        &-title {
+                          h5 {
+                            font-size: 1.23rem;
+
+                            @include mq("xxl", max) {
+                              font-size: 1rem;
+                            }
+                          }
+                        }
+
+                        &-text {
+                          p {
+                            font-size: 0.81rem;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            &-title {
+              p {
+                margin: 0%;
+              }
+            }
+
+            &-flag {
+              width: 10%;
+            }
+          }
+        }
+      }
+    }
+
+    &.equipamentos {
+      .container {
+        &-fluid[data-clone="container"] {
+          height: 520px;
+          max-height: 520px;
+          overflow-y: auto;
+          overflow-x: clip;
+
+          @include mq("sm", max) {
+            .row.bg-white {
+              flex-direction: column-reverse;
+            }
+          }
+        }
+
+        &-fluid {
+          @include mq("sm", max) {
+            .row.bg-white {
+              flex-direction: column-reverse;
+            }
+          }
+        }
+      }
+    }
+
+    &.home {
+      .container {
+        &-fluid {
+          div[data-clone="container"] {
+            height: 600px;
+            max-height: 600px;
+            overflow-y: auto;
+            overflow-x: clip;
+          }
+
+          @include mq("sm", max) {
+            .row.bg-white {
+              flex-direction: column-reverse;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .container {
+    &-clones {
+      height: 350px;
+      max-height: 350px;
+      overflow-y: auto;
+      overflow-x: clip;
+    }
+  }
+}
+
+.pagination {
+  justify-content: end !important;
+}
+
+.credentials {
+  .login-box {
+    margin: 0 auto;
+  }
+}
+
+.active-arco {
+  color: #000 !important;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.map {
+  svg {
+    width: 50%;
+
+    @include mq("xxl", min) {
+      width: 42%;
+    }
+
+    @include mq("xl", max) {
+      width: 55%;
+    }
+
+    @include mq("lg", max) {
+      width: 75%;
+      top: 10.75px !important;
+    }
+
+    @include mq("md", max) {
+      width: 90%;
+      top: 18.625px !important;
+    }
+
+    @include mq("sm", max) {
+      width: 75%;
+      top: 7.625px !important;
+    }
+  }
+}
+
+.categorie {
+  &-box {
+    flex-wrap: wrap;
+
+    label {
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      margin: 1rem 0;
+    }
+  }
+}
+
+button.btn.btn-success.save {
+  width: 20%;
+  @include mq("sm", max) {
+    width: 50%;
+  }
+}
+.add .add_btn {
+  display: flex;
+  justify-content: end;
+}

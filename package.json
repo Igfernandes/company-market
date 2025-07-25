@@ -1,0 +1,24 @@
+{
+  "name": "nautisys",
+  "version": "1.0.0",
+  "description": "The nautisys plataform create to ocean tours",
+  "main": "nautsys",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "browser": "npx browser-sync start --proxy \"localhost:8080\" --files \"app/Views/**/*.php,public/css/*.css,public/js/*.js\"",
+    "start": "npx webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Igfernandes/nautiSys.git"
+  },
+  "keywords": [
+    "sport",
+    "plataform"
+  ],
+  "author": "Igor Fernandes",
+  "license": "ISC"
+}

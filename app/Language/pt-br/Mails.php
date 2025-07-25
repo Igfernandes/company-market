@@ -1,0 +1,71 @@
+<?php
+
+// override core en language system validation or define your own en language validation message
+return [
+    "welcome" => [
+        "subject" => "Mensagens de Boas Vindas",
+        "title" => "Olá, “{name}” seja bem-vindo!",
+        "text_aux" => "Olá, você foi convidado a fazer parte da plataforma da AGM! Acesse o link: {inviteLink}"
+
+    ],
+    "alter_password" => [
+        "subject" => "Confirmação de alteração de senha",
+        "text_aux" => "A sua senha foi alterada com sucesso. Acesse a área de login e conecte-se",
+        "title" => "Olá, “Name”",
+        "subtitle" => "Você recebeu este e-mail porque alterou a senha da sua conta na plataforma da AGM.",
+        "text_about_date_created" => "Sua senha na plataforma da AGM foi alterada em 13/12/2024 às 16:38 (GMT).",
+        "alert_about_email" => "Se foi você, este e-mail pode ser ignorado com segurança."
+    ],
+    "recover_password" => [
+        "subject" => "Alteração de senha",
+        "subtitle" => "Você recebeu este e-mail porque esqueceu a senha da sua conta na plataforma da AGM.",
+        "text_aux" => "Olá, você recebeu uma solicitação para alteração de senha da plataforma {company}! Acesse o link: {link}",
+        "text_about_button" => "Pra criar uma nova senha, clique no botão e será redirecionado para plataforma da AGM pra criar uma nova senha.",
+        "text_button" => "Criar uma nova senha",
+        "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
+    ],
+    "invites" => [
+        "subject" => "Convite para cadastro",
+        "text_aux" => "Olá, você foi convidado a fazer parte da plataforma da {company}! Acesse o link: {link}",
+        "title" => "Olá, você foi convidado a fazer parte da plataforma da AGM!",
+        "subtitle" => "Você recebeu este e-mail para criar uma conta na plataforma da AGM e utilizar os seus recursos.",
+        "text_about_button" => "Pra criar uma conta, clique no botão e será redirecionado para plataforma da AGM pra criar uma nova senha.",
+        "text_button" => "Criar uma conta",
+        "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
+    ],
+    "charges" => [
+        "text_aux" => "Olá, você recebeu um cobrança da plataforma {company}! Acesse o link: {link}",
+        "title" => "Olá, você recebeu uma nova cobrança!",
+        "subtitle" => "Você recebeu este e-mail com uma cobrança referente ao serviço ou referência abaixo:",
+        "charge_received" => "Para ver mais detalhes sobre a cobrança, acesse o link abaixo",
+        "text_button" => "Ver cobrança",
+        "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
+    ],
+    "services" => [
+        "text_aux" => "Olá, você recebeu um cobrança da plataforma {company}! Acesse o link: {link}",
+        "text_button" => "Ver Evento",
+    ],
+    "footer" => [
+        "text" => " Se você acha que recebeu este e-mail por engano, entre em contato conosco em"
+    ],
+    "message" => [
+        "subject" => "Notificação",
+        "text_aux" => "Olá, você recebeu uma nova notificação da plataforma "
+    ],
+    "inscribes" => [
+        "subject" => "Confirmação da Inscrição",
+        "text_aux" => "Olá, sua inscrição está confirmada para o evento {serviceName}. Acesse o link para confirmação a inscrição: {link}",
+        "title" => "CONFIRMAÇÃO DE VAGA",
+        "subtitle" => "LEIA COM ATENÇÃO",
+        "text_about_button" => "Para confirmar a sua presença, clique no botão abaixo.",
+        "text_button" => "Confirmar Presença",
+        "text_about_problems_button" => "Caso ocorra algum problema quanto ao uso do botão, acesse o link abaixo para prosseguir.",
+    ],
+    "unsubscribe" => [
+        "subject" => "Notificação de exclusão",
+        "text_aux" => "Olá, sua inscrição está confirmada para o evento {serviceName}",
+        "title" => "EXCLUSÃO DO EVENTO",
+        "subtitle" => "Você foi removido da atividade da lista de participantes do evento:",
+        "text_contact" => "Para mais detalhes, entre em contato com a central por vias de contatos disponíveis."
+    ]
+];
