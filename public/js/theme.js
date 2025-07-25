@@ -1,6 +1,7 @@
+import "/js/components/exports.js";
 import { exports } from "./exports/index.js";
 import { resolvesPath } from "./helpers/resolvesPath.js";
-import "/js/libs/swiper/swiper-bundle.min.js";
+import "/js/libraries/swiper/swiper-bundle.min.js";
 import "/js/helpers/initHtml.js";
 
 const path = resolvesPath(exports, window.location.pathname) ?? [];
@@ -21,5 +22,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// import * as internitCookie from './main/cookie/_cookie.js';

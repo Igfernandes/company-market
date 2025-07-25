@@ -2,15 +2,15 @@
     <div class="content px-2 h-[88vh] w-[20vw] overflow-y-auto">
         <ul class="list-unstyled pl-2 pt-4">
             <li class="pointer-event rounded-3">
-                <span class="text-white text-xl ps-3 d-block rounded-3"><strong>Formulário</strong></span>
-                <ul class="list-square-inside menu-components pl-5 text-white list-">
+                <span class="text-white text-lg ps-3 d-block rounded-3"><strong>Formulário</strong></span>
+                <ul class="list-square-inside menu-components pl-5 text-white">
                     <li data-component="components/forms/email" data-navbar='component'>
                         <span><i>Email</i></span>
                     </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">
-                <span class="text-white text-xl ps-3 d-block rounded-3"><strong>Layout</strong></span>
+                <span class="text-white text-lg ps-3 d-block rounded-3"><strong>Layout</strong></span>
                 <ul class="menu-components pl-2">
                     <li>
 
@@ -18,7 +18,7 @@
                 </ul>
             </li>
             <li class="pointer-event mt-4">
-                <span class="text-white text-xl ps-3 d-block b"><strong>Utils</strong></span>
+                <span class="text-white text-lg ps-3 d-block b"><strong>Utils</strong></span>
                 <ul class="menu-components pl-2 text-white">
                     <!-- <li data-navbar='component' data-component="components/utils/snackbar">
                         <span><i>Snackbar</i></span>
