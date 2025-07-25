@@ -16,10 +16,23 @@ class Laboratory extends BaseController
 
     public function components(...$args)
     {
-        try {
-            return view("components/shared/" . join("/", $args));
-        } catch (Exception $err) {
-            throw new Exception("COMPONENT NOT FOUND", \NOT_FOUND);
+        $paths = array_map(fn($path) => ucfirst($path), $args);
+        $class = 'App\\Components\\' . join("\\", $paths)."\\{$paths[count($paths) - 1]}";
+
+        if (!class_exists($class)) {
+            throw new \Exception("COMPONENT NOT FOUND", \NOT_FOUND);
         }
+
+        $payload = $this->request->getVar();
+
+        if(isset($payload['mock']) ){
+            $mockClass = 'App\\Components\\' . join("\\", array_map(fn($path) => ucfirst($path), $args)).'\\Mock';
+        
+            if(class_exists($mockClass))
+            $payload = $mockClass::PROPS;
+        }
+        
+        return Component(new $class(...$payload));
+    
     }
 }

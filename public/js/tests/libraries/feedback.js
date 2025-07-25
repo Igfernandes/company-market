@@ -30,14 +30,14 @@ export function analysisFeedback(type) {
 
   switch (type) {
     case "ERROR":
-      statusBar.classList.remove("bg-warning");
-      statusBar.classList.add("bg-danger");
+      statusBar.classList.remove("bg-orange-400");
+      statusBar.classList.add("bg-red-400");
       statusBar.classList.add("text-white");
       statusBar.innerHTML = "Falha ao carregar componentes";
       break;
     case "SUCCESS":
-      statusBar.classList.remove("bg-warning");
-      statusBar.classList.add("bg-success");
+      statusBar.classList.remove("bg-orange-400");
+      statusBar.classList.add("bg-green-400");
       statusBar.classList.add("text-white");
       statusBar.innerHTML = "Componentes Carregados";
       break;

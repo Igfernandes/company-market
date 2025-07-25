@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
+<!-- /home/icaro/Área de Trabalho/nautiSys/public/css/tailwind.min.css -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,17 +8,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap principal -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
-
-    <!-- Bootstrap Grid -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap-grid.min.css">
-
-    <!-- Bootstrap Reboot -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap-reboot.min.css">
-
-    <!-- Bootstrap Utilities -->
-    <link rel="stylesheet" href="/css/bootstrap/bootstrap-utilities.min.css">
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="/css/tailwind.min.css">
 
     <!-- Formio -->
     <link rel="stylesheet" href="/css/formio.full.min.css">
