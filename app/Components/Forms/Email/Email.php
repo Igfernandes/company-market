@@ -16,7 +16,8 @@ class Email extends BaseComponents{
     ?string $required = "", 
     ?array $attributes = [], 
     ?bool $disabled = null, 
-    ?bool $readonly = null
+    ?bool $readonly = null,
+    ?string $icon = null
     ) {
         $this->props = compact([
             "name", 
@@ -27,7 +28,8 @@ class Email extends BaseComponents{
             "required",
             "attributes",
             "disabled",
-            "readonly"
+            "readonly",
+            "icon"
         ]);
     }
 }

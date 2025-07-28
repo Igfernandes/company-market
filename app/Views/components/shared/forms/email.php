@@ -19,39 +19,35 @@ if (isset($name) && isset($storeValue[$name]))
 
 ?>
 
-<div class="d-flex flex-column">
-    <?php if (!isset($labelNot)) : ?>
-        <label for="<?= $id ?? $name ?>" >
-            <strong>
-                <i>
-                    <?= ucfirst($label) ?>
-                    <?= isset($required) && $required == "required" ?  view("/components/shared/forms/tooltip/required") : null ?>
-                </i>
-            </strong>
-        </label>
-    <?php endif; ?>
+<div class="email relative">
     <div class="p-relative mb-3">
         <div class="w-100">
             <input type="email"
-                name="<?= $name ?>" 
-                value="<?= isset($name) ? $name : null ?>" 
-                id="<?= $id ?? $name ?>" 
-                data-label="<?= $label ?>" 
-                class="bg-gray-100 rounded text-gray-600 email <?= $className ?? null ?>"
-                placeholder="<?= $placeholder ?? null ?>" 
-                <?= !empty($attributeData) ? $attributeData : null ?> 
-                <?= isset($disabled) ? strval($disabled) : null  ?> 
-                <?= $required ? "required" : null ?> 
-                <?= isset($storeValue[$name]) && $storeValue[$name] == $value && isset($type) ?> 
-                <?= strval($readonly) ?? null ?>
-                >
+                name="<?= $name ?>"
+                value="<?= isset($name) ? $name : null ?>"
+                id="<?= $id ?? $name ?>"
+                data-label="<?= $label ?>"
+                class="form-control w-100 h-[3rem] text-lg px-2 pt-2 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
+                data-password-target
+                <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
+                <?= !empty($attributeData) ? $attributeData : null ?>
+                <?= isset($disabled) ? strval($disabled) : null  ?>
+                <?= $required ? "required" : null ?>
+                <?= isset($storeValue[$name]) && $storeValue[$name] == $value && isset($type) ?>
+                <?= strval($readonly) ?? null ?>>
+            <?php if (!isset($labelNot)) : ?>
+                <label class="absolute left-1 top-20" data-label-toggle data-component="email-toggle:label" for="<?= $id ?? $name ?>">
+                    <strong>
+                        <?= ucfirst($label) ?>
+                        <?= isset($required) && $required == "true" ?  view("/components/shared/forms/tooltip/required") : null ?>
+                    </strong>
+                </label>
+            <?php endif; ?>
         </div>
         <?php if (isset($icon)) : ?>
-            <div class="" style="width: 45px;">
-                <div class="bd-radius-100 d-flex justify-content-center align-items-center h-100 bg-white">
-                    <span>
-                        <?= $icon ?>
-                    </span>
+            <div class="absolute right-1 top-20">
+                <div class="input-group-append absolute w-[1rem] h-[1rem] top-20 right-2 z-20 text-accent">
+                    <?= $icon ?>
                 </div>
             </div>
         <?php endif; ?>
