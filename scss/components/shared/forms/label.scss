@@ -1,0 +1,13 @@
+[data-label-toggle] {
+  transition: all 0.2s ease-in-out;
+}
+
+input:focus ~ [data-label-toggle],
+input:placeholder-shown ~ [data-label-toggle],
+[data-label-toggle="true"] {
+  bottom: 45%;
+  left: 7px;
+  top: 0;
+  font-size: 0.8rem;
+  font-style: normal;
+}
