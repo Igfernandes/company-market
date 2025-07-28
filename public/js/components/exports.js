@@ -1,4 +1,4 @@
-import * as FormsPassword from "./forms/Password.js";
-
-import * as LayoutsCardCountGraphic from "./layouts/CardCountGraphic.js";
-import * as LayoutsGraphicTraffic from "./layouts/CardTraffic.js";
+export const COMPONENTS = {
+  "data-password-target": "/js/components/forms/password/toggle.js",
+  "data-label-toggle": "/js/components/forms/label/toggle.js"
+};
