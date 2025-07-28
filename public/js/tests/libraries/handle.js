@@ -5,7 +5,7 @@ export async function handleComponentTests(ev) {
     const component = url.searchParams.get("component");
 
     const testModule = await import(
-      `../${component.toLowerCase()}/index.test.js`
+      `../${component}/index.test.js`
     );
 
     const isSingle = btn.dataset.single;

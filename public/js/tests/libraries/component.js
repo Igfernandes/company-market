@@ -26,7 +26,7 @@ export async function loadComponent(component) {
   document.querySelector("[data-duration='time']").innerHTML = `${duration.toFixed(2)}s`;
 
   const testsModule = await import(
-    `../${component.toLowerCase()}/index.test.js`
+    `../${component}/index.test.js`
   );
 
   const testSelect = document.querySelector("[name='test']");

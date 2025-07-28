@@ -8,11 +8,12 @@ class Mock {
         "name" => "email", 
         "label" => "Login/Email", 
         "id" => "email",
-        "placeholder" => "Enter your email",
-        "className" => "email",
-        "required" => true,
+        "placeholder" => "",
+        "className" => "",
+        "required" => "true",
         "attributes" => [],
         "disabled" => false,
-        "readonly" => false
+        "readonly" => false,
+        "icon" => '<i class="bi bi-envelope-fill"></i>'
     ];
 }
