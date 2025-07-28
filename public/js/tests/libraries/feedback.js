@@ -9,6 +9,8 @@ export function Log(type, { component = "", message = "" }) {
   const p = document.createElement("p");
   const now = new Date(Date.now());
 
+  p.classList.add("line-1");
+  p.classList.add("mb-1")
   p.classList.add(type == "ERROR" ? "text-danger" : "text-success");
   p.innerHTML = `<strong>[${component} - <span class='text-xs'>${now.getHours()}:${now.getMinutes()}</span>]</strong>: `;
 
