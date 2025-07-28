@@ -7,6 +7,9 @@
                     <li data-component="components/forms/email" data-navbar='component'>
                         <span><i>Email</i></span>
                     </li>
+                    <li data-component="components/forms/password/passwordToggle" data-navbar='component'>
+                        <span><i>Password Toggle</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">

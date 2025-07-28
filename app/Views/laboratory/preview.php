@@ -9,7 +9,7 @@
                     <div>
                         <ul class="text-sm list-unstyled flex justify-content-around pt-2 ps-2">
                             <li>
-                                <p><span class="font-700 font-monospace">Renderização:</span> <i>0.2s</i></p>
+                                <p><span class="font-700 font-monospace">Renderização:</span> <i data-duration='time'>0.2s</i></p>
                             </li>
                         </ul>
                     </div>

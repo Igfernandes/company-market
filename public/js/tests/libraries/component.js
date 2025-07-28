@@ -16,14 +16,14 @@ export async function loadComponent(component) {
   window.history.pushState("update current component", "Query Component", url);
 
   const start = performance.now();
-  const resp = await fetch(`/laboratory/${component}`);
+  const resp = await fetch(`/laboratory/${component}?mock=true`);
   const end = performance.now();
   const duration = end - start;
 
   const html = await resp.text();
-  console.log(duration.toFixed(2));
 
   document.querySelector("#render").innerHTML = html;
+  document.querySelector("[data-duration='time']").innerHTML = `${duration.toFixed(2)}s`;
 
   const testsModule = await import(
     `../${component.toLowerCase()}/index.test.js`
@@ -63,7 +63,7 @@ export async function checkLoadComponents() {
     try {
       const { component: url } = component.dataset;
 
-      const resp = await fetch(`/laboratory/${url}`);
+      const resp = await fetch(`/laboratory/${url}?mock=true`);
 
       if (resp.status === 404) {
         handleError(component.textContent);

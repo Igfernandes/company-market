@@ -16,10 +16,17 @@ $levels: "100", "200", "300", "400", "500", "600", "700", "800", "900";
     .shadow-#{$color}-#{$level} {
       box-shadow: 0 4px 6px var(--#{$color}-#{$level});
     }
+    .outline-#{$color}-#{$level} {
+      outline: var(--#{$color}-#{$level});
+    }
+    .fill-#{$color}-#{$level} {
+      fill: var(--#{$color}-#{$level});
+    }
   }
 }
 
-$extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled", "laboratory";
+$extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled",
+  "laboratory";
 // Loop para cores fixas (sem nível)
 @each $name in $extra-colors {
   .bg-#{$name} {
@@ -33,6 +40,12 @@ $extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled"
   }
   .shadow-#{$name} {
     box-shadow: 0 4px 6px var(--shadow-#{$name});
+  }
+  .outline-#{$name} {
+    outline: var(--outline-#{$name});
+  }
+  .fill-#{$name} {
+    fill: var(--fill-#{$name});
   }
 }
 

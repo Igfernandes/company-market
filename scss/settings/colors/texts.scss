@@ -2,3 +2,10 @@ $text-primary: #061138; // Títulos, texto principal
 $text-secondary: #4c4c4c; // Texto complementar
 $text-inverse: #ffffff; // Texto sobre fundo escuro
 $text-muted: #ccc; // Texto desabilitado
+
+.text-success{
+    color: var(--green-600);
+}
+.text-danger{
+    color: var(--red-600);
+}
