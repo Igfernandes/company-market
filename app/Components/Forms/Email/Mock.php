@@ -10,7 +10,7 @@ class Mock {
         "id" => "email",
         "placeholder" => "Enter your email",
         "className" => "email",
-        "required" => true,
+        "required" => "true",
         "attributes" => [],
         "disabled" => false,
         "readonly" => false
