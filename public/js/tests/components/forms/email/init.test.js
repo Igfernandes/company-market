@@ -1,10 +1,10 @@
-import { Log } from "../../../../libraries/feedback.js";
+import { Log } from "../../../libraries/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateEmail: () => {
-    const email = document.querySelector(".email-toggle");
+    const email = document.querySelector(".email");
     let hasError = false;
-    const elementName = "email-toggle";
+    const elementName = "email";
 
     if (!email)
       return Log("ERROR", {
@@ -18,7 +18,7 @@ export const INIT_TESTS = {
     if (!hasElementInEmail) {
       Log("ERROR", {
         component: elementName,
-        message: `O elemento ${param} do p${elementName} não pode ser encontrado`,
+        message: `O elemento label do ${elementName} não pode ser encontrado`,
       });
       hasError = true;
     }

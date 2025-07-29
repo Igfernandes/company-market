@@ -4,16 +4,16 @@ export async function handleComponentTests(ev) {
     const url = new URL(window.location.href);
     const component = url.searchParams.get("component");
 
-    const testModule = await import(
-      `../${component}/index.test.js`
-    );
+    const testModule = await import(`../${component}/index.test.js`);
 
     const isSingle = btn.dataset.single;
 
     if (isSingle) {
       const testName = document.querySelector("[name='test']").value;
 
-      return testModule.TESTS[testName];
+      const callbackTest = testModule.TESTS[testName];
+
+      return callbackTest();
     }
 
     Object.entries(testModule.TESTS).forEach(([key, callbackTest]) =>

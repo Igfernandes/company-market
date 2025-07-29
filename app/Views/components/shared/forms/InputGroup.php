@@ -24,7 +24,7 @@ if (isset($readonly)) {
 
 <div class="form-group">
     <?php if (!isset($labelNot)) : ?>
-        <label for="<?= $id ?? $name ?>" >
+        <label for="<?= $id ?? $name ?>">
             <strong>
                 <i>
                     <?= ucfirst($label) ?>

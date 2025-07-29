@@ -36,7 +36,7 @@ if (isset($name) && isset($storeValue[$name]))
                 <?= isset($storeValue[$name]) && $storeValue[$name] == $value && isset($type) ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (!isset($labelNot)) : ?>
-                <label class="absolute left-1 top-20" data-label-toggle data-component="email-toggle:label" for="<?= $id ?? $name ?>">
+                <label class="absolute left-1 top-20" data-label-toggle data-component="email:label" for="<?= $id ?? $name ?>">
                     <strong>
                         <?= ucfirst($label) ?>
                         <?= isset($required) && $required == "true" ?  view("/components/shared/forms/tooltip/required") : null ?>
@@ -46,7 +46,7 @@ if (isset($name) && isset($storeValue[$name]))
         </div>
         <?php if (isset($icon)) : ?>
             <div class="absolute right-1 top-20">
-                <div class="input-group-append absolute w-[1rem] h-[1rem] top-20 right-2 z-20 text-accent">
+                <div class="input-group-append absolute text-xl w-[1.5rem] h-[1rem] top-20 right-5 z-20 text-accent">
                     <?= $icon ?>
                 </div>
             </div>

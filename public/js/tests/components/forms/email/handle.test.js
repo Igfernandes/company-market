@@ -1,4 +1,4 @@
-import { Log } from "../../../../libraries/feedback.js";
+import { Log } from "../../../libraries/feedback.js";
 
 const elementName = "email";
 
