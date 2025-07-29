@@ -10,6 +10,9 @@
                     <li data-component="components/forms/password/passwordToggle" data-navbar='component'>
                         <span><i>Password Toggle</i></span>
                     </li>
+                    <li data-component="components/forms/checkbox" data-navbar='component'>
+                        <span><i>Checkout</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">
