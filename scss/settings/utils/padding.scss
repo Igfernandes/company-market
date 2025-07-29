@@ -1,0 +1,47 @@
+$sides: "l", "t", "b", "r";
+
+@for $i from 0 through 100 {
+  // Ex: .p-[1rem]
+  .p-\[#{$i}rem\] {
+    padding: #{$i}rem;
+  }
+
+  // Ex: .p-[1.5rem]
+  .p-\[#{$i}\.5rem\] {
+    padding: #{$i + 0.5}rem;
+  }
+
+    // Ex: .p-[1.5rem]
+  .p-\[#{$i}px\] {
+    padding: #{$i}px ;
+  }
+
+
+  @each $side in $sides {
+    // Ex: .pl-[1rem]
+    .p#{$side}-\[#{$i}rem\] {
+      @if $side == "l" {
+        padding-left: #{$i}rem;
+      } @else if $side == "t" {
+        padding-top: #{$i}rem;
+      } @else if $side == "b" {
+        padding-bottom: #{$i}rem;
+      } @else if $side == "r" {
+        padding-right: #{$i}rem;
+      }
+    }
+
+    // Ex: .pl-[1.5rem]
+    .p#{$side}-\[#{$i}\.5rem\] {
+      @if $side == "l" {
+        padding-left: #{$i + 0.5}rem;
+      } @else if $side == "t" {
+        padding-top: #{$i + 0.5}rem;
+      } @else if $side == "b" {
+        padding-bottom: #{$i + 0.5}rem;
+      } @else if $side == "r" {
+        padding-right: #{$i + 0.5}rem;
+      }
+    }
+  }
+}
