@@ -21,7 +21,7 @@
                     <div class="my-1 ms-2">
                         <button class="btn bg-blue-400 text-white px-4 py-2 rounded-sm mr-1" data-component='action'>Executar Testes</button>
                         <button class="btn bg-yellow-500 px-4 py-2 rounded-sm mr-1" data-component='restore'>Restaurar</button>
-                        <button class="btn bg-green-400 text-white px-6 py-2 rounded-sm mr-1" data-component='action'>Teste Único</button>
+                        <button class="btn bg-green-400 text-white px-6 py-2 rounded-sm mr-1" data-single='true' data-component='action'>Teste Único</button>
                     </div>
                 </div>
                 <div class="w-50">

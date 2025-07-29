@@ -132,3 +132,4 @@ node_modules/
 dist/
 vendor/
 .sass-cache/
+public/css/theme.css
