@@ -13,6 +13,9 @@
                     <li data-component="components/forms/checkbox" data-navbar='component'>
                         <span><i>Checkout</i></span>
                     </li>
+                    <li data-component="components/forms/link" data-navbar='component'>
+                        <span><i>Link</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">
