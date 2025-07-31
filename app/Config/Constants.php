@@ -140,6 +140,7 @@ define("VALIDATE_CEP", "/(^\d{5}\x2D\d{3}$)/");
  |
  | The CONSTANTS of project.
  */
+define("BASE_URL", getenv('CI_ENVIRONMENT') === 'production' ? getenv('globals.href.backend') : 'http://localhost:3000');
 
 define("ATTEMPT_CHANCES", 3);
 // CONTACTS AND SOCIAL MEDIAS
