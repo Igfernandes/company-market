@@ -1,18 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
-use App\Components\Forms\Email;
-echo view('components/public/header/index');
+use App\Components\Public\Footer\Footer;
+use App\Components\Shared\Layouts\Head\Head;
+use App\Components\Shared\Layouts\Scripts\Scripts;
+
+Head::render(title: "Laboratory - Company Market");
 
 ?>
 <div class="laboratory bg-laboratory">
 
-    <?php echo view("laboratory/header"); ?>
+    <?php echo Component("laboratory/header"); ?>
     <div class="content flex">
-        <?php echo view("laboratory/sidebar"); ?>
-        <?php echo view("laboratory/preview"); ?>
+        <?php echo Component("laboratory/sidebar"); ?>
+        <?php echo Component("laboratory/preview"); ?>
     </div>
 </div>
 
-<script type="module" src="/js/tests/execute.js"></script>
-<?php echo view('components/public/footer/index'); ?>
+<?php Scripts::render(scripts: [
+    "/js/tests/execute.js?type=module"
+]); ?>
