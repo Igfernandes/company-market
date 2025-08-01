@@ -1,0 +1,1 @@
+<img class="w-full h-full <?= $class ?? "" ?>" src="<?= base_url($src) ?>" alt="<?= $alt ?? "" ?>">
