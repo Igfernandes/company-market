@@ -1,10 +1,17 @@
 <?php
 
-use App\Components\BaseComponents;
-
 if (!function_exists('Component')) {
-    function Component(BaseComponents $instance): string
+    function Component(string $origin, ?array $props = [], bool $return = false)
     {
-        return view($instance->origin, $instance->props);
+        try {
+            $component = view($origin, $props);
+
+            if ($return)
+                return $component;
+
+            echo $component;
+        } catch (Exception $err) {
+            echo "[COMPONENT NOT FOUND]: $origin";
+        }
     }
 }
