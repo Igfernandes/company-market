@@ -31,15 +31,15 @@ if (!function_exists('validateRecaptcha')) {
     {
         $config = new Recaptcha();
         // URL da API de verificação do reCAPTCHA
-        $verifyURL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+        $verifyURL = 'https://api.hcaptcha.com/siteverify';
 
         $payload = (object)[
             'secret' =>   $config->secretKey,
             'response' => $props['token']
         ];
 
-        if (isset($props['userId']))
-            $payload->remoteip = $props['userId'];
+        if (isset($props['ip']))
+            $payload->remoteip = $props['ip'];
 
         // Executando a requisição
         $data =   HttpClient::request("POST", $verifyURL, [
