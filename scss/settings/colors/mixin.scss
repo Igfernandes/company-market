@@ -62,3 +62,14 @@ $extra-colors: "light", "dark", "accent", "muted", "hover", "active", "disabled"
     }
   }
 }
+@each $color in $extra-colors {
+  .hover\:bg-#{$color}:hover {
+    background-color: var(--bg-#{$color});
+  }
+  .hover\:text-#{$color}:hover {
+    color: var(--text-#{$color});
+  }
+  .hover\:border-#{$color}:hover {
+    border-color: var(--border-#{$color});
+  }
+}
