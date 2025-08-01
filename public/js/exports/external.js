@@ -8,6 +8,7 @@ export const exportsExternal = {
     /** MODULES - OTHERS */
     "/js/modules/Others/Password/Visibility/init.js",
   ],
+  "/login": ["/js/modules/public/login/init.js"],
   "/register": [
     "/js/modules/Others/TradeScenes/init.js",
     "/js/modules/Register/init.js",
@@ -43,5 +44,5 @@ export const exportsExternal = {
     "/js/modules/Others/PasswordCriterion/init.js",
     "/js/modules/Others/IncorrectFields/init.js",
     "/js/modules/Others/Password/Visibility/init.js",
-  ]
+  ],
 };
