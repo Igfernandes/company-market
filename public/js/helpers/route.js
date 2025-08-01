@@ -4,3 +4,13 @@ export function getUrlBase(url) {
 export function redirect(url) {
   window.location.href = url;
 }
+
+export function getQueryParams(props = {}) {
+  let query = "";
+
+  for (const [name, value] of Object.entries(props)) {
+    query += `${name}=${value}&`;
+  }
+
+  return query;
+}
