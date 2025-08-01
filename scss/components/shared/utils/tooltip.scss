@@ -1,0 +1,17 @@
+.invalid-tooltip {
+  display: none;
+}
+input.is-invalid ~ .invalid-tooltip {
+  position: absolute;
+  top: 100%;
+  z-index: 5;
+  display: block;
+  max-width: 100%;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.1rem;
+  font-size: 0.875rem;
+  z-index: 9999;
+  color: #fff;
+  background-color: rgba(177, 61, 73, 1);
+  border-radius: 0.25rem;
+}
