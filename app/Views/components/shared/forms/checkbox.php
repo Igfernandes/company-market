@@ -28,9 +28,9 @@ if (isset($readonly)) {
             name="<?= $name ?>"
             value="<?= isset($value) ? $value : null ?>"
             id="<?= $id ?? $name ?>"
-            class="checkbox appearance-none bg-accent rounded-xs p-[7px] cursor-pointer text-accent <?= $className ?? null ?>"
+            class="checkbox appearance-none bg-accent rounded-xs p-[7px] cursor-pointer text-accent <?= $class ?? "" ?>"
             data-label="<?= $label ?>"
-            checked="<?= $checked ? "checked" : null ?>"
+            <?= $checked ? "checked" : null ?>
             <?= !empty($attributeData) ? $attributeData : null ?>
             <?= isset($disabled) ? strval($disabled) : null  ?>
             <?= $required ? "true" : null ?>
@@ -38,8 +38,7 @@ if (isset($readonly)) {
             <?= strval($readonly) ?? null ?>>
         <label class="form-check-label" for="<?= $id ?? $name ?>">
             <?= ucfirst($label) ?>
-            <?= isset($required) && $required == "true" ?  view("/components/shared/forms/tooltip/required") : null ?>
+            <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/tooltip/required") : "" ?>
         </label>
-
     </div>
 </div>
