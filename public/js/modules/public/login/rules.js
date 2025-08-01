@@ -6,6 +6,6 @@ export const loginSchema = {
   },
   password: {
     typeOf: "string",
-    noEmpty: true,
+    noEmpty: true
   },
 };

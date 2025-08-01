@@ -1,10 +1,11 @@
-import { Snackbar } from "../../components/utils/snackbar/index.js";
+import { Snackbar } from "../../components/shared/utils/snackbar.js";
 import { Ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
+import { translate } from "../../translate/index.js";
 
 export async function postAuth(payload = {}) {
   const snackbar = new Snackbar();
-
+  const snackbarTitleText = translate("Screens.auth.snackbar_title");
   try {
     const ajax = new Ajax();
     const { auth } = API_ROUTES;
@@ -12,20 +13,21 @@ export async function postAuth(payload = {}) {
     const { data } = await ajax.post(auth, payload, {});
 
     if (data.errors)
-      snackbar.show("failed", data.errors, {
-        title: "Ocorreu um problema",
+      return snackbar.execute("FAIL", {
+        title: snackbarTitleText,
+        message: translate(data.errors[0]),
       });
-    else {
-      snackbar.show("success", "O usuário foi autenticado com sucesso", {
-        title: "Autenticado",
-      });
-    }
+
+    snackbar.execute("SUCCESS", {
+      title: snackbarTitleText,
+      message: translate(data.success),
+    });
 
     return data;
   } catch (error) {
-    snackbar.show(
-      "failed",
-      "Aconteceu algo errado com a camada service de PostSocialAuth"
-    );
+    snackbar.execute("NOTICE", {
+      title: snackbarTitleText,
+      message: translate("Screens.default.service_error"),
+    });
   }
 }
