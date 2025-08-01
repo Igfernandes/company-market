@@ -1,148 +1,202 @@
+/**
+ * Validações de campos de formulário reutilizáveis.
+ * Cada função exportada representa uma regra de validação específica.
+ */
+
 import { errors } from "../../constants/errors.js";
 import {
   lowercaseRegex,
   numberRegex,
-  onlySpaces,
   symbolRegex,
   uppercaseRegex,
   urlRegex,
   VALID_EMAIL_REGEX,
 } from "../../constants/regex.js";
 
+/**
+ * Verifica se o valor do campo corresponde ao tipo especificado.
+ * @param {string} type - Tipo esperado (ex: "string", "number").
+ * @param {HTMLInputElement} field - Campo a ser validado.
+ * @returns {string|null}
+ */
 export function typeOf(type, field) {
-  return typeof field.value == type ? null : errors.typeof;
+  return typeof field.value === type ? null : errors.typeof;
 }
 
+/**
+ * Verifica se o campo está vazio.
+ * @param {boolean} [value=false]
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
 export function noEmpty(value = false, field) {
-  if (typeof value != "boolean" && value !== true)
-    return field.value == value || onlySpaces.test(field.value)
-      ? null
-      : errors.noEmpty;
-
-  return !field.value || field.value == " " || onlySpaces.test(field.value)
-    ? errors.noEmpty
-    : null;
+  const isInvalid =
+    (typeof value !== "boolean" && field.value != value) || !field.value.trim();
+  return isInvalid ? errors.noEmpty : null;
 }
 
-const separator = {
-  br: "/",
-  eua: "-",
-};
+const dateSeparators = { br: "/", eua: "-" };
 
+/**
+ * Valida uma data com base no formato especificado.
+ * @param {"br"|"eua"} format
+ * @param {{ value: string }} field
+ * @returns {string|null|undefined}
+ */
 export function date(format = "br", { value }) {
   if (!value) return;
-  let error = null;
-  const date = value.split(separator[format]);
+  const parts = value.split(dateSeparators[format]);
+  if (parts.length < 3) return errors.notValidDate;
 
-  if (
-    date.length < 3 ||
-    date[0] < 1 ||
-    date[0] > 31 ||
-    date[1] > 12 ||
-    date[1] < 1
-  )
-    return errors.notValidDate;
+  const [d1, d2, d3] = parts.map(Number);
+  if (d1 < 1 || d2 < 1 || d1 > 31 || d2 > 12) return errors.notValidDate;
 
   switch (format) {
     case "br":
-      error = date[0].length != 2 || date[1].length != 2 ? errors.typeof : null;
-      error = date[2] && date[2].length != 4 ? errors.typeof : null;
+      if (
+        d1.toString().length !== 2 ||
+        d2.toString().length !== 2 ||
+        d3.toString().length !== 4
+      )
+        return errors.typeof;
       break;
     case "eua":
-      error = date[1].length != 2 || date[2].length != 2 ? errors.typeof : null;
-      error = date[0].length != 4 ? errors.typeof : null;
+      if (
+        d1.toString().length !== 4 ||
+        d2.toString().length !== 2 ||
+        d3.toString().length !== 2
+      )
+        return errors.typeof;
       break;
   }
 
-  return error;
+  return null;
 }
 
-export function min(min, field) {
-  return field.value.length >= min ? null : errors.min.replace("${min}", min);
-}
+/**
+ * Verifica se o valor tem comprimento mínimo.
+ * @param {number} min
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export const min = (min, field) =>
+  field.value.length >= min ? null : errors.min.replace("${min}", min);
 
-export function max(max, field) {
-  return field.value.length <= max ? null : errors.max.replace("${max}", max);
-}
+/**
+ * Verifica se o valor tem comprimento máximo.
+ * @param {number} max
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export const max = (max, field) =>
+  field.value.length <= max ? null : errors.max.replace("${max}", max);
 
-export function length(length, field) {
-  return field.value.length == length
-    ? null
-    : errors.length.replace("${length}", max);
-}
+/**
+ * Verifica se o valor tem comprimento exato.
+ * @param {number} len
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export const length = (len, field) =>
+  field.value.length === len ? null : errors.length.replace("${length}", len);
 
-export function file(limite = 8048576, field) {
-  if (field.type != "file" || field.value == null || !field.files[0]) return;
-  if (field.files[0].size > limite && limite !== true)
-    return errors.fileLimite.replace("${limite}", limite);
-  else if (limite === true && field.files[0].size > 8048576)
-    return errors.fileLimite.replace("${limite}", "8MB");
-}
-
-export function compare(reference, field) {
-  if (!field) return errors.notFound;
-
-  const formReference = field.closest("form");
-  const fieldReference = formReference.querySelector(`[name='${reference}']`);
-
-  if (!fieldReference) return errors.notFound;
-  if (fieldReference.value != field.value)
-    return errors.notEquals
-      .replace("${reference}", fieldReference.dataset.label)
-      .replace("${field}", field.dataset.label);
-}
-
-export function regex(regex, field) {
-  return regex.test(field.value)
-    ? null
-    : errors.regex.replace("${field}", field.dataset.label);
-}
-
-export function dateRange({ min, max }, field) {
-  const fieldDate = field.value;
-  if (fieldDate) {
-    const arrDateRemove = fieldDate.split("/");
-    const dateEdit =
-      arrDateRemove[1] + "-" + arrDateRemove[0] + "-" + arrDateRemove[2];
-    const dataFormated = new Date(dateEdit);
-
-    if (min) {
-      const minDate = new Date(min.year, min.month, min.day);
-      return minDate.getTime() > dataFormated.getTime()
-        ? errors.dateMin.replace("${data}", minDate.toLocaleDateString())
-        : null;
-    }
-    if (max) {
-      const maxDate = new Date(max.year, max.month, max.day);
-      return maxDate.getTime() < dataFormated.getTime()
-        ? errors.dateMax.replace("${data}", maxDate.toLocaleDateString())
-        : null;
-    }
+/**
+ * Valida tamanho de arquivo enviado.
+ * @param {number|true} [limit=8048576]
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
+export function file(limit = 8048576, field) {
+  if (field.type !== "file" || !field.files?.[0]) return;
+  const size = field.files[0].size;
+  if ((limit === true && size > 8048576) || (limit !== true && size > limit)) {
+    return errors.fileLimite.replace(
+      "${limite}",
+      limit === true ? "8MB" : limit
+    );
   }
 }
 
-export function password(passord, field) {
-  if (!field) return errors.notFound;
+/**
+ * Compara valor de um campo com outro.
+ * @param {string} reference
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
+export function compare(reference, field) {
+  const form = field.closest("form");
+  const refField = form?.querySelector(`[name='${reference}']`);
+  if (!refField) return errors.notFound;
+  if (refField.value !== field.value) {
+    return errors.notEquals
+      .replace("${reference}", refField.dataset.label)
+      .replace("${field}", field.dataset.label);
+  }
+}
 
-  const inputValue = field.value;
-  if (!inputValue) return;
+/**
+ * Valida o campo com uma regex.
+ * @param {RegExp} pattern
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export const regex = (pattern, field) =>
+  pattern.test(field.value)
+    ? null
+    : errors.regex.replace("${field}", field.dataset.label);
 
-  if (!lowercaseRegex.test(inputValue))
+/**
+ * Valida se a data está dentro do intervalo especificado.
+ * @param {{min?: Object, max?: Object}} range
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export function dateRange({ min, max }, field) {
+  if (!field.value) return;
+
+  const [d, m, y] = field.value.split("/").map(Number);
+  const current = new Date(`${m}-${d}-${y}`);
+
+  if (min) {
+    const minDate = new Date(min.year, min.month, min.day);
+    if (current < minDate)
+      return errors.dateMin.replace("${data}", minDate.toLocaleDateString());
+  }
+  if (max) {
+    const maxDate = new Date(max.year, max.month, max.day);
+    if (current > maxDate)
+      return errors.dateMax.replace("${data}", maxDate.toLocaleDateString());
+  }
+
+  return null;
+}
+
+/**
+ * Valida força de senha com letras, símbolos e números.
+ * @param {*} _ - Ignorado
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export function password(_, field) {
+  const value = field?.value;
+  if (!value) return;
+
+  if (!lowercaseRegex.test(value))
     return errors.notValidPassword.replace(
       "${validPassword}",
       " pelo menos 1 letra minuscula"
     );
-  if (!uppercaseRegex.test(inputValue))
+  if (!uppercaseRegex.test(value))
     return errors.notValidPassword.replace(
       "${validPassword}",
       " pelo menos 1 letra maiuscula"
     );
-  if (!symbolRegex.test(inputValue))
+  if (!symbolRegex.test(value))
     return errors.notValidPassword.replace(
       "${validPassword}",
       " pelo menos 1 caracter especial"
     );
-  if (!numberRegex.test(inputValue))
+  if (!numberRegex.test(value))
     return errors.notValidPassword.replace(
       "${validPassword}",
       " pelo menos 1 numero"
@@ -151,100 +205,129 @@ export function password(passord, field) {
   return null;
 }
 
-export function email(email, field) {
-  if (!field) return errors.notFound;
+/**
+ * Verifica se o e-mail é válido.
+ * @param {*} _ - Ignorado
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
+export const email = (_, field) => {
+  const value = field?.value;
+  if (!value) return;
+  if (!VALID_EMAIL_REGEX.test(value)) return errors.notValidEmail;
+};
 
-  const inputValue = field.value;
-  if (!inputValue) return;
-  if (!VALID_EMAIL_REGEX.test(inputValue)) return errors.notValidEmail;
-}
+/**
+ * Placeholder para validação de telefone.
+ * @param {*} _ - Ignorado
+ * @param {HTMLInputElement} field
+ */
+export const telephone = (_, field) => {
+  const value = field?.value;
+  if (!value) return;
+};
 
-export function telephone(telephone, field) {
-  if (!field) return errors.notFound;
-
-  const inputValue = field.value;
-  if (!inputValue) return;
-}
-
-export function url(url, field) {
-  if (!field) return errors.notFound;
-
-  if (field.value && !urlRegex.test(field.value))
+/**
+ * Valida se a URL do campo é válida.
+ * @param {*} _ - Ignorado
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
+export const url = (_, field) => {
+  const value = field?.value;
+  if (value && !urlRegex.test(value)) {
     return errors.notValidUrl.replace("${reference}", field.dataset.label);
-}
+  }
+};
 
+/**
+ * Valida dependência entre campos.
+ * @param {{refs: string[], value: string[], refValue: string[]}} obj
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
 export function relationFields({ refs, value, refValue }, field) {
-  for (const index in refs) {
-    if (field && field.value != value[index]) continue;
+  for (let i = 0; i < refs.length; i++) {
+    if (field && field.value !== value[i]) continue;
 
-    const ref = refs[index];
-    let refElement = document.querySelector(`[name='${ref}']`);
-
+    let refElement = document.querySelector(`[name='${refs[i]}']`);
     if (!refElement)
-      throw new Error(`O elemento html '${ref}' não foi encontrado.`);
+      throw new Error(`O elemento html '${refs[i]}' não foi encontrado.`);
 
     const label = refElement.dataset.label;
 
     if (["radio", "checkbox"].includes(refElement.type)) {
       refElement = document.querySelector(
-        `[name='${ref}'][value='${refValue[index]}']`
+        `[name='${refs[i]}'][value='${refValue[i]}']`
       );
-
       if (!refElement)
-        throw new Error(`O elemento html '${ref}' não foi encontrado.`);
+        throw new Error(`O elemento html '${refs[i]}' não foi encontrado.`);
       if (!refElement.checked)
         return errors.notRelationFields.replace("${reference}", label);
     }
 
     if (
-      (refValue[index] && refValue[index] != refElement.value) ||
+      (refValue[i] && refElement.value !== refValue[i]) ||
       !refElement.value
-    )
+    ) {
       return errors.notRelationFields.replace("${reference}", label);
+    }
   }
 }
 
+/**
+ * Torna campo obrigatório se o campo de referência tiver determinado valor.
+ * @param {{ref: string, value: string}} obj
+ * @param {HTMLInputElement} field
+ * @returns {string|undefined}
+ */
 export function requiredIfNotEmpty({ ref, value }, field) {
   const refField = document.querySelector(`[name='${ref}']`);
-
   if (!refField)
     throw new Error(`O elemento html '${ref}' não foi encontrado.`);
-
-  if (refField.value == value && !field.value) return errors.noEmpty;
+  if (refField.value === value && !field.value) return errors.noEmpty;
 }
 
+/**
+ * Verifica via API se valor do campo já existe.
+ * @async
+ * @param {{ callbackService: function, refColumn: string, shapeData?: RegExp }} param
+ * @param {HTMLInputElement} field
+ * @returns {Promise<string|undefined>}
+ */
 export async function hasField(
   { callbackService, refColumn, shapeData },
   field
 ) {
-  if (!field.value) return;
+  if (!field?.value) return;
 
   const { exceptionValue } = field.dataset;
 
   if (
-    (exceptionValue && field.value == exceptionValue) ||
+    (exceptionValue && field.value === exceptionValue) ||
     (shapeData && !shapeData.test(field.value))
   )
     return;
 
-  const payload = {};
-  payload[refColumn] = field.value;
-
+  const payload = { [refColumn]: field.value };
   const { data: resp } = await callbackService(payload);
 
-  const label = field.dataset.label;
-
-  if (resp.isAvaliable !== false) return;
+  if (resp?.isAvaliable !== false) return;
 
   field.value = "";
-  return errors.hasField.replace("${field}", label);
+  return errors.hasField.replace("${field}", field.dataset.label);
 }
 
-export function match(regex, field) {
-  const label = field.dataset.label;
-
-  if (!regex.test(field.value)) return errors.match.replace("${field}", label);
-}
+/**
+ * Verifica se campo corresponde ao padrão informado.
+ * @param {RegExp} pattern
+ * @param {HTMLInputElement} field
+ * @returns {string|null}
+ */
+export const match = (pattern, field) =>
+  !pattern.test(field.value)
+    ? errors.match.replace("${field}", field.dataset.label)
+    : null;
 
 export default {
   typeOf,
@@ -252,6 +335,7 @@ export default {
   date,
   min,
   max,
+  length,
   file,
   compare,
   dateRange,
