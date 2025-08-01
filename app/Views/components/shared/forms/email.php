@@ -19,27 +19,25 @@ if (isset($name) && isset($storeValue[$name]))
 
 ?>
 
-<div class="email relative">
-    <div class="p-relative mb-3">
+<div class="email mb-3">
+    <div class="relative shadow-sm border-gray-200 border-2 rounded-md">
         <div class="w-100">
             <input type="email"
                 name="<?= $name ?>"
-                value="<?= isset($name) ? $name : null ?>"
+                value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?? $name ?>"
                 data-label="<?= $label ?>"
                 class="form-control w-100 h-[3rem] text-lg px-2 pt-2 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
-                data-password-target
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= !empty($attributeData) ? $attributeData : null ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
-                <?= isset($storeValue[$name]) && $storeValue[$name] == $value && isset($type) ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (!isset($labelNot)) : ?>
-                <label class="absolute left-1 top-20" data-label-toggle data-component="email:label" for="<?= $id ?? $name ?>">
-                    <strong>
+                <label class="absolute left-1 top-20 pl-1 text-black-700" data-label-toggle data-component="email:label" for="<?= $id ?? $name ?>">
+                    <strong class="font-arial">
                         <?= ucfirst($label) ?>
-                        <?= isset($required) && $required == "true" ?  view("/components/shared/forms/tooltip/required") : null ?>
+                        <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/tooltip/required") : null ?>
                     </strong>
                 </label>
             <?php endif; ?>
@@ -51,5 +49,7 @@ if (isset($name) && isset($storeValue[$name]))
                 </div>
             </div>
         <?php endif; ?>
+    </div>
+    <div class="invalid-message text-xs text-red-500 px-2 mt-1" data-invalid="<?= $name ?>">
     </div>
 </div>

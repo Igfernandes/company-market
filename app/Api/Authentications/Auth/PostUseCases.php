@@ -16,11 +16,11 @@ class PostUseCases
      */
     public function execute(array $payload, object $userSettings)
     {
-        // if (!validateRecaptcha([
-        //     "token" => $payload['recaptcha'],
-        //     "userId" => $userSettings->ip
-        // ]) && $payload['recaptcha'] !==  \getenv("globals.recaptcha.tokenTest"))
-        //     throw new Exceptions("Api.auth.invalid.recaptcha", BAD_REQUEST);
+        if (!validateRecaptcha([
+            "token" => $payload['recaptcha'],
+            "ip" => $userSettings->ip
+        ]))
+            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_AUTH);
 
         $authenticationBusiness = new AuthenticationBusiness();
 
@@ -38,11 +38,8 @@ class PostUseCases
         if (empty($foundUser))
             throw new Exceptions("Api.auth.invalid.credentials", BAD_BUSINESS_RULES);
 
-        $tokenNavigation = $authenticationBusiness->createTokenNavigation($foundUser, $userSettings);
-
         $response = (object)[
-            "success" => "Api.auth.success.post",
-            "token_navigation" => $tokenNavigation
+            "success" => "Api.auth.success.post"
         ];
 
         $tokenRemember = $authenticationBusiness->createTokenRemember($payload, $foundUser);

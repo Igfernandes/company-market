@@ -18,7 +18,7 @@ class UsersAuthHistoryModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Users\UserAuthHistoryEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'ip', 'browser', 'token'];
+    protected $allowedFields    = ['user_id', 'ip', 'browser'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
@@ -35,7 +35,6 @@ class UsersAuthHistoryModel extends Model
             $userAuthHistoryEntity->setBrowser($userAuthHistory->getBrowser());
             $userAuthHistoryEntity->setIp($userAuthHistory->getId());
             $userAuthHistoryEntity->setUserId($userAuthHistory->getUserId());
-            $userAuthHistoryEntity->setToken($userAuthHistory->getToken());
 
             $usersEntity->fill($userAuthHistory->toArray());
 

@@ -16,9 +16,9 @@ trait PostDTOs
         'password' => [
             'rules'  => 'string|required|regex_match[' . VALIDATE_PASSWORD . ']',
             'errors' => [
-                'string' => 'Api.auth.invalid.password',
-                'string' => 'Api.auth.invalid.password',
-                'regex_match' => 'Api.auth.invalid.password'
+                'string' => 'Api.auth.invalid.credentials',
+                'string' => 'Api.auth.invalid.credentials',
+                'regex_match' => 'Api.auth.invalid.credentials'
             ],
         ],
         'rememberMe' => [
@@ -27,11 +27,12 @@ trait PostDTOs
                 'in_list' => 'Api.auth.invalid.rememberMe',
             ],
         ],
-        // 'recaptcha' => [
-        //     'rules'  => 'string',
-        //     'errors' => [
-        //         'string' => 'Api.auth.invalid.recaptcha',
-        //     ],
-        // ],
+        'recaptcha' => [
+            'rules'  => 'string|required',
+            'errors' => [
+                'string' => 'Api.invalid.recaptcha',
+                'required' => 'Api.invalid.recaptcha',
+            ],
+        ]
     ];
 }

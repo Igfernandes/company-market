@@ -20,18 +20,18 @@
             </li>
             <li class="pointer-event rounded-3 mt-4">
                 <span class="text-white text-lg ps-3 d-block rounded-3"><strong>Layout</strong></span>
-                <ul class="menu-components pl-2">
-                    <li>
-
+                <ul class="menu-components pl-2 text-white">
+                    <li data-component="components/layouts/carousel" data-navbar='component'>
+                        <span><i>Carousel</i></span>
                     </li>
                 </ul>
             </li>
             <li class="pointer-event mt-4">
                 <span class="text-white text-lg ps-3 d-block b"><strong>Utils</strong></span>
                 <ul class="menu-components pl-2 text-white">
-                    <!-- <li data-navbar='component' data-component="components/utils/snackbar">
+                    <li data-navbar='component' data-component="components/utils/snackbar">
                         <span><i>Snackbar</i></span>
-                    </li> -->
+                    </li>
                 </ul>
             </li>
         </ul>

@@ -1,7 +1,11 @@
-import { handleRecaptchaTokenUpdate } from "../../../helpers/recaptcha.js";
+import {
+  getRecaptchaToken,
+  loadRecaptcha,
+} from "../../../helpers/recaptcha.js";
 import { redirect } from "../../../helpers/route.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { postAuth } from "../../../services/authentications/post.js";
+import { WEB_ROUTES } from "../../../settings/web.js";
 import { loginSchema } from "./rules.js";
 
 export function LoginForm() {
@@ -9,35 +13,38 @@ export function LoginForm() {
     ev.preventDefault();
     const form = ev.currentTarget;
 
-    this.btnSubmit(form, true, "Enviando...");
+    this.btnSubmit(form, true);
 
     const payload = new FormData(form);
-    const validations = new Validations();
+    const validations = new Validations(form);
 
     const formValid = await validations.execute(loginSchema);
 
-    console.log(formValid)
     if (formValid.length > 0) {
-      this.btnSubmit(form, false, "Conectar-se");
+      this.btnSubmit(form, false);
       return;
     }
 
-    const resp = await postAuth(payload);
-    handleRecaptchaTokenUpdate();
+    payload.append("recaptcha", getRecaptchaToken());
+
+    const { success } = (await postAuth(payload)) ?? {};
 
     setTimeout(() => {
-      if (resp.errors) {
-        this.btnSubmit(form, false, "Conectar-se");
-      } else {
-        this.btnSubmit(form, true, "Conectado!");
-        redirect("/dashboard");
+      if (!success) {
+        loadRecaptcha();
+        return this.btnSubmit(form, false);
       }
+
+      redirect(WEB_ROUTES.dashboard.overview);
     }, 300);
   };
 
-  this.btnSubmit = (form, isDisabled, text) => {
+  this.btnSubmit = (form, status = false) => {
     const button = form.querySelector("button[type='submit']");
-    button.disabled = isDisabled;
-    button.innerText = text;
+
+    if (!status) button.removeAttribute("disabled");
+    else button.disabled = status;
+
+    button.setAttribute("data-loading", String(status));
   };
 }

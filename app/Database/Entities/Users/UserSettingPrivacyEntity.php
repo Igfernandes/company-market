@@ -4,11 +4,9 @@ namespace App\Database\Entities\Users;
 
 use App\Database\Migrations\SettingsPrivacy;
 use CodeIgniter\Entity\Entity;
-use Exception;
 
 class UserSettingPrivacyEntity extends Entity
 {
-    protected $dates = [];
     public $attributes = [
         'user_id'               => null,
         'settings_privacy_id'   => null,

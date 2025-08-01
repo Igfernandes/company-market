@@ -1,0 +1,20 @@
+.submit {
+  button {
+    &:disabled {
+      background-color: var(--bg-disabled);
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+    & ~ .is-loading {
+      display: none;
+    }
+  }
+  button[data-loading="true"] {
+    background-color: var(--bg-disabled);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+    & ~ .is-loading {
+      display: block;
+    }
+  }
+}

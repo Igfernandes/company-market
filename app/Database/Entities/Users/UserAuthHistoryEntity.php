@@ -7,12 +7,10 @@ use Exception;
 
 class UserAuthHistoryEntity extends Entity
 {
-    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'ip'              => null,
         'browser'         => null,
-        'token'           => null,
         'user_id'         => null,
         'user'            => null,
         'created_at'      => null
@@ -90,33 +88,7 @@ class UserAuthHistoryEntity extends Entity
         if (!empty($browser))
             $this->attributes['browser'] = $browser;
     }
-
-
-    /**
-     * getToken function
-     *
-     * @return String|null
-     */
-    public function getToken(): ?String
-    {
-        return $this->attributes['token'];
-    }
-
-    /**
-     * setToken function
-     *
-     * @param String|null $token
-     * @return void
-     */
-    public function setToken(?String $token)
-    {
-        if (strlen($token) > 50)
-            throw new Exception("Api.user_auth_history.invalid.token_max_length_30", BAD_BUSINESS_RULES);
-
-        if (!empty($token))
-            $this->attributes['token'] = $token;
-    }
-
+    
     /**
      * getUserId function
      *

@@ -1,7 +1,7 @@
 <main class="preview">
     <div class="content h-[86vh] flex flex-column justify-between">
         <div class="render relative w-100 h-100 px-4 mt-4 flex w-[100%] justify-content-center align-items-center">
-            <div id="render" class="w-100" style="transform: scale(1)"></div>
+            <div id="render" class="w-100 h-[55vh] overflow-y-scroll overflow-x-hidden " style="transform: scale(1)"></div>
         </div>
         <div class="actions shadow-md bg-gray-200 p-4">
             <div class="flex w-full">

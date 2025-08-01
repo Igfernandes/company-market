@@ -1,7 +1,18 @@
-export function handleRecaptchaTokenUpdate() {
-  grecaptcha
-    .execute("6LfCAOwqAAAAANyYzK2-3r84RXjwQ5w3P6qS0WEp", { action: "submit" })
-    .then(function (token) {
-      document.getElementById("g-recaptcha-response").value = token;
-    });
+export function getRecaptchaToken() {
+  const recaptchaInput = document.querySelector("[name='res-recaptcha']");
+
+  if (!recaptchaInput) return;
+
+  return recaptchaInput.value;
+}
+
+export function initRecaptcha() {
+  const recaptcha = document.querySelector("[data-component='recaptcha']");
+
+  if (recaptcha) hcaptcha.execute();
+}
+export function loadRecaptcha() {
+  const recaptcha = document.querySelector("[data-component='recaptcha']");
+
+  if (recaptcha) hcaptcha.reset();
 }

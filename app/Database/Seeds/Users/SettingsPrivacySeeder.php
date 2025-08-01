@@ -13,27 +13,19 @@ class SettingsPrivacySeeder extends Seeder
         $POLICIES_PRIVACY = [
             "code_of_ethics"  => (object)[
                 "id" => 1,
-                "describe" => view('components/PrivacyPolicies/doping'),
-                "path" => "/registrar"
             ],
             "anti_doping_policy" => (object)[
                 "id" => 2,
-                "describe" => view('components/PrivacyPolicies/etica'),
-                "path" => "/registrar"
             ],
             "general_data_protection_law" => (object)[
                 "id" => 3,
-                "describe" => view('components/PrivacyPolicies/lgpd.php'),
-                "path" => "/registrar"
             ]
         ];
 
-        foreach ($POLICIES_PRIVACY as $title => $policyPrivacy) :
+        foreach ($POLICIES_PRIVACY as $name => $policyPrivacy) :
 
             $settingsPrivacy->setId($policyPrivacy->id);
-            $settingsPrivacy->setTitle($title);
-            $settingsPrivacy->setDescribes($policyPrivacy->describe);
-            $settingsPrivacy->setPath($policyPrivacy->path);
+            $settingsPrivacy->setName($name);
 
             $prefix = getenv('database.default.DBPrefix');
 
