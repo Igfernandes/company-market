@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Subscribes extends Migration
+class SettingsPrivacy extends Migration
 {
-    protected $tb_name = "subscribes";
+    protected $tb_name = "settings_privacy";
 
     public function up()
     {
@@ -17,20 +17,16 @@ class Subscribes extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'phone_sha256' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '70'
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
             ],
-            "type" => [
-                'type' => 'VARCHAR(20)'
-            ],
-            'data' => [
-                'type' => 'JSON'
-            ],
-            'created_at datetime default current_timestamp'
+            'created_at datetime default current_timestamp',
+            'updated_at datetime default current_timestamp on update current_timestamp'
         ]);
 
         $this->forge->addKey('id', true);
+
         $this->forge->createTable($this->tb_name, true);
     }
 

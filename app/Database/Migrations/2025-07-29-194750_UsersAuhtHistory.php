@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class FormFills extends Migration
+class UsersAuthHistory extends Migration
 {
-    protected $tb_name = "form_fills";
+    protected $tb_name = "users_auth_history";
 
     public function up()
     {
@@ -17,24 +17,24 @@ class FormFills extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'form_id' => [
+            'ip' => [
+                'type' => 'VARCHAR',
+                'constraint' => '30'
+            ],
+            'browser' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ],
+            'user_id' => [
                 'type' => 'INT',
-                'unsigned' => true
-            ],
-            "package" => [
-                'type' => 'VARCHAR(90)'
-            ],
-            'field_id' => [
-                'type' => 'VARCHAR(100)'
-            ],
-            'value' => [
-                'type' => 'BLOB'
+                'unsigned' => true,
             ],
             'created_at datetime default current_timestamp'
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey("form_id", "custom_forms", ["id"]);
+
+        $this->forge->addForeignKey("user_id", "users", ["id"]);
         $this->forge->createTable($this->tb_name, true);
     }
 

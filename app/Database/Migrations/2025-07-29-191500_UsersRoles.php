@@ -4,36 +4,28 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Remember extends Migration
+class UsersRoles extends Migration
 {
-    protected $tb_name = "remember";
+    protected $tb_name = "users_roles";
 
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type'           => 'INT',
-                'constraint'     => 5,
+            'role_id' => [
+                'type' => 'INT',
                 'unsigned'       => true,
-                'auto_increment' => true,
-            ],
-            'token' => [
-                'type' => 'VARCHAR',
-                'constraint' => '20'
-            ],
-            'ip' => [
-                'type' => 'VARCHAR',
-                'constraint' => '100'
             ],
             'user_id' => [
                 'type' => 'INT',
-                'unsigned' => true
+                'unsigned'       => true,
             ],
             'created_at datetime default current_timestamp',
         ]);
 
-        $this->forge->addKey('id', true);
+        $this->forge->addKey(['role_id', 'user_id'], true);
+        $this->forge->addForeignKey("role_id", "roles", ["id"]);
         $this->forge->addForeignKey("user_id", "users", ["id"]);
+
         $this->forge->createTable($this->tb_name, true);
     }
 

@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Clients extends Migration
+class Users extends Migration
 {
-    protected $tb_name = "clients";
+    protected $tb_name = "users";
 
     public function up()
     {
@@ -19,41 +19,57 @@ class Clients extends Migration
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '150',
-                'null' => true,
+                'constraint' => '100'
             ],
             'avatar'       => [
                 'type'      => 'TINYTEXT',
-                'null'      => true,
+                'null'      => true
+            ],
+            'email' => [
+                'type'       => 'BLOB',
             ],
             'phone' => [
                 'type'       => 'BLOB',
             ],
-            'email' => [
+            'password'       => [
                 'type'       => 'BLOB',
-                'null' => true,
+            ],
+            'cpf'       => [
+                'type'       => 'BLOB'
             ],
             'birthdate'       => [
                 'type'       => 'DATE',
-                'null' => true,
+            ],
+            'keyword'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true
             ],
             'status' => [
-                'type' => 'ENUM("ACTIVE", "INACTIVE")'
+                'type' => 'ENUM("ACTIVE", "INACTIVE", "ANALYSIS")',
+                'default' => "ANALYSIS"
             ],
-            'system_key'       => [
-                'type'       => 'BLOB'
+            'email_sha256'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '70',
+                'unique'     => true
             ],
             'phone_sha256'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '70',
                 'unique'     => true
             ],
-            'owner_id' => [
-                'type' => 'INT',
-                'null' => true
+            'cpf_sha256'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => '70',
+                'unique'         => true
+            ],
+            'system_key'       => [
+                'type'       => 'BLOB'
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',
+            'deleted_at datetime',
         ]);
 
         $this->forge->addKey('id', true);

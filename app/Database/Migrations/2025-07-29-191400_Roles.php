@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CustomForms extends Migration
+class Roles extends Migration
 {
-    protected $tb_name = "custom_forms";
+    protected $tb_name = "roles";
 
     public function up()
     {
@@ -19,22 +19,15 @@ class CustomForms extends Migration
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '200'
-            ],
-            'slug' => [
-                'type' => 'VARCHAR',
-                'constraint' => '250'
-            ],
-            'components' => [
-                'type'       => 'JSON',
+                'constraint' => '100'
             ],
             'description' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '250',
+                'constraint' => '255',
                 'null'       => true
             ],
             'status' => [
-                'type'       => 'ENUM("PUBLISHED", "DRAFT")'
+                'type' => 'ENUM("ACTIVE", "INACTIVE")'
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
@@ -47,6 +40,7 @@ class CustomForms extends Migration
 
     public function down()
     {
+
         $this->forge->dropTable($this->tb_name);
     }
 }
