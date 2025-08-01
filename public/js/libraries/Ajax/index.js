@@ -38,7 +38,6 @@ const Ajax = function () {
   this.post = async (
     route,
     payload,
-    token,
     options = {
       action: true,
       headers: {
@@ -49,7 +48,6 @@ const Ajax = function () {
   ) => {
     try {
       const { headers, reference } = options;
-      if (token) route += "/" + token;
 
       const request = {
         method: "POST",
