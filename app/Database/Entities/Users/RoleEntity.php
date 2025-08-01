@@ -5,9 +5,8 @@ namespace App\Database\Entities\Users;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
-use Exception;
 
-class GroupEntity extends Entity
+class RoleEntity extends Entity
 {
     use EntityEnhancerTrait;
 
@@ -17,8 +16,8 @@ class GroupEntity extends Entity
         'name'           => null,
         'description'     => null,
         'status'          => null,
-        "created_at"      => null,
-        "updated_at"      => null
+        'created_at'      => null,
+        'updated_at'      => null
     ];
 
     /**

@@ -4,64 +4,64 @@ namespace App\Database\Entities\Users;
 
 use CodeIgniter\Entity\Entity;
 
-class UserGroupsEntity extends Entity
+class UserRoleEntity extends Entity
 {
     protected $dates = [];
     public $attributes = [
-        'group_id'        => null,
-        'group'           => null,
+        'role_id'         => null,
+        'role'            => null,
         'user_id'         => null,
         'user'            => null,
-        "created_at"      => null,
-        "updated_at"      => null
+        'created_at'      => null,
+        'updated_at'      => null
     ];
     public $relations = [
-        'group'     => null,
+        'role'     => null,
         'user'      => null
     ];
 
     /**
-     * getGroupId function
+     * getRoleId function
      *
      * @return Int|null
      */
-    public function getGroupId(): ?Int
+    public function getRoleId(): ?Int
     {
-        return $this->attributes['group_id'];
+        return $this->attributes['role_id'];
     }
 
     /**
-     * setGroupId function
+     * setRoleId function
      *
-     * @param Int|null $groupId
+     * @param Int|null $roleId
      * @return void
      */
-    public function setGroupId(Int $groupId)
+    public function setRoleId(Int $roleId)
     {
-        if (!empty($groupId))
-            $this->attributes['group_id'] = $groupId;
+        if (!empty($roleId))
+            $this->attributes['role_id'] = $roleId;
     }
 
     /**
-     * getGroup function
+     * getRole function
      *
-     * @return GroupsEntity|null
+     * @return RoleEntity|null
      */
-    public function getGroup(): ?GroupEntity
+    public function getRole(): ?RoleEntity
     {
-        return $this->relations['group'];
+        return $this->relations['role'];
     }
 
     /**
-     * setGroup function
+     * setRole function
      *
-     * @param GroupsEntity|null $user
+     * @param RoleEntity|null $role
      * @return void
      */
-    public function setGroup(GroupEntity $group)
+    public function setRole(RoleEntity $role)
     {
-        if (!empty($group))
-            $this->relations['group'] = $group;
+        if (!empty($role))
+            $this->relations['role'] = $role;
     }
 
     /**

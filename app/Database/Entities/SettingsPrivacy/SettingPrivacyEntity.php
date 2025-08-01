@@ -7,12 +7,9 @@ use Exception;
 
 class SettingPrivacyEntity extends Entity
 {
-    protected $dates = [];
     public $attributes = [
         'id'              => null,
-        'title'           => null,
-        'describes'       => null,
-        'path'            => null,
+        'name'           => null,
         'created_at'      => null,
         'updated_at'      => null
     ];
@@ -40,72 +37,28 @@ class SettingPrivacyEntity extends Entity
     }
 
     /**
-     * @method getTitle function
+     * @method getName function
      *
      * @return String|null
      */
-    public function getTitle(): ?String
+    public function getName(): ?String
     {
-        return $this->attributes['title'];
+        return $this->attributes['name'];
     }
 
     /**
-     * @method setTitle function
+     * @method setName function
      *
-     * @param String|null $title
+     * @param String|null $name
      * @return void
      */
-    public function setTitle(?String $title)
+    public function setName(?String $name)
     {
-        if (strlen($title) > 250)
-            throw new Exception("Api.settings_privacy.invalid.title_max_length_200", BAD_REQUEST);
+        if (strlen($name) > 50)
+            throw new Exception("Api.settings_privacy.invalid.name_max_length_50", BAD_REQUEST);
 
-        if (!empty($title))
-            $this->attributes['title'] = $title;
-    }
-
-    /**
-     * @method getDescribes function
-     *
-     * @return String|null
-     */
-    public function getDescribes(): ?String
-    {
-        return $this->attributes['describes'];
-    }
-
-    /**
-     * @method setDescribes function
-     *
-     * @param String|null $describe
-     * @return void
-     */
-    public function setDescribes(?String $describe)
-    {
-        if (!empty($describe))
-            $this->attributes['describes'] = $describe;
-    }
-
-    /**
-     * @method getPath function
-     *
-     * @return String|null
-     */
-    public function getPath(): ?String
-    {
-        return $this->attributes['path'];
-    }
-
-    /**
-     * @method setPath function
-     *
-     * @param String|null $path
-     * @return void
-     */
-    public function setPath(?String $path)
-    {
-        if (!empty($path))
-            $this->attributes['path'] = $path;
+        if (!empty($name))
+            $this->attributes['name'] = $name;
     }
 
     /**
