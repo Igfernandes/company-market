@@ -1,0 +1,17 @@
+.recaptcha {
+  width: 5rem;
+  overflow: hidden;
+  transition: width 0.5s ease-in-out;
+  .describe {
+    min-width: 11rem;
+    display: none;
+  }
+  &:hover {
+    width: 17rem;
+    .describe {
+      word-break: keep-all;
+      color: var(--text-white);
+      display: block;
+    }
+  }
+}
