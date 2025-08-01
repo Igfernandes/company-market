@@ -17,7 +17,7 @@ class Laboratory extends BaseController
     public function components(...$args)
     {
         $paths = array_map(fn($path) => ucfirst($path), $args);
-        $class = 'App\\Components\\' . join("\\", $paths)."\\{$paths[count($paths) - 1]}";
+        $class = 'App\\Components\\Shared\\' . join("\\", $paths) . "\\{$paths[count($paths) - 1]}";
 
         if (!class_exists($class)) {
             throw new \Exception("COMPONENT NOT FOUND", \NOT_FOUND);
@@ -25,14 +25,14 @@ class Laboratory extends BaseController
 
         $payload = $this->request->getVar();
 
-        if(isset($payload['mock']) ){
-            $mockClass = 'App\\Components\\' . join("\\", array_map(fn($path) => ucfirst($path), $args)).'\\Mock';
-        
-            if(class_exists($mockClass))
-            $payload = $mockClass::PROPS;
+        if (isset($payload['mock'])) {
+            $mockClass = 'App\\Components\\Shared\\' . join("\\", array_map(fn($path) => ucfirst($path), $args)) . '\\Mock';
+
+            if (class_exists($mockClass))
+                $payload = $mockClass::PROPS;
         }
-        
-        return Component(new $class(...$payload));
-    
+        unset($payload['mock']);
+
+        return $class::render(...$payload);
     }
 }
