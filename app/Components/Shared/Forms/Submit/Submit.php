@@ -11,15 +11,13 @@ class Submit extends BaseComponents
         "id",
         "text",
         "class",
-        "attributes",
-        "disabled"
+        "attributes"
     ];
 
     public static function render(
         ?string $id = "",
         ?string $text = "",
         ?string $class = "",
-        ?bool $disabled = null,
         ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
