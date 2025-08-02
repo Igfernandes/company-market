@@ -1,6 +1,20 @@
 import { Log } from "../../../libraries/feedback.js";
 
 export const HANDLE_TESTS = {
+  ShouldCreateCheckbox: () => {
+    const checkbox = document.querySelector(".checkbox");
+
+    if (!checkbox)
+      return Log("ERROR", {
+        component: "checkbox",
+        message: "O checkbox não foi encontrado",
+      });
+
+    return Log("SUCCESS", {
+      component: "checkbox",
+      message: "O checkbox foi criado com sucesso",
+    });
+  },
   shouldCheckboxBeUnChecked: () => {
     const checkbox = document.querySelector(".checkbox");
     const input = checkbox.querySelector("input");

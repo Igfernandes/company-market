@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Components\Shared\Layouts\Carousel;
+namespace App\Components\Shared\Layouts\Image;
 
 class Mock
 {
     public const PROPS = [
-        "class" => "class-image",
-        "src" => "nautisys-image-white.png",
+        "class" => "object-contain",
+        "src" => "/imgs/nautisys-image-white.png",
         "alt" => "Logotipo do projeto"
     ];
 }
