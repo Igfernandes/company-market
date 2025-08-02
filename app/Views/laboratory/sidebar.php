@@ -16,6 +16,9 @@
                     <li data-component="components/forms/link" data-navbar='component'>
                         <span><i>Link</i></span>
                     </li>
+                    <li data-component="components/forms/submit" data-navbar='component'>
+                        <span><i>Submit</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">
@@ -24,6 +27,9 @@
                     <li data-component="components/layouts/carousel" data-navbar='component'>
                         <span><i>Carousel</i></span>
                     </li>
+                    <li data-component="components/layouts/image" data-navbar='component'>
+                        <span><i>Image</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event mt-4">
@@ -31,6 +37,9 @@
                 <ul class="menu-components pl-2 text-white">
                     <li data-navbar='component' data-component="components/utils/snackbar">
                         <span><i>Snackbar</i></span>
+                    </li>
+                    <li data-navbar='component' data-component="components/utils/recaptcha">
+                        <span><i>Recaptcha</i></span>
                     </li>
                 </ul>
             </li>
