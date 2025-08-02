@@ -27,16 +27,4 @@ export const HANDLE_TESTS = {
       message: "O recaptcha foi criado com sucesso",
     });
   },
-  ShouldClickRecaptcha: () => {
-    const recaptcha = document.querySelector("[data-component='recaptcha']");
-
-    if (recaptcha) {
-      console.log(hcaptcha.execute())
-    }
-
-    return Log("SUCCESS", {
-      component: "recaptcha",
-      message: "O recaptcha foi clicado com sucesso",
-    });
-  },
 };
