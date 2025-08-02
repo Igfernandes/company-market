@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Forms\Link;
+namespace App\Components\Shared\Forms\Link;
 
 class Mock
 {
