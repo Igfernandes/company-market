@@ -1,5 +1,15 @@
+// Classes de 1 até 100
 @for $i from 1 through 100 {
   .line-#{$i} {
     line-height: $i;
+  }
+}
+
+// Classes com décimos (1.1 até 9.9)
+@for $int from 1 through 9 {
+  @for $dec from 1 through 9 {
+    .line-\[#{$int}\.#{$dec}\] {
+      line-height: $int + ($dec / 10);
+    }
   }
 }
