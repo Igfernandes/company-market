@@ -4,7 +4,7 @@ const elementName = "password-toggle";
 
 export const HANDLE_TESTS = {
   shouldShowContentPassword: () => {
-    const password = document.querySelector(".password-toggle");
+    const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
     const eyeElement = password.querySelector("[data-password-visibility]");
 
@@ -23,7 +23,7 @@ export const HANDLE_TESTS = {
     });
   },
   shouldHiddenContentPassword: () => {
-    const password = document.querySelector(".password-toggle");
+    const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
     const eyeElement = password.querySelector("[data-password-visibility]");
 
@@ -42,7 +42,7 @@ export const HANDLE_TESTS = {
     });
   },
   shouldLabelHasStateFalseInPassword: () => {
-    const password = document.querySelector(".password-toggle");
+    const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
     const label = password.querySelector("[data-label-toggle]");
 
@@ -62,7 +62,7 @@ export const HANDLE_TESTS = {
     });
   },
   shouldLabelHasStateTrueInPassword: () => {
-    const password = document.querySelector(".password-toggle");
+    const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
     const label = password.querySelector("[data-label-toggle]");
 
