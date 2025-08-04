@@ -1,7 +1,7 @@
 <?php
 
 $token = isset($recoverToken) ? $recoverToken : "";
-$recoverToken = getenv('globals.href.frontend') . "/alter-password?recover_token=$token ";
+$recoverToken = base_url("/alter-password?token=$token");
 ?>
 
 <?= view('mails/_header') ?>
