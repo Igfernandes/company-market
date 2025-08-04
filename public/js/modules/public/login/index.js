@@ -1,7 +1,7 @@
 import {
-  getRecaptchaToken,
+  initRecaptcha,
   loadRecaptcha,
-} from "../../../helpers/recaptcha.js";
+} from "../../../components/shared/utils/recaptcha.js";
 import { redirect } from "../../../helpers/route.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { postAuth } from "../../../services/authentications/post.js";
@@ -25,16 +25,19 @@ export function LoginForm() {
       return;
     }
 
-    payload.append("recaptcha", getRecaptchaToken());
+    initRecaptcha((token) => {
+      payload.append("recaptcha", token);
+      this.sendLogin(form, payload);
+    });
+  };
 
+  this.sendLogin = async (form, payload) => {
     const { success } = (await postAuth(payload)) ?? {};
-
     setTimeout(() => {
       if (!success) {
         loadRecaptcha();
         return this.btnSubmit(form, false);
       }
-
       redirect(WEB_ROUTES.dashboard.overview);
     }, 300);
   };
