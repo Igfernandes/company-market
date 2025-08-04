@@ -6,7 +6,7 @@ use App\Components\Public\Footer\Footer;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Scripts\Scripts;
 
-Head::render(title: "Laboratory - Company Market");
+Head::render(title: "Laboratory - Company Market", hasTable: true);
 
 ?>
 <div class="laboratory bg-laboratory">
@@ -20,4 +20,4 @@ Head::render(title: "Laboratory - Company Market");
 
 <?php Scripts::render(scripts: [
     "/js/tests/execute.js?type=module"
-]); ?>
+], hasTable: true); ?>
