@@ -30,6 +30,9 @@
                     <li class="cursor-pointer" data-component="components/layouts/link" data-navbar='component'>
                         <span><i>Link</i></span>
                     </li>
+                    <li data-component="components/layouts/table" data-navbar='component'>
+                        <span><i>Table</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event mt-4">

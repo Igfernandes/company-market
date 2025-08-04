@@ -8,10 +8,11 @@ class Scripts extends BaseComponents
 {
     const ORIGIN = "components/shared/layouts/scripts";
     const PROPS = [
-        'scripts'
+        'scripts',
+        'hasTable'
     ];
 
-    public static function render(?array $scripts = [])
+    public static function render(?array $scripts = [], ?bool $hasTable = false)
     {
         Component(self::ORIGIN, compact(self::PROPS));
     }

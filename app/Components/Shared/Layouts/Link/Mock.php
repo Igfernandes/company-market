@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Shared\Forms\Link;
+namespace App\Components\Shared\Layouts\Link;
 
 class Mock
 {

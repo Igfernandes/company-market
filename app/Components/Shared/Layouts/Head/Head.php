@@ -10,13 +10,15 @@ class Head extends BaseComponents
     const PROPS = [
         "title",
         "description",
-        "path"
+        "path",
+        "hasTable"
     ];
 
     public static function render(
         ?string $title = "",
         ?string $description = "",
         ?string $path = "",
+        ?bool $hasTable = false
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }
