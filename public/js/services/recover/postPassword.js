@@ -1,9 +1,11 @@
-import { Snackbar } from "../../components/utils/snackbar/index.js";
+import { Snackbar } from "../../components/shared/utils/snackbar.js";
 import { Ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
+import { translate } from "../../translate/index.js";
 
 export async function postRecoverPassword(payload = {}) {
   const snackbar = new Snackbar();
+  const snackbarTitleText = translate("Screens.forgot_password.snackbar_title");
 
   try {
     const ajax = new Ajax();
@@ -11,26 +13,21 @@ export async function postRecoverPassword(payload = {}) {
 
     const { data } = await ajax.post(recover.password, payload, {});
 
-    if (data.errors)
-      snackbar.show("failed", data.errors, {
-        title: "Fala no envio",
+    if (!data || data.errors)
+      return snackbar.execute("failed", {
+        title: snackbarTitleText,
+        message: translate(data.errors),
       });
-    else {
-      snackbar.show(
-        "success",
-        "Abra a sua caixa de e-mail e siga as instruções",
-        {
-          title: "Token Enviado",
-        }
-      );
-    }
 
+    snackbar.execute("success", {
+      title: translate("Texts.send_solicitation"),
+      message: translate(data.success),
+    });
     return data;
   } catch (error) {
-    console.log(error);
-    snackbar.show(
-      "failed",
-      "Aconteceu algo errado com a camada service de PostSocialAuth"
-    );
+    snackbar.execute("NOTICE", {
+      title: snackbarTitleText,
+      message: translate("Screens.default.service_error"),
+    });
   }
 }

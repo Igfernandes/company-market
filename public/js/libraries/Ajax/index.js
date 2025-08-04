@@ -1,4 +1,7 @@
+import { Snackbar } from "../../components/shared/utils/snackbar.js";
+import { HTTP_STATUS } from "../../constants/http.js";
 import cookies from "../../helpers/cookies/index.js";
+import { translate } from "../../translate/index.js";
 import { mutate } from "./libs/mutate.js";
 
 const Ajax = function () {
@@ -48,6 +51,7 @@ const Ajax = function () {
   ) => {
     try {
       const { headers, reference } = options;
+      const snackbar = new Snackbar();
 
       const request = {
         method: "POST",
@@ -65,6 +69,15 @@ const Ajax = function () {
       if (route.substr(-1) == "/") route = route.substring(0, route.length - 1);
 
       const postResponse = await fetch(route, request);
+
+      if (postResponse.status == HTTP_STATUS.NOT_FOUND) {
+        snackbar.execute("NOTICE", {
+          title: "Erro",
+          message: translate("Screens.default.service_error"),
+        });
+        throw new Error("ERROR IN SERVICE: " + route);
+      }
+
       return await mutate(
         {
           ...request,

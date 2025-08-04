@@ -30,7 +30,7 @@ export const exportsExternal = {
     "/js/modules/Others/ConfirmEmail/init.js",
     "/js/libs/Mask/index.js",
   ],
-  "/recover/password": ["/js/modules/Recover/Password/Request/init.js"],
+  "/forgot-password": ["/js/modules/public/forgotPassword/init.js"],
   "/recover/password/confirmation/*": [
     /** HELPERS */
     "/js/helpers/toggleTypePassword.js",

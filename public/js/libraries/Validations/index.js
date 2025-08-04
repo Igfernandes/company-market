@@ -32,7 +32,7 @@ export function Validations(form) {
 
       fields.forEach((field) =>
         field.addEventListener("change", () =>
-          this.validField([selector, rule])
+          this.valid([selector, rule])
         )
       );
     });
