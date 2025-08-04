@@ -61,7 +61,7 @@ Head::render(title: "Login - Nautisys System");
                                     label: "Lembrar-me"
                                 ) ?>
                             </div>
-                            <div class="w-50  forgot-password">
+                            <div class="w-70 text-right  forgot-password">
                                 <?= Link::render(
                                     class: "hover:text-black-400 text-md",
                                     text: "Esqueceu sua senha?",
