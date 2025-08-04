@@ -1,0 +1,6 @@
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NOTHING_CHANGE: 202,
+  NOT_FOUND: 404,
+};

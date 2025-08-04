@@ -6,6 +6,7 @@ import { translate } from "../../translate/index.js";
 export async function postAuth(payload = {}) {
   const snackbar = new Snackbar();
   const snackbarTitleText = translate("Screens.auth.snackbar_title");
+  
   try {
     const ajax = new Ajax();
     const { auth } = API_ROUTES;

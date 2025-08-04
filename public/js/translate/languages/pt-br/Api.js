@@ -13,4 +13,9 @@ export const API = {
         "A página contém recursos desatualizados. Recarregue e tente novamente.",
     },
   },
+  users: {
+    success: {
+      recover_password: "Abra a sua caixa de e-mail e siga as instruções",
+    },
+  },
 };

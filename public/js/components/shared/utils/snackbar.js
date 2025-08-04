@@ -3,7 +3,9 @@ import { Component, ComponentManager } from "../../../helpers/components.js";
 const TIME_CLOSE_MODAL = 4000;
 
 export const init = () => {
-  const closeBtn = document.querySelectorAll("[data-component='snackbar:close']");
+  const closeBtn = document.querySelectorAll(
+    "[data-component='snackbar:close']"
+  );
 
   closeBtn.forEach((closeBtnElement) => {
     closeBtnElement.addEventListener("click", () => {
@@ -50,3 +52,5 @@ export function Snackbar() {
       .forEach((component) => component.remove());
   };
 }
+
+export const snackbar = new Snackbar();
