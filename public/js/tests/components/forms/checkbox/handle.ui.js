@@ -1,22 +1,8 @@
 import { Log } from "../../../libraries/feedback.js";
 
 export const HANDLE_TESTS = {
-  ShouldCreateCheckbox: () => {
-    const checkbox = document.querySelector(".checkbox");
-
-    if (!checkbox)
-      return Log("ERROR", {
-        component: "checkbox",
-        message: "O checkbox não foi encontrado",
-      });
-
-    return Log("SUCCESS", {
-      component: "checkbox",
-      message: "O checkbox foi criado com sucesso",
-    });
-  },
   shouldCheckboxBeUnChecked: () => {
-    const checkbox = document.querySelector(".checkbox");
+    const checkbox = document.querySelector("[component='checkbox']");
     const input = checkbox.querySelector("input");
 
     input.checked = false;
@@ -35,7 +21,7 @@ export const HANDLE_TESTS = {
     });
   },
   shouldCheckboxBeChecked: () => {
-    const checkbox = document.querySelector(".checkbox");
+    const checkbox = document.querySelector("[component='checkbox']");
     const input = checkbox.querySelector("input");
 
     input.checked = true;
@@ -52,5 +38,5 @@ export const HANDLE_TESTS = {
       component: "checkbox",
       message: `O checkbox alterou para checado com sucesso`,
     });
-  }
+  },
 };

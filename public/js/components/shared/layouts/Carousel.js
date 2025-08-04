@@ -1,5 +1,5 @@
 export const init = () => {
-  const carousels = document.querySelectorAll("[data-component='carousel']");
+  const carousels = document.querySelectorAll("[component='carousel']");
 
   carousels.forEach((carousel) => {
     const settingsString = carousel.getAttribute("carousel-settings");

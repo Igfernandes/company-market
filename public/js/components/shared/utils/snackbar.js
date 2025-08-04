@@ -3,13 +3,11 @@ import { Component, ComponentManager } from "../../../helpers/components.js";
 const TIME_CLOSE_MODAL = 4000;
 
 export const init = () => {
-  const closeBtn = document.querySelectorAll(
-    "[data-component='snackbar:close']"
-  );
+  const closeBtn = document.querySelectorAll("[data-component='snackbar:close']");
 
   closeBtn.forEach((closeBtnElement) => {
     closeBtnElement.addEventListener("click", () => {
-      closeBtnElement.closest("[data-component='snackbar']").remove();
+      closeBtnElement.closest("[component='snackbar']").remove();
     });
   });
 };
@@ -39,7 +37,7 @@ export function Snackbar() {
     snackbarContent.innerHTML = component;
 
     document.body.appendChild(snackbarContent);
-    new ComponentManager().single("data-component='snackbar'");
+    new ComponentManager().single("component='snackbar'");
 
     setTimeout(() => {
       snackbarContent.remove();
@@ -48,7 +46,7 @@ export function Snackbar() {
 
   this.clean = () => {
     document
-      .querySelectorAll("[data-component='snackbar']")
+      .querySelectorAll("[component='snackbar']")
       .forEach((component) => component.remove());
   };
 }

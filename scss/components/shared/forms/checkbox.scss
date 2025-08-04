@@ -1,19 +1,20 @@
 .checkbox {
   position: relative;
   input {
+    background-color: var(--bg-light);
+    border: 1px solid var(--border-accent);
     &:after {
       content: "\f26e";
       display: block;
       font-family: bootstrap-icons !important;
-      top: -5.5px;
+      top: -5px;
+      color: var(--text-light);
       left: -1px;
       position: absolute;
       z-index: 2;
     }
     &:checked {
-      &:after {
-        color: var(--text-light);
-      }
+      background-color: var(--bg-accent);
     }
   }
 }

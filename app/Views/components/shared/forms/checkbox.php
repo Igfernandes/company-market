@@ -22,13 +22,13 @@ if (isset($readonly)) {
 
 ?>
 
-<div class="checkbox">
-    <div class="">
+<div class="checkbox" component='checkbox'>
+    <div class="flex items-center ">
         <input type="checkbox"
             name="<?= $name ?>"
             value="<?= isset($value) ? $value : null ?>"
             id="<?= $id ?? $name ?>"
-            class="checkbox appearance-none bg-accent rounded-xs p-[7px] cursor-pointer text-accent <?= $class ?? "" ?>"
+            class="checkbox appearance-none bg-accent rounded-xs p-[7px] cursor-pointer <?= $class ?? "" ?>"
             data-label="<?= $label ?>"
             <?= $checked ? "checked" : null ?>
             <?= !empty($attributeData) ? $attributeData : null ?>
@@ -36,7 +36,7 @@ if (isset($readonly)) {
             <?= $required ? "true" : null ?>
             <?= isset($storeValue[$name]) && $storeValue[$name] == $value && isset($type) ?>
             <?= strval($readonly) ?? null ?>>
-        <label class="form-check-label" for="<?= $id ?? $name ?>">
+        <label class="ml-1 cursor-pointer form-check-label <?= $class ?>" for="<?= $id ?? $name ?>">
             <?= ucfirst($label) ?>
             <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/tooltip/required") : "" ?>
         </label>

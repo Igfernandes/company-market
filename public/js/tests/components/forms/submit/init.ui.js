@@ -1,8 +1,8 @@
 import { Log } from "../../../libraries/feedback.js";
 
-export const HANDLE_TESTS = {
+export const INIT_TESTS = {
   ShouldCreateSubmit: () => {
-    const submit = document.querySelector('.submit');
+    const submit = document.querySelector("[component='submit']");
 
     if (!submit)
       return Log("ERROR", {

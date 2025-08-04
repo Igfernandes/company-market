@@ -4,19 +4,16 @@
             <li class="pointer-event rounded-3">
                 <span class="text-white text-lg ps-3 d-block rounded-3"><strong>Formulário</strong></span>
                 <ul class="list-square-inside menu-components pl-5 text-white">
-                    <li data-component="components/forms/email" data-navbar='component'>
-                        <span><i>Email</i></span>
-                    </li>
-                    <li data-component="components/forms/password/passwordToggle" data-navbar='component'>
-                        <span><i>Password Toggle</i></span>
-                    </li>
-                    <li data-component="components/forms/checkbox" data-navbar='component'>
+                    <li class="cursor-pointer" data-component="components/forms/checkbox" data-navbar='component'>
                         <span><i>Checkout</i></span>
                     </li>
-                    <li data-component="components/forms/link" data-navbar='component'>
-                        <span><i>Link</i></span>
+                    <li class="cursor-pointer" data-component="components/forms/email" data-navbar='component'>
+                        <span><i>Email</i></span>
                     </li>
-                    <li data-component="components/forms/submit" data-navbar='component'>
+                    <li class="cursor-pointer" data-component="components/forms/password/passwordToggle" data-navbar='component'>
+                        <span><i>Password Toggle</i></span>
+                    </li>
+                    <li class="cursor-pointer" data-component="components/forms/submit" data-navbar='component'>
                         <span><i>Submit</i></span>
                     </li>
                 </ul>
@@ -29,6 +26,9 @@
                     </li>
                     <li data-component="components/layouts/image" data-navbar='component'>
                         <span><i>Image</i></span>
+                    </li>
+                    <li class="cursor-pointer" data-component="components/layouts/link" data-navbar='component'>
+                        <span><i>Link</i></span>
                     </li>
                 </ul>
             </li>

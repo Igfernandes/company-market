@@ -27,7 +27,9 @@ import {
   document
     .querySelector("[data-component='restore']")
     .addEventListener("click", () => {
+      const url = new URL(window.location.href);
       const component = url.searchParams.get("component");
+      
       if (component) loadComponent(component);
     });
   document

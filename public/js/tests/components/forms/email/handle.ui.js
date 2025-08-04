@@ -4,7 +4,7 @@ const elementName = "email";
 
 export const HANDLE_TESTS = {
   shouldLabelHasStateFalseInEmail: () => {
-    const email = document.querySelector(".email");
+    const email = document.querySelector("[component='email']");
     const input = email.querySelector("input");
     const label = email.querySelector("[data-label-toggle]");
 
@@ -24,7 +24,7 @@ export const HANDLE_TESTS = {
     });
   },
   shouldLabelHasStateTrueInEmail: () => {
-    const email = document.querySelector(".email");
+    const email = document.querySelector("[component='email']");
     const input = email.querySelector("input");
     const label = email.querySelector("[data-label-toggle]");
 

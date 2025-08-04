@@ -2,8 +2,7 @@ import { Log } from "../../../../libraries/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreatePassword: () => {
-    const password = document.querySelector(".password-toggle");
-    let hasError = false;
+    const password = document.querySelector("[component='password-toggle']");
     const elementName = "password-toggle";
 
     if (!password)
@@ -11,6 +10,16 @@ export const INIT_TESTS = {
         component: elementName,
         message: `O ${elementName} não foi encontrado`,
       });
+
+    Log("SUCCESS", {
+      component: elementName,
+      message: `O ${elementName} foi criado com sucesso`,
+    });
+  },
+  ShouldExistsElementsInPassword: () => {
+    const password = document.querySelector("[component='password-toggle']");
+    let hasError = false;
+    const elementName = "password-toggle";
 
     ["label", "visibility"].forEach((param) => {
       const hasElementInPassword = password.querySelector(

@@ -1,29 +1,25 @@
 <?php
 
-namespace App\Components\Shared\Forms\Link;
+namespace App\Components\Shared\Layouts\Link;
 
 use App\Components\BaseComponents;
 
 class Link extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/link";
+    const ORIGIN = "components/shared/layouts/link";
     const PROPS = [
-        "name",
-        "label",
+        "text",
         "id",
         "href",
-        "readonly",
-        "className",
+        "class",
     ];
 
     public static function render
     (
-        ?string $name = "",
-        ?string $label = "",
+        ?string $text = "",
         ?string $id = "",
         ?string $href = "",
-        ?bool $readonly = null,
-        ?string $className = "",
+        ?string $class = "",
     ) {
         {
             Component(self::ORIGIN, compact(self::PROPS));

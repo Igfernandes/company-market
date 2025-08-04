@@ -2,7 +2,7 @@ import { Log } from "../../../libraries/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateLink: () => {
-    const link = document.querySelector(".link");
+    const link = document.querySelector("[component='link']");
     const elementName = "link";
 
     if (!link)

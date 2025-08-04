@@ -34,7 +34,7 @@ if (isset($name) && isset($storeValue[$name]))
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (!isset($labelNot)) : ?>
-                <label class="absolute left-1 top-20 pl-1 text-black-700" data-label-toggle data-component="email:label" for="<?= $id ?? $name ?>">
+                <label class="absolute left-1 top-20 pl-1 text-black-700" data-label-toggle component="email:label" for="<?= $id ?? $name ?>">
                     <strong class="font-arial">
                         <?= ucfirst($label) ?>
                         <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/tooltip/required") : null ?>

@@ -15,7 +15,7 @@ trait ExceptionApi
             return var_dump($err);
 
         if ($err instanceof Exceptions  && !empty($err->getErrors()))
-            $message = is_array($err->getErrors()) ? array_values($err->getErrors()) : $err->getErrors();
+            $message = is_array($err->getErrors()) ? array_values($err->getErrors())[0] : $err->getErrors();
         else $message = $err->getMessage();
 
         return !empty($message) ? $message : 'Did something wrong happen';

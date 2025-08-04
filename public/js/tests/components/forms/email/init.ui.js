@@ -2,8 +2,7 @@ import { Log } from "../../../libraries/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateEmail: () => {
-    const email = document.querySelector(".email");
-    let hasError = false;
+    const email = document.querySelector("[component='email']");
     const elementName = "email";
 
     if (!email)
@@ -12,8 +11,18 @@ export const INIT_TESTS = {
         message: `O ${elementName} não foi encontrado`,
       });
 
+    Log("SUCCESS", {
+      component: elementName,
+      message: `O ${elementName} foi criado com sucesso`,
+    });
+  },
+  ShouldAllProprietiesInEmail: () => {
+    const email = document.querySelector("[component='email']");
+    let hasError = false;
+    const elementName = "email";
+
     const hasElementInEmail = email.querySelector(
-      `[data-component="${elementName}:label"]`
+      `[component="${elementName}:label"]`
     );
     if (!hasElementInEmail) {
       Log("ERROR", {
@@ -22,7 +31,7 @@ export const INIT_TESTS = {
       });
       hasError = true;
     }
-    
+
     if (hasError) return;
 
     Log("SUCCESS", {

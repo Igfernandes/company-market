@@ -1,8 +1,8 @@
 import { Log } from "../../../libraries/feedback.js";
 
 export const HANDLE_TESTS = {
-  ShouldCreateImage: () => {
-    const image = document.querySelector('img');
+  ShouldCreateCarousel: () => {
+    const image = document.querySelector('[component="carousel"]');
 
     if (!image)
       return Log("ERROR", {

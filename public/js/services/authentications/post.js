@@ -15,7 +15,7 @@ export async function postAuth(payload = {}) {
     if (data.errors)
       return snackbar.execute("FAIL", {
         title: snackbarTitleText,
-        message: translate(data.errors[0]),
+        message: translate(data.errors),
       });
 
     snackbar.execute("SUCCESS", {

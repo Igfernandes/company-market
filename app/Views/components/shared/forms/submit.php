@@ -14,7 +14,7 @@ if (isset($attributes)) {
 $id = !empty($id) ? $id : "btn_" . date("HHmmss");
 ?>
 
-<div class="submit relative">
+<div class="submit relative" component='submit'>
     <button
         class="bg-accent py-3 px-2 w-full rounded-sm text-white hover:bg-white hover:border-accent hover:text-accent shadow-md <?= $class ?>"
         type="submit"
