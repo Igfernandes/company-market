@@ -46,6 +46,7 @@ $routes->group("api", ['namespace' => 'App'], function ($routes) {
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Index::index');
+$routes->get('login', 'Index::login');
 $routes->get('forgot-password', 'Index::forgotPassword');
 
 /*
