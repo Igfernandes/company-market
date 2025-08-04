@@ -5,4 +5,5 @@ export const COMPONENTS = {
   "data-label-toggle": "/js/components/shared/forms/label/toggle.js",
   "component='carousel'": "/js/components/shared/layouts/Carousel.js",
   "component='recaptcha'": "/js/components/shared/utils/recaptcha.js",
+  "component='table'": "/js/libraries/DataTables/dataTables.js",
 };

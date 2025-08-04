@@ -55,6 +55,16 @@
 
     <link rel="stylesheet" href="/css/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/theme.css">
-</head>
+
+    <!-- JQuery -->
+    <script src="/js/libraries/JQuery/jquery-3.7.1.min.js"></script>
+
+    <?php
+    if ($hasTable) {
+    ?>
+        <link rel="stylesheet" href="/css/dataTables.css" />;
+    <?php
+    }
+    ?>
 
 <body>
