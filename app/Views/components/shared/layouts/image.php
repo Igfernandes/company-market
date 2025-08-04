@@ -1,1 +1,1 @@
-<img class="w-full h-full <?= $class ?? "" ?>" src="<?= base_url($src) ?>" alt="<?= $alt ?? "" ?>">
+<img component='image' class="w-full h-full <?= $class ?? "" ?>" src="<?= base_url($src) ?>" alt="<?= $alt ?? "" ?>">

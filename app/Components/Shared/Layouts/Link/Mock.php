@@ -5,11 +5,9 @@ namespace App\Components\Shared\Forms\Link;
 class Mock
 {
     public const PROPS = [
-        "name" => "link",
-        "label" => "Link",
+        "text" => "Link",
         "id" => "link",
         "href" => "#",
-        "readonly" => false,
-        "className" => "",
+        "class" => "",
     ];
 }

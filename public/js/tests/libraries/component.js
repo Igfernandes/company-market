@@ -23,11 +23,11 @@ export async function loadComponent(component) {
   const html = await resp.text();
 
   document.querySelector("#render").innerHTML = html;
-  document.querySelector("[data-duration='time']").innerHTML = `${duration.toFixed(2)}s`;
+  document.querySelector(
+    "[data-duration='time']"
+  ).innerHTML = `${duration.toFixed(2)}s`;
 
-  const testsModule = await import(
-    `../${component}/index.test.js`
-  );
+  const testsModule = await import(`../${component}/index.ui.js`);
 
   const testSelect = document.querySelector("[name='test']");
   testSelect.innerHTML = "";
@@ -74,4 +74,11 @@ export async function checkLoadComponents() {
   }
 
   analysisFeedback(hasError ? "ERROR" : "SUCCESS");
+}
+
+export function render(element = document.createElement("div")) {
+  const render = document.querySelector("#render");
+
+  render.innerHTML = "";
+  render.appendChild(element);
 }

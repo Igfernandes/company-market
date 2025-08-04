@@ -1,6 +1,6 @@
-<div data-component='recaptcha' class="recaptcha fixed bottom-12 right-1 bg-white text-blue-600 w-[5vw] pl-5 hover:text-white cursor-pointer hover:bg-blue-600 h-8 pb-1 px-4 shadow-md rounded-sm">
+<div component='recaptcha' class="recaptcha fixed bottom-13 right-1 mr-2 bg-white text-blue-600 w-[5vw] pl-5 hover:text-white cursor-pointer hover:bg-blue-600 h-[3.5rem] pb-1 px-4 shadow-md rounded-sm">
     <div class="flex items-center">
-        <div class="h-captcha" data-callback="handleRecaptcha"
+        <div class="h-captcha" data-callback="onRecaptchaVerified"
             data-size="invisible" data-sitekey="2e3c109c-3934-4482-aa1a-f57c7526d492"></div>
         <i class="bi bi-shield-lock-fill header-xl"></i>
         <input type="hidden" name='res-recaptcha'>
