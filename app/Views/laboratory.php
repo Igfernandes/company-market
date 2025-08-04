@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Components\Public\Footer\Footer;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Scripts\Scripts;
 
