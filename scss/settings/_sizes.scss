@@ -30,9 +30,21 @@
   .h-\[#{$i}rem\] {
     height: #{$i}rem;
   }
+  .min-h-\[#{$i}rem\] {
+    min-height: #{$i}rem;
+  }
+  .max-h-\[#{$i}rem\] {
+    max-height: #{$i}rem;
+  }
   @for $d from 1 through 9 {
     .h-\[#{ $i }\.#{ $d }rem\] {
       height: #{"#{$i}.#{$d}rem"};
+    }
+    .min-h-\[#{ $i }\.#{ $d }rem\] {
+      min-height: #{"#{$i}.#{$d}rem"};
+    }
+    .max-h-\[#{ $i }\.#{ $d }rem\] {
+      max-height: #{"#{$i}.#{$d}rem"};
     }
   }
 }
@@ -41,10 +53,21 @@
   .w-\[#{ $i }rem\] {
     width: #{$i}rem;
   }
-
+  .min-w-\[#{ $i }rem\] {
+    min-width: #{$i}rem;
+  }
+  .max-w-\[#{ $i }rem\] {
+    max-width: #{$i}rem;
+  }
   @for $d from 1 through 9 {
     .w-\[#{ $i }\.#{ $d }rem\] {
       width: #{"#{$i}.#{$d}rem"};
+    }
+    .min-w-\[#{ $i }\.#{ $d }rem\] {
+      min-width: #{"#{$i}.#{$d}rem"};
+    }
+    .max-w-\[#{ $i }\.#{ $d }rem\] {
+      max-width: #{"#{$i}.#{$d}rem"};
     }
   }
 }
