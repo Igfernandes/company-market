@@ -26,4 +26,9 @@ class Index extends BaseController
     {
         return view("layouts/forgot-password");
     }
+
+    public function groupValidation()
+    {
+        return view("layouts/group-validation");
+    }
 }
