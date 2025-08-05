@@ -19,7 +19,7 @@ if (isset($name) && isset($storeValue[$name]))
 
 ?>
 
-<div class="email mb-3">
+<div class="email mb-3" component="email">
     <div class="relative shadow-sm border-gray-200 border-2 rounded-md">
         <div class="w-100">
             <input type="email"
