@@ -21,18 +21,16 @@ export const INIT_TESTS = {
     let hasError = false;
     const elementName = "password-toggle";
 
-    ["label", "visibility"].forEach((param) => {
-      const hasElementInPassword = password.querySelector(
-        `[data-component="${elementName}:${param}"]`
-      );
-      if (!hasElementInPassword) {
-        Log("ERROR", {
-          component: elementName,
-          message: `O elemento ${param} do p${elementName} não pode ser encontrado`,
-        });
-        hasError = true;
-      }
-    });
+    if (
+      !hasAttributesInElement(
+        [
+          `[component="${elementName}:label"]`,
+          `[component="${elementName}:visibility"]`,
+        ],
+        password
+      )
+    )
+      return;
 
     if (hasError) return;
 

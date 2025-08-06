@@ -6,7 +6,7 @@ export const HANDLE_TESTS = {
   shouldShowContentPassword: () => {
     const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
-    const eyeElement = password.querySelector("[data-password-visibility]");
+    const eyeElement = password.querySelector("[password-visibility]");
 
     eyeElement.click();
 
@@ -25,7 +25,7 @@ export const HANDLE_TESTS = {
   shouldHiddenContentPassword: () => {
     const password = document.querySelector("[component='password-toggle']");
     const input = password.querySelector("input");
-    const eyeElement = password.querySelector("[data-password-visibility]");
+    const eyeElement = password.querySelector("[password-visibility]");
 
     eyeElement.click();
 
