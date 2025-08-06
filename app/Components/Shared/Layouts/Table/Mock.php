@@ -10,6 +10,8 @@ class Mock
         "heads" => ["id", "Nome", "CPF", "Birthdate"],
         "ajax" => "/json/mocks/clients.json",
         "data" => [],
+        "update" => "/dashboard/clients",
+        "delete" => "clients",
         "attributes" => [
             "data-test" => "test"
         ]

@@ -15,13 +15,15 @@ if (isset($attributes)) {
     component="table"
     data-heads="<?= join("/", $heads) ?>"
     data-ajax="<?= $ajax ?>"
+    <?= $update ? "data-update-action='$update'" : null ?>
+    <?= $delete ? "data-delete-action='$delete'" : null ?>
     <?= !empty($attributeData) ? $attributeData : null ?>>
     <table id="table_<?= esc(date("YYYYMMDDHHmmss")) ?>">
         <?php if (is_array($heads)): ?>
             <thead>
-                <tr class="">
+                <tr>
                     <?php foreach ($heads as $tHead): ?>
-                        <th class=""><?= empty($tHead) ? '---' : esc($tHead) ?></th>
+                        <th><?= empty($tHead) ? '---' : esc($tHead) ?></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>

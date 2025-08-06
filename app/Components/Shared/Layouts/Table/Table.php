@@ -11,6 +11,8 @@ class Table
         "heads",
         "data",
         "ajax",
+        "update",
+        "delete",
         "attributes",
     ];
 
@@ -20,6 +22,8 @@ class Table
         ?array $heads = [],
         ?array $data = [[]],
         ?string $ajax = "",
+        ?string $update = "",
+        ?string $delete = "",
         ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
