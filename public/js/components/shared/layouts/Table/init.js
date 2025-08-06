@@ -1,6 +1,7 @@
 import "../../../../libraries/DataTables/dataTables.js";
-import { tableAjax } from "./utils/ajax.js";
-import { translatorTable } from "./utils/translator.js";
+import { tableAjax } from "./settings/ajax.js";
+import { tableRender } from "./settings/render.js";
+import { translatorTable } from "./settings/translator.js";
 
 export const init = () => {
   const tableContainers = document.querySelectorAll("[component='table']");
@@ -15,6 +16,9 @@ export const init = () => {
       pageLength: page ?? 10,
       ...translatorTable(),
       ...tableAjax(tableContainer),
+      ...tableRender(tableContainer),
+      info: false,
+      pagingType: "simple_numbers",
     });
   });
 };

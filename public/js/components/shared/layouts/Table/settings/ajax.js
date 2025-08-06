@@ -1,5 +1,3 @@
-import { tableOrder } from "./order.js";
-
 export function tableAjax(tableContainer) {
   const { ajax } = tableContainer.dataset;
   if (!ajax) return {};

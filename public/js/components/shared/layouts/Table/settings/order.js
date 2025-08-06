@@ -1,5 +1,4 @@
 export function tableOrder(settings, data) {
-  console.log(settings);
   if (!settings.order || settings.order.length == 0) return data;
 
   const order = settings.order[0];
