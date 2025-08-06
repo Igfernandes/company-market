@@ -1,4 +1,4 @@
-import { inicializeForm } from "../../../../helpers/forms.js";
+import { inicializeForm } from "../../../../components/shared/forms/forms.js";
 import { render } from "../../../libraries/component.js";
 import { Log } from "../../../libraries/feedback.js";
 
