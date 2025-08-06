@@ -1,6 +1,6 @@
 import { Log } from "../../../libraries/feedback.js";
 
-export const HANDLE_TESTS = {
+export const INIT_TESTS = {
   ShouldCreateCarousel: () => {
     const image = document.querySelector('[component="carousel"]');
 
