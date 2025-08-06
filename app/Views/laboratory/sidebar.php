@@ -24,9 +24,6 @@
                     <li class="cursor-pointer" data-component="components/forms/submit" data-navbar='component'>
                         <span><i>Submit</i></span>
                     </li>
-                    <li class="cursor-pointer" data-component="components/forms/input" data-navbar='component'>
-                        <span><i>Input</i></span>
-                    </li>
                 </ul>
             </li>
             <li class="pointer-event rounded-3 mt-4">
