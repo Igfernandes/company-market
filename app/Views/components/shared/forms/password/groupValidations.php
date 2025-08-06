@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 use App\Components\Shared\Forms\Password\PasswordToggle\PasswordToggle;
@@ -60,4 +59,5 @@ $dataCriterion = [
                 <p class="text-validate">A senha informada deve ser igual à senha de confirmação</p>
             </div>
         </div>
-    </div>
+    </div> 
+</div>

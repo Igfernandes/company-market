@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Components\Public\Footer\Footer;
-use App\Components\Shared\Forms\Password\GroupValidation\GroupValidation;
 use App\Components\Shared\Forms\Password\GroupValidations\GroupValidations;
 use App\Components\Shared\Forms\Submit\Submit;
 use App\Components\shared\Layouts\Head\Head;
@@ -32,7 +31,7 @@ Head::render(title: "Alter Password - Nautisys System");
                     </div>
                     <div class="form-content w-100 mt-4">
                         <div class="form-group">
-                            <?= GroupValidation::render(
+                            <?= GroupValidations::render(
                                 name: "password",
                                 id: "password",
                             ) ?>
