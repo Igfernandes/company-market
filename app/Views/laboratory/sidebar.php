@@ -10,11 +10,22 @@
                     <li class="cursor-pointer" data-component="components/forms/email" data-navbar='component'>
                         <span><i>Email</i></span>
                     </li>
-                    <li class="cursor-pointer" data-component="components/forms/password/passwordToggle" data-navbar='component'>
-                        <span><i>Password Toggle</i></span>
+                    <li>
+                        <span><i><strong>Password</strong></i></span>
                     </li>
+                    <ul>
+                        <li class="cursor-pointer" data-component="components/forms/password/passwordToggle" data-navbar='component'>
+                            <span><i>Password Toggle</i></span>
+                        </li>
+                        <li class="cursor-pointer" data-component="components/forms/password/groupValidation" data-navbar='component'>
+                            <span><i>Group Validation</i></span>
+                        </li>
+                    </ul>
                     <li class="cursor-pointer" data-component="components/forms/submit" data-navbar='component'>
                         <span><i>Submit</i></span>
+                    </li>
+                    <li class="cursor-pointer" data-component="components/forms/input" data-navbar='component'>
+                        <span><i>Input</i></span>
                     </li>
                 </ul>
             </li>
