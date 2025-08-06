@@ -62,7 +62,7 @@
     <?php
     if ($hasTable) {
     ?>
-        <link rel="stylesheet" href="/css/dataTables.css" />;
+        <link rel="stylesheet" href="/css/dataTables.css" />
     <?php
     }
     ?>

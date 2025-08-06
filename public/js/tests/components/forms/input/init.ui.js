@@ -1,11 +1,11 @@
 import { Log } from "../../../libraries/feedback.js";
 
 export const INIT_TESTS = {
-  ShouldCreateEmail: () => {
-    const email = document.querySelector("[component='email']");
-    const elementName = "email";
+  ShouldCreateInput: () => {
+    const input = document.querySelector("[component='input']");
+    const elementName = "input";
 
-    if (!email)
+    if (!input)
       return Log("ERROR", {
         component: elementName,
         message: `O ${elementName} não foi encontrado`,
@@ -16,15 +16,15 @@ export const INIT_TESTS = {
       message: `O ${elementName} foi criado com sucesso`,
     });
   },
-  ShouldExistLabelElementInEmail: () => {
-    const email = document.querySelector("[component='email']");
+  ShouldAllProprietiesInInput: () => {
+    const input = document.querySelector("[component='input']");
     let hasError = false;
-    const elementName = "email";
+    const elementName = "input";
 
-    const hasElementInEmail = email.querySelector(
+    const hasElementInInput = input.querySelector(
       `[component="${elementName}:label"]`
     );
-    if (!hasElementInEmail) {
+    if (!hasElementInInput) {
       Log("ERROR", {
         component: elementName,
         message: `O elemento label do ${elementName} não pode ser encontrado`,
