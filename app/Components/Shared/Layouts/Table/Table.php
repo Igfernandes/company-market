@@ -8,15 +8,19 @@ class Table
     const PROPS = [
         "id",
         "class",
-        "dataTitles",
-        "dataTable"
+        "heads",
+        "data",
+        "ajax",
+        "attributes",
     ];
 
     public static function render(
         ?string $id = "",
         ?string $class = "",
-        ?array $dataTitles = [],
-        ?array $dataTable = [[]]
+        ?array $heads = [],
+        ?array $data = [[]],
+        ?string $ajax = "",
+        ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }
