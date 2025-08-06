@@ -10,10 +10,10 @@ Head::render(title: "Laboratory - Company Market", hasTable: true);
 ?>
 <div class="laboratory bg-laboratory">
 
-    <?php echo Component("laboratory/header"); ?>
+    <?php Component("laboratory/header"); ?>
     <div class="content flex">
-        <?php echo Component("laboratory/sidebar"); ?>
-        <?php echo Component("laboratory/preview"); ?>
+        <?php Component("laboratory/sidebar"); ?>
+        <?php Component("laboratory/preview"); ?>
     </div>
 </div>
 
