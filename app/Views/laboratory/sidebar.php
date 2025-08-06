@@ -16,9 +16,9 @@
                             <li class="cursor-pointer" data-component="components/forms/password/passwordToggle" data-navbar='component'>
                                 - <span><i>Toggle</i></span>
                             </li>
-                            <!-- <li class="cursor-pointer" data-component="components/forms/password/groupValidations" data-navbar='component'>
+                            <li class="cursor-pointer" data-component="components/forms/password/groupValidations" data-navbar='component'>
                                 - <span><i>Group Validations</i></span>
-                            </li> -->
+                            </li>
                         </ul>
                     </li>
                     <li class="cursor-pointer" data-component="components/forms/submit" data-navbar='component'>

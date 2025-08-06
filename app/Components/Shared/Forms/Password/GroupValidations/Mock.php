@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Shared\Forms\Password\PasswordToggle;
+namespace App\Components\Shared\Forms\Password\GroupValidations;
 
 class Mock
 {
@@ -8,6 +8,7 @@ class Mock
         "name" => "password",
         "label" => "Senha",
         "id" => "password",
+        "class" => "",
         "required" => "true",
     ];
 }
