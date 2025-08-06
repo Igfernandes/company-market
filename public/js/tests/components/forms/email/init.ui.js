@@ -16,7 +16,7 @@ export const INIT_TESTS = {
       message: `O ${elementName} foi criado com sucesso`,
     });
   },
-  ShouldAllProprietiesInEmail: () => {
+  ShouldExistLabelElementInEmail: () => {
     const email = document.querySelector("[component='email']");
     let hasError = false;
     const elementName = "email";

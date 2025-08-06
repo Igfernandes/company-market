@@ -1,4 +1,5 @@
 import { Log } from "../../../../libraries/feedback.js";
+import { hasElementsInComponent } from "../../../../libraries/validations/has.js";
 
 export const INIT_TESTS = {
   ShouldCreatePassword: () => {
@@ -22,7 +23,7 @@ export const INIT_TESTS = {
     const elementName = "password-toggle";
 
     if (
-      !hasAttributesInElement(
+      !hasElementsInComponent(
         [
           `[component="${elementName}:label"]`,
           `[component="${elementName}:visibility"]`,

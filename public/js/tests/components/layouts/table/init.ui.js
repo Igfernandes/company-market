@@ -35,10 +35,7 @@ export const INIT_TESTS = {
     const elementName = "table";
 
     if (
-      !hasAttributesInElement(
-        ["[data-heads]", "[data-ajax]", "[data-test='test']"],
-        table
-      )
+      !hasAttributesInElement(["data-heads", "data-ajax", "data-test"], table)
     )
       return;
 
