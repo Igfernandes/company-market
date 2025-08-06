@@ -3,14 +3,15 @@
 declare(strict_types=1);
 
 use App\Components\Public\Footer\Footer;
-use App\Components\Shared\Forms\Email\Email;
+use App\Components\Shared\Forms\Password\GroupValidation\GroupValidation;
+use App\Components\Shared\Forms\Password\GroupValidations\GroupValidations;
 use App\Components\Shared\Forms\Submit\Submit;
-use App\Components\Shared\Layouts\Head\Head;
+use App\Components\shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
 use App\Components\Shared\Layouts\Link\Link;
 use App\Components\Shared\Utils\Recaptcha\Recaptcha;
 
-Head::render(title: "Login - Nautisys System");
+Head::render(title: "Alter Password - Nautisys System");
 ?>
 
 <div class="login bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
@@ -31,11 +32,9 @@ Head::render(title: "Login - Nautisys System");
                     </div>
                     <div class="form-content w-100 mt-4">
                         <div class="form-group">
-                            <?= Email::render(
-                                name: "email",
-                                id: "email",
-                                label: "E-mail",
-                                icon: '<i class="bi bi-envelope-fill"></i>'
+                            <?= GroupValidation::render(
+                                name: "password",
+                                id: "password",
                             ) ?>
                         </div>
                         <div class="form-btn text-center">
@@ -47,8 +46,7 @@ Head::render(title: "Login - Nautisys System");
                 <div class="link-login text-center mt-10">
                     <?= Link::render(
                         text: "Já lembra sua senha? Entre agora",
-                        class: "hover:text-gray-300",
-                        href: "/login"
+                        class: "hover:text-gray-300"
                     ) ?>
                 </div>
             </div>

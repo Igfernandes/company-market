@@ -8,7 +8,7 @@ use App\Components\Shared\Forms\Email\Email;
 use App\Components\Shared\Forms\Password\PasswordToggle\PasswordToggle;
 use App\Components\Shared\Forms\Submit\Submit;
 use App\Components\Shared\Layouts\Carousel\Carousel;
-use App\Components\shared\Layouts\Head\Head;
+use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
 use App\Components\Shared\Layouts\Link\Link;
 use App\Components\Shared\Utils\Recaptcha\Recaptcha;
