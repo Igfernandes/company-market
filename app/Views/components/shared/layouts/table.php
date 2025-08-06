@@ -1,18 +1,39 @@
-<table id="<?= esc($id) ?>" class="<?= esc($class) ?>" component="table">
-    <thead>
-        <tr class="">
-            <?php foreach ($dataTitles as $title): ?>
-                <th class=""><?= empty($title) ? '---' : esc($title) ?></th>
+<?php
+if (isset($attributes)) {
+    $attributesRef = [];
+    foreach ($attributes as $index => $attribute) {
+        if (empty($attribute)) continue;
+        array_push($attributesRef, join("=", [$index, $attribute]));
+    }
+
+    $attributeData = join(" ", $attributesRef);
+}
+?>
+
+<div class="<?= esc($class) ?> w-full bg-white p-4 rounded-lg"
+    id="<?= esc($id) ?>"
+    component="table"
+    data-heads="<?= join("/", $heads) ?>"
+    data-ajax="<?= $ajax ?>"
+    <?= !empty($attributeData) ? $attributeData : null ?>>
+    <table id="table_<?= esc(date("YYYYMMDDHHmmss")) ?>">
+        <?php if (is_array($heads)): ?>
+            <thead>
+                <tr class="">
+                    <?php foreach ($heads as $tHead): ?>
+                        <th class=""><?= empty($tHead) ? '---' : esc($tHead) ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+        <?php endif; ?>
+        <tbody>
+            <?php foreach ($data as $row): ?>
+                <tr class="trow">
+                    <?php foreach ($row as $cell): ?>
+                        <td class=""><?= empty($cell) ? '---' : esc($cell) ?></td>
+                    <?php endforeach; ?>
+                </tr>
             <?php endforeach; ?>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($dataTable as $row): ?>
-            <tr class="">
-                <?php foreach ($row as $cell): ?>
-                    <td class=""><?= empty($cell) ? '---' : esc($cell) ?></td>
-                <?php endforeach; ?>
-            </tr>
-        <?php endforeach; ?> 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
