@@ -16,21 +16,7 @@ export const INIT_TESTS = {
       message: "A tabela foi criada com sucesso",
     });
   },
-  ShouldCreateTable: () => {
-    const table = document.querySelector("[component='table'] table");
-
-    if (!DataTable.isDataTable(table))
-      return Log("ERROR", {
-        component: "table",
-        message: "A tabela não foi instanciada ",
-      });
-
-    return Log("SUCCESS", {
-      component: "table",
-      message: "A tabela foi criada com sucesso",
-    });
-  },
-  ShouldAllProprietiesInTable: () => {
+  ShouldAllAttributesInTable: () => {
     const table = document.querySelector("[component='table']");
     const elementName = "table";
 

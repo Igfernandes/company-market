@@ -1,142 +1,144 @@
-import { Snackbar } from "../../components/shared/utils/snackbar.js";
 import { HTTP_STATUS } from "../../constants/http.js";
 import cookies from "../../helpers/cookies/index.js";
-import { translate } from "../../translate/index.js";
+import { getQueryParams } from "../../helpers/route.js";
 import { mutate } from "./libs/mutate.js";
 
+/**
+ * Classe responsável por realizar requisições HTTP com suporte a cache via cookies
+ * e estrutura padronizada de resposta.
+ *
+ * @class
+ */
 const Ajax = function () {
+  /**
+   * Realiza uma requisição HTTP com método e cabeçalhos customizados.
+   *
+   * @async
+   * @param {string} route - URL do endpoint.
+   * @param {Object} [payload] - Dados enviados no corpo da requisição.
+   * @param {Object} [options] - Configurações adicionais da requisição.
+   * @param {string} [options.method="POST"] - Método HTTP a ser usado.
+   * @param {Object} [options.headers] - Cabeçalhos da requisição.
+   * @returns {Promise<Object>} Resposta processada pela função `mutate`.
+   */
   this.custom = async (
     route,
     payload,
     options = {
-      action: true,
       method: "POST",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-      reference: null,
     }
   ) => {
-    const { method, headers, reference } = options;
+    const reference = [route];
+    const request = options;
 
-    if (route.substr(-1) == "/") route = route.substring(0, route.length - 1);
+    if (payload) {
+      request["body"] = JSON.stringify(payload);
+      reference.push(payload);
+    }
 
-    const request = {
-      method,
-      body: JSON.stringify(payload),
-      headers,
-    };
     const customResponse = await fetch(route, request);
+
     return await mutate(
       {
         ...request,
         urlFetched: route,
-        reference,
+        queryKey: JSON.stringify(reference),
       },
-      customResponse,
-      payload
+      customResponse
     );
   };
 
+  /**
+   * Realiza uma requisição POST com dados no corpo da requisição.
+   *
+   * @async
+   * @param {string} route - URL do endpoint.
+   * @param {Object} payload - Dados enviados no corpo da requisição.
+   * @param {Object} [options] - Configurações adicionais da requisição.
+   * @param {Object} [options.headers] - Cabeçalhos da requisição.
+   * @returns {Promise<Object>} Resposta processada pela função `mutate`.
+   */
   this.post = async (
     route,
     payload,
     options = {
-      action: true,
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-      reference: null,
     }
   ) => {
-    try {
-      const { headers, reference } = options;
-      const snackbar = new Snackbar();
-
-      const request = {
-        method: "POST",
-        body:
-          options.headers &&
-          options.headers["Content-type"].includes(
-            "application/json; charset=UTF-8"
-          )
-            ? JSON.stringify(payload)
-            : payload,
-        headers,
-        reference,
-      };
-
-      if (route.substr(-1) == "/") route = route.substring(0, route.length - 1);
-
-      const postResponse = await fetch(route, request);
-
-      if (postResponse.status == HTTP_STATUS.NOT_FOUND) {
-        snackbar.execute("NOTICE", {
-          title: "Erro",
-          message: translate("Screens.default.service_error"),
-        });
-        throw new Error("ERROR IN SERVICE: " + route);
-      }
-
-      return await mutate(
-        {
-          ...request,
-          urlFetched: route,
-          reference,
-        },
-        postResponse,
-        payload
-      );
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  this.get = async (
-    route,
-    payload,
-    options = {
-      payload: {},
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      reference: null,
-    }
-  ) => {
-    let params = "?";
-    const { headers, reference } = options;
-
-    if (payload)
-      Object.entries(payload).forEach(([label, value], key) => {
-        if (!value) return;
-
-        params += key != 0 ? "&" : "";
-        params += `${label}=${value}`;
-      });
-
+    const reference = [route];
     const request = {
-      method: "GET",
-      headers,
+      method: "POST",
+      body: payload,
+      ...options,
     };
-    const cookiesData = cookies.get(reference);
 
-    if (cookiesData && cookiesData.payload == JSON.stringify(payload))
-      return cookiesData.data;
+    if (payload) {
+      reference.push(payload);
+    }
 
-    const urlFetched = route + params;
-    const getResponse = await fetch(urlFetched, request);
+    const postResponse = await fetch(route, request);
 
     return await mutate(
       {
         ...request,
-        queryStrings: params,
-        urlFetched,
-        reference,
+        urlFetched: route,
+        queryKey: JSON.stringify(reference),
       },
-      getResponse,
-      payload
+
+      postResponse
+    );
+  };
+
+  /**
+   * Realiza uma requisição GET com suporte a cache via cookies.
+   *
+   * @async
+   * @param {string} route - URL base do endpoint.
+   * @param {Object} payload - Parâmetros de consulta (query params).
+   * @param {Object} [options] - Configurações adicionais da requisição.
+   * @param {Object} [options.headers] - Cabeçalhos da requisição.
+   * @returns {Promise<Object>} Dados do cache (cookies) ou da resposta processada pela função `mutate`.
+   */
+  this.get = async (
+    route,
+    payload,
+    options = {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }
+  ) => {
+    const url = `${route}/${getQueryParams(payload)}`;
+    const request = {
+      method: "GET",
+      ...options,
+    };
+
+    const cookiesData = cookies.get(url);
+
+    if (cookiesData)
+      return {
+        data: cookiesData.data,
+        status: HTTP_STATUS.OK,
+        url: route,
+      };
+
+    const getResponse = await fetch(url, request);
+
+    return await mutate(
+      {
+        ...request,
+        urlFetched: url,
+        queryKey: url,
+      },
+      getResponse
     );
   };
 };
 
-export { Ajax };
+export const ajax = new Ajax();
