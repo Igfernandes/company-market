@@ -19,6 +19,7 @@ use App\Routes\OperationsFailuresRoutes;
 use App\Routes\PaymentsRoutes;
 use App\Routes\PermissionsRoutes;
 use App\Routes\RecoversRoutes;
+use App\Routes\Sandbox\SandboxRoutes;
 use App\Routes\SchedulesRoutes;
 use App\Routes\ServicesRoutes;
 use App\Routes\UsersRoutes;
@@ -28,6 +29,7 @@ use CodeIgniter\Router\RouteCollection;
 class RoutesApi
 {
   private $routesInstances = [
+    SandboxRoutes::class,
     AuthenticationsRoutes::class,
     ChargesRoutes::class,
     CheckoutRoutes::class,
