@@ -1,4 +1,4 @@
-import { HANDLE_TESTS } from "./handle.UI.js";
+import { HANDLE_TESTS } from "./handle.ui.js";
 import { INIT_TESTS } from "./init.ui.js";
 
 export const TESTS = {
