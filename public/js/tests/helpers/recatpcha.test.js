@@ -1,3 +1,5 @@
+import { getQueryParams, getUrlBase } from "../../helpers/route.js";
+
 describe("HELPER - Recaptcha:", () => {
   test(`Return only path url`, () => {
     const path = "/image/icon.png";

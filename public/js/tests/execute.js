@@ -1,8 +1,8 @@
-import { checkLoadComponents, loadComponent } from "./libraries/component.js";
+import { checkLoadComponents, loadComponent } from "./runtime/component.js";
 import {
   handleComponentTests,
   handleSearchComponentsByName,
-} from "./libraries/handle.js";
+} from "./runtime/handle.js";
 
 (async function () {
   await checkLoadComponents();
@@ -29,7 +29,7 @@ import {
     .addEventListener("click", () => {
       const url = new URL(window.location.href);
       const component = url.searchParams.get("component");
-      
+
       if (component) loadComponent(component);
     });
   document

@@ -8,7 +8,6 @@ class Mock {
         "name" => "email", 
         "label" => "Login/Email", 
         "id" => "email",
-        "placeholder" => "",
         "class" => "",
         "required" => "true",
         "attributes" => [],
