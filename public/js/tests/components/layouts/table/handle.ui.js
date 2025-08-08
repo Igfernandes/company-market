@@ -1,5 +1,5 @@
-import { Log } from "../../../libraries/feedback.js";
-import { hasAttributesInElement } from "../../../libraries/validations/has.js";
+import { Log } from "/js/tests/runtime/feedback.js";
+import { hasAttributesInElement } from "/js/tests/runtime/validations/has.js";
 
 export const HANDLE_TESTS = {
   ShouldSearchInTable: () => {
