@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Api\Operations\Files\Post;
+
+use App\Api\ExceptionApi;
+use App\Api\Validation;
+use App\Controllers\BaseController;
+use App\Libraries\Exceptions\Exceptions;
+use App\Traits\ControllersTrait;
+use Exception;
+
+class PostController extends BaseController
+{
+    use Validation, ExceptionApi, ControllersTrait;
+
+    private PostUseCases $postUseCases;
+
+    public function __construct()
+    {
+        $this->postUseCases = new PostUseCases();
+    }
+
+    public function handle()
+    {
+        try {
+            $payload = $this->request->getVar();
+            $uploads = $this->request->getFiles();
+
+            if (!isset($uploads['files']))
+                throw new Exceptions("Api.files.invalid.files", \BAD_REQUEST);
+
+            $payload['files'] = $uploads['files'];
+
+            $responsePost = $this->postUseCases->execute($payload);
+
+            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
+        } catch (Exception | Exceptions $err) {
+
+            return  $this->response->setJSON((object)[
+                "errors" => $this->getMessageError($err)
+            ])->setStatusCode($this->getCodeError($err));
+        }
+    }
+}

@@ -2,7 +2,8 @@
 
 namespace Config;
 
-use App\Api\RoutesApi;
+use App\Api\Routes\Routes;
+use App\Sandbox\Routes\Routes as RoutesRoutes;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -33,7 +34,7 @@ $routes->setAutoRoute(true);
  */
 
 $routes->group("api", ['namespace' => 'App'], function ($routes) {
-    $routesApi = new RoutesApi();
+    $routesApi = new Routes();
     $routes = $routesApi->init($routes);
 });
 
