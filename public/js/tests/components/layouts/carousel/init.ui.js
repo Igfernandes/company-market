@@ -1,4 +1,4 @@
-import { Log } from "/public/js/tests/runtime/feedback.js";
+import { Log } from "/js/tests/runtime/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateCarousel: () => {

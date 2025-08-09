@@ -1,4 +1,4 @@
-import { Log } from "../../../libraries/feedback.js";
+import { Log } from "/js/tests/runtime/feedback.js";
 
 export const HANDLE_TESTS = {
   shouldCheckboxBeUnChecked: () => {

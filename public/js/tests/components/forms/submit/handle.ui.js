@@ -1,6 +1,6 @@
-import { inicializeForm } from "../../../../components/shared/forms/forms.js";
-import { render } from "../../../libraries/component.js";
-import { Log } from "../../../libraries/feedback.js";
+import { render } from "/js/tests/runtime/component.js";
+import { Log } from "/js/tests/runtime/feedback.js";
+import { inicializeForm } from "/js/components/shared/forms/forms.js";
 
 export const HANDLE_TESTS = {
   ShouldEnableButtonWhenUseInicializeFormFunction: () => {

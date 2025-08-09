@@ -1,8 +1,8 @@
-import { Log } from "../../../../libraries/feedback.js";
+import { Log } from "/js/tests/runtime/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateGroupValidation: () => {
-    const passwordGroup = document.querySelector("[component='password-group']");
+    const passwordGroup = document.querySelector("[component='group-validation']");
     const elementName = "group-validation";
 
     if (!passwordGroup)

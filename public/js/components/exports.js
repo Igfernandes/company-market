@@ -6,4 +6,5 @@ export const COMPONENTS = {
   "component='carousel'": "/js/components/shared/layouts/Carousel.js",
   "component='recaptcha'": "/js/components/shared/utils/recaptcha.js",
   "component='table'": "/js/components/shared/layouts/Table/init.js",
+  "component='modal'": "/js/components/shared/utils/modal.js",
 };

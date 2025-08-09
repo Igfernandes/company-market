@@ -55,6 +55,9 @@
                     <li class="cursor-pointer" data-navbar='component' data-component="components/utils/recaptcha">
                         <span><i>Recaptcha</i></span>
                     </li>
+                    <li class="cursor-pointer" data-navbar='component' data-component="components/utils/modal">
+                        <span><i>Modal</i></span>
+                    </li>
                 </ul>
             </li>
         </ul>

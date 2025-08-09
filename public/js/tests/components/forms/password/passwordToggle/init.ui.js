@@ -1,5 +1,5 @@
-import { Log } from "../../../../libraries/feedback.js";
-import { hasElementsInComponent } from "../../../../libraries/validations/has.js";
+import { Log } from "/js/tests/runtime/feedback.js";
+import { hasElementsInComponent } from "/js/tests/runtime/validations/has.js";
 
 export const INIT_TESTS = {
   ShouldCreatePassword: () => {
