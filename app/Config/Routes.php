@@ -3,7 +3,6 @@
 namespace Config;
 
 use App\Api\Routes\Routes;
-use App\Sandbox\Routes\Routes as RoutesRoutes;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
