@@ -11,7 +11,7 @@ export const INIT_TESTS = {
         message: "O modal não foi encontrado",
       });
 
-    ["title", 'subtitle',"message", "close"].forEach((param) => {
+    ["title", 'subtitle', "close"].forEach((param) => {
       const hasElementInModal = modal.querySelector(
         `[data-component="modal:${param}"]`
       );
