@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Components\Shared\Utils\Modal;
+namespace App\Components\Shared\Utils\Warning;
 
 use App\Components\BaseComponents;
 
-class Modal extends BaseComponents
+class Warning extends BaseComponents
 {
-    const ORIGIN = "components/shared/utils/modal";
+    const ORIGIN = "components/shared/utils/warning/index";
     const PROPS = [
         'title',
         'subtitle',
         'message',
-        'action'
+        'left',
+        'right'
     ];
 
     /**
@@ -19,14 +20,16 @@ class Modal extends BaseComponents
      * @param string $title* O título do modal, sendo ele fixo.
      * @param string $subtitle* O subtítulo do modal, sendo ele fixo.
      * @param string $message* A mensagem que será exibida no modal.
-     * @param string $action O conteúdo html em string referente a uma ação ou execução no modal. 
+     * @param string $let Os atributos a serem atribuídos como guias de ações do lado esquerdo
+     * @param string $right Os atributos a serem atribuídos como guias de ações do lado direito
      */
     public static function render(
         string $title = "",
         string $subtitle = "",
         string $message = "",
-        mixed $action = ""
+        array $left = [],
+        array $right = [],
     ) {
-        Component(self::ORIGIN, compact(self::PROPS), true);
+        Component(self::ORIGIN, compact(self::PROPS));
     }
 }

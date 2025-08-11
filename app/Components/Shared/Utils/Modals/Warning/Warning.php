@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Components\Shared\Utils\Modal;
+namespace App\Components\Shared\Utils\Modals\Warning;
 
 use App\Components\BaseComponents;
 
-class Modal extends BaseComponents
+class Warning extends BaseComponents
 {
-    const ORIGIN = "components/shared/utils/modal";
+    const ORIGIN = "components/shared/utils/modals/warning";
     const PROPS = [
         'title',
         'subtitle',
         'message',
-        'action'
     ];
 
     /**
@@ -25,8 +24,7 @@ class Modal extends BaseComponents
         string $title = "",
         string $subtitle = "",
         string $message = "",
-        mixed $action = ""
     ) {
-        Component(self::ORIGIN, compact(self::PROPS), true);
+        Component(self::ORIGIN, compact(self::PROPS));
     }
 }
