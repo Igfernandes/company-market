@@ -1,17 +1,6 @@
 <?php
 $session = session();
 $storeValue = $session->get($form ?? "");
-$attributeData = "";
-
-if (isset($attributes)) {
-    $attributesRef = [];
-    foreach ($attributes as $index => $attribute) {
-        if (empty($attribute)) continue;
-        array_push($attributesRef, join("=", [$index, $attribute]));
-    }
-
-    $attributeData = join(" ", $attributesRef);
-}
 
 if (isset($name) && isset($storeValue[$name]))
     $value = $storeValue[$name];
@@ -26,7 +15,7 @@ if (isset($name) && isset($storeValue[$name]))
             id="<?= $id ?? $name ?>"
             data-label="<?= $label ?>"
             <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
-            <?= !empty($attributeData) ? $attributeData : null ?>
+            <?= getAttributes($attributes) ?>
             <?= isset($disabled) ? strval($disabled) : null  ?>
             <?= $required ? "required" : null ?>
             <?= strval($readonly) ?? null ?>>
