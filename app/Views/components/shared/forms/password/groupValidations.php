@@ -1,16 +1,16 @@
 <?php
+
 declare(strict_types=1);
 
 use App\Components\Shared\Forms\Password\PasswordToggle\PasswordToggle;
 
 
 $dataCriterion = [
-    'caracteres' => 'Pelo menos 8 caracteres',
-    'maiuscula' => 'Pelo menos 1 letra maiúscula',
-    'minuscula' => 'Pelo menos 1 letra minúscula',
-    'numero' => 'Pelo menos 1 número',
-    'caractere especial' => 'Pelo menos 1 caractere especial',
-    'confirmation' => 'A senha informada deve ser igual à senha de confirmação'
+    'lowercase' => 'Pelo menos 1 letra minúscula',
+    'number' => 'Pelo menos 1 número',
+    'uppercase' => 'Pelo menos 1 letra maiúscula',
+    'min' => 'Pelo menos 8 caracteres',
+    'symbol' => 'Pelo menos 1 caractere especial'
 ];
 ?>
 
@@ -19,45 +19,40 @@ $dataCriterion = [
         <div class="mb-0" component='password:new-password'>
             <?php
             PasswordToggle::render(
-                name: "new-password",
-                id: "new-password",
-                label: "New Password",
+                name: $name,
+                id: $id,
+                label: "Senha",
                 required: $required ?? "true",
             );
             ?>
         </div>
     </div>
     <div>
-        <div class="row">
+        <ul class="flex flex-wrap text-gray-600">
             <?php foreach ($dataCriterion as $criterion => $text): ?>
-                <div class="validations-password" data-criterion="group-validation:<?= $criterion ?>">
+                <li class="validations-password mr-2" criterion="<?= $criterion ?>">
                     <div class='flex items-center'>
                         <span>
-                            <i class="bi bi-check-circle text-green-300"></i>
+                            <i class="bi bi-check-circle"></i>
                         </span>
-                        <div class='ml-2'>
+                        <div class='text-sm ml-2'>
                             <p class="text-validate"><?= $text ?></p>
                         </div>
                     </div>
-                </div>
+                </li>
             <?php endforeach; ?>
-        </div>
+        </ul>
     </div>
-    <div class="p-relative mt-4 mb-4">
+    <div class="p-relative mt-4 mb-2">
         <div class="password-confirmation" component='password:confirmation'>
             <?php
             PasswordToggle::render(
                 name: "confirmation",
                 id: "confirmation",
-                label: "Confirm Password",
+                label: "Confirmação de Senha",
                 required: $required ?? "true",
             );
             ?>
         </div>
-        <div class="confirmation-password" data-criterion-password='confirmation'>
-            <div class='ml-1'>
-                <p class="text-validate">A senha informada deve ser igual à senha de confirmação</p>
-            </div>
-        </div>
-    </div> 
+    </div>
 </div>
