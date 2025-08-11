@@ -15,3 +15,19 @@ if (!function_exists('Component')) {
         }
     }
 }
+
+if (!function_exists('getAttributes')) {
+    function getAttributes(array $attributes)
+    {
+        if (!is_array($attributes))
+            return "";
+
+        $attributesRef = [];
+        foreach ($attributes as $index => $attribute) {
+            if (empty($attribute)) continue;
+            array_push($attributesRef, join("=", [$index, $attribute]));
+        }
+
+        return join(" ", $attributesRef);
+    }
+}
