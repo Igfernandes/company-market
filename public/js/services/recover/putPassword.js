@@ -1,13 +1,10 @@
-import { Snackbar } from "../../components/utils/snackbar/index.js";
+import { snackbar } from "../../components/shared/utils/snackbar.js";
 import { formDataToJson } from "../../helpers/payload.js";
-import { Ajax } from "../../libraries/Ajax/index.js";
+import { ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
 
 export async function putRecoverPassword(payload = {}) {
-  const snackbar = new Snackbar();
-
   try {
-    const ajax = new Ajax();
     const { recover } = API_ROUTES;
 
     const { data } = await ajax.custom(

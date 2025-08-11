@@ -3,7 +3,7 @@ export const AlterPasswordSchema = {
     typeOf: "string",
     noEmpty: true,
   },
-  "password-confirm": {
+  "confirmation": {
     typeOf: "string",
     min: 4,
     noEmpty: true,

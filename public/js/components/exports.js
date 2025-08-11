@@ -7,4 +7,6 @@ export const COMPONENTS = {
   "component='recaptcha'": "/js/components/shared/utils/recaptcha.js",
   "component='table'": "/js/components/shared/layouts/Table/init.js",
   "component='modal'": "/js/components/shared/utils/modal.js",
+  "component='group-validation'":
+    "/js/components/shared/forms/password/validations/init.js",
 };
