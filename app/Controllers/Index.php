@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Api\Exports\Post\PostUseCases;
 
 class Index extends BaseController
 {
@@ -27,8 +26,8 @@ class Index extends BaseController
         return view("layouts/forgot-password");
     }
 
-    public function groupValidation()
+    public function alterPassword()
     {
-        return view("layouts/group-validation");
+        return view("layouts/alter-password");
     }
 }
