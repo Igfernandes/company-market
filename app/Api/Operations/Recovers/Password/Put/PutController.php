@@ -19,12 +19,14 @@ class PutController extends BaseController
         $this->putUseCases = new PutUseCases();
     }
 
-    public function handle(int $serviceId = 0)
+    public function handle()
     {
         try {
             $validation = \Config\Services::validation();
 
-            $payload = $this->request->getVar(array_keys($this->rules));
+            $allPayload = $this->request->getJSON() ?? [];
+            $payload = array_intersect_key((array)$allPayload, array_flip(array_keys($this->rules)));
+
             $validation->setRules($this->rules);
 
             if (!$validation->run($payload))

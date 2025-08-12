@@ -5,12 +5,12 @@ namespace App\Api\Operations\Recovers\Password\Put;
 trait PutDTOs
 {
     protected array $rules = [
-        'recover_token' => [
+        'token' => [
             'rules'  => 'string|required|max_length[50]',
             'errors' => [
-                'string'     => 'Api.recovers.password.invalid.recover_token',
-                'required'   => 'Api.recovers.password.invalid.recover_token',
-                'max_length' => 'Api.recovers.password.invalid.recover_token_max_length_50',
+                'string'     => 'Api.recovers.password.invalid.token',
+                'required'   => 'Api.recovers.password.invalid.token',
+                'max_length' => 'Api.recovers.password.invalid.token',
             ],
         ],
         'password' => [

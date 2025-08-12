@@ -21,7 +21,7 @@ trait PostDTOs
                 'regex_match' => 'Api.auth.invalid.credentials'
             ],
         ],
-        'rememberMe' => [
+        'remember-me' => [
             'rules'  => 'in_list[0,1]|permit_empty',
             'errors' => [
                 'in_list' => 'Api.auth.invalid.rememberMe',

@@ -14,5 +14,12 @@ trait PostDTOs
                 'required'    => 'Api.recovers.password.invalid.email',
             ],
         ],
+        'recaptcha' => [
+            'rules'  => 'string|required',
+            'errors' => [
+                'string' => 'Api.invalid.recaptcha',
+                'required' => 'Api.invalid.recaptcha',
+            ],
+        ]
     ];
 }

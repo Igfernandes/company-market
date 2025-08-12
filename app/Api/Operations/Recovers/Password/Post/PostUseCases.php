@@ -13,18 +13,27 @@ use App\Services\Mailer\Mailers\RequestPasswordMail;
 class PostUseCases
 {
     /**
-     * @param array{
-     *   email: string
+     * @param array{email:string,recaptcha:string}
+     * @param object{browser:string;ip:string} $userSettings
      */
-    public function execute(array $payload)
+    public function execute(array $payload, object $userSettings)
     {
+        $response = (object)[
+            "success" => "Api.users.success.recover_password"
+        ];
+
+        if (!validateRecaptcha([
+            "token" => $payload['recaptcha'],
+            "ip" => $userSettings->ip
+        ]))
+            throw new Exceptions("Api.auth.invalid.recaptcha", BAD_AUTH);
 
         $usersModel = new UsersModel();
 
         $foundUser =  $usersModel->where("email_sha256", \referenceHash($payload['email']))->first();
 
         if (empty($foundUser))
-            throw new Exceptions("Api.users.invalid.already_exists_email", BAD_REQUEST);
+            return $response;
 
         $crypto = new Crypto();
         $encryptedEmail = $crypto->encrypt($payload['email'], getenv('system.encrypted_key'));
@@ -74,8 +83,6 @@ class PostUseCases
             "recoverToken" => $recoverToken
         ]);
 
-        return (object)[
-            "success" => "Api.users.success.recover_password"
-        ];
+        return $response;
     }
 }

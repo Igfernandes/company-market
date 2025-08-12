@@ -32,7 +32,11 @@ class PostController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $responsePost = $this->postUseCases->execute($payload);
+            $browser = $this->request->getUserAgent()->getBrowser();
+            $responsePost = $this->postUseCases->execute($payload, (object)[
+                "ip" => $this->request->getIPAddress() ?? "127.0.0.1",
+                "browser" => !empty($browser) ? $browser : "Postman"
+            ]);
 
             return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
