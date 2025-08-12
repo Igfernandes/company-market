@@ -6,7 +6,7 @@ import { translate } from "../../translate/index.js";
 
 export async function putRecoverPassword(payload = {}) {
   const snackbarTitleText = translate("Screens.alter_password.snackbar_title");
-  
+
   try {
     const { recover } = API_ROUTES;
 
@@ -21,10 +21,10 @@ export async function putRecoverPassword(payload = {}) {
       }
     );
 
-    if (!data || data.errors)
+    if (!data || data.error)
       return snackbar.execute("FAILED", {
         title: snackbarTitleText,
-        message: translate(data.errors),
+        message: translate(data.error),
       });
 
     snackbar.execute("SUCCESS", {

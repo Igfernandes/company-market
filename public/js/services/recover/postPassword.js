@@ -12,10 +12,10 @@ export async function postRecoverPassword(payload = {}) {
 
     const { data } = await ajax.post(recover.password, payload, {});
 
-    if (!data || data.errors)
+    if (!data || data.error)
       return snackbar.execute("failed", {
         title: snackbarTitleText,
-        message: translate(data.errors),
+        message: translate(data.error),
       });
 
     snackbar.execute("success", {

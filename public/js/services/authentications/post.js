@@ -12,10 +12,10 @@ export async function postAuth(payload = {}) {
 
     const { data } = await ajax.post(auth, JSON.stringify(payload));
 
-    if (data.errors)
+    if (data.error)
       return snackbar.execute("FAIL", {
         title: snackbarTitleText,
-        message: translate(data.errors),
+        message: translate(data.error),
       });
 
     snackbar.execute("SUCCESS", {
