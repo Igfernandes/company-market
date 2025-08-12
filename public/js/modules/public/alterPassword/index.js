@@ -1,8 +1,10 @@
 import { GroupValidations } from "../../../components/shared/forms/password/validations/criteria.js";
+import { snackbar } from "../../../components/shared/utils/snackbar.js";
 import { redirect } from "../../../helpers/route.js";
 import { Navigation } from "../../../libraries/Navigation/index.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { putRecoverPassword } from "../../../services/recover/putPassword.js";
+import { translate } from "../../../translate/index.js";
 import { AlterPasswordSchema } from "./rules.js";
 
 export function AlterPasswordForm() {
@@ -10,7 +12,10 @@ export function AlterPasswordForm() {
     ev.preventDefault();
     const form = ev.currentTarget;
 
-    this.handleLoading(form, true, "Enviando...");
+    snackbar.execute("NOTICE", {
+      title: translate("Screens.alter_password.sending_form"),
+      message: translate("Screens.alter_password.awaiting"),
+    });
 
     const payload = new FormData(form);
     const validations = new Validations(form);
@@ -39,12 +44,7 @@ export function AlterPasswordForm() {
     const resp = await putRecoverPassword(payload);
 
     setTimeout(() => {
-      if (resp.errors) {
-        this.handleLoading(form, false, "Alterar senha");
-      } else {
-        this.handleLoading(form, true, "Enviado!");
-        redirect("/");
-      }
+      if (resp.success) redirect("/login");
     }, [500]);
   };
 
