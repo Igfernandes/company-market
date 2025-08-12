@@ -49,7 +49,7 @@ class GetController extends BaseController
             }
 
             return $this->response->setJSON((object)[
-                "errors" => $this->getMessageError($err)
+                "error" => $this->getMessageError($err)
             ])->setStatusCode($this->getCodeError($err));
         }
     }

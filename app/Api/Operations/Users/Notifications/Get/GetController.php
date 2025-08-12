@@ -40,7 +40,7 @@ class GetController extends BaseController
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[
-                "errors" => $this->getMessageError($err)
+                "error" => $this->getMessageError($err)
             ])->setStatusCode($this->getCodeError($err));
         }
     }
