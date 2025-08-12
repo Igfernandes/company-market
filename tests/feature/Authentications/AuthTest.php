@@ -38,42 +38,42 @@ class AuthTest extends CIUnitTestCase
         $result->assertJSONFragment(['error' => 'Api.auth.invalid.recaptcha']);
     }
 
-    // public function testCredenciaisInvalidas()
-    // {
-    //     $result = $this->post($this->route, [
-    //         'login' => 'notfound@email.com',
-    //         'password' => 'Senha123!',
-    //         'recaptcha' => 'valid',
-    //         'rememberMe' => '0'
-    //     ]);
-    //     $result->assertStatus(403); // BAD_BUSINESS_RULES ex: 403
-    //     $result->assertJSONFragment(['errors' => 'Api.auth.invalid.credentials']);
-    // }
+    public function testCredenciaisInvalidas()
+    {
+        $result = $this->post($this->route, [
+            'login' => 'notfound@email.com',
+            'password' => 'Senha123!',
+            'recaptcha' => getenv('globals.recaptcha.tokenTest'),
+            'remember-me' => '0'
+        ]);
+        $result->assertStatus(\BAD_BUSINESS_RULES); // BAD_BUSINESS_RULES ex: 403
+        $result->assertJSONFragment(['error' => 'Api.auth.invalid.credentials']);
+    }
 
-    // public function testLoginValidoSemRememberMe()
-    // {
-    //     $result = $this->post($this->route, [
-    //         'login' => 'test@email.com',
-    //         'password' => 'Senha123!',
-    //         'recaptcha' => 'valid',
-    //         'rememberMe' => '0'
-    //     ]);
-    //     $result->assertStatus(200); // OK = 200
-    //     $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
-    //     $result->assertJSONMissing(['reference_token']);
-    // }
+    public function testLoginValidoSemRememberMe()
+    {
+        $result = $this->post($this->route, [
+            'login' => getenv('globals.admin.login'),
+            'password' => getenv('globals.admin.password'),
+            'recaptcha' => getenv('globals.recaptcha.tokenTest'),
+        ]);
+        $result->assertStatus(200); // OK = 200
+        $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
+        $result->assertJSONMissing(['reference_token']);
+    }
 
-    // public function testLoginValidoComRememberMe()
-    // {
-    //     $result = $this->post($this->route, [
-    //         'login' => 'test@email.com',
-    //         'password' => 'Senha123!',
-    //         'recaptcha' => 'valid',
-    //         'rememberMe' => '1'
-    //     ]);
-    //     $result->assertStatus(200);
-    //     $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
-    //     $data = json_decode($result->getJSON(), true);
-    //     $this->assertArrayHasKey('reference_token', $data);
-    // }
+    public function testLoginValidoComRememberMe()
+    {
+        $result = $this->post($this->route, [
+            'login' => getenv('globals.admin.login'),
+            'password' => getenv('globals.admin.password'),
+            'recaptcha' => getenv('globals.recaptcha.tokenTest'),
+            'remember-me' => '1'
+        ]);
+
+        $result->assertStatus(OK);
+        $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
+        $data = json_decode($result->getJSON(), true);
+        $this->assertArrayHasKey('reference_token', $data);
+    }
 }
