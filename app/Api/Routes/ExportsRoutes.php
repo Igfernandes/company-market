@@ -8,6 +8,6 @@ class ExportsRoutes extends BaseRoutes
 {
     public function load(RouteCollection &$routes)
     {
-        $routes->post("exports", "Api\Exports\Post\PostController::handle",  $this->optionsWithAuthentications);
+        $routes->post("exports", "Api\Operations\Exports\Post\PostController::handle",  $this->optionsWithAuthentications);
     }
 }

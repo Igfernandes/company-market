@@ -10,10 +10,10 @@ class CustomFormsRoutes extends BaseRoutes
 
     {
         /** CustomForms */
-        $routes->get("custom-forms", "Api\CustomForms\Get\GetController::handle", $this->optionsWithAuthentications);
-        $routes->get("custom-forms/(:num)", "Api\CustomForms\Get\GetController::handle/$1", $this->optionsWithAuthentications);
-        $routes->post("custom-forms", "Api\CustomForms\Post\PostController::handle", $this->optionsWithAuthentications);
-        $routes->put("custom-forms/(:num)", "Api\CustomForms\Put\PutController::handle/$1", $this->optionsWithAuthentications);
-        $routes->delete("custom-forms/(:num)", "Api\CustomForms\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
+        $routes->get("custom-forms", "Api\Operations\CustomForms\Get\GetController::handle", $this->optionsWithAuthentications);
+        $routes->get("custom-forms/(:num)", "Api\Operations\CustomForms\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+        $routes->post("custom-forms", "Api\Operations\CustomForms\Post\PostController::handle", $this->optionsWithAuthentications);
+        $routes->put("custom-forms/(:num)", "Api\Operations\CustomForms\Put\PutController::handle/$1", $this->optionsWithAuthentications);
+        $routes->delete("custom-forms/(:num)", "Api\Operations\CustomForms\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
     }
 }
