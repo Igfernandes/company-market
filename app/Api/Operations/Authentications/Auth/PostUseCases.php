@@ -11,7 +11,7 @@ use App\Libraries\Exceptions\Exceptions;
 class PostUseCases
 {
     /**
-     * @param array{email:string,password:string,recaptcha:string.rememberMe:string|null} $payload
+     * @param array{email:string,password:string,recaptcha:string.remember-me:string|null} $payload
      * @param object{browser:string;ip:string} $userSettings
      */
     public function execute(array $payload, object $userSettings)

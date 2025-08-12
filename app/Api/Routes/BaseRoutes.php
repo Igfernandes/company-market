@@ -6,5 +6,5 @@ use CodeIgniter\Router\RouteCollection;
 
 class BaseRoutes
 {
-    protected array $optionsWithAuthentications = ["filter" => "bearerToken"];
+    protected array $optionsWithAuthentications = [];
 }

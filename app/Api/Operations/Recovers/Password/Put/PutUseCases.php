@@ -30,7 +30,7 @@ class PutUseCases
         $usersTokensBusiness = new UsersTokensBusiness();
 
         /** @var array{UserTokenEntity}  */
-        $foundToken = $usersTokensBusiness->getAvailableRelationUserToken($filteredPayload['recover_token']);
+        $foundToken = $usersTokensBusiness->getAvailableRelationUserToken($filteredPayload['token']);
 
         if (empty($foundToken))
             throw new Exceptions("Api.recover.password.invalid.token", BAD_BUSINESS_RULES);
