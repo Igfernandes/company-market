@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Business\Users\UsersTokensBusiness;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Index extends BaseController
 {
@@ -28,6 +30,14 @@ class Index extends BaseController
 
     public function alterPassword()
     {
+        $token = $this->request->getVar("k");
+        $usersTokensBusiness = new UsersTokensBusiness();
+
+        $userToken =  $usersTokensBusiness->getAvailableRelationUserToken($token);
+
+        if (empty($userToken))
+            throw PageNotFoundException::forPageNotFound();
+
         return view("layouts/alter-password");
     }
 }
