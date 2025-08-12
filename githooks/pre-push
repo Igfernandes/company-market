@@ -7,6 +7,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+echo
+echo
+echo
+echo
+
 echo "🚦 Rodando testes JS (npm run test)..."
 npm run test
 if [ $? -ne 0 ]; then

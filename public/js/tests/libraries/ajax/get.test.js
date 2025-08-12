@@ -1,9 +1,9 @@
-import { HTTP_STATUS } from "../../constants/http";
-import { ajax } from "../../libraries/Ajax";
-import { mutate } from "../../libraries/Ajax/libs/mutate";
-import cookies from "../../helpers/cookies";
+import { HTTP_STATUS } from "@constants/http";
+import { ajax } from "@libraries/Ajax";
+import { mutate } from "@libraries/Ajax/libs/mutate";
+import cookies from "@helpers/cookies";
 
-jest.mock("../../helpers/cookies", () => ({
+jest.mock("@helpers/cookies", () => ({
   get: jest.fn(),
   set: jest.fn(),
 }));
