@@ -1,0 +1,18 @@
+#!/bin/sh
+
+echo "🚦 Rodando testes PHP (composer test)..."
+composer test
+if [ $? -ne 0 ]; then
+    echo "❌ Testes PHP falharam! Abortando push."
+    exit 1
+fi
+
+echo "🚦 Rodando testes JS (npm run test)..."
+npm run test
+if [ $? -ne 0 ]; then
+    echo "❌ Testes JS falharam! Abortando push."
+    exit 1
+fi
+
+echo "✅ Todos os testes passaram. Continuando o push..."
+exit 0

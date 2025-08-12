@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use CodeIgniter\DataCaster\DataCaster;
+
 trait EntityEnhancerTrait
 {
     /**
@@ -14,6 +16,10 @@ trait EntityEnhancerTrait
      */
     public function toArray(bool $onlyChanged = false, bool $cast = true, bool $recursive = false): array
     {
+        if (!isset($this->dataCaster) || !($this->dataCaster instanceof DataCaster)) {
+            $this->dataCaster = new DataCaster([]);
+        }
+
         $data = parent::toArray($onlyChanged, $cast, $recursive);
 
         // Adicionando lógica extra: Filtrar valores vazios
@@ -32,6 +38,7 @@ trait EntityEnhancerTrait
 
     public function store(array $data)
     {
+
         foreach ($this->attributes as $atbIndex => $atbValue) {
             if (isset($data[$atbIndex]))
                 $this->attributes[$atbIndex] = $data[$atbIndex];
