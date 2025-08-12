@@ -22,7 +22,7 @@ trait PostDTOs
             ],
         ],
         'rememberMe' => [
-            'rules'  => 'in_list[0,1]',
+            'rules'  => 'in_list[0,1]|permit_empty',
             'errors' => [
                 'in_list' => 'Api.auth.invalid.rememberMe',
             ],
