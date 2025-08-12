@@ -11,4 +11,9 @@ export const SCREENS = {
     sending_form: "Enviando Solicitação",
     awaiting: "Aguarde enquanto estamos enviando a solicitação",
   },
+  alter_password: {
+    snackbar_title: "Alteração de Senha",
+    sending_form: "Enviando Solicitação",
+    awaiting: "Aguarde enquanto estamos enviando a solicitação",
+  },
 };
