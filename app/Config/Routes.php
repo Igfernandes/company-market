@@ -3,6 +3,23 @@
 use App\Api\Routes\Routes;
 use CodeIgniter\Router\RouteCollection;
 
+/*
+ * --------------------------------------------------------------------
+ * Router Setup
+ * --------------------------------------------------------------------
+ */
+
+$routes->setDefaultNamespace('App\Controllers');
+$routes->setDefaultController('Index');
+$routes->setDefaultMethod('index');
+$routes->setTranslateURIDashes(true);
+$routes->set404Override();
+$routes->setAutoRoute(true);
+
+$appRoutes = \Config\Services::routes(true);
+$appRoutes->setAutoRoute(true);
+
+
 /**
  * @var RouteCollection $routes
  */
