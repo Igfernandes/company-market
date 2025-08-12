@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\MercadoPago;
+namespace App\Services\MercadoPago\Constants;
 
 class ReportsUserConstants
 {
