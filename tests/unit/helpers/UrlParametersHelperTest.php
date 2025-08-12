@@ -1,11 +1,13 @@
 <?php
 
+namespace Tests\Unit\Helpers;
+
 use CodeIgniter\Test\CIUnitTestCase;
 
 /**
  * @internal
  */
-final class HealthTest extends CIUnitTestCase
+final class UrlParametersHelperTest extends CIUnitTestCase
 {
 
     /**
