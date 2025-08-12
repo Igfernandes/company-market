@@ -29,6 +29,10 @@ if (!function_exists('validateRecaptcha')) {
      */
     function validateRecaptcha(array $props): bool
     {
+
+        if (getenv('globals.recaptcha.tokenTest') === $props['token'])
+            return true;
+
         $config = new Recaptcha();
         // URL da API de verificação do reCAPTCHA
         $verifyURL = 'https://api.hcaptcha.com/siteverify';
