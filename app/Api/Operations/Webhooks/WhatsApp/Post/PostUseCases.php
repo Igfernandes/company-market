@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Api\Operations\WebHooks\WhatsApp\Post;
+namespace App\Api\Operations\Webhooks\WhatsApp\Post;
 
 use App\Business\WebHooks\WhatsAppBusiness;
 use App\Database\Entities\Integrations\IntegrationEntity;

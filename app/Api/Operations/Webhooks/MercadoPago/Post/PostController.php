@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\WebHooks\Meta\Get;
+namespace App\Api\Operations\Webhooks\MercadoPago\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -10,37 +10,43 @@ use App\Libraries\Cerberus\Cerberus;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
 
-class GetController extends BaseController
+class PostController extends BaseController
 {
     use Validation, ExceptionApi;
 
-    private GetUseCases $getUseCases;
+    private PostUseCases $postUseCases;
 
     public function __construct()
     {
-        $this->getUseCases = new GetUseCases();
+        $this->postUseCases = new PostUseCases();
     }
 
     public function handle()
     {
-        $payload = $this->request->getVar();
+        $json = file_get_contents('php://input');
         try {
 
-            $responseGet = $this->getUseCases->execute($payload);
+            $data = json_decode($json);
 
-            return $this->response->setJSON($responseGet)->setStatusCode(OK);
+            if (empty($data))
+                throw new Exceptions("Api.webhooks.not_found", \NOT_FOUND);
+
+            $responsePost = $this->postUseCases->execute($data);
+
+            return $this->response->setJSON($responsePost)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
+            $data = json_decode($json);
 
             if (isset($data->action) && !empty($data->action)) {
                 $operationFailure = new OperationFailureEntity();
 
                 $operationFailure->store([
-                    'operation_type'     => "Received Token",
-                    'provider'           => "META",
+                    'operation_type'     => $data->action ?? "none",
+                    'provider'           => "MERCADO_PAGO",
                     'error_code'         => $err->getCode(),
                     'error_message'      => $err->getMessage(),
                     'response_received'  => \json_encode($err),
-                    'payload_sent'       => $payload,
+                    'payload_sent'       => $json,
                     'attempt_number'     => 0,
                     'should_retry'       => true,
                     'status'             => "PENDING",

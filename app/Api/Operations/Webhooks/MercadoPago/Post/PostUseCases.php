@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\WebHooks\MercadoPago\Post;
+namespace App\Api\Operations\Webhooks\MercadoPago\Post;
 
 use App\Business\WebHooks\MercadoPagoBusiness;
 use App\Database\Models\Finances\PaymentsModel;

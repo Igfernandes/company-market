@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\WebHooks\WhatsApp\Post;
+namespace App\Api\Operations\Webhooks\Meta\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -10,16 +10,15 @@ use App\Libraries\Cerberus\Cerberus;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
 
-class PostController extends BaseController
+class GetController extends BaseController
 {
     use Validation, ExceptionApi;
 
-    private PostUseCases $postUseCases;
+    private GetUseCases $getUseCases;
 
     public function __construct()
     {
-        $this->postUseCases = new PostUseCases();
-        helper('crypto');
+        $this->getUseCases = new GetUseCases();
     }
 
     public function handle()
@@ -27,16 +26,16 @@ class PostController extends BaseController
         $payload = $this->request->getVar();
         try {
 
-            $responsePost = $this->postUseCases->execute($payload);
+            $responseGet = $this->getUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responseGet)->setStatusCode(OK);
         } catch (Exception | Exceptions $err) {
 
             if (isset($data->action) && !empty($data->action)) {
                 $operationFailure = new OperationFailureEntity();
 
                 $operationFailure->store([
-                    'operation_type'     => "Received PSID",
+                    'operation_type'     => "Received Token",
                     'provider'           => "META",
                     'error_code'         => $err->getCode(),
                     'error_message'      => $err->getMessage(),
