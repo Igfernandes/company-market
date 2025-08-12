@@ -16,10 +16,9 @@ class AuthenticationBusiness
         $this->tokens = new Tokens();
     }
 
-
     public function createTokenRemember(array $payload, UserEntity $user)
     {
-        if (!isset($payload['rememberMe']) || empty($payload['rememberMe']))  return;
+        if (!isset($payload['remember-me']) || empty($payload['remember-me']))  return;
 
         $rememberModal = new RememberModel();
         $rememberEntity = new RememberEntity();
