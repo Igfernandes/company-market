@@ -18,7 +18,7 @@ if (isset($name) && isset($storeValue[$name]))
                 data-label="<?= $label ?>"
                 class="form-control w-100 h-[3rem] text-lg pl-2 pr-9 pt-2 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
-                <?= getAttributes($attribute) ?>
+                <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
@@ -32,7 +32,7 @@ if (isset($name) && isset($storeValue[$name]))
             <?php endif; ?>
         </div>
         <?php if (isset($icon)) : ?>
-            <div class="absolute right-0 top-0 h-full pt-2 pr-2 ">
+            <div class="absolute right-0 top-0 h-full pt-2 pr-2">
                 <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-accent">
                     <?= $icon ?>
                 </div>
