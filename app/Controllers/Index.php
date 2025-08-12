@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Api\Exports\Post\PostUseCases;
+use App\Business\Users\UsersTokensBusiness;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Index extends BaseController
 {
@@ -27,8 +28,16 @@ class Index extends BaseController
         return view("layouts/forgot-password");
     }
 
-    public function groupValidation()
+    public function alterPassword()
     {
-        return view("layouts/group-validation");
+        $token = $this->request->getVar("k");
+        $usersTokensBusiness = new UsersTokensBusiness();
+
+        $userToken =  $usersTokensBusiness->getAvailableRelationUserToken($token);
+
+        if (empty($userToken))
+            throw PageNotFoundException::forPageNotFound();
+
+        return view("layouts/alter-password");
     }
 }

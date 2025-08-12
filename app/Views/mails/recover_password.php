@@ -1,7 +1,7 @@
 <?php
 
 $token = isset($recoverToken) ? $recoverToken : "";
-$recoverToken = base_url("/alter-password?token=$token");
+$recoverToken = base_url("/alter-password?k=$token");
 ?>
 
 <?= view('mails/_header') ?>

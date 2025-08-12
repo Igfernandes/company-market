@@ -48,6 +48,7 @@ $routes->group("api", ['namespace' => 'App'], function ($routes) {
 $routes->get('/', 'Index::index');
 $routes->get('login', 'Index::login');
 $routes->get('forgot-password', 'Index::forgotPassword');
+$routes->get('alter-password', 'Index::alterPassword');
 
 /*
  * --------------------------------------------------------------------

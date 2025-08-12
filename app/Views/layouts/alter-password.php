@@ -13,11 +13,11 @@ use App\Components\Shared\Utils\Recaptcha\Recaptcha;
 Head::render(title: "Alter Password - Nautisys System");
 ?>
 
-<div class="login bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
+<div class="login bg-blue-100 flex flex-col justify-center min-h-[100vh] w-100">
     <div class="content w-75 mx-auto">
         <div class="row my-4 ">
-            <div class="col w-45 min-w-[19rem] bg-white rounded-r-lg mx-auto py-12 px-4 rounded-md shadow-lg">
-                <form class="flex flex-col justify-center h-100 px-6" data-send="forgot-password">
+            <div class="col w-45 min-w-[25rem] bg-white rounded-r-lg mx-auto py-12 px-4 rounded-md shadow-lg">
+                <form class="flex flex-col justify-center h-100 px-6" data-send="alter-password">
                     <div class="form-header text-center">
                         <div class="form-icon w-20 mx-auto">
                             <?= Image::render(src: "/imgs/nautisys-icon.png", alt: "Icon of NautiSys") ?>

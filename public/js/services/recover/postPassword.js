@@ -1,5 +1,5 @@
 import { Snackbar } from "../../components/shared/utils/snackbar.js";
-import { ajax, Ajax } from "../../libraries/Ajax/index.js";
+import { ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
 import { translate } from "../../translate/index.js";
 
@@ -10,7 +10,7 @@ export async function postRecoverPassword(payload = {}) {
   try {
     const { recover } = API_ROUTES;
 
-    const { data } = await ajax.post(recover.password, JSON.stringify(payload));
+    const { data } = await ajax.post(recover.password, payload, {});
 
     if (!data || data.errors)
       return snackbar.execute("failed", {

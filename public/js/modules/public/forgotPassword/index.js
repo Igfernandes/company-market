@@ -3,7 +3,6 @@ import {
   loadRecaptcha,
 } from "../../../components/shared/utils/recaptcha.js";
 import { snackbar } from "../../../components/shared/utils/snackbar.js";
-import { redirect } from "../../../helpers/route.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { postRecoverPassword } from "../../../services/recover/postPassword.js";
 import { translate } from "../../../translate/index.js";

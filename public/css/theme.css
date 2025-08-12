@@ -33294,6 +33294,12 @@ input:placeholder-shown ~ [data-label-toggle],
   .submit button[data-loading="true"] ~ .is-loading {
     display: block; }
 
+[criterion-status="INVALID"] {
+  color: var(--red-500); }
+
+[criterion-status="APPROVED"] {
+  color: var(--green-500); }
+
 /** Forms */
 /** Utils **/
 .invalid-tooltip {
@@ -33368,6 +33374,12 @@ input:placeholder-shown ~ [data-label-toggle],
   cursor: not-allowed; }
   .submit button[data-loading="true"] ~ .is-loading {
     display: block; }
+
+[criterion-status="INVALID"] {
+  color: var(--red-500); }
+
+[criterion-status="APPROVED"] {
+  color: var(--green-500); }
 
 /** Globals */
 footer {

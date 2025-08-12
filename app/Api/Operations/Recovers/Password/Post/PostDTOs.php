@@ -10,7 +10,7 @@ trait PostDTOs
             'errors' => [
                 'string'      => 'Api.recovers.password.invalid.email',
                 'valid_email' => 'Api.recovers.password.invalid.email',
-                'max_length'  => 'Api.recovers.password.invalid.email_max_length_255',
+                'max_length'  => 'Api.recovers.password.invalid.email',
                 'required'    => 'Api.recovers.password.invalid.email',
             ],
         ],

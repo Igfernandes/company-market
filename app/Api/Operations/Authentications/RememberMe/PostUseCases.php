@@ -2,7 +2,6 @@
 
 namespace App\Api\Operations\Authentications\RememberMe;
 
-use App\Business\Authentication\AuthenticationBusiness;
 use App\Database\Entities\Users\RememberEntity;
 use App\Database\Models\Users\RememberModel;
 use App\Database\Models\Users\UsersModel;
@@ -29,8 +28,6 @@ class PostUseCases
 
         if (empty($foundUser))
             throw new Exceptions("Api.remember.invalid.token", BAD_BUSINESS_RULES);
-
-        $authenticationBusiness = new AuthenticationBusiness();
 
         return (object)[
             "success" => "Api.remember.success.post"

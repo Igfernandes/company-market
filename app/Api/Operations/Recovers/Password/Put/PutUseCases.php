@@ -3,6 +3,7 @@
 namespace App\Api\Operations\Recovers\Password\Put;
 
 use App\Business\Users\UsersBusiness;
+use App\Business\Users\UsersTokensBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Entities\Users\UserTokenEntity;
 use App\Database\Models\Users\UsersModel;
@@ -26,15 +27,13 @@ class PutUseCases
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
         $usersTokensModel = new UsersTokensModel();
-        $userTokenEntity = new UserTokenEntity();
-
-        $userTokenEntity->setToken($filteredPayload['recover_token']);
+        $usersTokensBusiness = new UsersTokensBusiness();
 
         /** @var array{UserTokenEntity}  */
-        $foundToken = $usersTokensModel->getTokenWithUser([], $userTokenEntity->toArray(true));
+        $foundToken = $usersTokensBusiness->getAvailableRelationUserToken($filteredPayload['recover_token']);
 
-        if (\count($foundToken) == 0)
-            throw new Exceptions("Api.users.success.not_found_token", \BAD_BUSINESS_RULES);
+        if (empty($foundToken))
+            throw new Exceptions("Api.recover.password.invalid.token", BAD_BUSINESS_RULES);
 
         $usersModel = new UsersModel();
         $userEntity = new UserEntity();
@@ -44,7 +43,7 @@ class PutUseCases
         $currentUser = $foundToken[0]->getUser();
 
         if (empty($currentUser))
-            throw new Exceptions("Api.users.invalid.not_found", \BAD_REQUEST);
+            throw new Exceptions("Api.users.invalid.not_found", BAD_REQUEST);
 
         $password = $payload['password'];
         $email = $currentUser->getDecryptEmail();

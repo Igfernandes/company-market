@@ -9,7 +9,7 @@ class PaymentsRoutes extends BaseRoutes
     public function load(RouteCollection &$routes)
     {
         /** Payments */
-        $routes->get("payments", "Api\Finances\Payments\Get\GetController::handle",  $this->optionsWithAuthentications);
-        $routes->get("payments/(:num)", "Api\Finances\Payments\Get\GetController::handle/$1",  $this->optionsWithAuthentications);
+        $routes->get("payments", "Api\Operations\Finances\Payments\Get\GetController::handle",  $this->optionsWithAuthentications);
+        $routes->get("payments/(:num)", "Api\Operations\Finances\Payments\Get\GetController::handle/$1",  $this->optionsWithAuthentications);
     }
 }

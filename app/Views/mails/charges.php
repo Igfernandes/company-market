@@ -1,5 +1,3 @@
-
-
 <?= view('mails/_header') ?>
 <tbody>
     <tr>

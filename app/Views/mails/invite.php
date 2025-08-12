@@ -4,7 +4,6 @@ $token = isset($inviteToken) ? $inviteToken : "";
 $inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=$token ";
 ?>
 
-
 <?= view('mails/_header') ?>
 <tbody>
     <tr>

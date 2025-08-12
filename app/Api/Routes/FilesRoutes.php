@@ -9,6 +9,6 @@ class FilesRoutes extends BaseRoutes
     public function load(RouteCollection &$routes)
     {
         /** Notifications */
-        $routes->post("files", "Api\Files\Post\PostController::handle");
+        $routes->post("files", "Api\Operations\Files\Post\PostController::handle");
     }
 }

@@ -2,7 +2,9 @@ import { EyeCloseIcon } from "../../../../assets/icons/EyeCloseIcon.js";
 import { EyeOpenIcon } from "../../../../assets/icons/EyeOpenIcon.js";
 
 export const init = () => {
-  const elementsPassword = document.querySelectorAll("[password-visibility]");
+  const elementsPassword = document.querySelectorAll(
+    "[component='password-toggle:visibility']"
+  );
 
   const handleToggleTypePassword = (eyeContent) => {
     const container = eyeContent.closest("[password='visibility']");
