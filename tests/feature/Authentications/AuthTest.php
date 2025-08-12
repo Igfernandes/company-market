@@ -35,7 +35,7 @@ class AuthTest extends CIUnitTestCase
         ]);
 
         $result->assertStatus(BAD_AUTH);
-        $result->assertJSONFragment(['errors' => 'Api.auth.invalid.recaptcha']);
+        $result->assertJSONFragment(['error' => 'Api.auth.invalid.recaptcha']);
     }
 
     // public function testCredenciaisInvalidas()

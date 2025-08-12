@@ -1,17 +1,25 @@
-<?php
-// Detecta se a requisição espera JSON
-$request = service('request');
-$acceptsJson = $request->negotiate('media', ['application/json', 'text/html']) === 'application/json';
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
 
-// Você pode também usar base na URI, ex: API
-$isApi = str_starts_with($request->uri->getPath(), 'api');
+    <title><?= lang('Errors.whoops') ?></title>
 
-if ($acceptsJson || $isApi) {
-	header('Content-Type: application/json', true, INTERNAL_ERROR);
-	echo json_encode([
-		'status'  => false,
-		'error'   => INTERNAL_ERROR,
-		'message' => 'Aconteceu um erro interno. Entre em contato com o suporte.'
-	]);
-	exit;
-}
+    <style>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
+    </style>
+</head>
+<body>
+
+    <div class="container text-center">
+
+        <h1 class="headline"><?= lang('Errors.whoops') ?></h1>
+
+        <p class="lead"><?= lang('Errors.weHitASnag') ?></p>
+
+    </div>
+
+</body>
+
+</html>
