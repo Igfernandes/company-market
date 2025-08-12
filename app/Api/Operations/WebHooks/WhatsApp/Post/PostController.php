@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\WebHooks\WhatsApp\Post;
+namespace App\Api\Operations\Webhooks\WhatsApp\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;

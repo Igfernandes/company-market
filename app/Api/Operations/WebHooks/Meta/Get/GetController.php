@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\WebHooks\Meta\Get;
+namespace App\Api\Operations\Webhooks\Meta\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;

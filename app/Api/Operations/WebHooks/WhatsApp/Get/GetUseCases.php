@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Api\Operations\WebHooks\WhatsApp\Get;
+namespace App\Api\Operations\Webhooks\WhatsApp\Get;
 
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\BusinessTrait;

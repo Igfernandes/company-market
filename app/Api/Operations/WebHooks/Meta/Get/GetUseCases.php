@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Api\Operations\WebHooks\Meta\Get;
+namespace App\Api\Operations\Webhooks\Meta\Get;
 
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\Meta\Operations\AuthMeta;
