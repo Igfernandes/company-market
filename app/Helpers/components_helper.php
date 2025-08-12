@@ -16,7 +16,6 @@ if (!function_exists('Component')) {
     }
 }
 
-
 if (!function_exists('getAttributes')) {
     function getAttributes(array $attributes)
     {
