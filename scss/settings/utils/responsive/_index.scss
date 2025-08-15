@@ -1,0 +1,15 @@
+// Breakpoints no formato Tailwind
+$breakpoints: (
+  xs: 380px,
+  sm: 550px,
+  md: 769px,
+  lg: 1025px,
+  xl: 1200px,
+  xxl: 1540px,
+);
+$mqs: map-keys($breakpoints);
+
+@import "./margin.scss";
+@import "./width.scss";
+@import "./height.scss";
+@import "./display.scss";

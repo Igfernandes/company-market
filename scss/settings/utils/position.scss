@@ -11,6 +11,19 @@
   .bottom-#{$i} {
     bottom: #{$i + 0%};
   }
+
+  .right-\[#{ $i }rem\] {
+    right: #{$i + 0rem};
+  }
+  .top-\[#{ $i }rem\] {
+    top: #{$i + 0rem};
+  }
+  .left-\[#{ $i }rem\] {
+    left: #{$i + 0rem};
+  }
+  .bottom-\[#{ $i }rem\] {
+    bottom: #{$i + 0rem};
+  }
 }
 
 div:not(.laboratory) .absolute {

@@ -1,0 +1,34 @@
+@each $mq in $mqs {
+  $mq-value: map-get($breakpoints, $mq);
+
+  @media (min-width: #{$mq-value}) {
+    @for $i from 1 through 100 {
+      .#{$mq}\:w-#{$i} {
+        width: $i + 0%;
+      }
+      .#{$mq}\:w-\[#{$i}vw\] {
+        width: #{$i}vw;
+      }
+      .#{$mq}\:w-\[#{ $i }rem\] {
+        width: #{$i}rem;
+      }
+      .#{$mq}\:min-w-\[#{ $i }rem\] {
+        min-width: #{$i}rem;
+      }
+      .#{$mq}\:max-w-\[#{ $i }rem\] {
+        max-width: #{$i}rem;
+      }
+      @for $d from 1 through 9 {
+        .#{$mq}\:w-\[#{ $i }\.#{ $d }rem\] {
+          width: #{"#{$i}.#{$d}rem"};
+        }
+        .#{$mq}\:min-w-\[#{ $i }\.#{ $d }rem\] {
+          min-width: #{"#{$i}.#{$d}rem"};
+        }
+        .#{$mq}\:max-w-\[#{ $i }\.#{ $d }rem\] {
+          max-width: #{"#{$i}.#{$d}rem"};
+        }
+      }
+    }
+  }
+}

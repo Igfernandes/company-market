@@ -1,15 +1,4 @@
-// Breakpoints no formato Tailwind
-$breakpoints: (
-  xs: 380px,
-  sm: 550px,
-  md: 769px,
-  lg: 1025px,
-  xl: 1200px,
-  xxl: 1540px,
-);
-
 $sides: "l", "t", "b", "r";
-$mqs: map-keys($breakpoints);
 
 @each $mq in $mqs {
   $mq-value: map-get($breakpoints, $mq);

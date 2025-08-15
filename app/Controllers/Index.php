@@ -15,9 +15,10 @@ class Index extends BaseController
     public function login()
     {
         $session = session();
+        $userAuth = $session->get(\SESSION_KEY_AUTH_USER);
 
-        if (!empty($session->get('userAuth')))
-            return redirect("/dashboard/overview");
+        if (!empty($userAuth))
+            return redirect()->to('dashboard/overview');
 
         return view("layouts/login");
     }

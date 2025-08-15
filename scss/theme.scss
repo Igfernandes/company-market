@@ -9,6 +9,7 @@
 @import "./settings/fonts";
 @import "./settings/sizes";
 @import "./settings/utils/utils";
+
 @import "./settings/tags.scss";
 
 //SWIPER
@@ -27,7 +28,6 @@
 //LAYOUT
 @import "./layouts/layouts";
 @import "./layouts/404.scss";
-@import "./layouts/terms.scss";
 @import "./layouts/validation.scss";
 @import "./layouts/register.scss";
 @import "./layouts/forgot-password.scss";
