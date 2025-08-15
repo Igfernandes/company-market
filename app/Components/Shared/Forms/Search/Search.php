@@ -1,40 +1,34 @@
 <?php
 
-namespace App\Components\Shared\Forms\Input;
+namespace App\Components\Shared\Forms\Search;
 
 use App\Components\BaseComponents;
 
-class Input extends BaseComponents
+class Search extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/input";
+    const ORIGIN = "components/shared/forms/search";
     const PROPS = [
         "name",
         "label",
         "id",
         "value",
-        "type",
-        "placeholder",
         "class",
         "required",
         "attributes",
         "disabled",
         "readonly",
-        "icon"
     ];
 
     public static function render(
         ?string $name = "",
         ?string $id = "",
         ?string $label = "",
-        ?string $type = "text",
         ?string $value = "",
-        ?string $placeholder = "",
         ?string $class = "",
         ?string $required = "",
         ?array $attributes = [],
         ?bool $disabled = null,
-        ?bool $readonly = null,
-        ?string $icon = null
+        ?bool $readonly = null
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }

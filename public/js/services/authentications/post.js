@@ -1,5 +1,5 @@
 import { Snackbar } from "../../components/shared/utils/snackbar.js";
-import { ajax, Ajax } from "../../libraries/Ajax/index.js";
+import { ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
 import { translate } from "../../translate/index.js";
 
@@ -10,7 +10,7 @@ export async function postAuth(payload = {}) {
   try {
     const { auth } = API_ROUTES;
 
-    const { data } = await ajax.post(auth, JSON.stringify(payload));
+    const { data } = await ajax.post(auth, payload);
 
     if (data.error)
       return snackbar.execute("FAIL", {

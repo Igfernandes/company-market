@@ -10,7 +10,7 @@ export async function postRecoverPassword(payload = {}) {
   try {
     const { recover } = API_ROUTES;
 
-    const { data } = await ajax.post(recover.password, payload, {});
+    const { data } = await ajax.post(recover.password, payload);
 
     if (!data || data.error)
       return snackbar.execute("failed", {

@@ -8,7 +8,6 @@ class Overview extends BaseController
 {
     public function index()
     {
-
-        return "ENTROU";
+        return view("layouts/dashboard/overview/index");
     }
 }

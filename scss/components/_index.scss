@@ -14,4 +14,10 @@
 @import "./public/header.scss";
 @import "./public/sidebar.scss";
 @import "./public/footer.scss";
+
+
+@import "./private/header/index";
+@import "./private/sidebar/index";
+@import "./utils/popup.scss";
+@import "./private/settings.scss";
 @import "./public/forgot-password.scss"

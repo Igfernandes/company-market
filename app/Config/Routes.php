@@ -16,8 +16,6 @@ $routes->setTranslateURIDashes(true);
 $routes->set404Override();
 $routes->setAutoRoute(true);
 
-$appRoutes = \Config\Services::routes(true);
-$appRoutes->setAutoRoute(true);
 
 
 /**

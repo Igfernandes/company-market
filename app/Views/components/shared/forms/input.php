@@ -12,7 +12,7 @@ if (isset($name) && isset($storeValue[$name]))
 <div class="input mb-3" component="input">
     <div class="relative shadow-sm border-gray-200 border-2 rounded-md">
         <div class="w-100">
-            <input type="text"
+            <input type="<?= $type  ?>"
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?? $name ?>"

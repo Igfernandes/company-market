@@ -1,0 +1,28 @@
+[component="settings"] {
+  [component="settings:board"] {
+    .board-menu {
+      ul {
+        li {
+          border-width: 2px;
+          border-color: transparent;
+          margin-bottom: -2px;
+          &.active {
+            background-color: var(--bg-disabled);
+            border-right-color: var(--border-accent);
+            border-left-color: var(--border-accent);
+            border-top-color: var(--border-accent);
+            border-bottom-color: #fff;
+          }
+        }
+      }
+    }
+    .board-content{
+        .board-item{
+            display: none;
+            &.active{
+                display: block;
+            }
+        }
+    }
+  }
+}

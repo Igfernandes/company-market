@@ -1,0 +1,58 @@
+// Breakpoints no formato Tailwind
+$breakpoints: (
+  xs: 380px,
+  sm: 550px,
+  md: 769px,
+  lg: 1025px,
+  xl: 1200px,
+  xxl: 1540px,
+);
+
+$sides: "l", "t", "b", "r";
+$mqs: map-keys($breakpoints);
+
+@each $mq in $mqs {
+  $mq-value: map-get($breakpoints, $mq);
+
+  @media (min-width: #{$mq-value}) {
+    @for $i from 0 through 100 {
+      // padding geral
+      .#{$mq}\:p-\[#{$i}rem\] {
+        padding: #{$i}rem;
+      }
+      .#{$mq}\:p-\[#{$i}\.5rem\] {
+        padding: #{$i + 0.5}rem;
+      }
+      .#{$mq}\:p-\[#{$i}px\] {
+        padding: #{$i}px;
+      }
+
+      // padding por lado
+      @each $side in $sides {
+        .#{$mq}\:p#{$side}-\[#{$i}rem\] {
+          @if $side == "l" {
+            padding-left: #{$i}rem;
+          } @else if $side == "t" {
+            padding-top: #{$i}rem;
+          } @else if $side == "b" {
+            padding-bottom: #{$i}rem;
+          } @else if $side == "r" {
+            padding-right: #{$i}rem;
+          }
+        }
+
+        .#{$mq}\:p#{$side}-\[#{$i}\.5rem\] {
+          @if $side == "l" {
+            padding-left: #{$i + 0.5}rem;
+          } @else if $side == "t" {
+            padding-top: #{$i + 0.5}rem;
+          } @else if $side == "b" {
+            padding-bottom: #{$i + 0.5}rem;
+          } @else if $side == "r" {
+            padding-right: #{$i + 0.5}rem;
+          }
+        }
+      }
+    }
+  }
+}

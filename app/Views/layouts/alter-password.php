@@ -13,7 +13,7 @@ use App\Components\Shared\Utils\Recaptcha\Recaptcha;
 Head::render(title: "Alter Password - Nautisys System");
 ?>
 
-<div class="login bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
+<div class="alter-password bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
     <div class="content w-75 mx-auto">
         <div class="row my-4 ">
             <div class="col w-45 min-w-[25rem] bg-white rounded-r-lg mx-auto py-12 px-4 rounded-md shadow-lg">
