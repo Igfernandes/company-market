@@ -119,6 +119,15 @@ define("ROUTE_ACCESS", "/acesso");
 define("VIEW_HEADER", "globals/_header");
 define("VIEW_FOOTER", "globals/_footer");
 
+/*
+ |--------------------------------------------------------------------------
+ | SYSTEM Constants
+ |--------------------------------------------------------------------------
+ |
+ | The system value of project.
+ */
+define("SESSION_KEY_AUTH_USER", "authenticated");
+
 
 /*
  |--------------------------------------------------------------------------
