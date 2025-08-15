@@ -47,6 +47,9 @@ class PostUseCases
         if (!empty($tokenRemember))
             $response->reference_token = $tokenRemember;
 
+        $session = session();
+        $session->set(SESSION_KEY_AUTH_USER, $foundUser);
+
         return $response;
     }
 }
