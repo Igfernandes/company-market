@@ -26,9 +26,6 @@ const Ajax = function () {
     payload,
     options = {
       method: "POST",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
     }
   ) => {
     const reference = [route];
@@ -61,15 +58,7 @@ const Ajax = function () {
    * @param {Object} [options.headers] - Cabeçalhos da requisição.
    * @returns {Promise<Object>} Resposta processada pela função `mutate`.
    */
-  this.post = async (
-    route,
-    payload,
-    options = {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }
-  ) => {
+  this.post = async (route, payload, options = {}) => {
     const reference = [route];
     const request = {
       method: "POST",
@@ -104,15 +93,7 @@ const Ajax = function () {
    * @param {Object} [options.headers] - Cabeçalhos da requisição.
    * @returns {Promise<Object>} Dados do cache (cookies) ou da resposta processada pela função `mutate`.
    */
-  this.get = async (
-    route,
-    payload,
-    options = {
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    }
-  ) => {
+  this.get = async (route, payload, options = {}) => {
     const url = `${route}/${getQueryParams(payload)}`;
     const request = {
       method: "GET",
