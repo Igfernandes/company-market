@@ -1,0 +1,7 @@
+[data-target-popup] {
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
+  &.show {
+    transform: scale(1);
+  }
+}

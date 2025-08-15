@@ -9,4 +9,8 @@ export const COMPONENTS = {
   "component='modal'": "/js/components/shared/utils/modal.js",
   "component='group-validation'":
     "/js/components/shared/forms/password/validations/init.js",
+  "component='sidebar:toggle'": "/js/components/private/sidebar.js",
+  "component='settings'": "/js/components/private/settings.js",
+  "data-toggle": "/js/helpers/popup.js",
+  "component='notification'": "/js/components/private/notifications.js",
 };
