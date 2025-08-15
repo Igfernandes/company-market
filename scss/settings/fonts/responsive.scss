@@ -1,0 +1,34 @@
+// Breakpoints no formato Tailwind
+$breakpoints: (
+  xs: 380px,
+  sm: 550px,
+  md: 769px,
+  lg: 1025px,
+  xl: 1200px,
+  xxl: 1540px,
+);
+
+$mqs: map-keys($breakpoints);
+
+@each $mq in $mqs {
+  $mq-value: map-get($breakpoints, $mq);
+
+  @media (min-width: #{$mq-value}) {
+    @each $size in $font-sizes {
+      .#{$mq}\:text-#{$size} {
+        font-size: var(--font-#{$size});
+      }
+
+      .#{$mq}\:header-#{$size} {
+        font-size: var(--heading-#{$size});
+        font-weight: bold;
+      }
+    }
+
+    @for $i from 100 through 900 {
+      .#{$mq}\:font-#{$i} {
+        font-weight: $i;
+      }
+    }
+  }
+}
