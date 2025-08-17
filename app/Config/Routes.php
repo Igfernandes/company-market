@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\Routes\Routes;
+use App\Api\Routes;
 use CodeIgniter\Router\RouteCollection;
 
 /*
