@@ -14,7 +14,7 @@ describe("Popup helper", () => {
     `;
 
     // Carrega o helper (simulando import ou require)
-    require("./popup-helper.js");
+    require("../../helpers/popup.js");
   });
 
   afterEach(() => {
