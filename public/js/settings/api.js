@@ -3,4 +3,7 @@ export const API_ROUTES = {
   recover: {
     password: "/api/recovers/password",
   },
+  notifications: {
+    default: "/api/notifications"
+  }
 };
