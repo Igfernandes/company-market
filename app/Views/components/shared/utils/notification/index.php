@@ -1,7 +1,4 @@
-<?php
 
-use App\Components\Private\Notification\Message;
-?>
 <div component='notification' class="cursor-pointer relative">
     <div component='notification:icon' data-popup='notifications'>
         <i class="bi bi-bell-fill text-hover text-xl"></i>
@@ -10,7 +7,7 @@ use App\Components\Private\Notification\Message;
         <div class="message-title text-center text-light bg-accent p-1">
             <span><strong>Notificações</strong></span>
         </div>
-        <div component='notification:content' class="message-content px-1 overflow-y-auto h-[20vh]">
+        <div component='notification:content' class="message-content px-1 overflow-y-auto h-[35vh]">
             <div class="text-center mt-6">
                 <span class="text-md text-gray-500">Não há notificações</span>
             </div>
