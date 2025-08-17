@@ -22,7 +22,7 @@ class RememberModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Users\RememberEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'token'];
+    protected $allowedFields    = ['user_id', 'ip','token'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

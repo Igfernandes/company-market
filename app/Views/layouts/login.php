@@ -56,7 +56,7 @@ Head::render(title: "Login - Nautisys System");
                             <div class="form-remember w-35">
                                 <?= Checkbox::render(
                                     class: "text-gray-600 text-sm lg:text-md",
-                                    name: "remember",
+                                    name: "remember-me",
                                     id: "remember",
                                     label: "Lembrar-me"
                                 ) ?>
