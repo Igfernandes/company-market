@@ -3,6 +3,7 @@
 namespace App\Api\Routes;
 
 use CodeIgniter\Router\RouteCollection;
+use App\Api\BaseRoutes;
 
 class ServicesRoutes extends BaseRoutes
 {
