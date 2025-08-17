@@ -28,3 +28,12 @@ if (!function_exists('isValidIndexInArray')) {
         return isset($list[$index]) && !empty($list[$index]);
     }
 }
+
+if (!function_exists('getOnlyNumbers')) {
+    function getOnlyNumbers(array $array)
+    {
+        $arrWithNumbers = array_filter($array, fn($value) => gettype($value) === "integer");
+
+        return array_values($arrWithNumbers);
+    }
+}

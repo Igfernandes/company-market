@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Routes;
+namespace App\Api;
 
 use App\Api\Routes\AuthenticationsRoutes;
 use App\Api\Routes\ChargesRoutes;

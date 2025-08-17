@@ -1,8 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Components\Private\Sidebar\Navbar;
 use App\Components\Private\Sidebar\Toggle;
 use App\Components\Shared\Layouts\Image\Image;
+use App\Database\Entities\Users\UserEntity;
+
+/** @var UserEntity $user */
+
+
 ?>
 <aside component="sidebar" class="sticky top-0 left-0 min-w-[16vw]">
     <div class="content-sidebar relative w-[16vw] h-[100vh] bg-content pt-4 shadow">
@@ -14,12 +21,15 @@ use App\Components\Shared\Layouts\Image\Image;
             </div>
             <div class="avatar">
                 <?= Image::render(
-                    src: "/imgs/preview/preview-avatar.jpg",
-                    class: "w-40 rounded-full border-2 border-accent mx-auto"
+                    src: $user->getAvatar(),
+                    class: "w-40 rounded-full border-2 border-accent mx-auto",
+                    default: "/imgs/preview/preview-avatar.jpg"
                 ) ?>
             </div>
             <div class="username text-center mt-2 mb-1">
-                <span class="font-poppins font-medium">Igor Fernandes</span>
+                <span class="font-poppins font-medium">
+                    <?= $user->getName() ?>
+                </span>
             </div>
             <div class="social-icons">
                 <ul class="flex justify-center">

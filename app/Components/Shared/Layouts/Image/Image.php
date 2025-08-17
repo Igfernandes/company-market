@@ -10,13 +10,17 @@ class Image extends BaseComponents
     const PROPS = [
         "src",
         "alt",
-        "class"
+        "class",
+        "attributes",
+        "default"
     ];
 
     public static function render(
         ?string $class = "",
         ?string $src = "",
         ?string $alt = "",
+        ?string $default = "",
+        ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }

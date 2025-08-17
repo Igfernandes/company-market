@@ -1,3 +1,4 @@
+ <script type="module" src="/js/libraries/DayJs/dayjs.min.js"></script>
  <script type="module" src="/js/theme.js"></script>
 
  <?php

@@ -8,6 +8,11 @@ use App\Database\Entities\Users\UserRoleEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method UserRoleEntity|null find($id = null)
+ * @method UserRoleEntity|null first()
+ * @method UserRoleEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class UsersRolesModel extends Model
 {
     use ModelTrait;
