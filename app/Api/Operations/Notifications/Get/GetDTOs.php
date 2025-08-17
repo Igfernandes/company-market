@@ -6,9 +6,15 @@ trait GetDTOs
 {
     protected array $rules = [
         'id' => [
-            'rules'  => 'integer|permit_empty',
+            'rules'  => 'numeric|permit_empty',
             'errors' => [
                 'integer' => 'Api.notifications.invalid.id',
+            ],
+        ],
+        'in_ids' => [
+            'rules'  => 'permit_empty',
+            'errors' => [
+                'numeric' => 'Api.notifications.invalid.in_ids',
             ],
         ],
         'in_ids.*' => [
@@ -18,7 +24,7 @@ trait GetDTOs
             ],
         ],
         'author_id' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'numeric|permit_empty',
             'errors' => [
                 'string' => 'Api.notifications.invalid.author_id',
             ],
