@@ -5,19 +5,19 @@ namespace App\Database\Seeds\Permissions;
 use App\Database\Models\Permissions\PermissionsModel;
 use CodeIgniter\Database\Seeder;
 
-class GroupsPermissionsSeeder extends Seeder
+class RolesPermissionsSeeder extends Seeder
 {
     protected array $datas = [
         [
-            "group_id" => 1,
+            "role_id" => 1,
             "permission" =>  ['CREATE', 'UPDATE', 'DELETE', 'VIEW']
         ],
         [
-            "group_id" => 2,
+            "role_id" => 2,
             "permission" =>  ['CREATE', 'VIEW']
         ],
         [
-            "group_id" => 1,
+            "role_id" => 1,
             "permission" =>  ['VIEW']
         ]
     ];
@@ -32,13 +32,13 @@ class GroupsPermissionsSeeder extends Seeder
 
             foreach ($foundPermissions as $permission) {
                 $data = [
-                    "group_id" => $data['group_id'],
+                    "role_id" => $data['role_id'],
                     "permission_id" => $permission->getId()
                 ];
 
                 // Simple Queries
                 $this->db->query(
-                    "INSERT INTO  " . $prefix . "groups_permissions (" . join(", ", array_keys($data)) . ") 
+                    "INSERT INTO  " . $prefix . "roles_permissions (" . join(", ", array_keys($data)) . ") 
                 VALUES (" . join(", ", array_map(fn($column) =>  ":$column:", array_keys($data))) . ") 
                 ON DUPLICATE KEY UPDATE " . join(", ", array_map(fn($column) =>  "$column = values($column)", array_keys($data))),
                     $data
