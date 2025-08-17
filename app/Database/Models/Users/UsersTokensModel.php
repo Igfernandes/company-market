@@ -7,6 +7,11 @@ use App\Database\Entities\Users\UserTokenEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method UserTokenEntity|null find($id = null)
+ * @method UserTokenEntity|null first()
+ * @method UserTokenEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class UsersTokensModel extends Model
 {
     use ModelTrait;

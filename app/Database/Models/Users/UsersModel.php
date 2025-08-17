@@ -2,9 +2,15 @@
 
 namespace App\Database\Models\Users;
 
+use App\Database\Entities\Users\UserEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method UserEntity|null find($id = null)
+ * @method UserEntity|null first()
+ * @method UserEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class UsersModel extends Model
 {
     use ModelTrait;

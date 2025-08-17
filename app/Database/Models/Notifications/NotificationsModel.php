@@ -7,6 +7,11 @@ use App\Database\Entities\Users\UserEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method NotificationEntity|null find($id = null)
+ * @method NotificationEntity|null first()
+ * @method NotificationEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class NotificationsModel extends Model
 {
     use ModelTrait;
@@ -33,7 +38,6 @@ class NotificationsModel extends Model
 
     public function getNotificationWithAuthor(array $notificationQuery = []): array
     {
-
         if (isset($notificationQuery['in_ids'])) {
             $this->whereIn("notifications.id", $notificationQuery['in_ids']);
             unset($notificationQuery['in_ids']);

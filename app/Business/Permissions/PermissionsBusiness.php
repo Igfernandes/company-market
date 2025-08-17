@@ -98,6 +98,7 @@ class PermissionsBusiness
             $permissionsModel->where($permissionQuery);
 
         $userAuthId = $userAuth->getId();
+        
         $usersRolesModel = new UsersRolesModel();
         $foundRoles = $usersRolesModel->where("user_id", $userAuthId)->findAll();
         $roleIds = \array_map(fn(UserRoleEntity $role) => $role->getRoleId(), $foundRoles);

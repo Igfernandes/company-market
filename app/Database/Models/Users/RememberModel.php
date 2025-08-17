@@ -2,9 +2,15 @@
 
 namespace App\Database\Models\Users;
 
+use App\Database\Entities\Users\RememberEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method RememberEntity|null find($id = null)
+ * @method RememberEntity|null first()
+ * @method RememberEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class RememberModel extends Model
 {
     use ModelTrait;

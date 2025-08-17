@@ -50,7 +50,6 @@ class GetUseCases
         $notificationQueries['in_action'] = $actions;
 
         $notificationsModel = new NotificationsModel();
-        /** @var array{NotificationEntity} $foundNotifications */
         $foundNotifications = $notificationsModel->getNotificationWithAuthor($notificationQueries);
 
         return array_map(fn(NotificationEntity $notification) => $this->notificationsResponse($notification), $foundNotifications);
