@@ -14,4 +14,5 @@ export const COMPONENTS = {
   "data-toggle": "/js/helpers/popup.js",
   "component='image'": "/js/components/shared/layouts/image.js",
   "component='notification'": "/js/components/private/notifications/index.js",
+  "component='tabs'": "/js/components/shared/layouts/tabs/init.js",
 };

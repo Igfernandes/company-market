@@ -1,0 +1,20 @@
+[component="tabs"] {
+  [component="tabs:header"] {
+    li {
+      &.active {
+        color: var(--text-accent);
+      }
+    }
+  }
+  [tab-target] {
+    max-height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    &.active {
+      max-height: fit-content;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
