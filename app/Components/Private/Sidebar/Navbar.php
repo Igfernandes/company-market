@@ -29,7 +29,7 @@ class Navbar extends BaseComponents
             'coupons' => 'Cupons'
         ],
         'SISTEMA' => [
-            'logout' => 'Sair'
+            '/logout' => 'Sair'
         ]
     ];
 

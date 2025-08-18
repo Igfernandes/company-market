@@ -17,11 +17,7 @@ class MigrateTest extends BaseCommand
     {
         CLI::write('🚀 Executando migrations no banco de TESTES...', 'yellow');
 
-        // Força ambiente testing
-        // 1️⃣ Força ambiente testing antes de qualquer serviço
-        putenv('CI_ENVIRONMENT=testing');
-        $_ENV['CI_ENVIRONMENT'] = 'testing';
-        $_SERVER['CI_ENVIRONMENT'] = 'testing';
+        command('migrate', ['--group' => 'tests', '--env' => 'testing']);
 
         // 2️⃣ Pega o serviço de migrations corretamente
         /** @var \CodeIgniter\Database\MigrationRunner $migrations */

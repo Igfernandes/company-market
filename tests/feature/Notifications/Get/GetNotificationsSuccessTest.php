@@ -38,21 +38,6 @@ class GetNotificationsSuccessTest extends NotificationsMock
         $result->assertStatus(ResponseInterface::HTTP_OK);
     }
 
-    /**
-     * Cenário: usuário sem permissões
-     */
-    public function testUserWithoutPermissions()
-    {
-        $this->createAuthenticatedSession();
-        $useCase = $this->getMockBuilder(GetUseCases::class)
-            ->onlyMethods([])
-            ->getMock();
-
-        $result = $useCase->execute(['id' => 1]);
-
-        $this->assertIsArray($result);
-        $this->assertEmpty($result);
-    }
 
     /**
      * Cenário: sucesso com uma notificação

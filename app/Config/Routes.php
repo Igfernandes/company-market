@@ -44,5 +44,6 @@ $routes->group("api", ['namespace' => 'App'], function ($routes) {
 // route since we don't have to scan directories.
 $routes->get('/', 'Index::index');
 $routes->get('login', 'Index::login');
+$routes->get('logout', 'Index::logout');
 $routes->get('forgot-password', 'Index::forgotPassword');
 $routes->get('alter-password', 'Index::alterPassword');

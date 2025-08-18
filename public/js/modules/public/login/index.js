@@ -2,6 +2,7 @@ import {
   initRecaptcha,
   loadRecaptcha,
 } from "../../../components/shared/utils/recaptcha.js";
+import cookies from "../../../helpers/cookies/index.js";
 import { redirect } from "../../../helpers/route.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { postAuth } from "../../../services/authentications/post.js";
@@ -32,14 +33,22 @@ export function LoginForm() {
   };
 
   this.sendLogin = async (form, payload) => {
-    const { success } = (await postAuth(payload)) ?? {};
+    const { success, reference_token } = (await postAuth(payload)) ?? {};
     setTimeout(() => {
       if (!success) {
         loadRecaptcha();
         return this.btnSubmit(form, false);
       }
+
+      this.rememberMe(reference_token);
       redirect(WEB_ROUTES.dashboard.overview);
     }, 300);
+  };
+
+  this.rememberMe = (referenceToken) => {
+    if (!referenceToken) return;
+
+    cookies.set("rm_token", referenceToken);
   };
 
   this.btnSubmit = (form, status = false) => {
