@@ -47,6 +47,9 @@
                     <li class="cursor-pointer" data-component="components/layouts/table" data-navbar='component'>
                         <span><i>Table</i></span>
                     </li>
+                    <li class="cursor-pointer" data-component="components/layouts/tabs" data-navbar='component'>
+                        <span><i>Tabs</i></span>
+                    </li>
                 </ul>
             </li>
             <li class="pointer-event mt-4">
