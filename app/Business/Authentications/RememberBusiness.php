@@ -39,14 +39,21 @@ class RememberBusiness
         return $tokenRemember;
     }
 
-    public static function isRememberTokenValid(string $token): bool|UserEntity
+    /**
+     * Verifica se o token "remember-me" é válido
+     *
+     * @param string $token O token de lembrar-me
+     * @param object{ip:string,browser:string}|null $userSettings Informações do usuário (IP e navegador)
+     * @return bool|UserEntity Retorna o usuário se válido, ou false se inválido
+     */
+    public static function isRememberTokenValid(string $token, ?Object $userSettings = null): bool|UserEntity
     {
         $rememberEntity = new RememberEntity();
         $rememberModel = new RememberModel();
 
         $request = \Config\Services::request();
-        $browser = $request->getUserAgent()->getBrowser();
-        $ipAddress = $request->getIPAddress();
+        $browser = !empty($userSettings) ? $userSettings->browser :  $request->getUserAgent()->getBrowser();
+        $ipAddress = !empty($userSettings) ? $userSettings->ip : $request->getIPAddress();
         $ipAddress = $ipAddress == "::1" ? "127.0.0.1" : $ipAddress;
 
         $rememberEntity->setToken($token);

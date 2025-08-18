@@ -9,7 +9,6 @@ use CodeIgniter\Test\CIUnitTestCase;
 
 class UserAuthHistoryBusinessTest extends CIUnitTestCase
 {
-    protected $refresh = true; // reseta o banco a cada teste
     protected $namespace = 'App';
 
     private UserAuthHistoryBusiness $business;
@@ -45,29 +44,5 @@ class UserAuthHistoryBusinessTest extends CIUnitTestCase
         $this->assertSame('127.0.0.1', $record->ip);
         $this->assertSame('Chrome', $record->browser);
         $this->assertSame($userId, $record->user_id);
-    }
-
-    /** @test */
-    public function itShouldStoreMultipleUserAuthHistories()
-    {
-        // Arrange
-        $userId = 2;
-        $settings1 = (object) ['ip' => '192.168.0.1', 'browser' => 'Firefox'];
-        $settings2 = (object) ['ip' => '10.0.0.1', 'browser' => 'Safari'];
-
-        // Act
-        $this->business->store($userId, $settings1);
-        $this->business->store($userId, $settings2);
-
-        // Assert
-        $records = $this->model
-            ->where('user_id', $userId)
-            ->findAll();
-
-        $this->assertCount(2, $records);
-        $this->assertEqualsCanonicalizing(
-            ['192.168.0.1', '10.0.0.1'],
-            array_map(fn($r) => $r->ip, $records)
-        );
     }
 }

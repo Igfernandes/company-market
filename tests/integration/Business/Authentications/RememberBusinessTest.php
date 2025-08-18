@@ -7,14 +7,12 @@ use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\UsersModel;
 use App\Database\Models\Users\RememberModel;
 use CodeIgniter\Test\CIUnitTestCase;
-use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\Sessions\AuthenticatedSession;
 
 class RememberBusinessTest extends CIUnitTestCase
 {
-    use DatabaseTestTrait;
 
-    protected $refresh = true;
-    protected $seed = 'Tests\Support\Database\Seeds\UsersSeeder'; // opcional
+    use AuthenticatedSession;
 
     private UsersModel $usersModel;
     private RememberModel $rememberModel;
@@ -28,7 +26,8 @@ class RememberBusinessTest extends CIUnitTestCase
 
     public function testCreateTokenRemember()
     {
-        $user = $this->createFakeUser();
+        $user = new UserEntity();
+        $user->setId(1);
 
         $payload = ['remember-me' => true];
         $userSettings = (object)[
@@ -47,15 +46,20 @@ class RememberBusinessTest extends CIUnitTestCase
 
     public function testIsRememberTokenValidSuccess()
     {
-        $user = $this->createFakeUser();
+        $this->createAuthenticatedSession();
+        $user = new UserEntity();
+        $user->setId(1);
 
-        $payload = ['remember-me' => true];
-        $userSettings = (object)['ip' => '127.0.0.1'];
+        $payload = ['remember-me' => 1];
+        $userSettings = (object)[
+            'ip' => '127.0.0.1',
+            'browser' => "Chrome"
+        ];
 
         $business = new RememberBusiness();
         $token = $business->createTokenRemember($payload, $user, $userSettings);
 
-        $result = RememberBusiness::isRememberTokenValid($token);
+        $result = RememberBusiness::isRememberTokenValid($token, $userSettings);
 
         $this->assertInstanceOf(UserEntity::class, $result);
         $this->assertEquals($user->getId(), $result->getId());
@@ -69,7 +73,8 @@ class RememberBusinessTest extends CIUnitTestCase
 
     public function testRevokeRememberToken()
     {
-        $user = $this->createFakeUser();
+        $user = new UserEntity();
+        $user->setId(1);
 
         $payload = ['remember-me' => true];
         $userSettings = (object)['ip' => '127.0.0.1'];
@@ -90,7 +95,7 @@ class RememberBusinessTest extends CIUnitTestCase
         $user = new UserEntity();
         $user->fill([
             'name' => 'Test User',
-            'email' => uniqid('user').'@example.com',
+            'email' => uniqid('user') . '@example.com',
             'password' => password_hash('123456', PASSWORD_BCRYPT)
         ]);
 
