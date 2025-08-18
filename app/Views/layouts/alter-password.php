@@ -23,26 +23,26 @@ Head::render(title: "Alter Password - Nautisys System");
                             <?= Image::render(src: "/imgs/nautisys-icon.png", alt: "Icon of NautiSys") ?>
                         </div>
                         <div class="form-title mt-2">
-                            <h2 class="alter-title header-xs">Recupere a sua senha</h2>
+                            <h2 class="alter-title header-xs xxl:header-md">Recupere a sua senha</h2>
                         </div>
                         <div class="text-justify mt-1">
-                            <p class="alter-text text-md text-gray-500 line-[1.2]">Nós informe o seu e-mail cadastrados para que possamos enviar um link de recuperação de conta.</p>
+                            <p class="alter-text text-md text-gray-500 line-[1.2] xxl:text-xl">Nós informe o seu e-mail cadastrados para que possamos enviar um link de recuperação de conta.</p>
                         </div>
                     </div>
                     <div class="form-content w-100 mt-4">
-                        <div class="form-group">
+                        <div class="form-group xxl:text-xll">
                             <?= GroupValidations::render(
                                 name: "password",
                                 id: "password",
                             ) ?>
                         </div>
-                        <div class="form-btn text-center">
+                        <div class="form-btn text-center xxl:text-xxl">
                             <?= Submit::render(text: "Recuperar senha") ?>
                         </div>
                     </div>
                 </form>
 
-                <div class="link-login text-center mt-10">
+                <div class="link-login text-center mt-10 xxl:text-xxl xxl:mt-5">
                     <?= Link::render(
                         text: "Já lembra sua senha? Entre agora",
                         class: "hover:text-gray-300"
