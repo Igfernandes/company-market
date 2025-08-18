@@ -11,8 +11,11 @@ trait ExceptionApi
     {
         helper('objects');
 
-        if (getenv("CI_ENVIRONMENT") == 'development' && !$err->getCode() || $err->getCode() >= INTERNAL_ERROR)
-            return var_dump($err);
+        if (getenv("CI_ENVIRONMENT") === 'development' && (!$err->getCode() || $err->getCode() >= INTERNAL_ERROR)) {
+            // dump apenas para debug, mas sem quebrar execução
+            error_log($err);
+            return $err->getMessage();
+        }
 
         if ($err instanceof Exceptions  && !empty($err->getErrors()))
             $message = is_array($err->getErrors()) ? array_values($err->getErrors())[0] : $err->getErrors();

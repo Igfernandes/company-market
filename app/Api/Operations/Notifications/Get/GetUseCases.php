@@ -6,10 +6,11 @@ use App\Business\Permissions\PermissionsBusiness;
 use App\Database\Entities\Notifications\NotificationEntity;
 use App\Database\Models\Notifications\NotificationsModel;
 use App\Traits\BusinessTrait;
+use App\Traits\Notifications\NotificationsDataTrait;
 
 class GetUseCases
 {
-    use BusinessTrait;
+    use BusinessTrait, NotificationsDataTrait;
 
     /**
      * @param array{ 
@@ -20,49 +21,37 @@ class GetUseCases
      */
     public function execute(array $payload)
     {
+        helper('array');
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
-        $notificationsModel = new NotificationsModel();
-        $notificationEntity = new NotificationEntity();
-
-        $in_ids = isset($filteredPayload['in_ids']) ? $filteredPayload['in_ids'] : [];
-        unset($filteredPayload['in_ids']);
-
-        $notificationsModel = $this->builderClauseWithContains($filteredPayload ?? [], $notificationsModel);
-
-        if (count($in_ids) > 0)
-            $notificationsModel->whereIn("id", $in_ids);
-
-        $groupsPermissions = PermissionsBusiness::getPermissionUserAuth();
+        $permissions = PermissionsBusiness::getPermissionUserAuth();
 
         $scopes = [];
-        $types = [];
+        $actions = [];
 
-        foreach ($groupsPermissions as $groupPermission) {
-            $permission = $groupPermission->getPermission();
+        foreach ($permissions as $permission) {
             if (empty($permission)) continue;
 
             array_push($scopes, $permission->getScope());
-            array_push($types, $permission->getType());
+            array_push($actions, $permission->getType());
         }
-        if (count($types) == 0 && count($scopes) == 0) return [];
 
-        $notificationsModel->whereIn("scope", $scopes)->whereIn("action", $types);
+        if (count($actions) == 0 && count($scopes) == 0) return [];
 
+        $notificationEntity = new NotificationEntity();
         $notificationEntity->store($filteredPayload);
-        /** @var array{NotificationEntity}*/
-        $foundNotifications = $notificationsModel->getNotificationWithAuthor($notificationEntity->toArray());
 
-        return array_map(function (NotificationEntity $notification) {
-            $notificationData = $notification->toArray();
+        $notificationQueries = $notificationEntity->toArray(true);
+        if (isset($filteredPayload['in_ids'])) {
+            $notificationQueries['in_ids'] = getOnlyNumbers($filteredPayload['in_ids']);
+        }
 
-            $author = $notification->getAuthor();
-            $notificationData['author'] = [
-                "id" => $author->getId(),
-                "name" => $author->getName()
-            ];
+        $notificationQueries['in_scope'] = $scopes;
+        $notificationQueries['in_action'] = $actions;
 
-            return $notificationData;
-        }, $foundNotifications);
+        $notificationsModel = new NotificationsModel();
+        $foundNotifications = $notificationsModel->getNotificationWithAuthor($notificationQueries);
+
+        return array_map(fn(NotificationEntity $notification) => $this->notificationsResponse($notification), $foundNotifications);
     }
 }

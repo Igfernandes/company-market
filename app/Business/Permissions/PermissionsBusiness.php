@@ -3,12 +3,13 @@
 namespace App\Business\Permissions;
 
 use App\Business\BaseBusiness;
-use App\Database\Entities\Permissions\GroupPermissionsEntity;
-use App\Database\Entities\Users\UserGroupsEntity;
-use App\Database\Models\Permissions\GroupsPermissionsModel;
+use App\Database\Entities\Permissions\PermissionEntity;
+use App\Database\Entities\Users\UserEntity;
+use App\Database\Entities\Users\UserRoleEntity;
 use App\Database\Models\Permissions\PermissionsModel;
+use App\Database\Models\Permissions\RolesPermissionsModel;
 use App\Database\Models\Permissions\UsersPermissionsModel;
-use App\Database\Models\Users\UsersGroupsModel;
+use App\Database\Models\Users\UsersRolesModel;
 use App\Interfaces\IPermissions;
 use App\Libraries\Exceptions\Exceptions;
 use CodeIgniter\BaseModel;
@@ -41,7 +42,7 @@ class PermissionsBusiness
     public static function hasPermissionUser(string $scope, string $type, int $userId)
     {
         $usersPermissions = new UsersPermissionsModel();
-        $groupsPermissionsModel = new GroupsPermissionsModel();
+        $rolesPermissionsModel = new RolesPermissionsModel();
 
         $foundPermissions = $usersPermissions
             ->join("permissions", "permissions.id = users_permissions.permission_id")
@@ -51,16 +52,16 @@ class PermissionsBusiness
                 "permissions.type" => $type
             ])->findAll();
 
-        $foundGroupPermissions = $groupsPermissionsModel
-            ->join("users_groups", "users_groups.group_id = groups_permissions.group_id")
-            ->join("permissions", "permissions.id = groups_permissions.permission_id")
+        $foundRolePermissions = $rolesPermissionsModel
+            ->join("users_roles", "users_roles.role_id = roles_permissions.role_id")
+            ->join("permissions", "permissions.id = roles_permissions.permission_id")
             ->where([
-                "users_groups.user_id" => $userId,
+                "users_roles.user_id" => $userId,
                 "permissions.scope" => $scope,
                 "permissions.type" => $type
             ])->findAll();
 
-        return count($foundPermissions) > 0 || \count($foundGroupPermissions) > 0;
+        return count($foundPermissions) > 0 || \count($foundRolePermissions) > 0;
     }
 
     public static function hasPermissionUserAuth(array $permissionQuery = [])
@@ -83,21 +84,37 @@ class PermissionsBusiness
     }
 
     /**
-     * @return array{GroupPermissionsEntity}
+     * @return array{PermissionEntity}
      */
     public static function getPermissionUserAuth(array $permissionQuery = []): array
     {
         $session = \session();
-        $userAuthId = $session->get('userAuthId');
+        /** @var UserEntity */
+        $userAuth = $session->get(SESSION_KEY_AUTH_USER);
 
-        $groupsModel = new UsersGroupsModel();
-        $groups = $groupsModel->where('user_id', $userAuthId)->findAll();
+        $permissionsModel = new PermissionsModel();
 
-        $groupsPermissionsModel = new GroupsPermissionsModel();
+        if (\count($permissionQuery) > 0)
+            $permissionsModel->where($permissionQuery);
 
-        $foundPermissions = $groupsPermissionsModel->getGroupsWithPermissions([
-            "in_ids" => \array_map(fn(UserGroupsEntity $userGroup) => $userGroup->getGroupId(), $groups)
-        ], $permissionQuery);
+        $userAuthId = $userAuth->getId();
+        
+        $usersRolesModel = new UsersRolesModel();
+        $foundRoles = $usersRolesModel->where("user_id", $userAuthId)->findAll();
+        $roleIds = \array_map(fn(UserRoleEntity $role) => $role->getRoleId(), $foundRoles);
+
+        $permissionsModel
+            ->select('permissions.*')
+            ->join('users_permissions up', 'up.permission_id = permissions.id AND up.user_id = ' . (int)$userAuthId, 'left');
+
+        if (count($roleIds) > 0)
+            $permissionsModel
+                ->join('roles_permissions rp', 'rp.permission_id = permissions.id', 'left')
+                ->whereIn('rp.role_id', $roleIds); // verifica permissões pelo role
+
+        $foundPermissions = $permissionsModel
+            ->orWhere('up.user_id', $userAuthId) // ou permissões individuais;
+            ->findAll();
 
         return $foundPermissions;
     }

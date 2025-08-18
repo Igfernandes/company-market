@@ -3,21 +3,21 @@
 namespace App\Database\Entities\Permissions;
 
 use App\Database\Entities\Permissions\PermissionEntity;
-use App\Database\Entities\Users\GroupEntity;
+use App\Database\Entities\Users\RoleEntity;
 use App\Interfaces\IPermissions;
 use CodeIgniter\Entity\Entity;
 
-class GroupPermissionsEntity extends Entity implements IPermissions
+class RolePermissionsEntity extends Entity implements IPermissions
 {
     protected $dates = [];
     public $attributes = [
         'permission_id'   => null,
-        'group_id'         => null,
+        'role_id'         => null,
         "created_at"      => null,
     ];
     public $relations = [
         'permission'      => null,
-        'group'            => null
+        'role'            => null
     ];
 
     /**
@@ -65,47 +65,47 @@ class GroupPermissionsEntity extends Entity implements IPermissions
     }
 
     /**
-     * getGroupId function
+     * getRoleId function
      *
      * @return Int|null
      */
-    public function getGroupId(): ?Int
+    public function getRoleId(): ?Int
     {
-        return $this->attributes['group_id'];
+        return $this->attributes['role_id'];
     }
 
     /**
-     * setGroupId function
+     * setRoleId function
      *
-     * @param Int|null $groupId
+     * @param Int|null $roleId
      * @return void
      */
-    public function setGroupId(Int $groupId)
+    public function setRoleId(Int $groupId)
     {
         if (!empty($groupId))
-            $this->attributes['group_id'] = $groupId;
+            $this->attributes['role_id'] = $groupId;
     }
 
     /**
-     * getGroup function
+     * getRole function
      *
-     * @return UsersEntity|null
+     * @return RoleEntity|null
      */
-    public function getGroup(): ?GroupEntity
+    public function getRole(): ?RoleEntity
     {
-        return $this->attributes['group'];
+        return $this->attributes['role'];
     }
 
     /**
      * setUser function
      *
-     * @param UsersEntity|null $group
+     * @param RoleEntity|null $role
      * @return void
      */
-    public function setGroup(GroupEntity $group)
+    public function setRole(RoleEntity $role)
     {
-        if (!empty($group))
-            $this->attributes['group'] = $group;
+        if (!empty($role))
+            $this->attributes['role'] = $role;
     }
 
     /**

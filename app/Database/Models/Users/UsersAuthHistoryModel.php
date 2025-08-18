@@ -7,6 +7,11 @@ use App\Database\Entities\Users\UserEntity;
 use App\Traits\ModelTrait;
 use CodeIgniter\Model;
 
+/**
+ * @method UserAuthHistoryEntity|null find($id = null)
+ * @method UserAuthHistoryEntity|null first()
+ * @method UserAuthHistoryEntity[]|null findAll($limit = 0, $offset = 0)
+ */
 class UsersAuthHistoryModel extends Model
 {
     use ModelTrait;

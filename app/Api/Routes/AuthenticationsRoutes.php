@@ -2,6 +2,7 @@
 
 namespace App\Api\Routes;
 
+use App\Api\BaseRoutes;
 use CodeIgniter\Router\RouteCollection;
 
 class AuthenticationsRoutes extends BaseRoutes

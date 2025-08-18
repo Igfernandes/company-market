@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Authentications\Auth;
 
-use App\Business\Authentication\AuthenticationBusiness;
+use App\Business\Authentications\RememberBusiness;
 use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Crypto\Crypto;
@@ -22,7 +22,6 @@ class PostUseCases
         ]))
             throw new Exceptions("Api.auth.invalid.recaptcha", BAD_AUTH);
 
-        $authenticationBusiness = new AuthenticationBusiness();
 
         $crypto = new Crypto();
         $userModel = new UsersModel();
@@ -42,7 +41,8 @@ class PostUseCases
             "success" => "Api.auth.success.post"
         ];
 
-        $tokenRemember = $authenticationBusiness->createTokenRemember($payload, $foundUser);
+        $rememberBusiness = new RememberBusiness();
+        $tokenRemember = $rememberBusiness->createTokenRemember($payload, $foundUser, $userSettings);
 
         if (!empty($tokenRemember))
             $response->reference_token = $tokenRemember;
