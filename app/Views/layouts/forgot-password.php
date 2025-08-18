@@ -14,23 +14,23 @@ Head::render(title: "Login - Nautisys System");
 ?>
 
 <div class="login bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
-    <div class="content-forgot content w-75 mx-auto">
+    <div class="content-forgot content w-75 mx-auto xll:w-90">
         <div class="row my-4 ">
             <div class="forgot-password col w-45 min-w-[19rem] bg-white rounded-r-lg mx-auto py-12 px-4 rounded-md shadow-lg">
                 <form class="flex flex-col justify-center h-100 px-6" data-send="forgot-password">
                     <div class="form-header text-center">
-                        <div class="form-icon w-20 mx-auto">
+                        <div class="form-icon w-20 mx-auto xxl:w-25">
                             <?= Image::render(src: "/imgs/nautisys-icon.png", alt: "Icon of NautiSys") ?>
                         </div>
                         <div class="form-title mt-2">
-                            <h2 class="forgot-title header-xs">Recupere a sua senha</h2>
+                            <h2 class="forgot-title header-xs xxl:header-md">Recupere a sua senha</h2>
                         </div>
                         <div class="text-justify mt-1">
-                            <p class="forgot-text text-md text-gray-500 line-[1.2]">Nós informe o seu e-mail cadastrados para que possamos enviar um link de recuperação de conta.</p>
+                            <p class="forgot-text text-md text-gray-500 line-[1.2] xxl:text-xl">Nós informe o seu e-mail cadastrados para que possamos enviar um link de recuperação de conta.</p>
                         </div>
                     </div>
                     <div class="form-content w-100 mt-4">
-                        <div class="form-group">
+                        <div class="form-group xxl:text-xl">
                             <?= Email::render(
                                 name: "email",
                                 id: "email",
@@ -38,13 +38,13 @@ Head::render(title: "Login - Nautisys System");
                                 icon: '<i class="bi bi-envelope-fill"></i>'
                             ) ?>
                         </div>
-                        <div class="form-btn text-center">
+                        <div class="form-btn text-center xxl:text-xl">
                             <?= Submit::render(text: "Recuperar senha") ?>
                         </div>
                     </div>
                 </form>
 
-                <div class="link-login text-center mt-10">
+                <div class="link-login text-center mt-10 xxl:header-xs">
                     <?= Link::render(
                         text: "Já lembra sua senha? Entre agora",
                         class: "hover:text-gray-300",
