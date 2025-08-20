@@ -12,7 +12,6 @@ class UserEntity extends Entity
 {
     use EntityEnhancerTrait, CryptoEntityTrait;
 
-    protected $dates = [];
     public $attributes = [
         'id'               => null,
         'name'             => null,
@@ -20,13 +19,14 @@ class UserEntity extends Entity
         'password'         => null,
         'phone'            => null,
         'avatar'           => null,
-        'cpf'              => null,
+        'document'         => null,
+        'document_type'    => null,
         'birthdate'        => null,
         'status'           => null,
         'keyword'          => null,
         'email_sha256'     => null,
         'phone_sha256'     => null,
-        'cpf_sha256'       => null,
+        'document_sha256'  => null,
         'system_key'       => null,
         'twof_secret'      => null,
         "created_at"       => null,
@@ -205,52 +205,69 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed setCpf()
+     * @method mixed setDocument()
      *
-     * @param string|null $cpf O valor bruto do CPF sem pontuação "18222234798"
+     * @param string|null $document O valor bruto do documento sem pontuação "18222234798"
      * @return void
      */
-    public function setCpf(?string $cpf)
+    public function setDocument(?string $document)
     {
-        if (!empty($cpf))
-            $this->attributes['cpf'] = $cpf;
+        if (!empty($document))
+            $this->attributes['document'] = $document;
     }
 
     /**
-     * @method mixed setEncryptCpf()
+     * @method mixed setDocumentType()
      *
-     * @param string|null $cpf O valor bruto do CPF sem pontuação "18222234798"
+     * @param string|null $typeDocument O tipo de documentação
      * @return void
      */
-    public function setEncryptCpf(?string $cpf)
+    public function setDocumentType(?string $typeDocument)
     {
-        $cpf = str_replace([".", "-"], "", $cpf);
-
-        if (strlen($cpf) > 11)
-            throw new Exception("Api.users.invalid.cpf_max_length_11", BAD_REQUEST);
-
-        if (!empty($cpf))
-            $this->attributes['cpf'] = $this->cryptoLibrary->encrypt($cpf, $this->getEncryptedKey());;
+        if (!empty($typeDocument))
+            $this->attributes['document_type'] = $typeDocument;
     }
 
     /**
-     * @method mixed getCpf()
+     * @method mixed setEncryptDocument()
+     *
+     * @param string|null $document O valor bruto do documento sem pontuação "18222234798"
+     * @return void
+     */
+    public function setEncryptDocument(?string $document)
+    {
+        if (!empty($document))
+            $this->attributes['document'] = $this->cryptoLibrary->encrypt($document, $this->getEncryptedKey());;
+    }
+
+    /**
+     * @method mixed getDocument()
      *
      * @return String|null
      */
-    public function getCpf()
+    public function getDocument()
     {
-        return $this->attributes['cpf'];
+        return $this->attributes['document'];
     }
 
     /**
-     * @method mixed getDecryptCpf()
+     * @method mixed getDocumentType()
      *
      * @return String|null
      */
-    public function getDecryptCpf()
+    public function getDocumentType()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['cpf'], $this->getEncryptedKey());
+        return $this->attributes['document_type'];
+    }
+
+    /**
+     * @method mixed getDecryptDocument()
+     *
+     * @return String|null
+     */
+    public function getDecryptDocument()
+    {
+        return $this->cryptoLibrary->decrypt($this->attributes['document'], $this->getEncryptedKey());
     }
 
     /**
@@ -275,7 +292,7 @@ class UserEntity extends Entity
     public function setEncryptPhone(?string $phone)
     {
         if (strlen($phone) > 20)
-            throw new Exception("Api.users.invalid.phone_max_length_20", BAD_BUSINESS_RULES);
+            throw new Exception("Api.users.invalid.phone", BAD_BUSINESS_RULES);
 
         if (!empty($phone))
             $this->attributes['phone'] = $this->cryptoLibrary->encrypt(str_replace(['-', ' ', '(', ')'], '', $phone), $this->getEncryptedKey());
@@ -373,11 +390,10 @@ class UserEntity extends Entity
     public function setEncryptKeyword(?string $keyword)
     {
         if (strlen($keyword) > 100)
-            throw new Exception("Api.users.invalid.keyword_max_100", BAD_REQUEST);
+            throw new Exception("Api.users.invalid.keyword", BAD_REQUEST);
 
         if (!empty($keyword))
             $this->attributes['keyword'] = $this->cryptoLibrary->encrypt($keyword, $this->getEncryptedKey());
-        else  $this->attributes['keyword'] = $keyword;
     }
 
     /**
@@ -446,25 +462,25 @@ class UserEntity extends Entity
     }
 
     /**
-     * @method mixed setCPFSha256()
+     * @method mixed setDocumentSha256()
      *
-     * @param string|null $cpf_sha256
+     * @param string|null $document_sha256
      * @return void
      */
-    public function setCPFSha256(?string $cpf_sha256)
+    public function setDocumentSha256(?string $document_sha256)
     {
-        if (!empty($cpf_sha256))
-            $this->attributes['cpf_sha256'] = $cpf_sha256;
+        if (!empty($document_sha256))
+            $this->attributes['document_sha256'] = $document_sha256;
     }
 
     /**
-     * @method mixed getCPFSha256()
+     * @method mixed getDocumentSha256()
      *
      * @return String|null
      */
-    public function getCPFSha256(): ?String
+    public function getDocumentSha256(): ?String
     {
-        return $this->attributes['cpf_sha256'];
+        return $this->attributes['document_sha256'];
     }
 
 
@@ -478,7 +494,7 @@ class UserEntity extends Entity
     {
 
         if (strlen($twofSecretEnc ?? "") > 250)
-            throw new Exceptions("Api.users.invalid.twof_secret_max_length_250", BAD_REQUEST);
+            throw new Exceptions("Api.users.invalid.twof_secret", BAD_REQUEST);
 
         if (!empty($twofSecretEnc))
             $this->attributes['twof_secret'] = $twofSecretEnc;
@@ -530,7 +546,7 @@ class UserEntity extends Entity
     {
 
         if (strlen($systemKey) > 400)
-            throw new Exception("Api.users.invalid.system_key_max_length_250", BAD_REQUEST);
+            throw new Exception("Api.users.invalid.system_key", BAD_REQUEST);
 
         if (!empty($systemKey))
             $this->attributes['system_key'] = $systemKey;
