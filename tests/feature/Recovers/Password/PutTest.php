@@ -25,7 +25,7 @@ class PutTest extends CIUnitTestCase
     {
         $result = $this->withBody(json_encode([
             'password' => 'invalid',
-        ]), 'application/json')->put($this->route,);
+        ]), 'application/json')->put($this->route);
 
         $result->assertStatus(BAD_REQUEST);
         $result->assertJSONFragment(['error' => 'Api.recovers.password.invalid.token']);

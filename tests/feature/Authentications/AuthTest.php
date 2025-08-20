@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Authentications;
 
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\ReflectionHelper;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -22,7 +23,7 @@ class AuthTest extends CIUnitTestCase
     {
         $result = $this->call("post", $this->route);
 
-        $result->assertStatus(\BAD_REQUEST);
+        $result->assertStatus(ResponseInterface::HTTP_BAD_REQUEST);
         $result->assertJSONFragment(['error' => 'Api.invalid.email']);
     }
 
@@ -34,7 +35,7 @@ class AuthTest extends CIUnitTestCase
             'recaptcha' => 'invalid',
         ]);
 
-        $result->assertStatus(BAD_AUTH);
+        $result->assertStatus(ResponseInterface::HTTP_UNAUTHORIZED);
         $result->assertJSONFragment(['error' => 'Api.auth.invalid.recaptcha']);
     }
 
@@ -46,7 +47,7 @@ class AuthTest extends CIUnitTestCase
             'recaptcha' => getenv('globals.recaptcha.tokenTest'),
             'remember-me' => '0'
         ]);
-        $result->assertStatus(\BAD_BUSINESS_RULES); // BAD_BUSINESS_RULES ex: 403
+        $result->assertStatus(ResponseInterface::HTTP_NOT_ACCEPTABLE); 
         $result->assertJSONFragment(['error' => 'Api.auth.invalid.credentials']);
     }
 
@@ -57,7 +58,8 @@ class AuthTest extends CIUnitTestCase
             'password' => getenv('globals.admin.password'),
             'recaptcha' => getenv('globals.recaptcha.tokenTest'),
         ]);
-        $result->assertStatus(200); // OK = 200
+
+        $result->assertStatus(ResponseInterface::HTTP_OK); // OK = 200
         $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
         $result->assertJSONMissing(['reference_token']);
     }
@@ -71,7 +73,7 @@ class AuthTest extends CIUnitTestCase
             'remember-me' => '1'
         ]);
 
-        $result->assertStatus(OK);
+        $result->assertStatus(ResponseInterface::HTTP_OK);
         $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
         $data = json_decode($result->getJSON(), true);
         $this->assertArrayHasKey('reference_token', $data);
