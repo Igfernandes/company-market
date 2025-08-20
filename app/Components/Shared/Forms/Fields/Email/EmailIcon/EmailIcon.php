@@ -1,36 +1,40 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Checkbox;
+namespace App\Components\Shared\Forms\Fields\Email\EmailIcon;
 
 use App\Components\BaseComponents;
 
-class Checkbox extends BaseComponents
+class EmailIcon extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/fields/checkbox";
+    const ORIGIN = "components/shared/forms/fields/email/email-icon";
     const PROPS = [
         "name",
-        "id",
         "label",
+        "id",
+        "value",
+        "placeholder",
         "class",
         "required",
         "attributes",
         "disabled",
         "readonly",
-        "value",
-        "checked"
+        "iconLeft",
+        "iconRight"
     ];
 
     public static function render(
+        ?string $name = "",
         ?string $id = "",
         ?string $label = "",
-        ?string $name = "",
+        ?string $value = "",
+        ?string $placeholder = "",
         ?string $class = "",
         ?string $required = "",
-        ?string $value = "1",
+        ?array $attributes = [],
         ?bool $disabled = null,
         ?bool $readonly = null,
-        ?bool $checked = null,
-        ?array $attributes = [],
+        ?bool $iconLeft = null,
+        ?bool $iconRight = null
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }

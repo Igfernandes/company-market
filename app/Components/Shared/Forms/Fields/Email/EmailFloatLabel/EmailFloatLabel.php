@@ -1,36 +1,38 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Checkbox;
+namespace App\Components\Shared\Forms\Fields\Email\EmailFloatLabel;
 
 use App\Components\BaseComponents;
 
-class Checkbox extends BaseComponents
+class EmailFloatLabel extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/fields/checkbox";
+    const ORIGIN = "components/shared/forms/fields/email/email-float-label";
     const PROPS = [
         "name",
-        "id",
         "label",
+        "id",
+        "value",
+        "placeholder",
         "class",
         "required",
         "attributes",
         "disabled",
         "readonly",
-        "value",
-        "checked"
+        "icon",
     ];
 
     public static function render(
+        ?string $name = "",
         ?string $id = "",
         ?string $label = "",
-        ?string $name = "",
+        ?string $value = "",
+        ?string $placeholder = "",
         ?string $class = "",
         ?string $required = "",
-        ?string $value = "1",
+        ?array $attributes = [],
         ?bool $disabled = null,
         ?bool $readonly = null,
-        ?bool $checked = null,
-        ?array $attributes = [],
+        ?string $icon = null
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }

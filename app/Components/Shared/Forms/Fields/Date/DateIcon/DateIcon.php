@@ -1,36 +1,39 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Checkbox;
+namespace App\Components\Shared\Forms\Fields\Date\DateIcon;
 
 use App\Components\BaseComponents;
 
-class Checkbox extends BaseComponents
+class DateIcon extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/fields/checkbox";
+    const ORIGIN = "components/shared/forms/fields/date/date-icon";
     const PROPS = [
         "name",
-        "id",
         "label",
+        "id",
+        "value",
         "class",
         "required",
         "attributes",
         "disabled",
         "readonly",
-        "value",
-        "checked"
+        "iconLeft",
+        "iconRight"
     ];
 
     public static function render(
+        ?string $name = "",
         ?string $id = "",
         ?string $label = "",
-        ?string $name = "",
+        ?string $type = "text",
+        ?string $value = "",
         ?string $class = "",
         ?string $required = "",
-        ?string $value = "1",
+        ?array $attributes = [],
         ?bool $disabled = null,
         ?bool $readonly = null,
-        ?bool $checked = null,
-        ?array $attributes = [],
+        ?string $iconLeft = null,
+        ?string $iconRight = null
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }

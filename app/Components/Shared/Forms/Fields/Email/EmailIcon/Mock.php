@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Email;
+namespace App\Components\Shared\Forms\Fields\Email\EmailIcon;
 
 class Mock
 {
