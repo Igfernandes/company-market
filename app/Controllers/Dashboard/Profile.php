@@ -8,6 +8,11 @@ class Profile extends BaseController
 {
     public function index()
     {
-        return view("layouts/dashboard/profile/index");
+        $session = session();
+        $userAuth = $session->get(SESSION_KEY_AUTH_USER);
+
+        return view("layouts/dashboard/profile/index", [
+            "user" => $userAuth
+        ]);
     }
 }
