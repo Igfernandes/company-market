@@ -9,20 +9,20 @@ if (isset($name) && isset($storeValue[$name]))
 $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
 ?>
 
-<div class="input mb-3" component="input-icon">
+<div class="input mb-3" component="email-icon">
     <div class="relative flex shadow-sm border-gray-200 border-2 rounded-md">
         <?php if (isset($iconLeft) || !isset($iconRight)) : ?>
             <label class="text-lg py-2 px-4 text-black-700" component="input-icon:label" for="<?= $id ?? $name ?>">
-                <?= isset($iconLeft) ? $iconLeft : '<i class="bi bi-pencil"></i>' ?>
+                <i class="bi bi-envelope-at"></i>
             </label>
         <?php endif; ?>
         <div class="w-100">
-            <input type="<?= $type  ?>"
+            <input type="email"
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?? $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid <?= $class ?? null ?>"
+                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($label) ? "placeholder='$label" . "$requiredIcon'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
@@ -32,7 +32,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
         </div>
         <?php if (isset($iconRight)) : ?>
             <label class="text-lg py-2 px-4 text-black-700" component="input-icon:label" for="<?= $id ?? $name ?>">
-                <?= isset($iconRight) ? $iconRight : '<i class="bi bi-pencil"></i>' ?>
+                <i class="bi bi-envelope-at"></i>
             </label>
         <?php endif; ?>
     </div>

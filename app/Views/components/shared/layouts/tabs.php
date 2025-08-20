@@ -10,7 +10,7 @@
             </li>
         <?php endforeach; ?>
     </ul>
-    <div>
+    <div class="px-3">
         <?php foreach ($contents as $tab => $content): ?>
             <div class="<?= $default === $tab ? "active" : "" ?>" tab-target="<?= $tab ?>">
                 <?= $content ?>

@@ -58,6 +58,8 @@
 
     <!-- JQuery -->
     <script src="/js/libraries/JQuery/jquery-3.7.1.min.js"></script>
+    <script src="/js/libraries/Mask/jquery.mask.min.js"></script>
+    <script src="/js/libraries/IntlTelInput/intlTelInput.min.js"></script>
 
     <?php
     if ($hasTable) {
