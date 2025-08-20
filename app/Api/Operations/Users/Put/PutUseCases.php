@@ -2,13 +2,13 @@
 
 namespace App\Api\Operations\Users\Put;
 
+use App\Business\Authentications\AuthenticationBusiness;
 use App\Business\Users\UsersBusiness;
-use App\Database\Entities\Users\UserEntity;
-use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\Notifications\NotificationsService;
 use App\Traits\BusinessTrait;
 use App\Traits\Services\ServicesDataTrait;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class PutUseCases
 {
@@ -19,7 +19,10 @@ class PutUseCases
      *     id: integer,
      *     name: string, 
      *     email: string,
-     *     phone: string
+     *     phone: string,
+     *     document: string,
+     *     keyword: string,
+     *     birthdate: string
      * } $payload
      */
     public function execute(array $payload)
@@ -27,28 +30,30 @@ class PutUseCases
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isPhoneAvailable($payload['phone'], $payload['id']))
-            throw new Exceptions("Api.users.invalid.already_exists_phone", BAD_AUTH);
+            throw new Exceptions("Api.users.invalid.already_exists_phone", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
-        $usersModel = new UsersModel();
+        if (!$usersBusiness->isEmailAvailable($payload['email'], $payload['id']))
+            throw new Exceptions("Api.users.invalid.already_exists_email", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
-        /** @var UserEntity */
-        $foundUser = $usersModel->where("id", $payload['id'])->first();
+        if (!$usersBusiness->isDocumentAvailable($payload['document'], $payload['id']))
+            throw new Exceptions("Api.users.invalid.already_exists_document", ResponseInterface::HTTP_NOT_ACCEPTABLE);
+
+        $foundUser = $usersBusiness->hasUser([
+            "id" => $payload['id']
+        ]);
 
         if (empty($foundUser))
-            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.users.invalid.not_found", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
-        $foundUser->setPhoneSha256(\referenceHash($payload['phone']));
-        $foundUser->setEncryptPhone($payload['phone']);
-        $foundUser->setName($payload['name']);
+        if (!empty($payload['id']))
+            $usersBusiness->store($payload, $foundUser->getSystemKey());
 
-        if (!empty($foundUser->toArray(true)))
-            $usersModel->set($foundUser->toArray(true))->where("id", $foundUser->getId())->update();
-
-
+        AuthenticationBusiness::revokeSession($foundUser);
         NotificationsService::store([
             "scope" => "users",
             "action" => "UPDATE"
         ]);
+
         return (object)[
             "success" => "Api.users.success.put"
         ];
