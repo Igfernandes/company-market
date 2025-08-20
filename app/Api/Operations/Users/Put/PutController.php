@@ -6,6 +6,7 @@ use App\Api\ExceptionApi;
 use App\Api\Validation;
 use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
+use App\Database\Entities\Users\UserEntity;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
 
@@ -30,8 +31,17 @@ class PutController extends BaseController
             ]);
             $validation = \Config\Services::validation();
 
-            $payload = $this->request->getVar(array_keys($this->rules));
-            $payload['id'] = $userId;
+            $allPayload = $this->request->getJSON() ?? [];
+            $payload = array_intersect_key((array)$allPayload, array_flip(array_keys($this->rules)));
+
+            $session = \session();
+            /** @var UserEntity $userAuth */
+            $userAuth = $session->get(SESSION_KEY_AUTH_USER);
+
+            if ($userId  > 0 || !empty($userId)) {
+                $payload['id'] = $userId;
+            } else
+                $payload['id'] = $userAuth->getId();
 
             $validation->setRules($this->rules);
 

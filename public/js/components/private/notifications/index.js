@@ -4,6 +4,9 @@ import { notificationBuilder } from "./builder.js";
 
 export const init = async () => {
   const container = document.querySelector("[component='notification']");
+
+  if (!container) return;
+
   const content = container.querySelector("[component='notification:content']");
   const messageComponent = await Component("/utils/notification/message", {
     author: "none",
@@ -18,5 +21,4 @@ export const init = async () => {
   data.map((notificationData) =>
     content.appendChild(notificationBuilder(notificationData, messageComponent))
   );
-
 };

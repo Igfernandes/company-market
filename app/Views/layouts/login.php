@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use App\Components\Public\Footer\Footer;
-use App\Components\Shared\Forms\Checkbox\Checkbox;
-use App\Components\Shared\Forms\Email\Email;
-use App\Components\Shared\Forms\Password\PasswordToggle\PasswordToggle;
-use App\Components\Shared\Forms\Submit\Submit;
+use App\Components\Shared\Forms\Fields\Checkbox\Checkbox;
+use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
+use App\Components\Shared\Forms\Fields\Password\Password;
+use App\Components\Shared\Forms\Fields\Submit\Submit;
 use App\Components\Shared\Layouts\Carousel\Carousel;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
@@ -42,7 +42,7 @@ Head::render(title: "Login - Nautisys System");
                     </div>
                     <div class="form-content px-1 sm:px-8 mt-4">
                         <div class="form-group">
-                            <?= Email::render(
+                            <?= EmailFloatLabel::render(
                                 name: "login",
                                 id: "login",
                                 label: "Login/E-mail",
@@ -50,7 +50,7 @@ Head::render(title: "Login - Nautisys System");
                             ) ?>
                         </div>
                         <div class="form-group">
-                            <?= PasswordToggle::render(name: "password", id: "password", label: "Password") ?>
+                            <?= Password::render(name: "password", id: "password", label: "Password") ?>
                         </div>
                         <div class="flex justify-between items-center">
                             <div class="form-remember w-35">

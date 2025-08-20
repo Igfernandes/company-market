@@ -3,11 +3,10 @@
 @import "./utils/modals/index";
 @import "./utils/notify.scss";
 @import "./utils/tooltip.scss";
-@import "./shared/index";
+@import "./utils/popup.scss";
 
 /** Forms */
 @import "./shared/index";
-
 
 /** Globals */
 
@@ -15,8 +14,7 @@
 @import "./public/sidebar.scss";
 @import "./public/footer.scss";
 
-
 @import "./private/header/index";
 @import "./private/sidebar/index";
-@import "./utils/popup.scss";
 @import "./private/settings.scss";
+@import "./public/forgot-password.scss";

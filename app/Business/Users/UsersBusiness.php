@@ -8,6 +8,10 @@ use App\Database\Models\Users\UsersModel;
 use App\Libraries\Crypto\Crypto;
 use App\Traits\Users\UsersDataTrait;
 
+/**
+ * @phpstan-import-type UserShape from \App\Types\Users\User.type
+ */
+
 class UsersBusiness
 {
     use BaseBusiness, UsersDataTrait;
@@ -20,45 +24,12 @@ class UsersBusiness
         helper(['crypto']);
     }
 
-    /**
-     * @param array{
-     *     current: string, 
-     *     id: int,
-     *     in_ids: array<int>, 
-     *     name: string, 
-     *     cpf: string, 
-     *     phone: string, 
-     *     birthdate: string, 
-     *     status: 'ACTIVE' | 'INACTIVE', 
-     *     created_at: string, 
-     *     updated_at: string 
-     * } $payload
-     */
-    public function handler($payload): array
-    {
-        $userEntity = new UserEntity();
-        $usersModel = new UsersModel();
-
-        $userEntity->fill($payload);
-
-        $foundUserGroup = $usersModel->getUsersWithGroup($userEntity->toArray(true));
-        /** @var array{UserEntity} */
-        $users = [];
-
-        foreach ($foundUserGroup as $userGroup) {
-            $users[$userGroup->getUserId()] = $userGroup->getUser();
-        }
-
-        return \array_values(array_map(fn($userEntity) => $this->builder($userEntity, $foundUserGroup), $users));
-    }
-
-
-    public function isCPFAvailable(string $cpf, int $userId = 0)
+    public function isDocumentAvailable(string $document, int $userId = 0)
     {
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("cpf_sha256", \referenceHash($cpf))->first();
+        $foundUser = $this->usersModel->where("document_sha256", \referenceHash($document))->first();
 
         return empty($foundUser);
     }
@@ -84,32 +55,63 @@ class UsersBusiness
         return empty($foundUser);
     }
 
-    public function hasUser($query): bool
+    public function hasUser($query): null|UserEntity
     {
-        $usersModel = new UsersModel();
-
-        $foundUsers = $usersModel->where($query)->find();
-
-        return !empty($foundUsers);
+        return $this->usersModel->where($query)->first();
     }
 
-    public function updateEncryptionReferences(UserEntity $user, string $password, string $email): UserEntity
+    /**
+     * @param UserShape $payload
+     * @param string $encryptedKey
+     * 
+     * @return UserEntity
+     */
+    public function store(array $payload, string $encryptedKey): UserEntity
     {
         $crypto = new Crypto();
-        $encryptedKey = "$email:$password";
 
         $systemKey = $crypto->encrypt($encryptedKey, getenv('system.encrypted_key'));
 
-        $newUser = new UserEntity();
+        $alteredUser = new UserEntity();
 
-        $newUser->store($user->toArray());
-        $newUser->setSystemKey($systemKey);
-        $newUser->setEncryptEmail($user->getDecryptEmail());
-        $newUser->setEncryptPassword($password);
-        $newUser->setEncryptCpf($user->getDecryptCpf());
-        $newUser->setEncryptPhone($user->getDecryptPhone());
-        $newUser->setEncryptKeyword($user->getDecryptKeyword() ?? "none");
+        $alteredUser->store($payload);
+        $alteredUser->setSystemKey($systemKey);
 
-        return  $newUser;
+        if (isset($payload['phone'])) {
+            $alteredUser->setPhoneSha256(referenceHash($payload['phone']));
+            $alteredUser->setEncryptPhone($payload['phone']);
+        }
+
+        if (isset($payload['document'])) {
+            $alteredUser->setEncryptDocument($payload['document']);
+            $alteredUser->setDocumentSha256(\referenceHash($payload['document']));
+        }
+
+        if (isset($payload['email'])) {
+            $alteredUser->setEncryptEmail($payload['email']);
+            $alteredUser->setEmailSha256(referenceHash($payload['email']));
+        }
+
+        if (isset($payload['password']) || !empty($payload['password']))
+            $alteredUser->setEncryptPassword($payload['password']);
+
+        if (isset($payload['keyword']) && !empty($payload['keyword']))
+            $alteredUser->setEncryptKeyword($payload['keyword']);
+
+        $alreadyUser = null;
+
+        if (isset($payload['id'])) {
+            $alreadyUser = $this->hasUser([
+                "id" => $payload['id']
+            ]);
+        }
+
+        if (empty($alreadyUser))
+            $this->usersModel->protect(!isset($payload['id']))->insert($alteredUser->toArray(true));
+        else $this->usersModel->save($alteredUser->toArray(true));
+
+        $alteredUser->setId($this->usersModel->getInsertID());
+
+        return $alteredUser;
     }
 }

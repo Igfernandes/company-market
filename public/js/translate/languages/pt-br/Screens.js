@@ -16,7 +16,10 @@ export const SCREENS = {
     sending_form: "Enviando Solicitação",
     awaiting: "Aguarde enquanto estamos enviando a solicitação",
   },
+  users: {
+    snackbar_title: "Atualização de informações",
+  },
   notifications: {
     snackbar_title: "Notificações",
-  }
+  },
 };

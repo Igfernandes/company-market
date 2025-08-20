@@ -12,6 +12,7 @@ trait CryptoEntityTrait
 
     public function __construct()
     {
+        parent::__construct();
         $this->cryptoLibrary = new Crypto();
     }
 

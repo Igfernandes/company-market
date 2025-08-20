@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Components\Public\Footer\Footer;
-use App\Components\Shared\Forms\Email\Email;
-use App\Components\Shared\Forms\Submit\Submit;
+use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
+use App\Components\Shared\Forms\Fields\Submit\Submit;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
 use App\Components\Shared\Layouts\Link\Link;
@@ -30,12 +30,11 @@ Head::render(title: "Login - Nautisys System");
                         </div>
                     </div>
                     <div class="form-content w-100 mt-4">
-                        <div class="form-group xxl:text-xl">
-                            <?= Email::render(
+                        <div class="form-group">
+                            <?= EmailFloatLabel::render(
                                 name: "email",
                                 id: "email",
-                                label: "E-mail",
-                                icon: '<i class="bi bi-envelope-fill"></i>'
+                                label: "E-mail"
                             ) ?>
                         </div>
                         <div class="form-btn text-center xxl:text-xl">

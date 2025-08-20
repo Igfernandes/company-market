@@ -12,6 +12,7 @@ import {
   urlRegex,
   VALID_EMAIL_REGEX,
 } from "../../constants/regex.js";
+import "../DayJs/dayjs.min.js";
 
 /**
  * Verifica se o valor do campo corresponde ao tipo especificado.
@@ -35,7 +36,18 @@ export function noEmpty(value = false, field) {
   return isInvalid ? errors.noEmpty : null;
 }
 
-const dateSeparators = { br: "/", eua: "-" };
+const dateFormats = {
+  br: {
+    mask: "DD/MM/YYYY",
+    separator: "/",
+    parts: [2, 2, 4], // dia, mês, ano
+  },
+  eua: {
+    mask: "YYYY-MM-DD",
+    separator: "-",
+    parts: [4, 2, 2], // ano, mês, dia
+  },
+};
 
 /**
  * Valida uma data com base no formato especificado.
@@ -43,34 +55,25 @@ const dateSeparators = { br: "/", eua: "-" };
  * @param {{ value: string }} field
  * @returns {string|null|undefined}
  */
+
 export function date(format = "br", { value }) {
-  if (!value) return;
-  const parts = value.split(dateSeparators[format]);
-  if (parts.length < 3) return errors.notValidDate;
+  if (!value) return errors.required ?? "Data obrigatória";
 
-  const [d1, d2, d3] = parts.map(Number);
-  if (d1 < 1 || d2 < 1 || d1 > 31 || d2 > 12) return errors.notValidDate;
+  const { separator, parts, mask } = dateFormats[format];
+  const chunks = value.split(separator);
 
-  switch (format) {
-    case "br":
-      if (
-        d1.toString().length !== 2 ||
-        d2.toString().length !== 2 ||
-        d3.toString().length !== 4
-      )
-        return errors.typeof;
-      break;
-    case "eua":
-      if (
-        d1.toString().length !== 4 ||
-        d2.toString().length !== 2 ||
-        d3.toString().length !== 2
-      )
-        return errors.typeof;
-      break;
+  if (chunks.length !== 3) return errors.notValidDate;
+
+  // valida tamanho de cada parte (dia, mês, ano)
+  if (!chunks.every((c, i) => c.length === parts[i])) {
+    return errors.typeof;
   }
 
-  return null;
+  // valida data real usando dayjs (com parse estrito)
+  const isValid = dayjs(value, mask, true).isValid();
+  if (!isValid) return errors.notValidDate;
+
+  return null; // válido
 }
 
 /**

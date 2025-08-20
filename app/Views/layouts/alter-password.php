@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Components\Public\Footer\Footer;
-use App\Components\Shared\Forms\Password\GroupValidations\GroupValidations;
-use App\Components\Shared\Forms\Submit\Submit;
+use App\Components\Shared\Forms\Fields\Submit\Submit;
+use App\Components\Shared\Forms\Variants\GroupValidations\GroupValidations;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
 use App\Components\Shared\Layouts\Link\Link;

@@ -1,0 +1,25 @@
+[component="tabs"] {
+  position: relative;
+  overflow: hidden;
+  [component="tabs:header"] {
+    li {
+      &.active {
+        color: var(--text-accent);
+      }
+    }
+  }
+  [tab-target] {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    &.active {
+      position: initial;
+      z-index: 0;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}

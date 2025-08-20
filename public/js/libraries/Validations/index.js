@@ -103,7 +103,7 @@ export function Validations(form) {
 
       if (!exec) {
         console.log(
-          `error_${ruleLabel}:Não foi possível encontrar a validação de ${name}`
+          `error_${ruleName}:Não foi possível encontrar a validação de ${name}`
         );
         continue;
       }

@@ -34,16 +34,19 @@ class Users extends Migration
             'password'       => [
                 'type'       => 'BLOB',
             ],
-            'cpf'       => [
+            'document'       => [
                 'type'       => 'BLOB'
+            ],
+            'document_type'  => [
+                'type'       => 'VARCHAR',
+                'constraint' => '35',
+                'null'       => true
             ],
             'birthdate'       => [
                 'type'       => 'DATE',
             ],
             'keyword'       => [
-                'type'       => 'VARCHAR',
-                'constraint' => '255',
-                'null' => true
+                'type'       => 'BLOB',
             ],
             'status' => [
                 'type' => 'ENUM("ACTIVE", "INACTIVE", "ANALYSIS")',
@@ -59,7 +62,7 @@ class Users extends Migration
                 'constraint' => '70',
                 'unique'     => true
             ],
-            'cpf_sha256'       => [
+            'document_sha256'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '70',
                 'unique'         => true

@@ -1,0 +1,17 @@
+[component="phone"] {
+  [component="phone:reference"] {
+    visibility: hidden;
+    height: 0px;
+  }
+  .iti.iti--allow-dropdown {
+    position: absolute;
+    left: 2%;
+    background: var(--gray-100);
+  }
+  .iti__flag-container {
+    top: 0;
+    background: var(--gray-100);
+    padding: 1.32rem 0.2rem;
+    margin-top: 0px;
+  }
+}

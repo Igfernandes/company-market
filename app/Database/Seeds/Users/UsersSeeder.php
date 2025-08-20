@@ -15,9 +15,9 @@ class UsersSeeder extends Seeder
 
         $password = getenv("globals.admin.password");
         $email = getenv("globals.admin.login");
-        $cryptedKey = "$email:$password";
+        $encryptedKey = "$email:$password";
 
-        $systemKey = $cryptoLibrary->encrypt($cryptedKey, getenv('system.encrypted_key'));
+        $systemKey = $cryptoLibrary->encrypt($encryptedKey, getenv('system.encrypted_key'));
         $userEntity = new UserEntity();
         $USER_ID = 1;
 
@@ -26,12 +26,13 @@ class UsersSeeder extends Seeder
         $userEntity->setEncryptEmail($email);
         $userEntity->setEncryptPassword($password);
         $userEntity->setAvatar(site_url(getenv("globals.admin.photo")));
-        $userEntity->setEncryptCpf(getenv("globals.admin.cpf"));
+        $userEntity->setEncryptDocument(getenv("globals.admin.document"));
+        $userEntity->setDocumentType(getenv("globals.admin.document_type"));
         $userEntity->setEncryptPhone(getenv("globals.admin.phone"));
         $userEntity->setName(getenv("globals.admin.name"));
         $userEntity->setEmailSha256(referenceHash(getenv("globals.admin.login")));
         $userEntity->setPhoneSha256(referenceHash(getenv("globals.admin.phone")));
-        $userEntity->setCPFSha256(referenceHash(getenv("globals.admin.cpf")));
+        $userEntity->setDocumentSha256(referenceHash(getenv("globals.admin.cpf")));
         $userEntity->setBirthdate(getenv("globals.admin.birthdate"));
         $userEntity->setStatus("ACTIVE");
         $userEntity->setEncryptKeyword(getenv("globals.admin.keyword"));

@@ -1,15 +1,19 @@
-export function formatDateBr(dateRef) {
-  const date = new Date(dateRef);
+/**
+ * Verifica se o número fornecido representa um mês válido.
+ *
+ * @param {number} month - Número do mês (1 a 12).
+ * @returns {boolean} Retorna `true` se o mês estiver entre 1 e 12, caso contrário `false`.
+ */
+export function isMonthValid(month) {
+  return month > 0 && month <= 12;
+}
 
-  if (!dateRef) return "Indefinido";
-  const day =
-    date.getDate() < 10
-      ? "0" + (date.getDate() == 0 ? 1 : date.getDate())
-      : date.getDate();
-  const month =
-    date.getMonth() + 1 < 10
-      ? "0" + (1 + date.getMonth())
-      : 1 + date.getMonth();
-
-  return `${day}/${month}/${date.getFullYear()}`;
+/**
+ * Verifica se o número fornecido representa um dia válido.
+ *
+ * @param {number} day - Número do dia (1 a 31).
+ * @returns {boolean} Retorna `true` se o dia estiver entre 1 e 31, caso contrário `false`.
+ */
+export function isDayValid(day) {
+  return day > 0 && day <= 31;
 }

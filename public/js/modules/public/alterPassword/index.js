@@ -44,7 +44,7 @@ export function AlterPasswordForm() {
     const resp = await putRecoverPassword(payload);
 
     setTimeout(() => {
-      if (resp.success) redirect("/login");
+      if (resp && resp.success) redirect("/login");
     }, [500]);
   };
 

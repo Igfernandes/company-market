@@ -1,5 +1,5 @@
 <?php
 
-use App\Components\Private\Container\Container;
+use App\Components\Private\Layouts\Container\Container;
 
 Container::render();

@@ -11,7 +11,7 @@ if (!function_exists('Component')) {
 
             echo $component;
         } catch (Exception $err) {
-            echo "[COMPONENT NOT FOUND]: $origin";
+            echo "[PROBLEMS IN COMPONENT - $origin]: {$err->getMessage()} ";
         }
     }
 }
