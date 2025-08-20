@@ -4,6 +4,9 @@ export const API_ROUTES = {
     password: "/api/recovers/password",
   },
   notifications: {
-    default: "/api/notifications"
-  }
+    default: "/api/notifications",
+  },
+  users: {
+    put: "/api/users",
+  },
 };

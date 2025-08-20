@@ -12,7 +12,7 @@ export function availableRulesException(rules) {
 
     if (!execExceptions)
       return console.log(
-        `error_${ruleLabel}:Não foi possível encontrar a validação de ${name}`
+        `error_${exceptionFunction}:Não foi possível encontrar a validação de ${exceptionFunction}`
       );
 
     if (!execExceptions(exceptionValues, field)) return;

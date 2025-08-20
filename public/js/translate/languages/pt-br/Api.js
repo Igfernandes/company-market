@@ -17,13 +17,18 @@ export const API = {
     password: {
       invalid: {
         email: "O e-mail encontra-se não informado ou inválido",
-        token: "A solicitação encontra-se inválida ou expirada. Recomece e tente novamente.",
+        token:
+          "A solicitação encontra-se inválida ou expirada. Recomece e tente novamente.",
       },
     },
   },
   users: {
     success: {
       recover_password: "Abra a sua caixa de e-mail e siga as instruções",
+      put: "Informações do usuário atualizadas com sucesso",
+    },
+    invalid: {
+      document: "O documento encontra-se vazio ou inválido",
     },
   },
 };

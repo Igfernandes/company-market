@@ -1,4 +1,6 @@
 [component="tabs"] {
+  position: relative;
+  overflow: hidden;
   [component="tabs:header"] {
     li {
       &.active {
@@ -7,12 +9,15 @@
     }
   }
   [tab-target] {
-    max-height: 0;
+    position: absolute;
+    z-index: -1;
+    top: 0;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s linear;
     &.active {
-      max-height: fit-content;
+      position: initial;
+      z-index: 0;
       visibility: visible;
       opacity: 1;
     }

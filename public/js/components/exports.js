@@ -15,4 +15,6 @@ export const COMPONENTS = {
   "component='image'": "/js/components/shared/layouts/image.js",
   "component='notification'": "/js/components/private/notifications/index.js",
   "component='tabs'": "/js/components/shared/layouts/tabs/init.js",
+  "component='phone'": "/js/components/shared/forms/phone.js",
+  "component='date-icon'": "/js/components/shared/forms/date.js",
 };

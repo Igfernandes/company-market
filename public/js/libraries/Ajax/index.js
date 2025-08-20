@@ -5,6 +5,13 @@ import { mutate } from "./libs/mutate.js";
 
 const isFirstFetch = {};
 
+/**
+ * @developer Fernandes(github: https://github.com/Igfernandes)
+ *
+ * Ajax: Open source elaborado para ser uma tecnologia de solicitações e gerenciamento de requisições.
+ * version: 1.0.0
+ */
+
 /** @type {AjaxInstance} */
 export const ajax = {
   custom: async (
@@ -27,6 +34,7 @@ export const ajax = {
     return await mutate(
       {
         ...request,
+        method: options.method ?? "POST",
         urlFetched: route,
         queryKey: JSON.stringify(reference),
       },
