@@ -8,7 +8,7 @@ use App\Components\Shared\Forms\Fields\Search\Search;
 use App\Components\Shared\Utils\Notification\Notification;
 
 ?>
-<header class="bg-content w-100 shadow-sm">
+<header class="bg-content w-100 shadow-sm relative z-99">
     <div class="row flex items-center pt-3 px-4">
         <?php
         Toggle::render();
