@@ -3,8 +3,6 @@
 namespace App\Api\Operations\Users\Delete;
 
 use App\Business\Users\UsersBusiness;
-use App\Database\Models\Fields\UsersFieldsModel;
-use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\Notifications\NotificationsService;
@@ -27,13 +25,8 @@ class DeleteUseCases
         ]))
             throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
 
-        $usersFieldsModel = new UsersFieldsModel();
-        $usersGroupsModel = new UsersGroupsModel();
         $usersModel = new UsersModel();
-        $queryString = "user_id = $userId";
 
-        $usersGroupsModel->where($queryString)->delete();
-        $usersFieldsModel->where($queryString)->delete();
         $usersModel->delete($userId);
 
         NotificationsService::store([
