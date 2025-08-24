@@ -1,6 +1,7 @@
-import { capitalize } from "../../../../../helpers/string.js";
+import { capitalize } from "/js/helpers/string.js";
 import { getTHdTexts, isColumn } from "../utils/columns.js";
 import { handleRenderActions } from "./columns.js";
+import { INDEXES } from "../../../../../constants/indexes.js";
 
 export function tableRender(tableContainer) {
   const { updateAction, deleteAction } = tableContainer.dataset;
@@ -12,9 +13,12 @@ export function tableRender(tableContainer) {
 
     const colValue = data.toLowerCase();
 
-    return `<span class="inline-block h-100 w-100 bg-${colValue}">${capitalize(
-      colValue
-    )}</span>`;
+    return `<div class='text-center'>
+      <span class="inline-block h-100 w-100 bg-${
+        INDEXES[colValue]
+      }">${capitalize(colValue)}
+      </span>
+    </div>`;
   };
 
   const handleRender = (data, type, row, meta) => {

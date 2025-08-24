@@ -12,7 +12,7 @@ export const handleRenderUpdate = (id, updateAction) => {
 export const handleRenderDelete = (id, deleteAction) => {
   if (!id) return "";
 
-  return `<span class='t-btn-delete text-white-500 bg-accent p-2 rounded-xs' data-delete-entity="${deleteAction}" data-delete-key="${id}">
+  return `<span class='t-btn-delete text-white-500 bg-accent p-2 rounded-xs cursor-pointer' data-delete-entity="${deleteAction}" data-delete-key="${id}">
     <i class="bi bi-trash"></i>
     </span>
   `;
@@ -23,8 +23,8 @@ export const handleRenderActions = (
   { updateAction, deleteAction, tableContainer }
 ) => {
   const indexColumnId = getColumnIndex("id", tableContainer);
-  
-  if (!indexColumnId) return;
+
+  if (indexColumnId == -1) return;
 
   return {
     data: index, // <- sem ligação com dados

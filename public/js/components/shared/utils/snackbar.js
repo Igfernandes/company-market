@@ -29,14 +29,11 @@ export function Snackbar() {
     { message, timeToClose, title } = {}
   ) => {
     this.clean();
-    const component = await Component("/utils/snackbar", {
+    const snackbarContent = await Component("/utils/snackbar", {
       title,
       message,
       type: type.toUpperCase(),
     });
-
-    const snackbarContent = document.createElement("div");
-    snackbarContent.innerHTML = component;
 
     document.body.appendChild(snackbarContent);
     new ComponentManager().single("component='snackbar'");

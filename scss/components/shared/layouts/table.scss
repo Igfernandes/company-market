@@ -1,0 +1,66 @@
+[component="table"] {
+  .dt-layout-row {
+    &:nth-of-type(1) {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2%;
+    }
+    .dt-layout-cell {
+      .dt-length {
+        text-align: end;
+        display: flex;
+        justify-content: end;
+        flex-direction: row-reverse;
+        align-items: center;
+        select {
+          height: 2rem;
+          border: 1px solid var(--border-accent);
+          border-radius: 10%;
+        }
+        label {
+          text-transform: capitalize;
+          margin-right: 1rem;
+          font-size: 0.8rem;
+        }
+      }
+      &:nth-of-type(2) {
+        width: 25%;
+        min-width: 20rem;
+        .dt-search {
+          display: flex;
+          align-items: center;
+          label {
+            font-weight: 500;
+            font-family: "Poppins";
+            margin-right: 4%;
+          }
+          input {
+            border: 1px solid var(--border-accent);
+            height: 2rem;
+            padding-left: 1rem;
+            border-radius: 4%;
+          }
+        }
+      }
+      table {
+        thead {
+          background: var(--bg-content);
+        }
+        tbody {
+          tr {
+            &::nth-child(odd) {
+              background-color: var(--bg-accent-light);
+            }
+            td {
+              &.dt-empty {
+                text-align: center;
+                padding: 4rem 0;
+                background-color: var(--bg-dashboard);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

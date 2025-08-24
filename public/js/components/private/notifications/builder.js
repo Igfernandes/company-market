@@ -8,24 +8,17 @@ import { translate } from "../../../translate/index.js";
  *
  * @return {Element}
  */
-export function notificationBuilder(data = {}, component) {
-  const componentContainer = document.createElement("div");
-  componentContainer.innerHTML = component;
-
-  componentContainer.querySelector(
-    "[component='notification:author']"
-  ).innerHTML = data.author.name;
-  componentContainer.querySelector(
-    "[component='notification:title']"
-  ).innerHTML =
+export function notificationBuilder(data = {}, notification) {
+  notification.querySelector("[component='notification:author']").innerHTML =
+    data.author.name;
+  notification.querySelector("[component='notification:title']").innerHTML =
     data.title ?? translate(`Notifications.${data.operation}.title`);
-  componentContainer.querySelector(
+  notification.querySelector(
     "[component='notification:message-content']"
   ).innerHTML =
     data.message ?? translate(`Notifications.${data.operation}.text`);
-  componentContainer.querySelector(
-    "[component='notification:datetime']"
-  ).innerHTML = dayjs(data.created_at).format("DD/MM/YYYY HH:mm:ss");
+  notification.querySelector("[component='notification:datetime']").innerHTML =
+    dayjs(data.created_at).format("DD/MM/YYYY HH:mm:ss");
 
-  return componentContainer.children[0];
+  return notification;
 }

@@ -12,7 +12,7 @@
 @for $int from 1 through 9 {
   @for $dec from 1 through 9 {
     .border-\[#{$int}\.#{$dec}\] {
-      border-width: $int + ($dec / 10);
+      border-width: $int + ($dec / 10)px;
     }
   }
 }
