@@ -7,7 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "browser": "npx browser-sync start --proxy \"localhost:8080\" --host \"127.0.0.1\" --port 3000 --files \"app/Views/**/*.php\" \"public/css/**/*.css\" \"public/js/**/*.js\" --open external",
+    "vite": "vite",
+    "ngrok": "ngrok start --config=ngrok.yml ci4",
+    "browser": "concurrently \"npm run vite\" \"npm run ngrok\"",
     "start": "npx webpack",
     "test": "jest"
   },
@@ -25,8 +27,11 @@
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",
     "babel-jest": "^30.0.5",
+    "concurrently": "^9.2.0",
     "jest": "^30.0.5",
-    "node-fetch": "^2.7.0"
+    "ngrok": "^5.0.0-beta.2",
+    "node-fetch": "^2.7.0",
+    "vite": "^7.1.3"
   },
   "dependencies": {
     "jest-environment-jsdom": "^30.0.5"
