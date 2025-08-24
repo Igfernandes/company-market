@@ -3,7 +3,6 @@
 namespace App\Api\Operations\Invites\Users\Post;
 
 use App\Business\Users\UsersBusiness;
-use App\Business\Users\UsersGroupsBusiness;
 use App\Database\Entities\Invites\InviteEntity;
 use App\Database\Models\Invites\InvitesModel;
 use App\Libraries\Crypto\Crypto;
@@ -17,9 +16,7 @@ class PostUseCases
     /**
      * @param array{
      *   name: string,
-     *   email: string,
-     *   phone: string,
-     *   group: array{number}
+     *   email: string
      * } $payload
      */
     public function execute(array $payload)
@@ -27,17 +24,10 @@ class PostUseCases
         $session = session();
 
         $userAuthId = $session->get('userAuthId');
-        $usersGroupsBusiness = new UsersGroupsBusiness();
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isEmailAvailable($payload['email']))
             throw new Exceptions("Api.invites.invalid.already_exists_email", BAD_REQUEST);
-
-        if (!$usersBusiness->isPhoneAvailable($payload['phone']))
-            throw new Exceptions("Api.invites.invalid.already_exists_phone", BAD_REQUEST);
-
-        if (isset($payload['group']) && !$usersGroupsBusiness->hasGroups($payload['group']))
-            throw new Exceptions("Api.invites.invalid.invalid_group", BAD_REQUEST);
 
         $invitesModel = new InvitesModel();
         $inviteEntity = new InviteEntity();

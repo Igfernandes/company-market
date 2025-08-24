@@ -8,10 +8,10 @@ trait PostDTOs
         'cpf' => [
             'rules'  => 'string|max_length[100]|required|regex_match[' . VALIDATE_CPF_CNPJ . ']',
             'errors' => [
-                'string'      => 'Api.users.invalid.cpf',
-                'max_length'  => 'Api.users.invalid.cpf',
-                'required'    => 'Api.users.invalid.cpf',
-                'regex_match' => 'Api.users.invalid.cpf',
+                'string'      => 'Api.users.invalid.document',
+                'max_length'  => 'Api.users.invalid.document',
+                'required'    => 'Api.users.invalid.document',
+                'regex_match' => 'Api.users.invalid.document',
             ],
         ],
         'birthdate' => [

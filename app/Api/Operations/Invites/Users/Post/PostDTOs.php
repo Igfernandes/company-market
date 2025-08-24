@@ -21,17 +21,6 @@ trait PostDTOs
                 'max_length' => 'Api.invites.invalid.email_max_length_255',
                 'required' => 'Api.invites.invalid.email',
             ],
-        ],
-        'phone' => [
-            'rules' => 'string|required',
-            'errors' => [
-                'string' => 'Api.invites.invalid.phone',
-                'required' => 'Api.invites.invalid.phone',
-            ],
-        ],
-        'group' => [
-            'rules' => 'permit_empty',
-            'errors' => [],
-        ],
+        ]
     ];
 }
