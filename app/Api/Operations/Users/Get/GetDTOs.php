@@ -29,11 +29,11 @@ trait GetDTOs
                 'string' => 'Api.users.invalid.name',
             ],
         ],
-        'cpf' => [
-            'rules'  => 'string|regex_match[' . VALIDATE_CPF_CNPJ . ']|permit_empty',
+        'document' => [
+            'rules'  => 'string|permit_empty',
             'errors' => [
-                'string'      => 'Api.users.invalid.cpf',
-                'regex_match' => 'Api.users.invalid.cpf',
+                'string'      => 'Api.users.invalid.document',
+                'regex_match' => 'Api.users.invalid.document',
             ],
         ],
         'phone' => [
@@ -54,16 +54,17 @@ trait GetDTOs
                 'in_list' => 'Api.users.invalid.status',
             ],
         ],
-        'created_at' => [
-            'rules'  => 'valid_date|permit_empty',
+        'start' => [
+            'rules'  => 'numeric|permit_empty',
             'errors' => [
-                'valid_date' => 'Api.users.invalid.created_at',
+                'numeric' => 'Api.users.invalid.start',
             ],
         ],
-        'updated_at' => [
-            'rules'  => 'valid_date|permit_empty',
+        'limit' => [
+            'rules'  => 'numeric|less_than_equal_to[500]|permit_empty',
             'errors' => [
-                'valid_date' => 'Api.users.invalid.updated_at',
+                'numeric'    => 'Api.users.invalid.limit',
+                'less_than_equal_to' => 'Api.users.invalid.limit',
             ],
         ],
     ];
