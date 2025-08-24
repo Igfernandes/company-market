@@ -133,3 +133,9 @@ dist/
 vendor/
 .sass-cache/
 public/css/theme.css
+app/Config/App.php
+app/Config/Constants.php
+app/Config/Cors.php
+app/Services/CronJob/CronJobService.php
+app/Services/MercadoPago/Operations/ProductPunctual.php
+app/Traits/Users/UsersDataTrait.php
