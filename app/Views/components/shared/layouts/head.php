@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title><?= $title ?? "" ?></title>
+    <title><?= !empty($title) ? $title : getenv("globals.company.name") ?></title>
     <meta name="description" content="<?= $description ?? "" ?>">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= base_url($path ?? "") ?>">
@@ -55,18 +55,23 @@
 
     <link rel="stylesheet" href="/css/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/theme.css">
+    <!-- Dev (Vite) -->
+    <?php if (ENVIRONMENT === 'development'): ?>
+        <script type="module" src="http://localhost:3000/@vite/client"></script>
+    <?php else: ?>
+        <!-- Produção (build do dist) -->
+        <link rel="stylesheet" href="/dist/assets/app.css">
+        <script type="module" src="/dist/assets/app.js"></script>
+    <?php endif; ?>
+
 
     <!-- JQuery -->
     <script src="/js/libraries/JQuery/jquery-3.7.1.min.js"></script>
     <script src="/js/libraries/Mask/jquery.mask.min.js"></script>
     <script src="/js/libraries/IntlTelInput/intlTelInput.min.js"></script>
 
-    <?php
-    if ($hasTable) {
-    ?>
-        <link rel="stylesheet" href="/css/dataTables.css" />
-    <?php
-    }
-    ?>
+
+    <link rel="stylesheet" href="/css/dataTables.css" />
+
 
 <body>

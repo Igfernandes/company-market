@@ -31,6 +31,9 @@ export const ajax = {
 
     const customResponse = await fetch(route, request);
 
+    if (customResponse.status === HTTP_STATUS.NOT_FOUND)
+      throw new Error("INVALID ROUTE OR OPERATION");
+
     return await mutate(
       {
         ...request,
@@ -55,6 +58,9 @@ export const ajax = {
     }
 
     const postResponse = await fetch(route, request);
+
+    if (postResponse.status === HTTP_STATUS.NOT_FOUND)
+      throw new Error("INVALID ROUTE OR OPERATION");
 
     return await mutate(
       {

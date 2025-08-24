@@ -6,11 +6,14 @@ use App\Business\Exports\ExportsBusiness;
 use App\Business\Exports\ExportsClientsBusiness;
 use App\Business\Exports\ExportsFormFillsBusiness;
 use App\Business\Exports\ExportsFormsBusiness;
+use App\Business\Users\ExportsUsersBusiness;
 use App\Libraries\Exceptions\Exceptions;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class PostUseCases
 {
     private array $instances = [
+        "USERS" => ExportsUsersBusiness::class,
         "CLIENTS" => ExportsClientsBusiness::class,
         "FORMS" =>  ExportsFormsBusiness::class,
         "FORMS_FILLS" => ExportsFormFillsBusiness::class
@@ -26,26 +29,28 @@ class PostUseCases
      */
     public function execute(array $payload)
     {
-        if (!isset($this->instances[$payload['entity']]))
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
+        $instanceIndex = \strtoupper($payload['entity']);
 
-        $entityInstance = $this->instances[$payload['entity']];
+        if (!isset($this->instances[$instanceIndex]))
+            throw new Exceptions("Api.exports.invalid.entity", ResponseInterface::HTTP_NOT_ACCEPTABLE);
+
+        $entityInstance = $this->instances[$instanceIndex];
 
         if (empty($entityInstance) || !$entityInstance)
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
+            throw new Exceptions("Api.exports.invalid.entity", ResponseInterface::HTTP_NOT_ACCEPTABLE);
         if (count($payload['in_ids']) > $this->maxIds)
-            throw new Exceptions("Api.exports.invalid.entity", \BAD_REQUEST);
+            throw new Exceptions("Api.exports.invalid.entity", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         $exportData = new $entityInstance();
 
         switch ($payload['type']):
             case "PDF":
                 $data = $exportData->getData($payload['in_ids'] ?? []);
-                $file = ExportsBusiness::pdf(strtolower($payload['entity']), $data);
+                $file = ExportsBusiness::pdf(strtolower($instanceIndex), $data);
                 break;
             case "EXCEL":
                 $data = $exportData->getData($payload['in_ids'] ?? []);
-                $file = ExportsBusiness::excel(strtolower($payload['entity']), $data);
+                $file = ExportsBusiness::excel(strtolower($instanceIndex), $data);
         endswitch;
 
         return (object)[

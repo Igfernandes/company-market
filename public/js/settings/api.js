@@ -8,5 +8,12 @@ export const API_ROUTES = {
   },
   users: {
     put: "/api/users",
+    delete: "/api/users/{id}",
+  },
+  invites: {
+    user: "/api/invites/user",
+  },
+  exports: {
+    post: "/api/exports",
   },
 };

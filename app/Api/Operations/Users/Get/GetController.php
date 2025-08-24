@@ -7,6 +7,7 @@ use App\Api\Validation;
 use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
+use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
 class GetController extends BaseController
@@ -37,13 +38,11 @@ class GetController extends BaseController
 
 
             if (!$validation->run($payload))
-                throw new Exceptions($validation->getErrors(), BAD_REQUEST);
-
-
+                throw new Exceptions($validation->getErrors(), ResponseInterface::HTTP_BAD_REQUEST);
 
             $responseGet = $this->getUseCases->execute($payload);
 
-            return $this->response->setJSON($responseGet)->setStatusCode(OK);
+            return $this->response->setJSON($responseGet)->setStatusCode(ResponseInterface::HTTP_OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

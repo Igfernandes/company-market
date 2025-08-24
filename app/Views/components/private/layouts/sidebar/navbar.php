@@ -15,7 +15,8 @@ $icon = [
     'charges' => '<i class="bi bi-cash-stack"></i>',
     'expenses' => '<i class="bi bi-clipboard-data"></i>',
     "coupons" => '<i class="bi bi-ticket-detailed"></i>',
-    "sistema" => '<i class="bi bi-gear"></i>'
+    "sistema" => '<i class="bi bi-gear"></i>',
+    "users" => '<i class="bi bi-person-lock"></i>'
 ];
 ?>
 

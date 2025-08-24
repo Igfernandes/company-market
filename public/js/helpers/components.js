@@ -1,4 +1,5 @@
-import { COMPONENTS } from "../components/exports.js";
+import { COMPONENTS } from "../components/require.js";
+import { COMPONENTS_PATH } from "../constants/components.js";
 import { getQueryParams } from "./route.js";
 
 const loadedScripts = new Set();
@@ -12,15 +13,17 @@ const loadedScripts = new Set();
  */
 export async function Component(path = "", props = {}) {
   const queries = getQueryParams(props);
-  const stringOnlySingleBar = `/load/component/${path}?${queries}`.replaceAll(
-    "//",
-    "/"
-  );
+  const pathFiltered = COMPONENTS_PATH[path] ?? path;
+
+  const stringOnlySingleBar =
+    `/load/component/${pathFiltered}?${queries}`.replaceAll("//", "/");
 
   const component = await (await fetch(stringOnlySingleBar)).text();
   const componentParts = component.split("<!-- DEBUG-VIEW ENDED");
-
-  return componentParts[0] ?? component;
+  const container = document.createElement("div");
+  container.innerHTML = componentParts[0] ?? component;
+  
+  return container.firstElementChild;
 }
 
 export function ComponentManager() {

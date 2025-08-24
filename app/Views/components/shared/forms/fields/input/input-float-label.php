@@ -14,27 +14,22 @@ if (isset($name) && isset($storeValue[$name]))
             <input type="<?= $type  ?>"
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
-                id="<?= $id ?? $name ?>"
+                id="<?= !empty($id) ? $id : $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-[3rem] text-lg px-2 pt-2 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-[3rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (!isset($labelNot)) : ?>
-                <label class="absolute left-1 top-20 pl-1 text-black-700" data-label-toggle component="input:label" for="<?= $id ?? $name ?>">
+                <label class="absolute left-1 top-20 pl-1 text-sm lg:text-lg text-black-700" data-label-toggle component="input:label" for="<?= !empty($id) ? $id : $name ?>">
                     <strong class="font-arial">
                         <?= ucfirst($label) ?>
                         <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/variants/tooltip/required") : null ?>
                     </strong>
                 </label>
             <?php endif; ?>
-        </div>
-        <div class="absolute right-1 top-20">
-            <div class="input-group-append absolute text-xl w-[1.5rem] h-[1rem] top-20 right-5 z-20 text-accent">
-                <i class="bi bi-envelope-fill"></i>
-            </div>
         </div>
     </div>
     <div class="invalid-message text-xs text-red-500 px-2 mt-1" data-invalid="<?= $name ?>">

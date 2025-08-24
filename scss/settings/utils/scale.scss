@@ -1,0 +1,13 @@
+@for $i from 1 through 100 {
+  // Exemplo: .scale-110 => transform: scale(1.10)
+  .scale-#{$i} {
+    transform: scale(#{0 + ($i / 100)});
+  }
+
+  // Exemplo: .active:scale-110 => :active { transform: scale(1.10) }
+  .active\:scale-#{$i} {
+    &:active {
+      transform: scale(#{0 + ($i / 100)});
+    }
+  }
+}

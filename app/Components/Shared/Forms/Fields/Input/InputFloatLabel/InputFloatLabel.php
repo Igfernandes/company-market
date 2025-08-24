@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Shared\Forms\InputFloatLabel;
+namespace App\Components\Shared\Forms\Fields\Input\InputFloatLabel;
 
 use App\Components\BaseComponents;
 

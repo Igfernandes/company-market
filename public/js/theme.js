@@ -1,4 +1,4 @@
-import "/js/components/exports.js";
+import "/js/components/require.js";
 import { exports } from "./exports/index.js";
 import { resolvesPath } from "./helpers/resolvesPath.js";
 import "/js/libraries/swiper/swiper-bundle.min.js";

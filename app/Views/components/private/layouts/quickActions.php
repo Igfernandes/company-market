@@ -1,0 +1,56 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Components\Shared\Utils\Exports\Exports;
+
+/**
+ * @var array{
+ *  text: string,
+ *  link: string,
+ *  class: ?string ,
+ *  attributes: ?array,   
+ * } $actions
+ * @var array{
+ *  entity: string,
+ *  excel: bool,
+ *  pdf: bool
+ * } $exports
+ */
+
+?>
+
+<div component='quick-actions' class="relative z-10">
+    <div class="flex justify-between my-4">
+        <div>
+            <div class="flex items-center bg-content">
+                <?php
+                if (isset($actions)):
+                    foreach ($actions as $action): ?>
+                        <div <?= isset($action['attributes']) ? getAttributes($action['attributes']) : null ?> component='quick-actions:button' class="py-2 px-4 rounded-sm mr-3 cursor-pointer <?= $action['class'] ?>">
+                            <a href="<?= isset($action['link']) ? $action['link'] : "#" ?>">
+                                <strong> <?= $action['text'] ?></strong>
+                            </a>
+                        </div>
+                <?php endforeach;
+                endif; ?>
+                <?php if (isset($trash) && !empty($trash)): ?>
+                    <div component='quick-actions:button' class="bg-red-100 text-gray-800 py-2 px-8 rounded-sm shadow mr-3 cursor-pointer">
+                        <a href=" <?= $trash ?>">
+                            <i class="bi bi-trash"></i> <span>Lixeira</span>
+                        </a>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+        <?php if (isset($export['entity']) && isset($export['entity'])): ?>
+            <?=
+            Exports::render(
+                entity: $export['entity'],
+                excel: $export['excel'] ?: false,
+                pdf: $export['pdf'] ?: false
+            )
+            ?>
+        <?php endif; ?>
+    </div>
+</div>

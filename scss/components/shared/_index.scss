@@ -1,6 +1,8 @@
 /** Utils **/
 @import "./utils/tooltip.scss";
 @import "./utils/recaptcha.scss";
+@import "./utils/popup.scss";
+@import "./utils/exports.scss";
 
 @import "./forms/label.scss";
 @import "./forms/checkbox.scss";
@@ -9,3 +11,4 @@
 @import "./forms/phone.scss";
 
 @import "./layouts/tabs.scss";
+@import "./layouts/table.scss";

@@ -38,7 +38,9 @@ class Cors extends BaseConfig
             'http://localhost:8080',
             'http://localhost:3000',
             'http://localhost:5173',
-            'http://127.0.0.1:3000'
+            'http://127.0.0.1:3000',
+            'https://loon-vite.ngrok-free.app:3000',
+            'https://loon-selected-hideously.ngrok-free.app'
         ],
 
         /**
@@ -52,7 +54,7 @@ class Cors extends BaseConfig
          * E.g.:
          *   - ['https://\w+\.example\.com']
          */
-        'allowedOriginsPatterns' => ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
+        'allowedOriginsPatterns' => [],
 
         /**
          * Weather to send the `Access-Control-Allow-Credentials` header.

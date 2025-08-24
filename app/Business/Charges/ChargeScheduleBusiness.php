@@ -33,7 +33,7 @@ class ChargeScheduleBusiness
 
         $job->setTitle("Task-charge:{$charge->getId()}");
         $job->setSchedule($schedule);
-        $job->setUrl(getenv('globals.href.backend') . "/api/webhook/tasks/charge?k={$charge->getReference()}");
+        $job->setUrl(base_url("/api/webhook/tasks/charge?k={$charge->getReference()}"));
 
         $cronJobService->store($job);
     }

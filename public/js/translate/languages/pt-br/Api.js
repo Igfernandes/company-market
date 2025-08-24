@@ -5,7 +5,7 @@ export const API = {
   },
   auth: {
     success: {
-      post: "Aguarde! Logo você será redirecionado",
+      post: "Logo você será redirecionado",
     },
     invalid: {
       credentials: "As credenciais encontram-se inválidas",
@@ -22,12 +22,30 @@ export const API = {
       },
     },
   },
+  exports: {
+    success: {
+      post: "A exportação foi concluída com sucesso",
+    },
+    invalid: {
+      entity:
+        "O sistema ainda não tem integrado a exportação desse modelo de dados",
+    },
+  },
+  invites: {
+    success: {
+      post: "O convite foi enviado com sucesso para o e-mail do novo usuário",
+    },
+    invalid: {
+      already_exists_email: "O e-mail inserido encontra-se utilizado",
+    },
+  },
   users: {
     success: {
       recover_password: "Abra a sua caixa de e-mail e siga as instruções",
       put: "Informações do usuário atualizadas com sucesso",
     },
     invalid: {
+      name: "O nome encontra-se inferior a 3 caracteres ou inválido",
       document: "O documento encontra-se vazio ou inválido",
     },
   },

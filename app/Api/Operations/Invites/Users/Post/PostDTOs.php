@@ -9,7 +9,7 @@ trait PostDTOs
             'rules' => 'string|max_length[100]|required',
             'errors' => [
                 'string' => 'Api.invites.invalid.name',
-                'max_length' => 'Api.invites.invalid.name_max_length_100',
+                'max_length' => 'Api.invites.invalid.name',
                 'required' => 'Api.invites.invalid.name',
             ],
         ],
@@ -18,20 +18,9 @@ trait PostDTOs
             'errors' => [
                 'string' => 'Api.invites.invalid.email',
                 'valid_email' => 'Api.invites.invalid.email',
-                'max_length' => 'Api.invites.invalid.email_max_length_255',
+                'max_length' => 'Api.invites.invalid.email',
                 'required' => 'Api.invites.invalid.email',
             ],
-        ],
-        'phone' => [
-            'rules' => 'string|required',
-            'errors' => [
-                'string' => 'Api.invites.invalid.phone',
-                'required' => 'Api.invites.invalid.phone',
-            ],
-        ],
-        'group' => [
-            'rules' => 'permit_empty',
-            'errors' => [],
-        ],
+        ]
     ];
 }

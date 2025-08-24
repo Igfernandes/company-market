@@ -18,7 +18,7 @@ class ScheduleDispatcherBusiness
         $cronJobService = new CronJobService();
 
         $job = new Job();
-        $job->setUrl(getenv('globals.href.backend') . "/api/webhook/tasks/dispatcher?k={$dispatcher->getReference()}");
+        $job->setUrl(base_url("/api/webhook/tasks/dispatcher?k={$dispatcher->getReference()}"));
 
         $job->setTitle("Task-dispatcher:" . $dispatcher->getId());
         $schedule = new Schedule();

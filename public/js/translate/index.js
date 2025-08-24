@@ -1,3 +1,4 @@
+import { getDataInObject } from "../helpers/object.js";
 import { translates } from "./languages/pt-br/index.js";
 
 /**
@@ -7,11 +8,9 @@ import { translates } from "./languages/pt-br/index.js";
  * @param {string} string - A chave da tradução no formato de caminho com pontos (e.g., "API.users.invalid.password").
  * @returns {string|undefined} O valor traduzido correspondente à chave, ou `undefined` se não for encontrado.
  */
-export function translate(path) {
+export function translate(path, alternative = "") {
   if (!path) return;
-  const proprietiesList = path.split(".");
+  const responseText = getDataInObject(path, translates);
 
-  return proprietiesList.reduce((acc, key) => {
-    return acc && acc[key] !== undefined ? acc[key] : undefined;
-  }, translates);
+  return responseText ?? getDataInObject(alternative, translates);
 }

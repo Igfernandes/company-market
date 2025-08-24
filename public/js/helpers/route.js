@@ -55,3 +55,23 @@ export function getFormDataToJson(formData) {
   });
   return obj;
 }
+
+export function getParams(url, data) {
+  let urlWithParam = url;
+
+  if (data && Object.keys(data).length > 0) {
+    Object.entries(data).forEach(([label, value]) => {
+      urlWithParam = value
+        ? urlWithParam.replaceAll(`{${label}}`, value)
+        : urlWithParam.replaceAll(`{${label}}`, "");
+    });
+    urlWithParam = urlWithParam.includes("//")
+      ? urlWithParam.replaceAll("//", "/")
+      : urlWithParam;
+  }
+
+  // SE AINDA HOUVER ALGUM PARAMETRO QUE NAO FOI SUBSTITUIDO, REMOVER (REMOVE TUDO DENTRO DAS CHAVES INCLUINDO AS CHAVES)
+  urlWithParam = urlWithParam.replace(/ *\{[^)]*\} */g, "");
+
+  return urlWithParam;
+}

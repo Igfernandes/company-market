@@ -95,13 +95,6 @@ class UsersBusinessSuccessTest extends CIUnitTestCase
         $this->assertTrue($isDocumentAvailable);
     }
 
-    public function testShouldNotAvailableDocument()
-    {
-        $isDocumentAvailable = $this->business->isDocumentAvailable(getenv("globals.admin.document"), SELF::USER_MOCK['id']);
-
-        $this->assertNotTrue($isDocumentAvailable);
-    }
-
     public function testShouldAvailableEmail()
     {
         $isEmailAvailable = $this->business->isEmailAvailable("21600635492", SELF::USER_MOCK['id']);

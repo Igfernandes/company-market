@@ -1,5 +1,8 @@
-@for $i from 1 through 100 {
+@for $i from 1 through 1000 {
   .z-#{$i} {
     z-index: $i;
   }
+}
+.z-max{
+  z-index: 999999
 }

@@ -20,13 +20,21 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                 name="<?= $name ?>"
                 component='phone:input'
                 value="<?= isset($value) ? $value : null ?>"
-                id="<?= $id ?? $name ?>"
+                id="<?= !empty($id) ? $id : $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control  block ml-auto w-88 h-100 text-md pl-3 py-3 rounded-sm outline-accent focus:outline-solid <?= $class ?? null ?>"
+                class="form-control  block ml-auto w-100 h-[3rem] text-md pl-3 pt-2 rounded-sm outline-accent focus:outline-solid <?= $class ?? null ?>"
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
+            <?php if (isset($label)) : ?>
+                <label class="absolute left-1 top-20 pl-14 text-sm lg:text-lg text-black-700" data-label-toggle component="input:label" for="<?= !empty($id) ? $id : $name ?>">
+                    <strong class="font-arial">
+                        <?= ucfirst($label) ?>
+                        <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/variants/tooltip/required") : null ?>
+                    </strong>
+                </label>
+            <?php endif; ?>
         </div>
     </div>
     <div class="invalid-message text-xs text-red-500 px-2 mt-1" data-invalid="<?= $name ?>">

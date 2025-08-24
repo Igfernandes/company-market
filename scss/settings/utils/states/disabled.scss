@@ -1,0 +1,12 @@
+$extra-colors: "light", "dark", "accent", "accent-light", "muted", "hover",
+  "active", "disabled", "laboratory", "dashboard", "content";
+
+// Loop para gerar classes de estados disabled
+@each $name in $extra-colors {
+  .disabled\:bg-#{$name}:disabled {
+    background-color: var(--bg-#{$name});
+  }
+  .disabled\:text-#{$name}:disabled {
+    color: var(--text-#{$name});
+  }
+}

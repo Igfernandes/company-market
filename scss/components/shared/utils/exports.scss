@@ -1,0 +1,10 @@
+[component="exports"] {
+  &:hover {
+    [component="exports:list"] {
+      display: block;
+    }
+  }
+  [component="exports:list"] {
+    display: none;
+  }
+}

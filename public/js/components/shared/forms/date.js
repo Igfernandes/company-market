@@ -2,6 +2,11 @@ import { isDayValid, isMonthValid } from "../../../helpers/date.js";
 import { translate } from "../../../translate/index.js";
 import { snackbar } from "../utils/snackbar.js";
 
+const maskDates = {
+  default: "YYYY-MM-DD",
+  br: "DD/MM/YYYY",
+};
+
 export const init = () => {
   const components = Array.from(
     document.querySelectorAll("[component='date-icon']")

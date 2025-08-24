@@ -14,6 +14,7 @@ if (isset($attributes)) {
     id="<?= esc($id) ?>"
     component="table"
     data-heads="<?= join("/", $heads) ?>"
+    <?= is_array($relations) && count($relations) > 0 ? "table-relations='" . join(",", $relations) . "'" : "" ?>
     data-ajax="<?= $ajax ?>"
     <?= $update ? "data-update-action='$update'" : null ?>
     <?= $delete ? "data-delete-action='$delete'" : null ?>

@@ -1,4 +1,4 @@
-import "../../../../libraries/DataTables/dataTables.js";
+import "/js/libraries/DataTables/dataTables.js";
 import { tableAjax } from "./settings/ajax.js";
 import { tableRender } from "./settings/render.js";
 import { translatorTable } from "./settings/translator.js";
