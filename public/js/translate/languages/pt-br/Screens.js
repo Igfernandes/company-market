@@ -18,6 +18,18 @@ export const SCREENS = {
   },
   users: {
     snackbar_title: "Atualização de informações",
+    delete: {
+      modal_title: "Confirmar Exclusão",
+      modal_subtitle: "Você tem certeza que deseja excluir este usuário?",
+      modal_text:
+        "Após a exclusão, o usuário será movido para a Lixeira. Enquanto estiver lá, ele poderá ser recuperado a qualquer momento ou removido de forma definitiva.",
+    },
+  },
+  invites: {
+    snackbar_title: "Convite de Usuário",
+  },
+  exports: {
+    snackbar_title: "Exportação de dados",
   },
   notifications: {
     snackbar_title: "Notificações",
