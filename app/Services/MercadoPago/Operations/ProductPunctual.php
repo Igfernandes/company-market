@@ -41,13 +41,11 @@ trait ProductPunctual
             "client_id" => $options['client_id'],
             "reference" => $options['reference']
         ]);
-        $isLocalhost = \ENVIRONMENT === "development";
-        $baseLocalhost = getenv('globals.href.backend');
 
         $preference->__set("back_urls", [
-            "success" => $isLocalhost ? "$baseLocalhost/checkout/success" : base_url("checkout/success"),
-            "failure" => $isLocalhost ? "$baseLocalhost/checkout/failed" : base_url("checkout/failed"),
-            "pending" => $isLocalhost ? "$baseLocalhost/checkout/pendent" : base_url("checkout/pendent")
+            "success" =>  base_url("checkout/success"),
+            "failure" => base_url("checkout/failed"),
+            "pending" => base_url("checkout/pendent")
         ]);
 
         $preference->__set("auto_return", "approved");

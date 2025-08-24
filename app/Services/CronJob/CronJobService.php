@@ -20,7 +20,7 @@ class CronJobService
     public function store(Job $job)
     {
         if (empty($job->getUrl()))
-            $job->setUrl(getenv('globals.href.backend') . "/api/webhook/tasks/dispatcher");
+            $job->setUrl(base_url("/api/webhook/tasks/dispatcher"));
 
         $httpResponse =  HttpClient::request("PUT", "{$this->url}/jobs", [
             'Content-Type: application/json',
