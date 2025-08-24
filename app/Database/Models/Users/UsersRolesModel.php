@@ -73,9 +73,9 @@ class UsersRolesModel extends Model
 
             $roleEntity->store($attributes);
             $roleEntity->setId($attributes['role_id']);
-            $roleEntity->setName($attributes['group_name']);
-            $roleEntity->setCreatedAt($attributes['group_created_at']);
-            $roleEntity->setUpdatedAt($attributes['group_updated_at']);
+            $roleEntity->setName($attributes['role_name']);
+            $roleEntity->setCreatedAt($attributes['role_created_at']);
+            $roleEntity->setUpdatedAt($attributes['role_updated_at']);
 
             $userRoleEntity->setUserId($attributes['user_id']);
             $userRoleEntity->setRoleId($attributes['role_id']);
