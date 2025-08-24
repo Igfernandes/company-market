@@ -18,7 +18,7 @@ export async function getNotifications(payload = {}) {
     const { data } = await ajax.get(notifications.default, payload);
 
     if (!data || data.error)
-      return snackbar.execute("FAILED", {
+      return snackbar.execute("FAIL", {
         title: snackbarTitleText,
         message: translate(data.error),
       });
