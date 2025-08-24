@@ -13,7 +13,7 @@ export async function postRecoverPassword(payload = {}) {
     const { data } = await ajax.post(recover.password, payload);
 
     if (!data || data.error)
-      return snackbar.execute("failed", {
+      return snackbar.execute("fail", {
         title: snackbarTitleText,
         message: translate(data.error),
       });
