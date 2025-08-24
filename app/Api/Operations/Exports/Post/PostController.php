@@ -33,6 +33,10 @@ class PostController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), ResponseInterface::HTTP_BAD_REQUEST);
 
+            if (isset($payload['in_ids']) && !is_array($payload['in_ids']))
+                throw new Exceptions("Api.exports.invalid.in_ids", ResponseInterface::HTTP_BAD_REQUEST);
+            else $payload['in_ids'] = [];
+
             $isIdInvalid = \array_filter($payload['in_ids'], fn($id) => \gettype($id) !== "integer");
 
             if (\count($isIdInvalid) > 0 && count($payload['in_ids']) > 0)
@@ -42,7 +46,7 @@ class PostController extends BaseController
 
             return $this->response->setJSON($responsePost)->setStatusCode(ResponseInterface::HTTP_OK);
         } catch (Exception | Exceptions $err) {
-            \var_dump($err);
+         
             return  $this->response->setJSON((object)[
                 "error" => $this->getMessageError($err)
             ])->setStatusCode($this->getCodeError($err));

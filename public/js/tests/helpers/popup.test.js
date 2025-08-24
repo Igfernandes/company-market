@@ -6,11 +6,11 @@ describe("Popup helper", () => {
   beforeEach(() => {
     // Reset DOM antes de cada teste
     document.body.innerHTML = `
-      <button data-popup="a">Abrir A</button>
-      <button data-popup="b">Abrir B</button>
+      <button popup="a">Abrir A</button>
+      <button popup="b">Abrir B</button>
 
-      <div data-target-popup="a"></div>
-      <div data-target-popup="b"></div>
+      <div target-popup="a"></div>
+      <div target-popup="b"></div>
     `;
 
     // Carrega o helper (simulando import ou require)
@@ -22,8 +22,8 @@ describe("Popup helper", () => {
   });
 
   test("abre o popup correto ao clicar", () => {
-    const btnA = document.querySelector('[data-popup="a"]');
-    const targetA = document.querySelector('[data-target-popup="a"]');
+    const btnA = document.querySelector('[popup="a"]');
+    const targetA = document.querySelector('[target-popup="a"]');
 
     btnA.click();
 
@@ -31,10 +31,10 @@ describe("Popup helper", () => {
   });
 
   test("fecha outros popups quando um é aberto", () => {
-    const btnA = document.querySelector('[data-popup="a"]');
-    const btnB = document.querySelector('[data-popup="b"]');
-    const targetA = document.querySelector('[data-target-popup="a"]');
-    const targetB = document.querySelector('[data-target-popup="b"]');
+    const btnA = document.querySelector('[popup="a"]');
+    const btnB = document.querySelector('[popup="b"]');
+    const targetA = document.querySelector('[target-popup="a"]');
+    const targetB = document.querySelector('[target-popup="b"]');
 
     btnA.click();
     expect(targetA.classList.contains("show")).toBe(true);
@@ -46,8 +46,8 @@ describe("Popup helper", () => {
   });
 
   test("fecha popup se clicar nele quando já está aberto", () => {
-    const btnA = document.querySelector('[data-popup="a"]');
-    const targetA = document.querySelector('[data-target-popup="a"]');
+    const btnA = document.querySelector('[popup="a"]');
+    const targetA = document.querySelector('[target-popup="a"]');
 
     btnA.click();
     expect(targetA.classList.contains("show")).toBe(true);

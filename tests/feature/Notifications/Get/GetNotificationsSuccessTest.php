@@ -3,7 +3,6 @@
 namespace Tests\Feature\Notifications\Get;
 
 use App\Api\Operations\Notifications\Get\GetUseCases;
-use App\Database\Entities\Permissions\PermissionEntity;
 use App\Database\Models\Notifications\NotificationsModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
@@ -15,17 +14,6 @@ class GetNotificationsSuccessTest extends NotificationsMock
     use FeatureTestTrait, AuthenticatedSession;
 
     private string $route = '/api/notifications';
-
-    /**
-     * Cria um mock de PermissionEntity
-     */
-    private function createPermissionMock(string $scope = 'clients', string $action = 'VIEW'): PermissionEntity
-    {
-        $mock = $this->createMock(PermissionEntity::class);
-        $mock->method('getScope')->willReturn($scope);
-        $mock->method('getType')->willReturn($action);
-        return $mock;
-    }
 
     /**
      * Cenário: payload vazio

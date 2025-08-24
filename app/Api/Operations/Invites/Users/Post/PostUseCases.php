@@ -4,6 +4,7 @@ namespace App\Api\Operations\Invites\Users\Post;
 
 use App\Business\Users\UsersBusiness;
 use App\Database\Entities\Invites\InviteEntity;
+use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Invites\InvitesModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
@@ -23,7 +24,8 @@ class PostUseCases
     {
         $session = session();
 
-        $userAuthId = $session->get('userAuthId');
+        /** @var UserEntity */
+        $userAuth = $session->get(\SESSION_KEY_AUTH_USER);
         $usersBusiness = new UsersBusiness();
 
         if (!$usersBusiness->isEmailAvailable($payload['email']))
@@ -38,7 +40,7 @@ class PostUseCases
         $inviteEntity->setToken($tokenInvite);
         $inviteEntity->setType('USER');
         $inviteEntity->setIsValid(true);
-        $inviteEntity->setOwnerId($userAuthId);
+        $inviteEntity->setOwnerId($userAuth->getId());
         $inviteEntity->setExpiredAt(date('Y-m-d H:i:s', strtotime('+1 day')));
 
         $crypto = new Crypto();
