@@ -6,7 +6,7 @@ trait PostDTOs
 {
     protected array $rules = [
         'in_ids' => [
-            'rules'  => 'required',
+            'rules'  => 'permit_empty',
             'errors' => [
                 'required' => 'Api.exports.invalid.in_ids'
             ],
