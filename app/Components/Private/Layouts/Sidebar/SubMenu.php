@@ -13,22 +13,24 @@ class SubMenu extends BaseComponents
     ];
     const SUBMENU = [
         'clients' => [
-            'none' => 'Geral',
-            'create' => 'Criar',
+            'clients' => 'Geral',
+            'clients/create' => 'Criar',
         ],
         'boat' => [
-            'none' => 'Geral',
-            'create' => 'Criar',
-            'teste' => 'test'
+            'boat' => 'Geral',
+            'boat/create' => 'Criar'
         ],
         'documents' => [
-            'none' => 'Geral',
-            'create' => 'Criar',
+            'documents' => 'Geral',
+            'documents/create' => 'Criar',
         ],
         'forms' => [
-            'none' => 'Geral',
-            'create' => 'Criar',
+            'forms' => 'Geral',
+            'forms/create' => 'Criar',
         ],
+        'users' => [
+            'users' => 'Geral'
+        ]
     ];
 
     public static function render(

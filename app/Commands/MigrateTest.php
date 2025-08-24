@@ -5,7 +5,6 @@ namespace App\Commands;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\Database\Seeder;
-use CodeIgniter\Database\MigrationRunner;
 
 class MigrateTest extends BaseCommand
 {

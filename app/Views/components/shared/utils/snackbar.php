@@ -1,4 +1,4 @@
-<div component='snackbar' class="snackbar fixed top-5 z-99 right-2 bg-green min-w-[18rem] w-[25vw] bg-white rounded-lg shadow-md">
+<div component='snackbar' class="snackbar fixed top-5 z-max right-2 bg-green min-w-[18rem] w-[25vw] bg-white rounded-lg shadow-md">
     <div class="flex">
         <div class="w-15 text-center pt-2">
             <?php if ($type === "SUCCESS"): ?>

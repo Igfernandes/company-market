@@ -10,12 +10,17 @@ class Table
         "class",
         "heads",
         "data",
+        "relations",
         "ajax",
         "update",
         "delete",
         "attributes",
     ];
 
+    /**
+     * @param ?string $update A url para a página de atualização
+     * @param ?string $delete O parâmetro/entidade de referência que o sistema vai usar para ações de exclusões.
+     */
     public static function render(
         ?string $id = "",
         ?string $class = "",
@@ -24,6 +29,7 @@ class Table
         ?string $ajax = "",
         ?string $update = "",
         ?string $delete = "",
+        ?array $relations = [],
         ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));

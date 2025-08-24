@@ -1,50 +1,56 @@
-<div id="modal_<?= $type ?>" component='modal' class="fixed top-0 left-0 Z-[99999] w-full px-4 md:px-0 h-full bg-[#00000059] flex justify-center items-center">
-    <div class="modal bg-white fade show bg-white w-[25vw] pl-5 pb-1 px-4 shadow-md rounded-sm justify-center items-center">
-        <div class="modal-header text-xl py-2 text-secondary flex justify-between">
-            <span data-component='modal:title'>
+<div id="modal_<?= $type ?>" component='modal' class="fixed hidden top-0 left-0 z-max w-full px-4 md:px-0 h-full bg-overlay flex justify-center items-center">
+    <div class="modal bg-white bg-white lg:min-w-[20rem] max-w-[35vw] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
+        <div class="modal-header text-xl py-4 text-secondary flex justify-between">
+            <span component='modal:title'>
                 <span class="text-xll"><strong><?= $title ?></strong></span>
             </span>
-            <div class="btn-dismiss" data-component='modal:close'>
+            <div class="btn-dismiss" component='modal:close'
+                onclick="this.closest('#modal_<?= $type ?>').classList.add('hidden')">
                 <button class="btn text-xll">
                     <i class="bi bi-x"></i>
                 </button>
             </div>
         </div>
         <hr>
-        <div class="modal-content mb-2 mt-2">
-            <div class="items-center justify-center">
-                <div class="text-justify md:text-center" data-component='modal:subtitle'>
+        <div class="modal-content">
+            <div class="my-4">
+                <div class="text-justify md:text-center" component='modal:subtitle'>
                     <span class="text-xl text-secondary"><?= $subtitle ?></span>
                 </div>
             </div>
-            <?php if(!empty($content)): ?>
-                <div><?= $content ?></div>
+            <?php if (!empty($content)): ?>
+                <div class="text-justify line-[1.2] my-4"><?= $content ?></div>
             <?php endif; ?>
         </div>
         <?php if (!empty($left) || !empty($right)): ?>
             <hr>
-            <div>
-                <?php if (!empty($left)): ?>
-                    <div class="row mb-2 mt-2 flex justify-end">
+            <div class="py-3">
+                <div class="row mb-2 mt-2 flex justify-end">
+                    <?php if (!empty($left)): ?>
                         <div class="relative w-45">
-                            <button class="border border-secondary px-4 block active:scale-[95%] min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
+                            <button
+                                class=" border-2 border-secondary active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
                         disabled:bg-disable disabled:text-disabled cursor-pointer p-2"
-                                data-component="btn_left">
-                                <span class="px-2 mb-2 mt-2"><?= $left ?></span>
+                                component='modal:left-btn'>
+                                <span class="px-2 my-2">
+                                    <strong><?= $left ?></strong>
+                                </span>
                             </button>
                         </div>
                     <?php endif; ?>
 
                     <?php if (!empty($right)): ?>
                         <div class="relative w-45 ml-10">
-                            <button class="bg-accent text-white px-4 block active:scale-[95%] min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
-                        disabled:bg-disable disabled:text-disabled cursor-pointer p-2"
-                                data-component="btn_right">
-                                <span class="px-2 mb-2 mt-2"><?= $right ?></span>
+                            <button class="bg-accent text-white  active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
+                        disabled:bg-disabled disabled:text-disabled cursor-pointer p-2 "
+                                component="modal:right-btn">
+                                <span class="px-2 my-2">
+                                    <strong><?= $right ?></strong>
+                                </span>
                             </button>
                         </div>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php endif; ?>
     </div>
