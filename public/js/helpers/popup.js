@@ -1,16 +1,13 @@
 (function () {
-  const popups = Array.from(document.querySelectorAll("[data-popup]"));
+  const popups = Array.from(document.querySelectorAll("[popup]"));
 
   popups.forEach((popup) =>
     popup.addEventListener("click", () => {
-      const { popup: popupCurrent } = popup.dataset;
+      const popupCurrent = popup.getAttribute("popup");
 
       popups.forEach((toggleElement) => {
-        const { popup } = toggleElement.dataset;
-
-        const element = document.querySelector(
-          `[data-target-popup='${popup}']`
-        );
+        const popup = toggleElement.getAttribute("popup");
+        const element = document.querySelector(`[target-popup='${popup}']`);
 
         if (!element) return;
 
