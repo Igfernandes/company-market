@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  | --------------------------------------------------------------------
  | App Namespace
@@ -108,7 +109,6 @@ define("INTERNAL_ERROR", 500);
 define("ROUTE_RESTORE", "/restore");
 define("ROUTE_LOGOUT", "/load/auth/logout");
 define("ROUTE_ACCESS", "/acesso");
-
 /*
  |--------------------------------------------------------------------------
  | Views paths Constants
