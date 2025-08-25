@@ -1,11 +1,14 @@
 import { defineConfig } from "vite";
+import dotenv from "dotenv";
+
+dotenv.config(); // Carrega as variáveis do .env
 
 export default defineConfig({
   server: {
     host: "localhost", // acessível externamente
     port: 3000,
     cors: {
-      origin: "https://loon-selected-hideously.ngrok-free.app", // domínio do CI4/ngrok
+      origin: process.env.NGROK_DOMAIN, // domínio do CI4/ngrok
       credentials: true,
     },
     watch: {

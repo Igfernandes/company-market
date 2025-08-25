@@ -108,7 +108,7 @@ define("INTERNAL_ERROR", 500);
 define("ROUTE_RESTORE", "/restore");
 define("ROUTE_LOGOUT", "/load/auth/logout");
 define("ROUTE_ACCESS", "/acesso");
-
+define("BASE_URL", getenv('NGROK_DOMAIN'));
 /*
  |--------------------------------------------------------------------------
  | Views paths Constants
