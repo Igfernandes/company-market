@@ -8,8 +8,8 @@
   },
   "scripts": {
     "vite": "vite",
-    "ngrok": "ngrok start --config=ngrok.yml ci4",
-    "browser": "concurrently \"npm run vite\" \"npm run ngrok\"",
+    "ngrok": "node ngrok.config.js",
+    "browser": "concurrently \"npm run ngrok\"",
     "start": "npx webpack",
     "test": "jest"
   },

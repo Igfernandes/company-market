@@ -11,6 +11,9 @@ export default defineConfig({
       origin: process.env.NGROK_DOMAIN, // domínio do CI4/ngrok
       credentials: true,
     },
+    allowedHosts: [
+      process.env.NGROK_DOMAIN, // libera qualquer host ngrok
+    ],
     watch: {
       usePolling: true,
       interval: 300,
