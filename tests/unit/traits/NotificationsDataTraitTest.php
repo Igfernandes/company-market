@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use App\Traits\Notifications\NotificationsDataTrait;
 use App\Database\Entities\Notifications\NotificationEntity;
 use App\Database\Entities\Users\UserEntity;
-use stdClass;
 use Tests\Support\Sessions\AuthenticatedSession;
 
 class NotificationsDataTraitTest extends TestCase

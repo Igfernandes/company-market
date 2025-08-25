@@ -53,9 +53,6 @@
   .w-\[#{ $i }rem\] {
     width: #{$i}rem;
   }
-  .w-\[#{ $i }vw\] {
-    width: #{$i}rem;
-  }
   .min-w-\[#{ $i }rem\] {
     min-width: #{$i}rem;
   }
