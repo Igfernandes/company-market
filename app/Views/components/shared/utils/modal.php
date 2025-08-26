@@ -1,5 +1,5 @@
-<div id="modal_<?= $type ?>" component='modal' class="fixed hidden top-0 left-0 z-max w-full px-4 md:px-0 h-full bg-overlay flex justify-center items-center">
-    <div class="modal bg-white bg-white lg:min-w-[20rem] max-w-[35vw] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
+<div id="modal_<?= $type ?>" component='modal' class="fixed top-0 left-0 z-max w-full px-4 md:px-0 h-full bg-overlay flex justify-center items-center <?php $isActive? "":"hidden" ?>">
+    <div class="modal bg-white bg-white lg:min-w-[22rem] max-w-[35vw] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
         <div class="modal-header text-xl py-4 text-secondary flex justify-between">
             <span component='modal:title'>
                 <span class="text-xll"><strong><?= $title ?></strong></span>
@@ -29,7 +29,7 @@
                     <?php if (!empty($left)): ?>
                         <div class="relative w-45">
                             <button
-                                class=" border-2 border-secondary active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
+                                class="border-2 border-secondary active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
                         disabled:bg-disable disabled:text-disabled cursor-pointer p-2"
                                 component='modal:left-btn'>
                                 <span class="px-2 my-2">
@@ -41,7 +41,7 @@
 
                     <?php if (!empty($right)): ?>
                         <div class="relative w-45 ml-10">
-                            <button class="bg-accent text-white  active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
+                            <button class="bg-accent text-white active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
                         disabled:bg-disabled disabled:text-disabled cursor-pointer p-2 "
                                 component="modal:right-btn">
                                 <span class="px-2 my-2">
