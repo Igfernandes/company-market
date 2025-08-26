@@ -10,4 +10,9 @@ class Users extends BaseController
     {
         return view("layouts/dashboard/users/index");
     }
+
+    public function trash()
+    {
+        return view("layouts/dashboard/users/index");
+    }
 }

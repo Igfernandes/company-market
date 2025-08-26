@@ -8,8 +8,8 @@
   },
   "scripts": {
     "vite": "vite",
-    "ngrok": "ngrok start --config=ngrok.yml ci4",
-    "browser": "concurrently \"npm run vite\" \"npm run ngrok\"",
+    "tunnel": "cloudflared tunnel --url http://localhost:8080",
+    "browser": "concurrently \"npm run vite\" \"npm run tunnel\"",
     "start": "npx webpack",
     "test": "jest"
   },
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.28.0",
     "babel-jest": "^30.0.5",
+    "cloudflared": "^0.7.1",
     "concurrently": "^9.2.0",
     "jest": "^30.0.5",
     "ngrok": "^5.0.0-beta.2",
