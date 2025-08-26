@@ -7,13 +7,21 @@
                     <li class="cursor-pointer" data-component="components/forms/fields/checkbox" data-navbar='component'>
                         <span><i>Checkout</i></span>
                     </li>
-                    <li class="cursor-pointer" data-component="components/forms/fields/email" data-navbar='component'>
-                        <span><i>Email</i></span>
+                    <li>
+                        email
+                        <ul class="menu-components pl-5 text-white">
+                            <li class="cursor-pointer" data-component="components/forms/fields/email/emailIcon" data-navbar='component'>
+                                - <span><i>Email icon</i></span>
+                            </li>
+                            <li class="cursor-pointer" data-component="components/forms/fields/email/emailFloatLabel" data-navbar='component'>
+                                - <span><i>Email float label</i></span>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         password
                         <ul class="menu-components pl-5 text-white">
-                            <li class="cursor-pointer" data-component="components/forms/password" data-navbar='component'>
+                            <li class="cursor-pointer" data-component="components/forms/fields/password" data-navbar='component'>
                                 - <span><i>Toggle</i></span>
                             </li>
                             <li class="cursor-pointer" data-component="components/forms/variants/groupValidations" data-navbar='component'>
@@ -24,8 +32,22 @@
                     <li class="cursor-pointer" data-component="components/forms/fields/submit" data-navbar='component'>
                         <span><i>Submit</i></span>
                     </li>
-                    <li class="cursor-pointer" data-component="components/forms/fields/input-float-label" data-navbar='component'>
-                        <span><i>Input</i></span>
+                    <li class="cursor-pointer" data-component="components/forms/fields/phone/simple" data-navbar='component'>
+                        <span><i>Phone</i></span>
+                    </li>
+                    <li class="cursor-pointer" data-component="components/forms/fields/date/dateIcon" data-navbar='component'>
+                        <span><i>Date icon</i></span>
+                    </li>
+                    <li>
+                        input
+                        <ul class="menu-components pl-5 text-white">
+                            <li class="cursor-pointer" data-component="components/forms/fields/input/inputIcon" data-navbar='component'>
+                                - <span><i>Input icon</i></span>
+                            </li>
+                            <li class="cursor-pointer" data-component="components/forms/fields/input/inputFloatLabel" data-navbar='component'>
+                                - <span><i>Input float label</i></span>
+                            </li>
+                        </ul>
                     </li>
                     <li class="cursor-pointer" data-component="components/forms/fields/search" data-navbar='component'>
                         <span><i>Search</i></span>
