@@ -1,0 +1,8 @@
+version: "2"
+authtoken: 2X1gTUA4DSUKSIWNptwDxqFFwPB_78xuqYGhHvvriop3g2WBU
+
+tunnels:
+  ci4:
+    proto: http
+    addr: 8080
+    hostname: loon-selected-hideously.ngrok-free.app
