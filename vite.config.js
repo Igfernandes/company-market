@@ -5,9 +5,12 @@ export default defineConfig({
     host: "localhost", // acessível externamente
     port: 3000,
     cors: {
-      origin: "https://loon-selected-hideously.ngrok-free.app", // domínio do CI4/ngrok
+      origin: true,
       credentials: true,
     },
+    allowedHosts: [
+      ".trycloudflare.com", // permite qualquer subdomínio do Cloudflare Tunnel
+    ],
     watch: {
       usePolling: true,
       interval: 300,
