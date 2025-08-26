@@ -25,8 +25,9 @@ export const INIT_TESTS = {
         ["component='tabs-header'", "tab-target", "tab"],
         table
       )
-    )
+    ){
       return;
+    }
 
     Log("SUCCESS", {
       component: elementName,

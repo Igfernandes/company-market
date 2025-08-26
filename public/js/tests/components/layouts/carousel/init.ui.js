@@ -2,17 +2,17 @@ import { Log } from "/js/tests/runtime/feedback.js";
 
 export const INIT_TESTS = {
   ShouldCreateCarousel: () => {
-    const image = document.querySelector('[component="carousel"]');
+    const carousel = document.querySelector('[component="carousel"]');
 
-    if (!image)
+    if (!carousel)
       return Log("ERROR", {
-        component: "image",
-        message: "A imagem não foi encontrada",
+        component: "carousel",
+        message: "O carousel não foi encontrada",
       });
 
     return Log("SUCCESS", {
-      component: "image",
-      message: "A imagem foi criada com sucesso",
+      component: "carousel",
+      message: "O carousel foi criada com sucesso",
     });
   },
 };

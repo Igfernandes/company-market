@@ -13,7 +13,7 @@ export const INIT_TESTS = {
 
     ["title", 'subtitle', "close"].forEach((param) => {
       const hasElementInModal = modal.querySelector(
-        `[data-component="modal:${param}"]`
+        `[component="modal:${param}"]`
       );
       if (!hasElementInModal) {
         Log("ERROR", {
