@@ -6,7 +6,7 @@ use App\Components\BaseComponents;
 
 class GroupValidations extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/password/groupValidations";
+    const ORIGIN = "components/shared/forms/variants/groupValidations";
     const PROPS = [
         "name",
         "label",
