@@ -3,7 +3,6 @@ export const init = () => {
 
   images.forEach((image) => {
     image.addEventListener("error", () => {
-      console.log("images", images);
       const defaultSrc = image.getAttribute("default");
 
       image.setAttribute("src", defaultSrc);
