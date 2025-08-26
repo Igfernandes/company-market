@@ -12,15 +12,14 @@ use App\Components\Shared\Layouts\Table\Table;
         <div>
             <?php
             BreadcrumbHeader::render(
-                title: "Usuários do sistema",
-                text: "Listagem de usuário no sistema e suas informações",
+                title: "Usuários excluídos",
+                text: "Listagem de usuário no sistema excluídos",
                 icon: '<i class="bi bi-person"></i>'
             );
             ?>
         </div>
         <div class="bg-content text-left px-4 py-4 shadow my-2 mx-4">
             <?= QuickActions::render(
-                trash: "./users/trash",
                 export: [
                     "entity" => "users",
                     "excel" => true,
@@ -28,10 +27,17 @@ use App\Components\Shared\Layouts\Table\Table;
                 ],
                 actions: [
                     [
-                        "text" => "+ Convidar Usuários",
+                        "text" => "Recuperar Usuários",
                         "class" => "bg-accent text-gray-100",
                         "attributes" => [
                             "invite" => 'users'
+                        ]
+                    ],
+                    [
+                        "text" => "Selecionar todos",
+                        "class" => "bg-gray-300 active:scale-95",
+                        "attributes" => [
+                            "selection-toggle" => 'true'
                         ]
                     ],
                 ]
@@ -40,8 +46,8 @@ use App\Components\Shared\Layouts\Table\Table;
                 heads: ['id', 'name', 'status', 'email', 'role'],
                 relations: ['id', 'name', 'status', 'email', 'roles.name'],
                 ajax: '/api/users',
-                update: "/dashboard/users",
                 delete: "users",
+                checked: true
             ) ?>
         </div>
     </div>

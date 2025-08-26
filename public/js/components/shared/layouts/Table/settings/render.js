@@ -8,7 +8,9 @@ export function tableRender(tableContainer) {
   const settings = [];
   const tHeads = getTHdTexts(tableContainer);
 
-  const columnStatus = (data) => {
+  const dateReference = new Date().getTime();
+
+  const statusColumn = (data) => {
     if (!data) return data;
 
     const colValue = data.toLowerCase();
@@ -21,9 +23,20 @@ export function tableRender(tableContainer) {
     </div>`;
   };
 
+  const idColumn = (id) => {
+    if (!id) return id;
+
+    return `<div>
+    <input id='table_id_${dateReference}_${id}' name='table_id[]' value='${id}' type='checkbox' class='mr-2' />
+    <label for='table_id_${dateReference}_${id}' class='cursor-pointer'>${id}</label>
+    </div>`;
+  };
+
   const handleRender = (data, type, row, meta) => {
     if (isColumn("status", meta, tableContainer)) {
-      return columnStatus(data);
+      return statusColumn(data);
+    } else if (isColumn("id", meta, tableContainer)) {
+      return idColumn(data);
     }
 
     return data;

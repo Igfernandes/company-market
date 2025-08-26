@@ -13,6 +13,6 @@ class Users extends BaseController
 
     public function trash()
     {
-        return view("layouts/dashboard/users/index");
+        return view("layouts/dashboard/users/trash");
     }
 }

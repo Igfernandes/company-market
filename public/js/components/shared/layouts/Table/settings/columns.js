@@ -35,8 +35,8 @@ export const handleRenderActions = (
     render: function (data, type, row) {
       return `
           <div class="tb-actions">
-          ${handleRenderUpdate(row[indexColumnId], updateAction)}
-          ${handleRenderDelete(row[indexColumnId], deleteAction)}
+          ${updateAction ? handleRenderUpdate(row[indexColumnId], updateAction) : ''}
+          ${deleteAction ? handleRenderDelete(row[indexColumnId], deleteAction) : ''}
           </div>`;
     },
   };

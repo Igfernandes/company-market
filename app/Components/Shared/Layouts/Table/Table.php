@@ -14,6 +14,7 @@ class Table
         "ajax",
         "update",
         "delete",
+        "checked",
         "attributes",
     ];
 
@@ -29,6 +30,7 @@ class Table
         ?string $ajax = "",
         ?string $update = "",
         ?string $delete = "",
+        ?bool $checked = false,
         ?array $relations = [],
         ?array $attributes = [],
     ) {
