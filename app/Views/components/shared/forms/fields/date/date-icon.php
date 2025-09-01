@@ -34,7 +34,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
-            <div class="absolute top-22 <?= isset($iconRight) ? "left" : "right"   ?>-4 w-[1rem] h-full cursor-pointer">
+            <div class="absolute top-22 <?= isset($iconRight) ? "left" : "right"   ?>-1 w-[1rem] h-full cursor-pointer">
                 <input
                     value="<?= isset($value) ? $value : null ?>"
                     name="<?= $name ?>"

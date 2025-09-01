@@ -21,7 +21,7 @@ if (isset($name) && isset($storeValue[$name]))
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
-            <div component='search:action' class="absolute right-3 top-15 font-lg cursor-pointer font-bold text-gray-700">
+            <div component='search:action' class="absolute right-1 top-15 font-lg cursor-pointer font-bold text-gray-700">
                 <i class="bi bi-search"></i>
             </div>
         </div>
