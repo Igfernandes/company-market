@@ -1,5 +1,5 @@
 import { Log } from "/js/tests/runtime/feedback.js";
-import { hasAttributesInElement } from "/js/tests/runtime/validations/has.js";
+import { hasElementsInComponent} from "/js/tests/runtime/validations/has.js";
 
 export const INIT_TESTS = {
   ShouldCreateTabs: () => {
@@ -16,13 +16,13 @@ export const INIT_TESTS = {
       message: "A tab foi criada com sucesso",
     });
   },
-  ShouldAllAttributesInTabs: () => {
-    const table = document.querySelector("[component='tabs-header']");
+  ShouldAllComponentsInTabs: () => {
+    const table = document.querySelector("[component='tabs']");
     const elementName = "tab";
 
     if (
-      !hasAttributesInElement(
-        ["component='tabs-header'", "tab-target", "tab"],
+      !hasElementsInComponent(
+        ["[component='tabs:header']", "[tab]"],
         table
       )
     ){
