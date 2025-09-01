@@ -4,7 +4,7 @@ namespace App\Components\Shared\Forms\Fields\Phone\Simple;
 
 use App\Components\BaseComponents;
 
-class Phone extends BaseComponents
+class Simple extends BaseComponents
 {
     const ORIGIN = "components/shared/forms/fields/phone/simple";
     const PROPS = [

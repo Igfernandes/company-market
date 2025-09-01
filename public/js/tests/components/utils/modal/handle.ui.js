@@ -4,7 +4,7 @@ export const HANDLE_TESTS = {
   ShouldCloseModal: () => {
     const modal = document.querySelector("[component='modal']");
     const closeButton = modal.querySelector(
-      "[data-component='modal:close']"
+      "[component='modal:close']"
     );
 
     if (!modal || !closeButton)
@@ -15,9 +15,10 @@ export const HANDLE_TESTS = {
 
     closeButton.click();
 
-    const modalAfterEventClick = document.querySelector(
-      "[component='modal']"
-    );
+    const modalAfterEventClick = modal.querySelector(
+      '[id*="hidden"]'
+    )
+
     if (modalAfterEventClick) {
       return Log("ERROR", {
         component: "modal",
