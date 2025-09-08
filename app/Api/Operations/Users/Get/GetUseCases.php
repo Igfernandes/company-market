@@ -59,7 +59,7 @@ class GetUseCases
         $limit = isset($payload['limit']) ? \intval($payload['limit']) : 50;
         $startIndexRegister = isset($payload['start']) ? \intval($payload['start']) : 0;
 
-        $foundUserRole = $usersRolesModel->limit($limit, $startIndexRegister)->getUsersWithRole($userEntity->toArray(true));
+        $foundUserRole = $usersRolesModel->where("deleted_at", null)->limit($limit, $startIndexRegister)->getUsersWithRole($userEntity->toArray(true));
         /** @var array{UserEntity} */
         $users = [];
 
