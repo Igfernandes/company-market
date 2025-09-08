@@ -2,15 +2,12 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   server: {
-    host: "localhost", // acessível externamente
+    host: "0.0.0.0", // acessível externamente
     port: 3000,
     cors: {
       origin: true,
       credentials: true,
     },
-    allowedHosts: [
-      ".trycloudflare.com", // permite qualquer subdomínio do Cloudflare Tunnel
-    ],
     watch: {
       usePolling: true,
       interval: 300,
