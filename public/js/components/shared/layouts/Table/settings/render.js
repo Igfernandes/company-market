@@ -2,11 +2,13 @@ import { capitalize } from "/js/helpers/string.js";
 import { getTHdTexts, isColumn } from "../utils/columns.js";
 import { handleRenderActions } from "./columns.js";
 import { INDEXES } from "../../../../../constants/indexes.js";
+import "../utils/handle.js";
 
 export function tableRender(tableContainer) {
   const { updateAction, deleteAction } = tableContainer.dataset;
   const settings = [];
   const tHeads = getTHdTexts(tableContainer);
+  const tabRef = window.tables[tableContainer.getAttribute("id")];
 
   const dateReference = new Date().getTime();
 
@@ -23,20 +25,22 @@ export function tableRender(tableContainer) {
     </div>`;
   };
 
-  const idColumn = (id) => {
+  const checkboxColumn = (id) => {
     if (!id) return id;
 
-    return `<div>
-    <input id='table_id_${dateReference}_${id}' name='table_id[]' value='${id}' type='checkbox' class='mr-2' />
+    return `<div class='flex items-center'>
+    <input id='table_id_${dateReference}_${id}' onchange='handleChecked(event)' target-checked name='table_id[]' value='${id}' type='checkbox' class='checkbox cursor-pointer rounded-xs appearance-none border-2 border-gray-700 p-2 mr-2' />
     <label for='table_id_${dateReference}_${id}' class='cursor-pointer'>${id}</label>
     </div>`;
   };
 
   const handleRender = (data, type, row, meta) => {
+    const isChecked = tableContainer.getAttribute("checked");
+
     if (isColumn("status", meta, tableContainer)) {
       return statusColumn(data);
-    } else if (isColumn("id", meta, tableContainer)) {
-      return idColumn(data);
+    } else if (isChecked && isColumn("id", meta, tableContainer)) {
+      return checkboxColumn(data);
     }
 
     return data;

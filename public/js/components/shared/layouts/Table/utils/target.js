@@ -4,10 +4,35 @@ export function getTable(tableId) {
   );
 }
 
-export function getTableDeletes(entity) {
+export function getTableDeletes(tableId) {
   return Array.from(
     document.querySelectorAll(
-      `[component='table'] [data-delete-entity="${entity}"]`
+      `[component='table']${tableId ? "#" + tableId : ""} [data-delete-entity]`
+    )
+  );
+}
+
+export function getDeleteKey(btnAction) {
+  const attributeKey = "data-delete-key";
+  let id = btnAction.getAttribute(attributeKey);
+
+  if (!!id) return id;
+
+  const fatherReference = btnAction.closest(`[${attributeKey}]`);
+  id = fatherReference.getAttribute(attributeKey);
+
+  if (!!id) return id;
+
+  const ChildrenReference = btnAction.querySelector(`[${attributeKey}]`);
+  id = ChildrenReference.getAttribute(attributeKey);
+  
+  return id;
+}
+
+export function getTableCheckbox(tableId) {
+  return Array.from(
+    document.querySelectorAll(
+      `[component='table']${tableId ? "#" + tableId : ""} [target-checked]`
     )
   );
 }

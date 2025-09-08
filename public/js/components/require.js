@@ -6,6 +6,8 @@ export const COMPONENTS = {
   "component='carousel'": "/js/components/shared/layouts/carousel.js",
   "component='recaptcha'": "/js/components/shared/utils/recaptcha.js",
   "component='table'": "/js/components/shared/layouts/table/init.js",
+  "checked-settings='all'":
+    "/js/components/shared/layouts/table/utils/handle.js",
   "component='group-validation'":
     "/js/components/shared/forms/password/validations/init.js",
   "component='sidebar:toggle'": "/js/components/private/sidebar.js",
@@ -17,4 +19,5 @@ export const COMPONENTS = {
   "component='phone'": "/js/components/shared/forms/phone.js",
   "component='date-icon'": "/js/components/shared/forms/date.js",
   "component='exports'": "/js/components/shared/utils/exports.js",
+  "component='modal'": "/js/components/shared/utils/modal/init.js",
 };
