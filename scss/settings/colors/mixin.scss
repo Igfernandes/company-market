@@ -26,7 +26,7 @@ $levels: "100", "200", "300", "400", "500", "600", "700", "800", "900";
 }
 
 $extra-colors: "light", "dark", "accent", "accent-light", "muted", "hover",
-  "active", "disabled", "laboratory", "dashboard", "content";
+  "active", "inactive", "disabled", "laboratory", "dashboard", "content";
 // Loop para cores fixas (sem nível)
 @each $name in $extra-colors {
   .bg-#{$name} {

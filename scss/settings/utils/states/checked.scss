@@ -1,0 +1,11 @@
+.checkbox:checked {
+  background-color: var(--bg-hover);
+  &::after {
+    content: "\f26e";
+    font-family: bootstrap-icons !important;
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    color: #fff;
+  }
+}
