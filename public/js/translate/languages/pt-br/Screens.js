@@ -24,6 +24,12 @@ export const SCREENS = {
       modal_text:
         "Após a exclusão, o usuário será movido para a Lixeira. Enquanto estiver lá, ele poderá ser recuperado a qualquer momento ou removido de forma definitiva.",
     },
+    trash: {
+      invalid: {
+        user_ids:
+          "É obrigatório selecionar pelo menos um usuário para a restauração",
+      },
+    },
   },
   invites: {
     snackbar_title: "Convite de Usuário",

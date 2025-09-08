@@ -43,6 +43,11 @@ export const API = {
     success: {
       recover_password: "Abra a sua caixa de e-mail e siga as instruções",
       put: "Informações do usuário atualizadas com sucesso",
+      delete: "O usuário foi excluído e enviado para lixeira",
+      trash: {
+        restore: "Usuário(s) recuperado(s) com sucesso!",
+        delete: "O usuário foi excluído permanentemente com sucesso!",
+      },
     },
     invalid: {
       name: "O nome encontra-se inferior a 3 caracteres ou inválido",

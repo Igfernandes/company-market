@@ -9,6 +9,7 @@ export const API_ROUTES = {
   users: {
     put: "/api/users",
     delete: "/api/users/{id}",
+    permanently: "/api/users/trash/{id}",
   },
   invites: {
     user: "/api/invites/user",

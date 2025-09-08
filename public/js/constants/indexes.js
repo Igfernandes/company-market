@@ -1,4 +1,6 @@
 export const INDEXES = {
   ativo: "active",
-  inativo: "Inactive",
+  active: "active",
+  inativo: "inactive",
+  inactive: "inactive",
 };
