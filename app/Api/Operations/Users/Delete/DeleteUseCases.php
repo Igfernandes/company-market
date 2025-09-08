@@ -27,6 +27,7 @@ class DeleteUseCases
 
         $usersModel = new UsersModel();
 
+        $usersModel->set("status", "INACTIVE")->update($userId);
         $usersModel->delete($userId);
 
         NotificationsService::store([
