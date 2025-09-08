@@ -40,7 +40,8 @@ class Cors extends BaseConfig
             'http://localhost:5173',
             'http://127.0.0.1:3000',
             'https://loon-vite.ngrok-free.app:3000',
-            'https://loon-selected-hideously.ngrok-free.app'
+            'https://loon-selected-hideously.ngrok-free.app',
+            'https://poodle-relevant-peacock.ngrok-free.app'
         ],
 
         /**

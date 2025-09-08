@@ -11,12 +11,12 @@ if (isset($name) && isset($storeValue[$name]))
 <div class="input mb-3" component="input">
     <div class="relative shadow-sm border-gray-200 border-2 rounded-md">
         <div class="w-100">
-            <input type="<?= $type  ?>"
+            <input type="input"
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= !empty($id) ? $id : $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-[3rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-[3rem] text-sm lg:text-lg pl-2 pr-9 pt-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
@@ -31,6 +31,13 @@ if (isset($name) && isset($storeValue[$name]))
                 </label>
             <?php endif; ?>
         </div>
+        <?php if (isset($icon)) : ?>
+            <div class="absolute right-0 top-0 h-full pt-2 pr-2">
+                <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-accent">
+                    <?= $icon ?>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="invalid-message text-xs text-red-500 px-2 mt-1" data-invalid="<?= $name ?>">
     </div>

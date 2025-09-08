@@ -21,14 +21,13 @@ export const INIT_TESTS = {
     let hasError = false;
     const elementName = "group-validation";
 
-    ['caracteres',
-    'maiuscula',
-    'minuscula',
-    'numero',
-    'caractere especial',
-    'confirmation'].forEach((param) => {
+    ['lowercase',
+    'uppercase',
+    'number',
+    'symbol',
+    'min'].forEach((param) => {
       const hasElementInPassword = passwordGroup.querySelector(
-        `[data-criterion="${elementName}:${param}"]`
+        `[criterion="${param}"]`
       );
       if (!hasElementInPassword) {
         Log("ERROR", {

@@ -11,9 +11,8 @@ class Mock
         "id" => "email",
         "class" => "",
         "required" => "true",
-        "attributes" => [],
         "disabled" => false,
         "readonly" => false,
-        "icon" => '<i class="bi bi-envelope-fill"></i>'
+        "iconRight" => true
     ];
 }

@@ -1,19 +1,17 @@
 <?php 
 
-namespace App\Components\Shared\Forms\Input;
+namespace App\Components\Shared\Forms\Input\InputFloatLabel;
 
 class Mock {
 
     public const PROPS = [
-        "name" => "input", 
-        "label" => "Input", 
+        "name" => "input",
+        "label" => "Input",
         "id" => "input",
-        "placeholder" => "",
         "class" => "",
         "required" => "true",
         "attributes" => [],
         "disabled" => false,
-        "readonly" => false,
-        "icon" => ''
+        "readonly" => false
     ];
 }

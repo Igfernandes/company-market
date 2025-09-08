@@ -13,7 +13,8 @@ class Modal extends BaseComponents
         'subtitle',
         'content',
         'left',
-        'right'
+        'right',
+        'isActive'
     ];
 
     /**
@@ -23,6 +24,7 @@ class Modal extends BaseComponents
      * @param string $content O conteúdo que será exibido no modal
      * @param string $left O botão da esquerda. 
      * @param string $right O botão da direita. 
+     * @param boolean $isActive O booleano que vai ver se o modal está ativo
      */
     public static function render(
         string $type = "",
@@ -31,6 +33,7 @@ class Modal extends BaseComponents
         ?string $content = "",
         ?string $left = "",
         ?string $right = "",
+        ?bool $isActive = null,
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }
