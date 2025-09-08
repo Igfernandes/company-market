@@ -18,6 +18,12 @@ class UsersRoutes extends BaseRoutes
         $routes->post("users/groups", "Api\Operations\Users\Groups\Post\PostController::handle", $this->optionsWithAuthentications);
         $routes->put("users/groups/(:num)", "Api\Operations\Users\Groups\Put\PutController::handle/$1", $this->optionsWithAuthentications);
         $routes->delete("users/groups/(:num)", "Api\Operations\Users\Groups\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
+
+        $routes->delete("users/trash/(:num)", "Api\Operations\Users\Trash\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
+        $routes->get("users/trash/(:num)", "Api\Operations\Users\Trash\Get\GetController::handle/$1", $this->optionsWithAuthentications);
+        $routes->get("users/trash", "Api\Operations\Users\Trash\Get\GetController::handle", $this->optionsWithAuthentications);
+        $routes->post("users/trash", "Api\Operations\Users\Trash\Post\PostController::handle", $this->optionsWithAuthentications);
+
         $routes->patch("users/groups/(:num)", "Api\Operations\Users\Groups\Patch\PatchController::handle/$1", $this->optionsWithAuthentications);
         $routes->get("users/groups", "Api\Operations\Users\Groups\Get\GetController::handle", $this->optionsWithAuthentications);
 
