@@ -57,7 +57,7 @@ class UsersBusiness
 
     public function hasUser($query): null|UserEntity
     {
-        return $this->usersModel->where($query)->first();
+        return $this->usersModel->withDeleted()->where($query)->first();
     }
 
     /**
@@ -106,9 +106,12 @@ class UsersBusiness
             ]);
         }
 
+        $data =  $alteredUser->toArray(true);
+        $data['deleted_at'] = null;
+
         if (empty($alreadyUser))
-            $this->usersModel->protect(!isset($payload['id']))->insert($alteredUser->toArray(true));
-        else $this->usersModel->save($alteredUser->toArray(true));
+            $this->usersModel->protect(!isset($payload['id']))->insert($data);
+        else $this->usersModel->save($data);
 
         $alteredUser->setId($this->usersModel->getInsertID());
 
