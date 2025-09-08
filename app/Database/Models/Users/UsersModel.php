@@ -22,8 +22,11 @@ class UsersModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Users\UserEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'name', 'username', 'email', 'password', 'avatar', 'document', 'document_type', 'phone', 'birthdate', 'keyword', 'status', 'email_sha256', 'phone_sha256', 'document_sha256', 'twof_secret', 'system_key', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['id', 'name', 'username', 'email', 'password', 'avatar', 'document', 'document_type', 'phone', 'birthdate', 'keyword', 'status', 'email_sha256', 'phone_sha256', 'document_sha256', 'twof_secret', 'system_key', 'created_at', 'updated_at', 'deleted_at'];
 
+    protected $useSoftDeletes = true;
+    protected $deletedField   = 'deleted_at';
+    
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -19,7 +19,9 @@ $userAuth = $session->get(SESSION_KEY_AUTH_USER);
         ) ?>
         <div class="w-100">
             <?= Header::render() ?>
-            <?= implode('', $content) ?>
+            <div class="h-[88vh] overflow-y-auto">
+                <?= implode('', $content) ?>
+            </div>
         </div>
     </div>
 </div>

@@ -29,8 +29,9 @@ class SubMenu extends BaseComponents
             'forms/create' => 'Criar',
         ],
         'users' => [
-            'users' => 'Geral'
-        ]
+            'users' => 'Geral',
+            'users/trash' => 'Lixeira'
+        ] 
     ];
 
     public static function render(

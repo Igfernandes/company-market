@@ -35,8 +35,8 @@ use App\Components\Shared\Utils\Exports\Exports;
                 <?php endforeach;
                 endif; ?>
                 <?php if (isset($trash) && !empty($trash)): ?>
-                    <div component='quick-actions:button' class="bg-red-100 text-gray-800 py-2 px-8 rounded-sm shadow mr-3 cursor-pointer">
-                        <a href=" <?= $trash ?>">
+                    <div component='quick-actions:button' >
+                        <a href=" <?= $trash ?>" class="bg-red-100 text-gray-800 py-3 px-8 rounded-sm shadow mr-3 cursor-pointer">
                             <i class="bi bi-trash"></i> <span>Lixeira</span>
                         </a>
                     </div>

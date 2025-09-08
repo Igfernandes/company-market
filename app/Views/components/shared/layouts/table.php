@@ -18,9 +18,9 @@ if (isset($attributes)) {
     data-ajax="<?= $ajax ?>"
     <?= $update ? "data-update-action='$update'" : null ?>
     <?= $delete ? "data-delete-action='$delete'" : null ?>
-    <?= $checked ? "data-checked='true'" : null ?>
+    <?= $checked ? "checked='true'" : null ?>
     <?= !empty($attributeData) ? $attributeData : null ?>>
-    <table id="table_<?= esc(date("YYYYMMDDHHmmss")) ?>">
+    <table id="<?= esc($id) ?>_<?= esc(date("YmdHis")) ?>">
         <?php if (is_array($heads)): ?>
             <thead>
                 <tr>
