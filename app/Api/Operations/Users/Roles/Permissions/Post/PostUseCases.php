@@ -7,7 +7,7 @@ use App\Database\Models\Permissions\RolesPermissionsModel;
 class PostUseCases
 {
     /**
-     * @param object{
+     * @param array{
      *   role_id: integer,
      *   ids: array
      * } $payload

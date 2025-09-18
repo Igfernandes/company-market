@@ -8,13 +8,13 @@ trait PostDTOs
         'role_id' => [
             'rules'  => 'required',
             'errors' => [
-                'string' => 'Api.users.invalid.name',
+                'string' => 'Api.roles.invalid.id',
             ],
         ],
         'ids' => [
             'rules'  => 'required',
             'errors' => [
-                'string' => 'Api.users.invalid.required',
+                'string' => 'Api.permissions.invalid.in_ids',
             ],
         ]
     ];
