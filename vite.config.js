@@ -21,6 +21,7 @@ export default defineConfig({
         "**/scss/**",
         "**/githooks/**",
         "**/**.test.js",
+        "**/app/Api/**",
       ],
     },
   },
@@ -28,7 +29,11 @@ export default defineConfig({
     {
       name: "watch-codeigniter-views",
       handleHotUpdate({ file, server }) {
-        if (file.endsWith(".php")) {
+        const pathsAvailable = ["Components", "Views", "Language"];
+        const hasAvailablePath = pathsAvailable.some((path) =>
+          file.includes(path)
+        );
+        if (file.endsWith(".php") && hasAvailablePath) {
           server.ws.send({ type: "full-reload", path: "*" });
         }
       },

@@ -8,7 +8,9 @@
   },
   "scripts": {
     "vite": "vite",
-    "browser": "concurrently  \"npm run vite\" \"node tunnel.config.js\"",
+    "sass": "sass --watch scss/theme.scss:public/css/theme.css --quiet-deps 2>sass.logs",
+    "tunnel": "node tunnel.config.js",
+    "browser": "concurrently  \"npm run vite\" \"npm run tunnel\"",
     "start": "npx webpack",
     "test": "jest"
   },
@@ -29,6 +31,7 @@
     "concurrently": "^9.2.0",
     "jest": "^30.0.5",
     "node-fetch": "^2.7.0",
+    "sass": "^1.92.1",
     "vite": "^7.1.3"
   },
   "dependencies": {
