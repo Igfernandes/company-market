@@ -20,4 +20,6 @@ export const COMPONENTS = {
   "component='date-icon'": "/js/components/shared/forms/date.js",
   "component='exports'": "/js/components/shared/utils/exports.js",
   "component='modal'": "/js/components/shared/utils/modal/init.js",
+  "component='counter-field'": "/js/components/shared/forms/counter.js",
+  "component='permissions'": "/js/components/shared/utils/permissions/init.js"
 };

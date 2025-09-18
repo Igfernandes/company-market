@@ -65,8 +65,9 @@ export async function handleReloadTable(tableId) {
     return console.warn(`Não foi possível encontrar a tabela ${tableId}`);
 
   const oldTable = window.tables[tableId];
+
   if (oldTable) {
-    oldTable.destroy();
+    await oldTable.destroy();
     delete window.tables[tableId];
   }
 

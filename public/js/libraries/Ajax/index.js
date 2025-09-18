@@ -66,20 +66,22 @@ export const ajax = {
       {
         ...request,
         urlFetched: route,
-        queryKey: JSON.stringify(reference),
+        queryKey: route,
       },
 
       postResponse
     );
   },
   get: async (route, payload, options = {}) => {
-    const url = `${route}/${getQueryParams(payload)}`;
+
+    if (payload) route = `${route}/${getQueryParams(payload)}`;
+
     const request = {
       method: "GET",
       ...options,
     };
 
-    const cookiesData = cookies.get(url);
+    const cookiesData = cookies.get(route);
 
     if (cookiesData && !!isFirstFetch[route])
       return {
@@ -88,14 +90,14 @@ export const ajax = {
         url: route,
       };
 
-    const getResponse = await fetch(url, request);
+    const getResponse = await fetch(route, request);
 
     isFirstFetch[route] = true;
     return await mutate(
       {
         ...request,
-        urlFetched: url,
-        queryKey: url,
+        urlFetched: route,
+        queryKey: route,
       },
       getResponse
     );

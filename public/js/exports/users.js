@@ -5,6 +5,12 @@ export const usersExports = {
   ],
   "/dashboard/users/trash": [
     "/js/modules/private/users/trash/Delete/init.js",
-    "/js/modules/private/users/trash/Recover/init.js"
-  ]
+    "/js/modules/private/users/trash/Recover/init.js",
+  ],
+  "/dashboard/users/role": [
+    "/js/modules/private/users/roles/Create/init.js",
+    "/js/modules/private/users/roles/Delete/init.js",
+    "/js/modules/private/users/roles/UpdatePermissions/init.js",
+    "/js/modules/private/users/roles/Update/init.js",
+  ],
 };

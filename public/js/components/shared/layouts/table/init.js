@@ -10,7 +10,5 @@ export const init = () => {
   tableContainers.forEach((tableContainer) => {
    tableInstance(tableContainer);
   });
-
-
   handleCheckedAll();
 };

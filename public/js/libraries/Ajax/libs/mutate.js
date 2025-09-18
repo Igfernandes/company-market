@@ -21,6 +21,7 @@ export async function mutate(request, response) {
         data,
       })
     );
+  else Cookies.delete(request.queryKey);
 
   return {
     status: response.status,

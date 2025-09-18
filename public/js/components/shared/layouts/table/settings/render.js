@@ -8,7 +8,6 @@ export function tableRender(tableContainer) {
   const { updateAction, deleteAction } = tableContainer.dataset;
   const settings = [];
   const tHeads = getTHdTexts(tableContainer);
-  const tabRef = window.tables[tableContainer.getAttribute("id")];
 
   const dateReference = new Date().getTime();
 
@@ -46,13 +45,21 @@ export function tableRender(tableContainer) {
     return data;
   };
 
-  if (updateAction || deleteAction) {
-    const actions = handleRenderActions(tHeads.length, {
+  if (tHeads.includes("ações")) {
+    tHeads.splice(-1);
+  }
+
+  const hasActionsIsRow = updateAction || deleteAction;
+
+  if (hasActionsIsRow) {
+    const actions = handleRenderActions({
       updateAction,
       deleteAction,
       tableContainer,
     });
-    if (actions) settings.push(actions);
+    if (actions) {
+      settings.push(actions);
+    }
   }
 
   return {

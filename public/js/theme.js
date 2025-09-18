@@ -3,7 +3,6 @@ import { exports } from "./exports/index.js";
 import { resolvesPath } from "./helpers/resolvesPath.js";
 import "/js/libraries/swiper/swiper-bundle.min.js";
 import "/js/helpers/initHtml.js";
-import { ComponentManager } from "./helpers/components.js";
 
 const path = resolvesPath(exports, window.location.pathname) ?? [];
 
@@ -23,5 +22,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-new ComponentManager().init();

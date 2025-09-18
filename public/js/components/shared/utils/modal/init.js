@@ -1,4 +1,4 @@
-import { handleToggleModal } from "./handle.js";
+import { handleToggleModal } from "./core/handles.js";
 
 export const init = () => {
   const btnModals = Array.from(document.querySelectorAll("[modal-target]"));
