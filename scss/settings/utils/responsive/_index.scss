@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Breakpoints no formato Tailwind
 $breakpoints: (
   xs: 380px,
@@ -7,7 +9,7 @@ $breakpoints: (
   xl: 1200px,
   xxl: 1540px,
 );
-$mqs: map-keys($breakpoints);
+$mqs: map.keys($breakpoints);
 
 @import "./margin.scss";
 @import "./width.scss";

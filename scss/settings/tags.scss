@@ -57,10 +57,17 @@ h6 {
   position: relative !important;
 }
 
-input[type="number"]:-webkit-any() {
-  display: none;
+/* Remove setas do input number no Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
+/* Remove setas no Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 .invalid {
   .invalid-feedback {
     display: block;

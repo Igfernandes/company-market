@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Breakpoints no formato Tailwind
 $breakpoints: (
   xs: 380px,
@@ -8,10 +10,10 @@ $breakpoints: (
   xxl: 1540px,
 );
 
-$mqs: map-keys($breakpoints);
+$mqs: map.keys($breakpoints);
 
 @each $mq in $mqs {
-  $mq-value: map-get($breakpoints, $mq);
+  $mq-value: map.get($breakpoints, $mq);
 
   @media (min-width: #{$mq-value}) {
     @each $size in $font-sizes {

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Classes de 1 até 100
 @for $i from 1 through 100 {
   .border-#{$i} {
@@ -12,7 +14,7 @@
 @for $int from 1 through 9 {
   @for $dec from 1 through 9 {
     .border-\[#{$int}\.#{$dec}\] {
-      border-width: $int + ($dec / 10)px;
+      border-width: $int + math.div($dec, 10)px;
     }
   }
 }

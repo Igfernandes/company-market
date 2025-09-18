@@ -2,8 +2,8 @@
   transition: all 0.2s ease-in-out;
 }
 
-input:focus ~ [data-label-toggle],
-input:placeholder-shown ~ [data-label-toggle],
+[name]:focus ~ [data-label-toggle],
+[name]:placeholder-shown ~ [data-label-toggle],
 [data-label-toggle="true"] {
   bottom: 45%;
   left: 7px;

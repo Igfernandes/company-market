@@ -1,7 +1,8 @@
+@use "sass:map";
 $sides: "l", "t", "b", "r";
 
 @each $mq in $mqs {
-  $mq-value: map-get($breakpoints, $mq);
+  $mq-value: map.get($breakpoints, $mq);
 
   @media (min-width: #{$mq-value}) {
     @for $i from 0 through 100 {

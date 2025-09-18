@@ -57,6 +57,16 @@
                 padding: 4rem 0;
                 background-color: var(--bg-dashboard);
               }
+              .dots {
+                ul {
+                  display: none;
+                }
+                &:hover {
+                  ul {
+                    display: block;
+                  }
+                }
+              }
             }
           }
         }
