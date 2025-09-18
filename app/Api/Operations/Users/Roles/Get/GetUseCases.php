@@ -5,7 +5,6 @@ namespace App\Api\Operations\Users\Roles\Get;
 use App\Business\Users\UsersBusiness;
 use App\Business\Users\UserSingleBusiness;
 use App\Database\Entities\Users\RoleEntity;
-use App\Database\Entities\Users\UserEntity;
 use App\Database\Models\Users\RolesModel;
 use App\Database\Models\Users\UsersRolesModel;
 use App\Traits\BusinessTrait;
