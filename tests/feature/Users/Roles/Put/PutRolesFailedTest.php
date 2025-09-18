@@ -7,7 +7,7 @@ use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Users\RolesMock;
 use Tests\Support\Sessions\AuthenticatedSession;
 
-class PutURolesFailedTest extends RolesMock
+class PutRolesFailedTest extends RolesMock
 {
     use FeatureTestTrait, AuthenticatedSession;
 
