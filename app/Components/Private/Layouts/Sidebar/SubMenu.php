@@ -30,7 +30,8 @@ class SubMenu extends BaseComponents
         ],
         'users' => [
             'users' => 'Geral',
-            'users/trash' => 'Lixeira'
+            'users/trash' => 'Lixeira',
+            'users/roles' => 'Funções'
         ] 
     ];
 

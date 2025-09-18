@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Components\Shared\Forms\Variants\GroupValidations;
+namespace App\Components\Shared\Forms\Variants\Counter;
 
 class Mock
 {
     public const PROPS = [
-        "name" => "password",
-        "label" => "Senha",
-        "id" => "password",
-        "class" => "",
-        "required" => "true",
+        "initial" => 0,
+        "max" => 10
     ];
 }

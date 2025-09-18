@@ -15,6 +15,7 @@ class Table
         "update",
         "delete",
         "checked",
+        "options",
         "attributes",
     ];
 
@@ -32,6 +33,7 @@ class Table
         ?string $delete = "",
         ?bool $checked = false,
         ?array $relations = [],
+        ?array $options = [],
         ?array $attributes = [],
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
