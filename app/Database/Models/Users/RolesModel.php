@@ -22,7 +22,7 @@ class RolesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Users\RoleEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'status', 'description'];
+    protected $allowedFields    = ['id','name', 'status', 'description'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

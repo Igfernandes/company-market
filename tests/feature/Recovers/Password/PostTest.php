@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Recovers\Password;
 
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\ReflectionHelper;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -39,7 +40,7 @@ class PostTest extends CIUnitTestCase
             'recaptcha' => getenv('globals.recaptcha.tokenTest'),
         ]);
 
-        $result->assertStatus(OK); 
+        $result->assertStatus(OK);
         $result->assertJSONFragment(['success' => 'Api.users.success.recover_password']);
     }
 
@@ -51,8 +52,7 @@ class PostTest extends CIUnitTestCase
             'recaptcha' => getenv('globals.recaptcha.tokenTest'),
         ]);
 
-        $result->assertStatus(OK);
+        $result->assertStatus(ResponseInterface::HTTP_OK);
         $result->assertJSONFragment(['success' => 'Api.users.success.recover_password']);
-        $data = json_decode($result->getJSON(), true);
     }
 }

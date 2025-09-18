@@ -97,14 +97,14 @@ class UsersBusinessSuccessTest extends CIUnitTestCase
 
     public function testShouldAvailableEmail()
     {
-        $isEmailAvailable = $this->business->isEmailAvailable("21600635492", SELF::USER_MOCK['id']);
+        $isEmailAvailable = $this->business->isEmailAvailable("companymarket123@gmail.com", SELF::USER_MOCK['id']);
 
         $this->assertTrue($isEmailAvailable);
     }
 
     public function testShouldNotAvailableEmail()
     {
-        $isEmailAvailable = $this->business->isEmailAvailable(\getenv("globals.admin.login"), SELF::USER_MOCK['id']);
+        $isEmailAvailable = $this->business->isEmailAvailable(getenv("globals.admin.login"), SELF::USER_MOCK['id']);
 
         $this->assertNotTrue($isEmailAvailable);
     }

@@ -4,6 +4,12 @@
 use CodeIgniter\Boot;
 use Config\Paths;
 
+if (isset($argv[1]) && $argv[1] === 'test') {
+    putenv('CI_ENVIRONMENT=testing');
+    $_ENV['CI_ENVIRONMENT']   = 'testing';
+    $_SERVER['CI_ENVIRONMENT'] = 'testing';
+}
+
 if (str_starts_with(PHP_SAPI, 'cgi')) {
     exit("The cli tool is not supported when running php-cgi. It needs php-cli to function!\n\n");
 }

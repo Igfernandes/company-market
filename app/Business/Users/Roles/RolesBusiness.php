@@ -3,6 +3,7 @@
 namespace App\Business\Users\Roles;
 
 use App\Business\BaseBusiness;
+use App\Database\Models\Users\RolesModel;
 use App\Database\Models\Users\UsersModel;
 use App\Database\Models\Users\UsersRolesModel;
 use App\Traits\Users\UsersDataTrait;
@@ -29,6 +30,17 @@ class RolesBusiness
             $query['role_id'] = $roleId;
 
         $found = $usersRolesModel->where($query)->find();
+
+        return !empty($found);
+    }
+
+    public static function hasAvailableNameRole(string $name, int $roleId): bool
+    {
+        $rolesModel = new RolesModel();
+        $found = $rolesModel->where([
+            "name" => $name,
+            "id !=" => $roleId
+        ])->first();
 
         return !empty($found);
     }
