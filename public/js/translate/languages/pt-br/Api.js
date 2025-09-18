@@ -52,6 +52,20 @@ export const API = {
     invalid: {
       name: "O nome encontra-se inferior a 3 caracteres ou inválido",
       document: "O documento encontra-se vazio ou inválido",
+      not_found: "O usuário selecionado não existe ou encontra-se inválido",
+    },
+  },
+  roles: {
+    invalid: {
+      already_exists: "A função já está registrada no sistema",
+    },
+    success: {
+      post: "Função criada com sucesso",
+    },
+    permissions: {
+      success: {
+        post: "As permissões foram atualizadas com sucesso",
+      },
     },
   },
 };

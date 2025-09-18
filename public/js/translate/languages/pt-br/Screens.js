@@ -40,4 +40,9 @@ export const SCREENS = {
   notifications: {
     snackbar_title: "Notificações",
   },
+  roles: {
+    snackbar_title: "Funções",
+    problems_in_table:
+      "Ocorreu um problema ao carregar os recursos. Recarregue e tente novamente.",
+  },
 };
