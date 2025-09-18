@@ -20,7 +20,7 @@ $icon = [
 ];
 ?>
 
-<div class="menu h-[66vh] overflow-y-auto pl-5 ">
+<div class="menu h-[70vh] overflow-y-auto pl-5 pb-4">
     <?php
     if (isset($menu)):
         foreach ($menu as $topic => $itens):

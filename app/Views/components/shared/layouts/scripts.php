@@ -1,5 +1,6 @@
  <script type="module" src="/js/libraries/DayJs/dayjs.min.js"></script>
  <script type="module" src="/js/theme.js"></script>
+ <script type="module" src="/js/components/execute.js"></script>
 
  <?php
     if (is_array($scripts)):

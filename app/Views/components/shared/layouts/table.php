@@ -19,6 +19,7 @@ if (isset($attributes)) {
     <?= $update ? "data-update-action='$update'" : null ?>
     <?= $delete ? "data-delete-action='$delete'" : null ?>
     <?= $checked ? "checked='true'" : null ?>
+    options='[<?= is_array($options) ? join(",", array_map(fn($option, $ref) => '{"title": "' . $option . '", "key": "' . $ref . '"}', $options, array_keys($options))) : null ?>]'
     <?= !empty($attributeData) ? $attributeData : null ?>>
     <table id="<?= esc($id) ?>_<?= esc(date("YmdHis")) ?>">
         <?php if (is_array($heads)): ?>

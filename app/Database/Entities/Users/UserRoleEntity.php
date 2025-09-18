@@ -2,10 +2,13 @@
 
 namespace App\Database\Entities\Users;
 
+use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 
 class UserRoleEntity extends Entity
 {
+    use EntityEnhancerTrait;
+
     protected $dates = [];
     public $attributes = [
         'role_id'         => null,

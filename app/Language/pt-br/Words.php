@@ -120,5 +120,16 @@ return [
     "finance" => "Financeiro",
     "address" => "Endereço",
     "attachments" => "Anexos",
-    "basic" => "Básico"
+    "basic" => "Básico",
+    "users" => "Usuários",
+    "forms_fills" => "Formulários preenchidos",
+    "forms" => "Formulários",
+    "services" => "Serviços",
+    "dispatchers" => "Disparos",
+    "schedules" => "Agendamentos",
+    "clients" => "Clientes",
+    "categories" => "Categorias",
+    "charges" => "Cobranças",
+    "integrations" => "Integrações",
+    "fields" => "Campos"
 ];

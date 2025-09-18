@@ -15,4 +15,9 @@ class Users extends BaseController
     {
         return view("layouts/dashboard/users/trash");
     }
+    
+    public function roles()
+    {
+        return view("layouts/dashboard/users/roles");
+    }
 }
