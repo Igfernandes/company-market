@@ -6,9 +6,9 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\Database\Seeder;
 
-class MigrateTest extends BaseCommand
+class MigrateTestCommand extends BaseCommand
 {
-    protected $group       = 'Database';
+    protected $group       = 'Inicialize';
     protected $name        = 'migrate:test';
     protected $description = 'Roda as migrations e seeds no banco de teste (grupo tests)';
 
