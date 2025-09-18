@@ -18,19 +18,19 @@ trait GetDTOs
             ],
         ],
         'name' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'string|permit_empty|max_length[100]',
             'errors' => [
                 'string' => 'Api.roles.invalid.name',
             ],
         ],
         'name_contains' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'string|permit_empty|max_length[100]',
             'errors' => [
                 'string' => 'Api.roles.invalid.name',
             ],
         ],
         'description_contains' => [
-            'rules'  => 'string|permit_empty',
+            'rules'  => 'string|permit_empty|max_length[255]',
             'errors' => [
                 'string'      => 'Api.roles.invalid.description',
                 'regex_match' => 'Api.invalid.description',
