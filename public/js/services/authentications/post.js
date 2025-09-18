@@ -6,6 +6,7 @@ import { translate } from "../../translate/index.js";
 export async function postAuth(payload = {}) {
   const snackbar = new Snackbar();
   const snackbarTitleText = translate("Screens.auth.snackbar_title");
+  const defaultMessage = translate("Screens.default.service_error");
 
   try {
     const { auth } = API_ROUTES;
@@ -15,7 +16,7 @@ export async function postAuth(payload = {}) {
     if (data.error)
       return snackbar.execute("FAIL", {
         title: snackbarTitleText,
-        message: translate(data.error),
+        message: translate(data.error) ?? defaultMessage,
       });
 
     snackbar.execute("SUCCESS", {

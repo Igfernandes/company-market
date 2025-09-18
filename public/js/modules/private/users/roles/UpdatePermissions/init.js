@@ -1,24 +1,24 @@
 import {
-  getTableDeletes,
   getTable,
 } from "../../../../../components/shared/layouts/table/utils/target.js";
 import { Observer } from "../../../../../helpers/observer.js";
+import { TABLE_ROLE_ID } from "../constants.js";
 import { UserDeleteForm } from "./index.js";
 
-export const TABLE_TRASH_ID = "table_trash";
 export const init = () => {
-  const table = getTable(TABLE_TRASH_ID);
+  const table = getTable(TABLE_ROLE_ID);
 
   const userDeleteForm = new UserDeleteForm();
   Observer(
     table.querySelector("tbody"),
     () => {
-      const deletesBtn = getTableDeletes(TABLE_TRASH_ID);
+      const permissionOption = document.querySelectorAll(
+        "[option-ref='permissions']"
+      );
 
-      if (deletesBtn.length === 0) return;
+      if (permissionOption.length === 0) return;
 
-      deletesBtn.forEach((btn) => {
-        btn.removeEventListener("click", userDeleteForm.handleClick);
+      permissionOption.forEach((btn) => {
         btn.addEventListener("click", userDeleteForm.handleClick);
       });
     },
