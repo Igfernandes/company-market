@@ -2,6 +2,7 @@
 
 namespace App\Api\Operations\Users\Roles\Put;
 
+use App\Business\Users\Roles\RolesBusiness;
 use App\Database\Entities\Users\RoleEntity;
 use App\Database\Models\Users\RolesModel;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -23,6 +24,9 @@ class PutUseCases
 
         $rolesModel = new RolesModel();
         $foundRole = $rolesModel->where("id", $payload['id'])->first();
+
+        if (RolesBusiness::hasAvailableNameRole($payload['name'], $payload['id']))
+            throw new Exception("Api.roles.invalid.already_exists_name",  ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         if (empty($foundRole))
             throw new Exception("Api.roles.invalid.id",  ResponseInterface::HTTP_NOT_ACCEPTABLE);

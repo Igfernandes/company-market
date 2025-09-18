@@ -7,6 +7,7 @@ use App\Api\Validation;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
+use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
 class PutController extends BaseController
@@ -36,7 +37,7 @@ class PutController extends BaseController
 
             $responsePut = $this->putUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePut)->setStatusCode(CREATED);
+            return $this->response->setJSON($responsePut)->setStatusCode(ResponseInterface::HTTP_OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[
