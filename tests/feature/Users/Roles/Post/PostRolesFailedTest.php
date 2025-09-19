@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Users\Roles\Put;
+namespace Tests\Feature\Users\Roles\Post;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Users\RolesMock;
 use Tests\Support\Sessions\AuthenticatedSession;
 
-class PostURolesFailedTest extends RolesMock
+class PostRolesFailedTest extends RolesMock
 {
     use FeatureTestTrait, AuthenticatedSession;
 

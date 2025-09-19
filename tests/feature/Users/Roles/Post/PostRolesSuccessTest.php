@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Users\Roles\Put;
+namespace Tests\Feature\Users\Roles\Post;
 
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
@@ -16,39 +16,37 @@ class PostRolesSuccessTest extends RolesMock
     /**
      * Cenário: payload inválido causa exceção
      */
-    public function testUpdateRoles()
+    public function testCreateRoles()
     {
-        $this->createAuthenticatedSession(2);
+        $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
         unset($payload['permissions']);
+        $payload['name'] = "Empresários";
 
-        $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/" .  $id);
+        $result = $this->withBody(json_encode($payload), 'application/json')->post($this->route);
 
         $result->assertJSONFragment([
-            "success" => "Api.roles.success.put"
+            "success" => "Api.roles.success.post"
         ]);
-        $result->assertStatus(ResponseInterface::HTTP_OK);
+        $result->assertStatus(ResponseInterface::HTTP_CREATED);
     }
 
     /**
      * Cenário: payload inválido causa exceção
      */
-    public function testUpdateRolesWithPermissions()
+    public function testCreateRolesWithPermissions()
     {
-        $this->createAuthenticatedSession(2);
+        $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
+        $payload['name'] = "Médicos";
 
-        $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/$id");
+        $result = $this->withBody(json_encode($payload), 'application/json')->post($this->route);
 
         $result->assertJSONFragment([
-            "success" => "Api.roles.success.put"
+            "success" => "Api.roles.success.post"
         ]);
-        $result->assertStatus(ResponseInterface::HTTP_OK);
+        $result->assertStatus(ResponseInterface::HTTP_CREATED);
     }
 }

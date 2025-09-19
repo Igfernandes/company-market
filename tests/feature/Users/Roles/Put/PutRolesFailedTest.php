@@ -6,10 +6,11 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Users\RolesMock;
 use Tests\Support\Sessions\AuthenticatedSession;
+use Tests\Support\Traits\Users\RolesTrait;
 
 class PutRolesFailedTest extends RolesMock
 {
-    use FeatureTestTrait, AuthenticatedSession;
+    use FeatureTestTrait, AuthenticatedSession, RolesTrait;
 
     private string $route = '/api/users/roles';
 
@@ -21,7 +22,6 @@ class PutRolesFailedTest extends RolesMock
         $this->createAuthenticatedSession(2);
 
         $payload = SELF::DATA[0];
-        unset($payload['id']);
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/99");
 
@@ -33,8 +33,7 @@ class PutRolesFailedTest extends RolesMock
         $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
+        $id = $this->getId($payload['name']);
         $payload['name'] = null;
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/$id");
@@ -50,8 +49,7 @@ class PutRolesFailedTest extends RolesMock
         $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
+        $id = $this->getId($payload['name']);
         $payload['name'] = null;
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/$id");
@@ -67,8 +65,7 @@ class PutRolesFailedTest extends RolesMock
         $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
+        $id = $this->getId($payload['name']);
         $payload['name'] = \str_repeat("AAA", 101);
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/$id");
@@ -84,8 +81,7 @@ class PutRolesFailedTest extends RolesMock
         $this->createAuthenticatedSession(1);
 
         $payload = SELF::DATA[0];
-        $id = $payload['id'];
-        unset($payload['id']);
+        $id = $this->getId($payload['name']);
         $payload['description'] = \str_repeat("AAA", 401);
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/$id");
