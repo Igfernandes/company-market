@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Feature\Notifications\Get;
+namespace Tests\Feature\Users\Roles\Permissions\Get;
 
 use App\Api\Operations\Notifications\Get\GetUseCases;
 use App\Database\Models\Notifications\NotificationsModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
-use Tests\Support\Mocks\Notifications\NotificationsMock;
+use Tests\Support\Mocks\Users\RolesMock;
 use Tests\Support\Sessions\AuthenticatedSession;
 
-class GetNotificationsSuccessTest extends NotificationsMock
+class GetSuccessTest extends RolesMock
 {
     use FeatureTestTrait, AuthenticatedSession;
 
-    private string $route = '/api/notifications';
+    private string $route = '/api/users/roles';
 
     /**
      * Cenário: payload vazio
@@ -47,11 +47,8 @@ class GetNotificationsSuccessTest extends NotificationsMock
         ]);
 
         $this->assertIsArray($result);
-
-        if (count($result) > 0) {
-            $this->assertEquals($notification->getTitle(), $result[0]->title);
-            $this->assertEquals($notification->getMessage(), $result[0]->message);
-        }
+        $this->assertEquals($notification->getTitle(), $result[0]->title);
+        $this->assertEquals($notification->getMessage(), $result[0]->message);
     }
 
     /**

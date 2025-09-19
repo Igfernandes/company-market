@@ -6,10 +6,11 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Users\RolesMock;
 use Tests\Support\Sessions\AuthenticatedSession;
+use Tests\Support\Traits\Users\RolesTrait;
 
 class DeleteRolesSuccessTest extends RolesMock
 {
-    use FeatureTestTrait, AuthenticatedSession;
+    use FeatureTestTrait, AuthenticatedSession, RolesTrait;
 
     private string $route = '/api/users/roles';
 
@@ -20,9 +21,9 @@ class DeleteRolesSuccessTest extends RolesMock
     {
         $this->createAuthenticatedSession(1);
 
-        $payload = SELF::DATA[0];
+        $id = $this->getId(SELF::DATA['0']['name']);
 
-        $result = $this->delete("{$this->route}/" . $payload['id']);
+        $result = $this->delete("{$this->route}/" . $id);
 
         $result->assertJSONFragment([
             "success" => "Api.users.roles.success.delete"
