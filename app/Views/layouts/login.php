@@ -17,11 +17,11 @@ Head::render(title: "Login - Nautisys System");
 ?>
 
 <div class="login bg-blue-100 flex flex-col justify-center h-[100vh] w-100">
-    <div class="content w-90 md:w-75 max-w-[70rem]  mx-auto">
+    <div class="content w-90 md:w-75 max-w-[70rem] mx-auto">
         <div class="row flex my-4 ">
             <div class="col none sm:block w-40 lg:w-50 bg-blue-700 rounded-l-lg">
                 <?= Carousel::render(
-                    class: "h-[80vh]",
+                    class: "max-h-[40rem] h-[80vh]",
                     slides: [
                         "/imgs/nautisys-image-white.png"
                     ]
