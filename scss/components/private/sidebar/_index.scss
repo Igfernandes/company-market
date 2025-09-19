@@ -1,5 +1,5 @@
 [component="sidebar"] {
-  @include mq("sm", max) {
+  @include mq("md", max) {
     position: fixed;
     z-index: 999;
     width: 100%;
@@ -7,12 +7,12 @@
     margin-left: -100vw;
   }
   &.toggle {
-    @include mq("sm", max) {
+    @include mq("md", max) {
       margin-left: 0vw;
     }
     .content-sidebar {
       margin-left: -100vw;
-      @include mq("sm", max) {
+      @include mq("md", max) {
         margin-left: 0vw;
       }
     }
@@ -20,8 +20,8 @@
   .content-sidebar {
     margin-left: 0vw;
     transition: all 0.6s ease-in-out;
-    @include mq("lg", max) {
-      width: 22vw;
+    @include mq("md", max) {
+      width: 40%;
     }
     @include mq("sm", max) {
       width: 75%;
@@ -32,7 +32,7 @@
     position: absolute;
     right: -0px;
     top: 0;
-    @include mq("sm") {
+    @include mq("md") {
       display: none;
     }
   }

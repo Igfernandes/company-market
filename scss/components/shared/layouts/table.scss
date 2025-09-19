@@ -26,9 +26,16 @@
       &:nth-of-type(2) {
         width: 25%;
         min-width: 20rem;
+        @include mq("sm", max) {
+          min-width: auto;
+          width: 100%;
+        }
         .dt-search {
           display: flex;
           align-items: center;
+          @include mq("sm", max) {
+            flex-wrap: wrap;
+          }
           label {
             font-weight: 500;
             font-family: "Poppins";
@@ -39,6 +46,9 @@
             height: 2rem;
             padding-left: 1rem;
             border-radius: 4%;
+            @include mq("sm", max) {
+              width: 100%;
+            }
           }
         }
       }
