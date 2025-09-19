@@ -7,7 +7,6 @@ use App\Database\Entities\Users\RoleEntity;
 use App\Database\Models\Permissions\RolesPermissionsModel;
 use App\Database\Models\Users\RolesModel;
 use App\Libraries\Exceptions\Exceptions;
-use App\Services\Notifications\NotificationsService;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
@@ -16,8 +15,7 @@ class PostUseCases
     /**
      * @param object{
      *   name: string,
-     *   description: string,
-     *   permissions: array
+     *   description: string
      * } $payload
      */
     public function execute(object $payload)
@@ -25,11 +23,14 @@ class PostUseCases
         $roleEntity = new RoleEntity();
         $roleEntity->store((array)$payload);
         $permissionsBusiness = new PermissionsBusiness();
-        $hasPermissionsAvailable = is_array($payload->permissions) && count($payload->permissions) > 0;
+        $hasPermissionsAvailable = 0;
+        
+        if (isset($payload->permissions)) {
+            $hasPermissionsAvailable = is_array($payload->permissions) && count($payload->permissions) > 0;
 
-        if ($hasPermissionsAvailable && !$permissionsBusiness->hasPermissionsAvailable($payload->permissions))
-            throw new Exceptions("Api.permissions.invalid.in_ids", ResponseInterface::HTTP_NOT_ACCEPTABLE);
-
+            if ($hasPermissionsAvailable && !$permissionsBusiness->hasPermissionsAvailable($payload->permissions))
+                throw new Exceptions("Api.permissions.invalid.in_ids", ResponseInterface::HTTP_NOT_ACCEPTABLE);
+        }
         $rolesModel = new RolesModel();
         $foundRole = $rolesModel->where("name", $payload->name)->first();
 

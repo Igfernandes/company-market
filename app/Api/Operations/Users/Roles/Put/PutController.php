@@ -4,6 +4,7 @@ namespace App\Api\Operations\Users\Roles\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
+use App\Business\Permissions\PermissionsBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -25,6 +26,10 @@ class PutController extends BaseController
     public function handle(int $id)
     {
         try {
+            PermissionsBusiness::hasPermissionUserAuth([
+                'scope' => 'users',
+                'type' => 'VIEW'
+            ]);
             $validation = \Config\Services::validation();
 
             $payload = (array)$this->request->getJSON();

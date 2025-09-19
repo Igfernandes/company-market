@@ -22,7 +22,8 @@ class PostUseCases
             "permission_id" => $permissionId
         ], $payload['ids']);
 
-        $rolesPermissionsModel->insertBatch($permissions);
+        if (count($permissions) > 0)
+            $rolesPermissionsModel->insertBatch($permissions);
 
         return (object)[
             "success" => "Api.roles.permissions.success.post"

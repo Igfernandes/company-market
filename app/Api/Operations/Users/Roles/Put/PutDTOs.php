@@ -6,7 +6,7 @@ trait PutDTOs
 {
     protected array $rules = [
         'id' => [
-            'rules'  => 'required',
+            'rules'  => 'numeric|required',
             'errors' => [
                 'string' => 'Api.roles.invalid.id',
             ],

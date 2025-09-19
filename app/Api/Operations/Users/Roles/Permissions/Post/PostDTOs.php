@@ -6,9 +6,10 @@ trait PostDTOs
 {
     protected array $rules = [
         'role_id' => [
-            'rules'  => 'required',
+            'rules'  => 'numeric|required',
             'errors' => [
-                'string' => 'Api.roles.invalid.id',
+                'numeric' => 'Api.roles.invalid.id',
+                'required' => 'Api.roles.invalid.id',
             ],
         ],
         'ids' => [
