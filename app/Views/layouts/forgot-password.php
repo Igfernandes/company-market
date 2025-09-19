@@ -37,7 +37,7 @@ Head::render(title: "Login - Nautisys System");
                                 label: "E-mail"
                             ) ?>
                         </div>
-                        <div class="form-btn text-center xxl:text-xl">
+                        <div class="form-btn text-center text-sm xxl:text-xl">
                             <?= Submit::render(text: "Recuperar senha") ?>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ Head::render(title: "Login - Nautisys System");
                 <div class="link-login text-center mt-10 xxl:header-xs">
                     <?= Link::render(
                         text: "Já lembra sua senha? Entre agora",
-                        class: "hover:text-gray-300",
+                        class: "text-sm md:text-md hover:text-gray-300",
                         href: "/login"
                     ) ?>
                 </div>

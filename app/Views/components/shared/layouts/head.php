@@ -71,7 +71,7 @@
     <script src="/js/libraries/IntlTelInput/intlTelInput.min.js"></script>
 
 
-    <link rel="stylesheet" href="/css/dataTables.css" />
-
+    <link rel="stylesheet" href="/css/dataTables/dataTables.css" />
+  <link rel="stylesheet" href="/css/dataTables/responsive.dataTables.css" />
 
 <body>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Components\Private\Layouts\BreadcrumbHeader\BreadcrumbHeader;
 use App\Components\Private\Layouts\QuickActions\QuickActions;
+use App\Components\Private\Users\Overview\DeleteModal;
 use App\Components\Private\Users\Overview\InviteModal;
 use App\Components\Shared\Layouts\Table\Table;
 ?>
@@ -19,7 +20,7 @@ use App\Components\Shared\Layouts\Table\Table;
             );
             ?>
         </div>
-        <div class="bg-content text-left px-4 py-4 shadow my-2 mx-4">
+        <div class="bg-content text-left px-4 py-4 shadow my-2 md:mx-4">
             <?= QuickActions::render(
                 trash: "./users/trash",
                 export: [
@@ -30,7 +31,7 @@ use App\Components\Shared\Layouts\Table\Table;
                 actions: [
                     [
                         "text" => "+ Convidar Usuários",
-                        "class" => "bg-accent text-gray-100",
+                        "class" => "bg-accent text-gray-100 block w-full w-[24rem] md:inline-block text-center",
                         "attributes" => [
                             "invite" => 'users'
                         ]
@@ -48,4 +49,8 @@ use App\Components\Shared\Layouts\Table\Table;
         </div>
     </div>
 </div>
-<?= InviteModal::render(); ?>
+<?php
+
+DeleteModal::render();
+InviteModal::render();
+?>

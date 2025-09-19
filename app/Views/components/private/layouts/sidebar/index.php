@@ -11,7 +11,7 @@ use App\Database\Entities\Users\UserEntity;
 
 
 ?>
-<aside component="sidebar" class=" min-w-[16vw] ">
+<aside component="sidebar" class="">
     <div class="content-sidebar relative w-[16vw] h-[100vh] bg-content pt-4 shadow">
         <div class="">
             <div class="mobile-action absolute">

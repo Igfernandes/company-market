@@ -4,7 +4,7 @@ use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
 use App\Components\Shared\Forms\Fields\Input\InputFloatLabel\InputFloatLabel;
 
 ?>
-<form send="invite" class="w-[25vw]">
+<form send="invite" class="lg:w-[25vw]">
     <div class="form-title mb-6">
         <p class="font-semibold ">Convide um novo usuário preenchendo abaixo.
         </p>
