@@ -6,10 +6,12 @@ export function getRecaptchaToken() {
   return recaptchaInput.value;
 }
 
-export function initRecaptcha(callback) {
+export function initRecaptcha(callback, errorCallback) {
   const recaptcha = document.querySelector("[component='recaptcha']");
 
   window.onRecaptchaVerified = callback;
+
+  if (errorCallback) window.onRecaptchaExpired = errorCallback;
 
   if (recaptcha) hcaptcha.execute();
 }

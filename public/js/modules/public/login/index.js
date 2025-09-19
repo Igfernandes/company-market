@@ -26,10 +26,13 @@ export function LoginForm() {
       return;
     }
 
-    initRecaptcha((token) => {
-      payload.append("recaptcha", token);
-      this.sendLogin(form, payload);
-    });
+    initRecaptcha(
+      (token) => {
+        payload.append("recaptcha", token);
+        this.sendLogin(form, payload);
+      },
+      () => this.btnSubmit(form)
+    );
   };
 
   this.sendLogin = async (form, payload) => {

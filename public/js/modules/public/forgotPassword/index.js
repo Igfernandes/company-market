@@ -29,11 +29,14 @@ export function RecoverPasswordForm() {
       title: translate("Screens.forgot_password.sending_form"),
       message: translate("Screens.forgot_password.awaiting"),
     });
-    
-    initRecaptcha((token) => {
-      payload.append("recaptcha", token);
-      this.send(form, payload);
-    });
+
+    initRecaptcha(
+      (token) => {
+        payload.append("recaptcha", token);
+        this.send(form, payload);
+      },
+      () => this.handleLoading(form, false)
+    );
   };
 
   this.send = async (form, payload) => {
