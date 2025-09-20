@@ -40,7 +40,7 @@ use App\Components\Shared\Layouts\Table\Table;
             ) ?>
             <?= Table::render(
                 id: "users",
-                heads: ['id', 'name', 'status', 'email', 'role'],
+                heads: ['Id', 'Nome', 'Status', 'E-mail', 'Função'],
                 relations: ['id', 'name', 'status', 'email', 'roles.name'],
                 ajax: '/api/users',
                 update: "/dashboard/users",

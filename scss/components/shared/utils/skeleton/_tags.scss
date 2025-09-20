@@ -1,0 +1,5 @@
+[skeleton="true"] {
+  &[component="image"] {
+    @include skeleton();
+  }
+}
