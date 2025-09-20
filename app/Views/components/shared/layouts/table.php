@@ -10,7 +10,7 @@ if (isset($attributes)) {
 }
 ?>
 
-<div class="<?= esc($class) ?> w-full bg-white p-4 rounded-lg"
+<div skeleton='true' class=" skeleton-table <?= esc($class) ?>  w-full bg-white p-4 rounded-lg"
     id="<?= esc($id) ?>"
     component="table"
     data-heads="<?= join("/", $heads) ?>"

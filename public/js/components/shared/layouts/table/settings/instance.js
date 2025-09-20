@@ -1,11 +1,12 @@
-
+import { SkeletonModules } from "../../../utils/skeleton/exports.js";
 import { tableAjax } from "./ajax.js";
 import { tableRender } from "./render.js";
 import { translatorTable } from "./translator.js";
 
-export function tableInstance(tableContainer) {
+export async function tableInstance(tableContainer) {
   const table = tableContainer.querySelector("table");
   const { page } = table.dataset;
+  SkeletonModules.isActive(tableContainer.getAttribute("component"), true);
 
   window.tables = window.tables ?? {};
   const tableId = table.getAttribute("id");
@@ -24,6 +25,8 @@ export function tableInstance(tableContainer) {
   });
 
   window.tables[tableContainer.getAttribute("id")] = instance;
+  SkeletonModules.isActive(tableContainer.getAttribute("component"), false);
+  
   instance.on("draw", function () {
     instance.rows().every(function () {
       const rowNode = this.node();
