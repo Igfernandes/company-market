@@ -35,7 +35,10 @@ class PostUseCases
         if (! empty($ids)) {
             $usersModel
                 ->whereIn('id', $ids)
-                ->set(['deleted_at' => null])
+                ->set([
+                    'status' => 'ACTIVE',
+                    'deleted_at' => null
+                ])
                 ->update();
         }
 

@@ -1,5 +1,5 @@
 <div id="modal_<?= $type ?>" modal='<?= $type ?>' component='modal' class="fixed top-0 left-0 z-max w-full px-4 md:px-0 h-full bg-overlay flex justify-center items-center <?= $isActive ? "" : "hidden" ?>">
-    <div class="modal bg-white bg-white lg:min-w-[25rem] lg:max-w-[35vw] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
+    <div class="modal bg-white bg-white lg:min-w-[25rem] lg:max-w-[30rem] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
         <div class="modal-header text-xl py-4 text-secondary flex justify-between">
             <span component='modal:title'>
                 <span class="text-xll"><strong><?= $title ?></strong></span>
@@ -48,6 +48,11 @@
                                     <strong><?= $right ?></strong>
                                 </span>
                             </button>
+                            <div class="is-loading absolute w-6 top-20 right-4 spin text-lg font-semibold cursor-pointer">
+                                <?= Component("/assets/icons/dark/loading", [
+                                    "fill" => "#4d94ff"
+                                ]) ?>
+                            </div>
                         </div>
                     <?php endif; ?>
                 </div>

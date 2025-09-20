@@ -5,6 +5,7 @@ namespace App\Api\Operations\Users\Roles\Delete;
 use App\Business\Users\Roles\RolesBusiness;
 use App\Database\Models\Users\RolesModel;
 use App\Libraries\Exceptions\Exceptions;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class DeleteUseCases
 {
@@ -23,11 +24,14 @@ class DeleteUseCases
             "id" => $roleId
         ])->first();
 
+        if (strtolower($found->getName()) === "administrator")
+            throw new Exceptions("Api.roles.invalid.not_permit", ResponseInterface::HTTP_NOT_ACCEPTABLE);
+
         if (empty($found))
-            throw new Exceptions("Api.users.invalid.not_found", \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.roles.invalid.not_found", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         if (RolesBusiness::hasUsers(0, $roleId))
-            throw new Exceptions("Api.roles.invalid.has_users", \BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.roles.invalid.has_users", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         $rolesModel->delete($roleId);
 
@@ -36,7 +40,7 @@ class DeleteUseCases
         //     "action" => "DELETE"
         // ]);
         return (object)[
-            "success" => "Api.users.roles.success.delete"
+            "success" => "Api.roles.success.delete"
         ];
     }
 }
