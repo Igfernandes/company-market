@@ -1,0 +1,46 @@
+/* Base do skeleton */
+@mixin skeleton($padding: 16px, $radius: 8px) {
+  background: linear-gradient(90deg, #ebebeb 25%, #dddcdc 50%, #e6e6e6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  box-shadow: 1px 1px 3px #9a9a9a;
+}
+
+@mixin skeleton-lines(
+  $line-height: 30px,
+  $gap: 10px,
+  $color1: #d9d9d9,
+  $color2: #f5f5f5
+) {
+  background-color: #e0e0e0;
+  background: repeating-linear-gradient(
+    to bottom,
+    $color1,
+    $color1 $line-height,
+    $color2 $line-height,
+    $color2 ($line-height + $gap)
+  );
+
+  background-repeat: repeat;
+  background-size: 100% 200%; /* maior que 100% para animação */
+  animation: shimmer-line 1.5s infinite linear;
+}
+
+/* Animação de "brilho" */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes shimmer-line {
+  0% {
+    background-position: -200% 0;
+  } /* começa fora da tela à esquerda */
+  100% {
+    background-position: 200% 0;
+  } /* termina fora da tela à direita */
+}
