@@ -26,7 +26,7 @@ class DeleteRolesSuccessTest extends RolesMock
         $result = $this->delete("{$this->route}/" . $id);
 
         $result->assertJSONFragment([
-            "success" => "Api.users.roles.success.delete"
+            "success" => "Api.roles.success.delete"
         ]);
         $result->assertStatus(ResponseInterface::HTTP_OK);
     }
