@@ -64,23 +64,19 @@ export async function handleReloadTable(tableId) {
   if (!tableId)
     return console.warn(`Não foi possível encontrar a tabela ${tableId}`);
 
-  const oldTable = window.tables[tableId];
+  if (window.tables) {
+    const oldTable = window.tables[tableId];
 
-  if (oldTable) {
-    await oldTable.destroy();
-    delete window.tables[tableId];
+    if (oldTable) {
+      try {
+        await oldTable.destroy();
+      } catch (err) {
+      } finally {
+        delete window.tables[tableId];
+      }
+    }
   }
 
   const tableContainer = document.querySelector(`#${tableId}`);
   tableInstance(tableContainer);
-}
-
-export function getCheckedRows(tableId) {
-  const table = window.tables[tableId];
-
-  return table
-    .rows()
-    .data()
-    .toArray()
-    .filter((row) => !!row._selected);
 }

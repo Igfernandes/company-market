@@ -23,6 +23,8 @@ export const handleRenderOptions = (id, strOptions) => {
 
   const options = JSON.parse(strOptions);
 
+  if (options.length == 0) return "";
+
   return `
   <div class='dots relative inline-block ml-3'>
     <i class="bi bi-three-dots-vertical text-lg"></i> 
@@ -57,9 +59,10 @@ export const handleRenderActions = ({
     defaultContent: "", // ou pode deixar em branco
     orderable: false,
     searchable: false,
+    responsivePriority: 1,
     render: function (data, type, row) {
       return `
-          <div class="tb-actions">
+          <div class="tb-actions w-[5rem]" >
           ${handleRenderUpdate(row[indexColumnId], updateAction)}
           ${handleRenderDelete(row[indexColumnId], deleteAction)}
           ${handleRenderOptions(row[indexColumnId], strOptions)}

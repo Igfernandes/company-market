@@ -4,7 +4,7 @@ export const COMPONENTS = {
     "/js/components/shared/forms/password/toggle.js",
   "data-label-toggle": "/js/components/shared/forms/label/toggle.js",
   "component='carousel'": "/js/components/shared/layouts/carousel.js",
-  "component='recaptcha'": "/js/components/shared/utils/recaptcha.js",
+  "component='recaptcha'": "/js/components/shared/utils/recaptcha/index.js",
   "component='table'": "/js/components/shared/layouts/table/init.js",
   "checked-settings='all'":
     "/js/components/shared/layouts/table/utils/handle.js",

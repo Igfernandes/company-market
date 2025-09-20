@@ -1,7 +1,9 @@
-import { MODAL_ID } from "./core/constants.js";
+import { MODAL_REF } from "./core/constants.js";
+import { isLoading } from "./core/states.js";
 import {
   getCloseButton,
   getLeftButton,
+  getModal,
   getRightButton,
 } from "./core/targets.js";
 import { close, show } from "./core/utils.js";
@@ -12,5 +14,7 @@ export const ModalsModule = {
   getCloseButton,
   getLeftButton,
   getRightButton,
-  id: MODAL_ID,
+  getModal,
+  isLoading,
+  id: MODAL_REF,
 };

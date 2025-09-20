@@ -1,27 +1,21 @@
-import {
-  getTableDeletes,
-  getTable,
-} from "../../../../../components/shared/layouts/table/utils/target.js";
+import { TableModules } from "../../../../../components/shared/layouts/table/exports.js";
 import { Observer } from "../../../../../helpers/observer.js";
+import { TABLE_TRASH_ID } from "../../roles/constants.js";
 import { UserDeleteForm } from "./index.js";
 
-export const TABLE_TRASH_ID = "table_trash";
 export const init = () => {
-  const table = getTable(TABLE_TRASH_ID);
+  const table = TableModules.getTable(TABLE_TRASH_ID);
+
+  const execute = () => {
+    const deletesBtn = TableModules.getDeletesBtn(TABLE_TRASH_ID);
+
+    if (deletesBtn.length === 0) return;
+
+    deletesBtn.forEach((btn) => {
+      btn.addEventListener("click", userDeleteForm.handleClick);
+    });
+  };
 
   const userDeleteForm = new UserDeleteForm();
-  Observer(
-    table.querySelector("tbody"),
-    () => {
-      const deletesBtn = getTableDeletes(TABLE_TRASH_ID);
-
-      if (deletesBtn.length === 0) return;
-
-      deletesBtn.forEach((btn) => {
-        btn.removeEventListener("click", userDeleteForm.handleClick);
-        btn.addEventListener("click", userDeleteForm.handleClick);
-      });
-    },
-    { childList: true, attributes: false, characterData: false, subtree: false }
-  );
+  Observer(table.querySelector("tbody"), execute);
 };

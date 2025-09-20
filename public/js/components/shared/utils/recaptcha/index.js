@@ -1,12 +1,4 @@
-export function getRecaptchaToken() {
-  const recaptchaInput = document.querySelector("[name='res-recaptcha']");
-
-  if (!recaptchaInput) return;
-
-  return recaptchaInput.value;
-}
-
-export function initRecaptcha(callback, errorCallback) {
+export function init(callback, errorCallback) {
   const recaptcha = document.querySelector("[component='recaptcha']");
 
   window.onRecaptchaVerified = callback;
@@ -15,7 +7,7 @@ export function initRecaptcha(callback, errorCallback) {
 
   if (recaptcha) hcaptcha.execute();
 }
-export function loadRecaptcha() {
+export function load() {
   const recaptcha = document.querySelector("[component='recaptcha']");
 
   if (recaptcha) hcaptcha.reset();

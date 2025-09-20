@@ -1,1 +1,1 @@
-export const PERMISSION_MODAL_ID = "[modal='permissions']";
+export const PERMISSION_MODAL_ID = "permissions";

@@ -1,3 +1,4 @@
+
 import { tableAjax } from "./ajax.js";
 import { tableRender } from "./render.js";
 import { translatorTable } from "./translator.js";
@@ -15,6 +16,7 @@ export function tableInstance(tableContainer) {
     ...tableAjax(tableContainer),
     ...tableRender(tableContainer),
     info: false,
+    responsive: true,
     select: {
       style: "multi", // pode ser 'single', 'multi', 'os'
     },

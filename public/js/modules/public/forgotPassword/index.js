@@ -1,7 +1,4 @@
-import {
-  initRecaptcha,
-  loadRecaptcha,
-} from "../../../components/shared/utils/recaptcha.js";
+import { RecaptchaModules } from "../../../components/shared/utils/recaptcha/exports.js";
 import { snackbar } from "../../../components/shared/utils/snackbar.js";
 import { Validations } from "../../../libraries/Validations/index.js";
 import { postRecoverPassword } from "../../../services/recover/postPassword.js";
@@ -30,7 +27,7 @@ export function RecoverPasswordForm() {
       message: translate("Screens.forgot_password.awaiting"),
     });
 
-    initRecaptcha(
+    RecaptchaModules.init(
       (token) => {
         payload.append("recaptcha", token);
         this.send(form, payload);
@@ -44,7 +41,7 @@ export function RecoverPasswordForm() {
 
     setTimeout(() => {
       if (!success) {
-        loadRecaptcha();
+        RecaptchaModules.load();
         return this.handleLoading(form, false);
       }
     }, 300);

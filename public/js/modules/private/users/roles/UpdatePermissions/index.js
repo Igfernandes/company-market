@@ -9,7 +9,7 @@ export function UserDeleteForm() {
   this.handleClick = async (ev) => {
     const btn = ev.target;
     const roleId = btn.getAttribute("option-key");
-    const modalId = `#modal_permissions`;
+    const modalKey = `permissions`;
 
     if (!roleId)
       return snackbar.execute("NOTICE", {
@@ -21,20 +21,20 @@ export function UserDeleteForm() {
     });
 
     PermissionsModule.hydrate(permissions);
-    ModalsModule.show(modalId);
+    ModalsModule.show(modalKey);
 
     const handleClose = () => {
-      ModalsModule.close(modalId);
+      ModalsModule.close(modalKey);
       PermissionsModule.clear();
     };
 
-    const cancelBtn = ModalsModule.getLeftButton(modalId);
+    const cancelBtn = ModalsModule.getLeftButton(modalKey);
     cancelBtn.addEventListener("click", handleClose);
 
-    const closeIcon = ModalsModule.getCloseButton(modalId);
+    const closeIcon = ModalsModule.getCloseButton(modalKey);
     closeIcon.addEventListener("click", handleClose);
 
-    const saveBtn = ModalsModule.getRightButton(modalId);
+    const saveBtn = ModalsModule.getRightButton(modalKey);
     saveBtn.setAttribute(
       "permission-api",
       `/api/users/roles/${roleId}/permissions`

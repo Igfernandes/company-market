@@ -1,7 +1,8 @@
-import { handleReloadTable } from "../../../../../components/shared/layouts/table/utils/handle.js";
+import { TableModules } from "../../../../../components/shared/layouts/table/exports.js";
 import { PermissionsModule } from "../../../../../components/shared/utils/permissions/exports.js";
 import { Validations } from "../../../../../libraries/Validations/index.js";
 import { postRole } from "../../../../../services/users/roles/post.js";
+import { TABLE_ROLE_ID } from "../constants.js";
 import { RoleSchema } from "../rules.js";
 
 export function UserRolesCreate() {
@@ -24,7 +25,7 @@ export function UserRolesCreate() {
       });
 
       if (success) {
-        handleReloadTable("table_roles");
+        TableModules.load(TABLE_ROLE_ID);
         form.reset();
         PermissionsModule.clear();
       }

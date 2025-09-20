@@ -1,4 +1,6 @@
 import "/js/libraries/DataTables/dataTables.js";
+import "/js/libraries/DataTables/dataTables.responsive.js";
+import "/js/libraries/DataTables/responsive.dataTables.js";
 
 import { handleCheckedAll } from "./utils/handle.js";
 import './utils/globals.js'

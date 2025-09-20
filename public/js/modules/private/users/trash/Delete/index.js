@@ -1,35 +1,32 @@
-import { handleReloadTable } from "../../../../../components/shared/layouts/table/utils/handle.js";
-import { getDeleteKey } from "../../../../../components/shared/layouts/table/utils/target.js";
+import { TableModules } from "../../../../../components/shared/layouts/table/exports.js";
 import { ModalsModule } from "../../../../../components/shared/utils/modal/exports.js";
-import { TABLE_TRASH_ID } from "./init.js";
+import { TABLE_TRASH_ID } from "../../roles/constants.js";
 
 export function UserDeleteForm() {
   this.userId;
-  const modalId = "#modal_delete";
+  const modalKey = "delete";
 
   this.handleClick = async (ev) => {
     const btn = ev.target;
-    ModalsModule.show("#modal_delete");
+    ModalsModule.show(modalKey);
 
-    const cancelBtn = ModalsModule.getLeftButton(modalId);
-    cancelBtn.addEventListener("click", ModalsModule.close(modalId));
+    const cancelBtn = ModalsModule.getLeftButton(modalKey);
+    cancelBtn.addEventListener("click", () =>  ModalsModule.close(modalKey));
 
-    const confirmBtn = ModalsModule.getRightButton(modalId);
-    confirmBtn.replaceWith(confirmBtn.cloneNode(true));
-    const newConfirmBtn = ModalsModule.getRightButton(modalId);
+    const confirmBtn = ModalsModule.getRightButton(modalKey);
 
-    newConfirmBtn.addEventListener(
+    confirmBtn.addEventListener(
       "click",
       async () => {
-        const userId = getDeleteKey(btn);
+        const userId = TableModules.getDeleteKey(btn);
 
         const { success } = await deleteRole({
           id: userId,
         });
 
         if (success) {
-          handleReloadTable(TABLE_TRASH_ID);
-          ModalsModule.close(modalId);
+          TableModules.load(TABLE_TRASH_ID);
+          ModalsModule.close(modalKey);
         }
       },
       { once: true }

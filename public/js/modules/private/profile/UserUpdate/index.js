@@ -1,5 +1,4 @@
 import { snackbar } from "../../../../components/shared/utils/snackbar.js";
-import { getFormDataToJson } from "../../../../helpers/route.js";
 import { Validations } from "../../../../libraries/Validations/index.js";
 import { putUser } from "../../../../services/users/put.js";
 import { translate } from "../../../../translate/index.js";
@@ -21,7 +20,7 @@ export function UserUpdateForm() {
 
     const formValid = await validations.execute(UserUpdateSchema);
 
-    if (formValid.length === 0) await putUser(getFormDataToJson(payload));
+    if (formValid.length === 0) await putUser(payload);
 
     this.handleLoading(form, false);
   };

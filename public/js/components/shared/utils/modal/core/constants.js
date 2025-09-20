@@ -1,1 +1,1 @@
-export const MODAL_ID = "[component='modal']";
+export const MODAL_REF = "[component='modal']";

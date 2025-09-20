@@ -1,24 +1,24 @@
-import { getButtonElement } from "../../../forms/button/target.js";
-import { MODAL_ID } from "./constants.js";
+import { MODAL_REF } from "./constants.js";
 import { ModalsModule } from "../exports.js";
+import { FormModules } from "../../../forms/exports.jS";
 
 export function handleDeleteModal(ev) {
-  const btn = getButtonElement(ev);
-  const modal = btn.closest(MODAL_ID);
+  const btn = FormModules.button(ev);
+  const modal = btn.closest(MODAL_REF);
 
   modal.remove();
 }
 
 export function handleCloseModal(ev) {
-  const btn = getButtonElement(ev);
-  const modal = btn.closest(MODAL_ID);
+  const btn = FormModules.button(ev);
+  const modal = btn.closest(MODAL_REF);
 
   modal.classList.add("hidden");
 }
 
 export function handleToggleModal(ev) {
-  const btn = getButtonElement(ev);
+  const btn = FormModules.button(ev);
   const modalSelector = btn.getAttribute("modal-target");
 
-  ModalsModule.show(`[modal='${modalSelector}']`);
+  ModalsModule.show(modalSelector);
 }

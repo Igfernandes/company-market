@@ -1,5 +1,5 @@
 export function getCloseButton(target = "") {
-  const modal = document.querySelector(target);
+  const modal = getModal(target);
 
   if (!modal) return;
 
@@ -7,7 +7,7 @@ export function getCloseButton(target = "") {
 }
 
 export function getLeftButton(target = "") {
-  const modal = document.querySelector(target);
+  const modal = getModal(target);
 
   if (!modal) return;
 
@@ -15,9 +15,15 @@ export function getLeftButton(target = "") {
 }
 
 export function getRightButton(target = "") {
-  const modal = document.querySelector(target);
+  const modal = getModal(target);
 
   if (!modal) return;
 
   return modal.querySelector("[component='modal:right-btn']");
+}
+
+export function getModal(targetModal) {
+  return typeof targetModal == "string"
+    ? document.querySelector(`[modal='${targetModal}']`)
+    : targetModal;
 }

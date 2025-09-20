@@ -1,3 +1,3 @@
 export const locations = {
- form: document.querySelector("[send='role-create']")
+ form: document.querySelector("[send='role-update']")
 };

@@ -1,25 +1,21 @@
-import {
-  getTableDeletes,
-  getTable,
-} from "../../../../components/shared/layouts/table/utils/target.js";
+import { TableModules } from "../../../../components/shared/layouts/table/exports.js";
+import { getTable } from "../../../../components/shared/layouts/table/utils/target.js";
 import { Observer } from "../../../../helpers/observer.js";
 import { UserDeleteForm } from "./index.js";
 
 export const init = () => {
   const table = getTable();
   const userDeleteForm = new UserDeleteForm();
-  
-  Observer(
-    table.querySelector("tbody"),
-    () => {
-      const deletesBtn = getTableDeletes("users");
 
-      if (deletesBtn.length === 0) return;
+  const execute = () => {
+    const deletesBtn = TableModules.getDeletesBtn("users");
 
-      deletesBtn.forEach((btn) =>
-        btn.addEventListener("click", userDeleteForm.handleClick)
-      );
-    },
-    { childList: true, attributes: false, characterData: false, subtree: false }
-  );
+    if (deletesBtn.length === 0) return;
+
+    deletesBtn.forEach((btn) =>
+      btn.addEventListener("click", userDeleteForm.handleClick)
+    );
+  };
+
+  Observer(table.querySelector("tbody"), execute);
 };

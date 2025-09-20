@@ -25,7 +25,7 @@ export function getDeleteKey(btnAction) {
 
   const ChildrenReference = btnAction.querySelector(`[${attributeKey}]`);
   id = ChildrenReference.getAttribute(attributeKey);
-  
+
   return id;
 }
 
@@ -35,4 +35,14 @@ export function getTableCheckbox(tableId) {
       `[component='table']${tableId ? "#" + tableId : ""} [target-checked]`
     )
   );
+}
+
+export function getCheckedRows(tableId) {
+  const table = window.tables[tableId];
+
+  return table
+    .rows()
+    .data()
+    .toArray()
+    .filter((row) => !!row._selected);
 }

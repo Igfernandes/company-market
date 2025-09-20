@@ -30,9 +30,9 @@ export function Observer(element, callback, options = {}) {
 
   const defaultOptions = {
     childList: true,
-    attributes: true,
-    characterData: true,
-    subtree: true,
+    attributes: false,
+    characterData: false,
+    subtree: false,
   };
 
   const observer = new MutationObserver((mutations) => {

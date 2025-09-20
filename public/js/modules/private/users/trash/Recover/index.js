@@ -1,19 +1,16 @@
-import {
-  getCheckedRows,
-  handleReloadTable,
-} from "../../../../../components/shared/layouts/table/utils/handle.js";
+import { TableModules } from "../../../../../components/shared/layouts/table/exports.js";
 import { ModalsModule } from "../../../../../components/shared/utils/modal/exports.js";
 import { snackbar } from "../../../../../components/shared/utils/snackbar.js";
 import { postUserTrash } from "../../../../../services/users/trash/post.js";
 import { translate } from "../../../../../translate/index.js";
-import { TABLE_TRASH_ID } from "./init.js";
+import { TABLE_TRASH_ID } from "../../roles/constants.js";
 
 export function UserRecoverForm() {
   this.userId;
-  const modalId = "#modal_recover";
+  const modalKey = "recover";
 
   this.handleClick = async (ev) => {
-    const tableRows = getCheckedRows(TABLE_TRASH_ID);
+    const tableRows = TableModules.checkedRows(TABLE_TRASH_ID);
     const usersIds = tableRows.map((row) => row[0]);
 
     if (usersIds.length == 0)
@@ -22,11 +19,11 @@ export function UserRecoverForm() {
         message: translate("Screens.users.trash.invalid.user_ids"),
       });
 
-    ModalsModule.show(modalId);
+    ModalsModule.show(modalKey);
 
-    const cancelBtn = ModalsModule.getLeftButton(modalId);
-    cancelBtn.addEventListener("click", ModalsModule.close(modalId));
-    const confirmBtn = ModalsModule.getRightButton(modalId);
+    const cancelBtn = ModalsModule.getLeftButton(modalKey);
+    cancelBtn.addEventListener("click", () => ModalsModule.close(modalKey));
+    const confirmBtn = ModalsModule.getRightButton(modalKey);
 
     confirmBtn.addEventListener("click", async () => {
       const { success } = await postUserTrash({
@@ -34,8 +31,8 @@ export function UserRecoverForm() {
       });
 
       if (success) {
-        handleReloadTable(TABLE_TRASH_ID);
-        ModalsModule.remove();
+        TableModules.load(TABLE_TRASH_ID);
+        ModalsModule.close(modalKey);
       }
     });
   };

@@ -1,11 +1,10 @@
-import { showModal } from "../../../../components/shared/utils/modal/target.js";
+import { ModalsModule } from "../../../../components/shared/utils/modal/exports.js";
 import { UserInviteForm } from "./index.js";
-import { locations } from "./locations.js";
+import { locations, MODAL_INVITE_KEY } from "./locations.js";
 
 export const init = () => {
-  const { inviteModal } = locations;
   handleInviteModal();
-  const btnSubmit = inviteModal.querySelector("[component='modal:right-btn']");
+  const btnSubmit = ModalsModule.getRightButton(MODAL_INVITE_KEY);
 
   if (!btnSubmit) return;
   const userInviteForm = new UserInviteForm();
@@ -14,11 +13,11 @@ export const init = () => {
 };
 
 const handleInviteModal = () => {
-  const { btnInvite, inviteModal } = locations;
+  const { btnInvite } = locations;
 
   if (!btnInvite) return;
 
   btnInvite.addEventListener("click", () => {
-    showModal(inviteModal);
+    ModalsModule.show(MODAL_INVITE_KEY);
   });
 };

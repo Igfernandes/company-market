@@ -1,7 +1,4 @@
-import {
-  initRecaptcha,
-  loadRecaptcha,
-} from "../../../components/shared/utils/recaptcha.js";
+import { RecaptchaModules } from "../../../components/shared/utils/recaptcha/exports.js";
 import cookies from "../../../helpers/cookies/index.js";
 import { redirect } from "../../../helpers/route.js";
 import { Validations } from "../../../libraries/Validations/index.js";
@@ -26,7 +23,7 @@ export function LoginForm() {
       return;
     }
 
-    initRecaptcha(
+    RecaptchaModules.init(
       (token) => {
         payload.append("recaptcha", token);
         this.sendLogin(form, payload);
@@ -39,7 +36,7 @@ export function LoginForm() {
     const { success, reference_token } = (await postAuth(payload)) ?? {};
     setTimeout(() => {
       if (!success) {
-        loadRecaptcha();
+        RecaptchaModules.load();
         return this.btnSubmit(form, false);
       }
 
