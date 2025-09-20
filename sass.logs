@@ -1,0 +1,53 @@
+[33m[1mDeprecation Warning[0m [[34mimport[0m]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+[34m  ╷[0m
+[34m2 │[0m @import [31m"./settings/mixis.scss"[0m;
+[34m  │[0m [31m        ^^^^^^^^^^^^^^^^^^^^^^^[0m
+[34m  ╵[0m
+    scss\theme.scss 2:9  root stylesheet
+
+[33m[1mDeprecation Warning[0m [[34mimport[0m]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+[34m  ╷[0m
+[34m5 │[0m @import [31m"./animations/animations.scss"[0m;
+[34m  │[0m [31m        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[34m  ╵[0m
+    scss\theme.scss 5:9  root stylesheet
+
+[33m[1mDeprecation Warning[0m [[34mimport[0m]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+[34m  ╷[0m
+[34m8 │[0m @import [31m"./settings/colors.scss"[0m;
+[34m  │[0m [31m        ^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[34m  ╵[0m
+    scss\theme.scss 8:9  root stylesheet
+
+[33m[1mDeprecation Warning[0m [[34mimport[0m]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+[34m  ╷[0m
+[34m9 │[0m @import [31m"./settings/fonts"[0m;
+[34m  │[0m [31m        ^^^^^^^^^^^^^^^^^^[0m
+[34m  ╵[0m
+    scss\theme.scss 9:9  root stylesheet
+
+[33m[1mDeprecation Warning[0m [[34mimport[0m]: Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+[34m   ╷[0m
+[34m10 │[0m @import [31m"./settings/sizes"[0m;
+[34m   │[0m [31m        ^^^^^^^^^^^^^^^^^^[0m
+[34m   ╵[0m
+    scss\theme.scss 10:9  root stylesheet
+
+[33m[1mWarning[0m: 76 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
