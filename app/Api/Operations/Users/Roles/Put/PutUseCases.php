@@ -26,14 +26,14 @@ class PutUseCases
         $rolesModel = new RolesModel();
         $foundRole = $rolesModel->where("id", $payload['id'])->first();
 
-        if (strtolower($foundRole->getName()) === "administrator")
-            throw new Exceptions("Api.roles.invalid.not_permit", ResponseInterface::HTTP_NOT_ACCEPTABLE);
-
         if (RolesBusiness::hasAvailableNameRole($payload['name'], $payload['id']))
             throw new Exceptions("Api.roles.invalid.already_exists_name",  ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         if (empty($foundRole))
             throw new Exceptions("Api.roles.invalid.id",  ResponseInterface::HTTP_NOT_ACCEPTABLE);
+
+        if (strtolower($foundRole->getName()) === "administrator")
+            throw new Exceptions("Api.roles.invalid.not_permit", ResponseInterface::HTTP_NOT_ACCEPTABLE);
 
         if (count($roleEntity->toArray(true)) > 0)
             $rolesModel->set($roleEntity->toArray(true))->update($payload['id']);
