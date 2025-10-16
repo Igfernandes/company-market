@@ -2,6 +2,7 @@
 
 use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
 use App\Components\Shared\Forms\Fields\Input\InputFloatLabel\InputFloatLabel;
+use App\Components\Shared\Forms\Fields\Select\SelectFloatLabel\SelectFloatLabel;
 
 ?>
 <form send="invite" class="lg:w-[25vw]">
@@ -21,6 +22,15 @@ use App\Components\Shared\Forms\Fields\Input\InputFloatLabel\InputFloatLabel;
             name: "email",
             label: "E-mail",
             required: "true"
+        ); ?>
+    </div>
+
+    <div class="form-group">
+        <?= SelectFloatLabel::render(
+            name: "role_id",
+            label: "Função",
+            required: "true", 
+            options: $roles
         ); ?>
     </div>
     <div class="form-alert mt-6">
