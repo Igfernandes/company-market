@@ -1,8 +1,3 @@
-<?php
-
-$token = isset($inviteToken) ? $inviteToken : "";
-$inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=$token ";
-?>
 
 <?= view('mails/_header') ?>
 <tbody>
@@ -50,7 +45,7 @@ $inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=$toke
                 ">
                 <a href="<?= $inviteLink; ?>" target="_blank" rel="noopener noreferrer"
                     style="
-                        background: #BC2224;
+                        background: <?= getenv("theme.color.default") ?>;
                         padding: .75rem 5rem;
                         color: #fff;
                         text-decoration: none;
