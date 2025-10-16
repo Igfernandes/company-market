@@ -3,7 +3,7 @@
 namespace App\Business\Exports;
 
 use App\Business\BaseBusiness;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Database\Entities\CustomForms\CustomFormEntity;
 use App\Database\Entities\CustomForms\FormFillEntity;
 use App\Database\Entities\Services\ServiceEntity;
@@ -47,7 +47,7 @@ class ExportsFormFillsBusiness
         $this->formFillsModel->whereIn("id", $fieldIds);
         $payload = [];
 
-        $payload = PermissionsBusiness::applyOwnershipRestriction([
+        $payload = PermissionsValidationBusiness::applyOwnershipRestriction([
             'scope' => 'clients',
             'type' => 'VIEW'
         ], $payload);

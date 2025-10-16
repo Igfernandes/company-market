@@ -3,7 +3,7 @@
 namespace App\Business\Exports;
 
 use App\Business\BaseBusiness;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Database\Entities\Clients\ClientCategoryEntity;
 use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Entities\Fields\FieldsGroupEntity;
@@ -40,7 +40,7 @@ class ExportsClientsBusiness
             "in_ids" => $clientsFiltered
         ];
 
-        $payload = PermissionsBusiness::applyOwnershipRestriction([
+        $payload = PermissionsValidationBusiness::applyOwnershipRestriction([
             'scope' => 'clients',
             'type' => 'VIEW'
         ], $payload);
