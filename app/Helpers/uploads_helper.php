@@ -1,5 +1,8 @@
 <?php
 
+use App\Libraries\Exceptions\Exceptions;
+use CodeIgniter\HTTP\Response;
+
 if (!function_exists('saveBase64ToUploads')) {
 
     /**
@@ -24,19 +27,21 @@ if (!function_exists('saveBase64ToUploads')) {
         }
 
         // Define o caminho de destino
-        $uploadPath = WRITEPATH . 'uploads\services\\';
-        if (!is_dir($uploadPath)) {
-            mkdir($uploadPath, 0775, true); // Cria o diretório se não existir
+        $uploadPath  = 'uploads/' . date("Y") . '/' . date('m') . '/';
+        $uploadAbsolutePath = WRITEPATH . $uploadPath;
+        if (!is_dir($uploadAbsolutePath)) {
+            mkdir($uploadAbsolutePath, 0775, true); // Cria o diretório se não existir
         }
 
         $extension = explode("/",  $mimeType)[1];
-        $filePath = $uploadPath . "$photoName.$extension";
+        $fullNameImage = "$photoName.$extension";
+        $filePath = $uploadAbsolutePath . $fullNameImage;
 
         // Salva a imagem no destino
         if (file_put_contents($filePath, $data) === false) {
-            throw new \RuntimeException('Falha ao salvar o arquivo.');
+            throw new Exceptions('Falha ao salvar o arquivo.', Response::HTTP_NOT_ACCEPTABLE);
         }
 
-        return $filePath;
+        return '/uploads/images/' . date("Y") . '/' . date('m') . '/' . $fullNameImage;
     }
 }

@@ -6,23 +6,25 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Uploads extends BaseController
 {
-    private function handleFile()
+    public function images()
     {
-        $path = WRITEPATH . $this->request->getUri()->getPath();
+        $pathImageRemoved = \str_replace(["/uploads", "images/"], ["uploads", ""], $this->request->getUri()->getPath());
+        $path = WRITEPATH . $pathImageRemoved;
 
         $response = service('response');
 
         if (!is_file($path)) {
             return $response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
         }
-        
+
         return $response
             ->setHeader('Content-Type', mime_content_type($path))
             ->setBody(file_get_contents($path));
     }
-    public function image($filename)
+
+    private function handleFile()
     {
-        $path = WRITEPATH . 'uploads/images/' . basename($filename);
+        $path = WRITEPATH . $this->request->getUri()->getPath();
 
         $response = service('response');
 
@@ -38,21 +40,6 @@ class Uploads extends BaseController
     public function fields($filename)
     {
         $path = WRITEPATH . 'uploads/fields/' . basename($filename);
-
-        $response = service('response');
-
-        if (!is_file($path)) {
-            return $response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
-        }
-
-        return $response
-            ->setHeader('Content-Type', mime_content_type($path))
-            ->setBody(file_get_contents($path));
-    }
-
-    public function services($filename)
-    {
-        $path = WRITEPATH . 'uploads/services/' . basename($filename);
 
         $response = service('response');
 

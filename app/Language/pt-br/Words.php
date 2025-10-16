@@ -83,6 +83,7 @@ return [
     "athlete" => "atleta",
     "athletes" => "atletas",
     "role" => "cargo",
+    "administrator" => "administrador",
     "employee" => "funcionário",
     "employees" => "funcionários",
     "message" => [
@@ -95,6 +96,7 @@ return [
     "admins" => "administradores",
     "parents" => "pais",
     "kinship" => "parentesco",
+    "guide" => "Guia",
     "registration" => "matricula",
     "fill" => "preenchimento",
     "author" => "autor",

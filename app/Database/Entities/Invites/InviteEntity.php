@@ -7,7 +7,6 @@ use Exception;
 
 class InviteEntity extends Entity
 {
-    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'token'           => null,
@@ -154,6 +153,28 @@ class InviteEntity extends Entity
         if (!empty($ownerId)) {
             $this->attributes['owner_id'] = $ownerId;
         }
+    }
+
+    /**
+     * @method mixed setEmailSha256()
+     *
+     * @param string|null $emailSha256
+     * @return void
+     */
+    public function setEmailSha256(?string $emailSha256)
+    {
+        if (!empty($emailSha256))
+            $this->attributes['email_sha256'] = $emailSha256;
+    }
+
+    /**
+     * @method mixed getEmailSha256()
+     *
+     * @return String|null
+     */
+    public function getEmailSha256(): ?String
+    {
+        return $this->attributes['email_sha256'];
     }
 
     /**

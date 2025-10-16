@@ -23,8 +23,8 @@ class UsersRoles extends Migration
         ]);
 
         $this->forge->addKey(['role_id', 'user_id'], true);
-        $this->forge->addForeignKey("role_id", "roles", ["id"]);
-        $this->forge->addForeignKey("user_id", "users", ["id"]);
+        $this->forge->addForeignKey("role_id", "roles", ["id"], 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey("user_id", "users", ["id"], 'CASCADE', 'CASCADE');
 
         $this->forge->createTable($this->tb_name, true);
     }

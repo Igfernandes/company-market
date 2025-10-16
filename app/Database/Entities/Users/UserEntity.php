@@ -545,9 +545,6 @@ class UserEntity extends Entity
     public function setSystemKey(?String $systemKey)
     {
 
-        if (strlen($systemKey) > 400)
-            throw new Exception("Api.users.invalid.system_key", BAD_REQUEST);
-
         if (!empty($systemKey))
             $this->attributes['system_key'] = $systemKey;
     }

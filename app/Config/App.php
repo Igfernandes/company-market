@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = '' ;
+    public string $baseURL = "";
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -199,4 +199,10 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+
+    public function __construct()
+    {
+        $this->baseURL = env('app.baseURL', 'http://localhost:8080/');
+    }
 }

@@ -5,31 +5,31 @@ return [
     "welcome" => [
         "subject" => "Mensagens de Boas Vindas",
         "title" => "Olá, “{name}” seja bem-vindo!",
-        "text_aux" => "Olá, você foi convidado a fazer parte da plataforma da AGM! Acesse o link: {inviteLink}"
+        "text_aux" => "Olá, você foi convidado a fazer parte da Nautisys! Acesse o link: {inviteLink}"
 
     ],
     "alter_password" => [
         "subject" => "Confirmação de alteração de senha",
         "text_aux" => "A sua senha foi alterada com sucesso. Acesse a área de login e conecte-se",
         "title" => "Olá, “Name”",
-        "subtitle" => "Você recebeu este e-mail porque alterou a senha da sua conta na plataforma da AGM.",
-        "text_about_date_created" => "Sua senha na plataforma da AGM foi alterada em 13/12/2024 às 16:38 (GMT).",
+        "subtitle" => "Você recebeu este e-mail porque alterou a senha da sua conta na Nautisys.",
+        "text_about_date_created" => "Sua senha na Nautisys foi alterada em 13/12/2024 às 16:38 (GMT).",
         "alert_about_email" => "Se foi você, este e-mail pode ser ignorado com segurança."
     ],
     "recover_password" => [
         "subject" => "Alteração de senha",
-        "subtitle" => "Você recebeu este e-mail porque esqueceu a senha da sua conta na plataforma da AGM.",
+        "subtitle" => "Você recebeu este e-mail porque esqueceu a senha da sua conta na Nautisys.",
         "text_aux" => "Olá, você recebeu uma solicitação para alteração de senha da plataforma {company}! Acesse o link: {link}",
-        "text_about_button" => "Pra criar uma nova senha, clique no botão e será redirecionado para plataforma da AGM pra criar uma nova senha.",
+        "text_about_button" => "Pra criar uma nova senha, clique no botão e será redirecionado para Nautisys pra criar uma nova senha.",
         "text_button" => "Criar uma nova senha",
         "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
     ],
     "invites" => [
         "subject" => "Convite para cadastro",
-        "text_aux" => "Olá, você foi convidado a fazer parte da plataforma da {company}! Acesse o link: {link}",
-        "title" => "Olá, você foi convidado a fazer parte da plataforma da AGM!",
-        "subtitle" => "Você recebeu este e-mail para criar uma conta na plataforma da AGM e utilizar os seus recursos.",
-        "text_about_button" => "Pra criar uma conta, clique no botão e será redirecionado para plataforma da AGM pra criar uma nova senha.",
+        "text_aux" => "Olá, você foi convidado a fazer parte da Nautisys! Acesse o link: {link}",
+        "title" => "Olá, você foi convidado a fazer parte da Nautisys!",
+        "subtitle" => "Você recebeu este e-mail para criar uma conta na Nautisys e utilizar os seus recursos.",
+        "text_about_button" => "Pra criar uma conta, clique no botão e será redirecionado para Nautisys pra criar uma nova senha.",
         "text_button" => "Criar uma conta",
         "text_about_problems_button" => "Caso o botão não funcione, clique no link abaixo."
     ],

@@ -31,8 +31,8 @@ class UsersFields extends Migration
         ]);
 
         $this->forge->addKey(['user_id', 'field_id'], true);
-        $this->forge->addForeignKey("field_id", "fields", ["id"]);
-        $this->forge->addForeignKey("user_id", "users", ["id"]);
+        $this->forge->addForeignKey("field_id", "fields", ["id"], 'CASCADE');
+        $this->forge->addForeignKey("user_id", "users", ["id"], 'CASCADE');
 
         $this->forge->createTable($this->tb_name, true);
     }
