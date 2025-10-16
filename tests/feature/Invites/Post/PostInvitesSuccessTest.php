@@ -14,7 +14,8 @@ class PostInvitesSuccessTest extends NotificationsMock
     private string $route = '/api/invites/user';
     const PAYLOAD =  [
         'name' => 'Company Test',
-        'email' => 'companymarketbanks@gmail.com'
+        'email' => 'companymarketbanks@gmail.com',
+        'role_id' => 1
     ];
 
     /**
