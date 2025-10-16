@@ -3,7 +3,7 @@
 // Classes de 1 até 100
 @for $i from 1 through 100 {
   .border-#{$i} {
-    border-width: $i;
+    border-width: $i + 0px;
   }
   .hover\:border-#{$i}:hover {
     border-width: $i + 0px;
