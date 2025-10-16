@@ -19,6 +19,7 @@ class PutUsersSuccessTest extends NotificationsMock
         'name' => 'Teste',
         'phone' => '11999999999',
         'password' => 'Aa@134',
+        'status' => 'ACTIVE',
         'email' => 'teste@companymarketbr.com.br',
         'birthdate' => '1990-01-01',
         'document' => '12345678900',
