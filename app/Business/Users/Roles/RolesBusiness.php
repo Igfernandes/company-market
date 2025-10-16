@@ -34,6 +34,20 @@ class RolesBusiness
         return !empty($found);
     }
 
+    public static function isAdministrator(int $userId = 0): bool
+    {
+        $usersRolesModel = new UsersRolesModel();
+
+        $found = $usersRolesModel->join("roles", "roles.id = users_roles.role_id")
+            ->where([
+                "user_id" => $userId,
+                "roles.name" => "administrador"
+            ])->find();
+
+        return !empty($found);
+    }
+
+
     public static function hasAvailableNameRole(string $name, int $roleId): bool
     {
         $rolesModel = new RolesModel();
@@ -41,6 +55,14 @@ class RolesBusiness
             "name" => $name,
             "id !=" => $roleId
         ])->first();
+
+        return !empty($found);
+    }
+
+    public static function hasRole(array $roleQuery): bool
+    {
+        $rolesModel = new RolesModel();
+        $found = $rolesModel->where($roleQuery)->first();
 
         return !empty($found);
     }
