@@ -19,23 +19,23 @@
             <div class="flex justify-between">
                 <div>
                     <span>
-                        <strong data-component="snackbar:title">
+                        <strong component="snackbar:title">
                             <?= $title ?>
                         </strong>
                     </span>
                 </div>
-                <div class="btn-dismiss me-2" data-component='snackbar:close'>
+                <div class="btn-dismiss me-2" component='snackbar:close'>
                     <button class="btn text-xl">
                         <i class="bi bi-x"></i>
                     </button>
                 </div>
             </div>
             <div class="line-[1.2] text-sm">
-                <p data-component="snackbar:message"> <?= $message ?></p>
+                <p component="snackbar:message"> <?= $message ?></p>
             </div>
             <div class="box-buttons flex justify-end">
                 <?php if (!empty($action)): ?>
-                    <div class="btn ms-2 bg-accent btn-action" data-component="snackbar:action">
+                    <div class="btn ms-2 bg-accent btn-action" component="snackbar:action">
                         <?= $action ?>
                     </div>
                 <?php endif; ?>
