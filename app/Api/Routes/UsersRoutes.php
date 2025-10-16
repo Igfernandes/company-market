@@ -15,6 +15,7 @@ class UsersRoutes extends BaseRoutes
         $routes->put("users/(:num)", "Api\Operations\Users\Put\PutController::handle/$1", $this->optionsWithAuthentications);
         $routes->delete("users/(:num)", "Api\Operations\Users\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
         $routes->patch("users/(:num)", "Api\Operations\Users\Patch\PatchController::handle/$1");
+        $routes->post("users/(:num)/permissions", "Api\Operations\Users\Permissions\Post\PostController::handle/$1", $this->optionsWithAuthentications);
 
         $routes->delete("users/trash/(:num)", "Api\Operations\Users\Trash\Delete\DeleteController::handle/$1", $this->optionsWithAuthentications);
         $routes->get("users/trash/(:num)", "Api\Operations\Users\Trash\Get\GetController::handle/$1", $this->optionsWithAuthentications);
