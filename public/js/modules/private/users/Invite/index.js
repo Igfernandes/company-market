@@ -3,6 +3,7 @@ import { Validations } from "../../../../libraries/Validations/index.js";
 import { postInvite } from "../../../../services/users/postInvite.js";
 import { locations, MODAL_INVITE_KEY } from "./locations.js";
 import { InviteSchema } from "./rules.js";
+import { TableModules } from "../../../../components/shared/layouts/table/exports.js";
 
 export function UserInviteForm() {
   this.handleSubmit = async (ev) => {
@@ -21,11 +22,13 @@ export function UserInviteForm() {
 
     const response = await postInvite(payload);
 
-    if (response && response.success) {
-      ModalsModule.close(MODAL_INVITE_KEY);
-      this.handleLoading(false);
-      form.reset();
-    }
+    if (!response || !response.success) return    this.handleLoading(false);;
+
+    ModalsModule.close(MODAL_INVITE_KEY);
+    this.handleLoading(false);
+    form.reset();
+
+    if (TableModules.getTable("invites")) TableModules.load("invites");
   };
 
   this.handleLoading = (isLoading = false) => {

@@ -9,4 +9,9 @@ export const InviteSchema = {
     noEmpty: true,
     email: true,
   },
+  role_id: {
+    typeOf: "string",
+    noEmpty: true
+  },
+
 };
