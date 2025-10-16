@@ -1,0 +1,52 @@
+[component="snapshot"] {
+  background-color: #bcbcbc;
+  border-radius: 100%;
+  cursor: pointer;
+  [component="snapshot:message"] {
+    opacity: 0;
+  }
+  &:hover {
+    [component="snapshot:message"] {
+      opacity: 1;
+      background-color: #bcbcbc;
+    }
+  }
+  [component="snapshot-modal"] {
+    .FIE_topbar-close-button {
+      display: none;
+    }
+    [component="snapshot-modal:upload"],
+    [component="snapshot-modal:preview"] {
+      display: none;
+    }
+    &[snapshot-step="upload"] [component="snapshot-modal:upload"],
+    &[snapshot-step="preview"] [component="snapshot-modal:preview"] {
+      display: block;
+    }
+    .alert-texts {
+      font-size: 0.6rem;
+    }
+
+    &[snapshot-step="upload"] {
+      &[snapshot-loading="false"] {
+        [component="snapshot-modal:upload-empty"] {
+          display: block;
+        }
+        [component="snapshot-modal:upload-loading"] {
+          display: none;
+        }
+      }
+      &[snapshot-loading="true"] {
+        [component="snapshot-modal:upload-empty"] {
+          display: none;
+        }
+        [component="snapshot-modal:upload-loading"] {
+          display: block;
+        }
+      }
+    }
+  }
+}
+.SfxModal-Wrapper {
+  z-index: 999999999 !important;
+}
