@@ -7,10 +7,13 @@ use App\Components\BaseComponents;
 class Permissions extends BaseComponents
 {
     const ORIGIN = "components/private/profile/permissions";
-    const PROPS = [];
+    const PROPS = [
+        'userId'
+    ];
 
-    public static function render()
-    {
+    public static function render(
+        int $userId = 0
+    ) {
         return Component(SELF::ORIGIN, compact(SELF::PROPS), true);
     }
 }

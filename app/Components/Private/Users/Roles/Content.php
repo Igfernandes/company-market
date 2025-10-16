@@ -13,6 +13,10 @@ class Content extends BaseComponents
     public static function render()
     {
         return Container::render(
+            head: [
+                'title' => 'Gerenciar Funções - Nautisys',
+                'description' => 'Página reservada para gerenciar funções dos usuários'
+            ],
             content: [
                 Component(SELF::ORIGIN, compact(SELF::PROPS), true)
             ]

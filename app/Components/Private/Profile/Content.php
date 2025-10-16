@@ -3,6 +3,7 @@
 namespace App\Components\Private\Profile;
 
 use App\Components\BaseComponents;
+use App\Components\Private\Layouts\Container\Container;
 
 class Content extends BaseComponents
 {
@@ -11,6 +12,14 @@ class Content extends BaseComponents
 
     public static function render()
     {
-        return Component(SELF::ORIGIN, compact(SELF::PROPS), true);
+        return Container::render(
+            head: [
+                'title' => 'Perfil do usuário - Nautisys',
+                'description' => 'Página reservada para visualizar e atualizar informações do perfil'
+            ],
+            content: [
+                Component(SELF::ORIGIN, compact(SELF::PROPS), true)
+            ]
+        );
     }
 }

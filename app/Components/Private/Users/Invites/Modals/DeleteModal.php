@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Components\Private\Users\Overview;
+namespace App\Components\Private\Users\Overview\Modals;
 
 use App\Components\BaseComponents;
 use App\Components\Shared\Utils\Modal\Modal;
 
 class DeleteModal extends BaseComponents
 {
-    const ORIGIN = "components/private/users/overview/deleteModal";
+    const ORIGIN = "components/private/users/overview/modals/deleteModal";
     const PROPS = [];
 
     public static function render()

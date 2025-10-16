@@ -16,9 +16,9 @@ class SubMenu extends BaseComponents
             'clients' => 'Geral',
             'clients/create' => 'Criar',
         ],
-        'boat' => [
-            'boat' => 'Geral',
-            'boat/create' => 'Criar'
+        'boats' => [
+            'boats' => 'Geral',
+            'boats/create' => 'Criar'
         ],
         'documents' => [
             'documents' => 'Geral',
@@ -30,9 +30,10 @@ class SubMenu extends BaseComponents
         ],
         'users' => [
             'users' => 'Geral',
+            'users/invites' => 'Convites',
             'users/trash' => 'Lixeira',
-            'users/roles' => 'Funções'
-        ] 
+            'users/roles' => 'Funções',
+        ]
     ];
 
     public static function render(
