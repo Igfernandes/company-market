@@ -29,7 +29,7 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("document_sha256", \referenceHash($document))->first();
+        $foundUser = $this->usersModel->withDeleted()->where("document_sha256", \referenceHash($document))->first();
 
         return empty($foundUser);
     }
@@ -40,7 +40,7 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("email_sha256", \referenceHash($email))->first();
+        $foundUser = $this->usersModel->withDeleted()->where("email_sha256", \referenceHash($email))->first();
 
         return empty($foundUser);
     }
@@ -50,14 +50,14 @@ class UsersBusiness
         if ($userId > 0)
             $this->usersModel->where("id !=", $userId);
 
-        $foundUser = $this->usersModel->where("phone_sha256", \referenceHash($phone))->first();
+        $foundUser = $this->usersModel->withDeleted()->where("phone_sha256", \referenceHash($phone))->first();
 
         return empty($foundUser);
     }
 
     public function hasUser($query): null|UserEntity
     {
-        return $this->usersModel->withDeleted()->where($query)->first();
+        return $this->usersModel->withDeleted()->withDeleted()->where($query)->first();
     }
 
     /**
@@ -69,10 +69,9 @@ class UsersBusiness
     public function store(array $payload, string $encryptedKey): UserEntity
     {
         $crypto = new Crypto();
+        $alteredUser = new UserEntity();
 
         $systemKey = $crypto->encrypt($encryptedKey, getenv('system.encrypted_key'));
-
-        $alteredUser = new UserEntity();
 
         $alteredUser->store($payload);
         $alteredUser->setSystemKey($systemKey);
@@ -84,7 +83,7 @@ class UsersBusiness
 
         if (isset($payload['document'])) {
             $alteredUser->setEncryptDocument($payload['document']);
-            $alteredUser->setDocumentSha256(\referenceHash($payload['document']));
+            $alteredUser->setDocumentSha256(referenceHash($payload['document']));
         }
 
         if (isset($payload['email'])) {

@@ -3,18 +3,14 @@
 namespace App\Business\Permissions;
 
 use App\Business\BaseBusiness;
-use App\Database\Entities\Permissions\PermissionEntity;
-use App\Database\Entities\Users\UserEntity;
-use App\Database\Entities\Users\UserRoleEntity;
 use App\Database\Models\Permissions\PermissionsModel;
 use App\Database\Models\Permissions\RolesPermissionsModel;
 use App\Database\Models\Permissions\UsersPermissionsModel;
-use App\Database\Models\Users\UsersRolesModel;
 use App\Interfaces\IPermissions;
 use App\Libraries\Exceptions\Exceptions;
 use CodeIgniter\BaseModel;
 
-class PermissionsBusiness
+class PermissionsValidationBusiness
 {
     use BaseBusiness;
     /**
@@ -38,7 +34,7 @@ class PermissionsBusiness
             $model->upsert($entity->toArray(true), $entity);
         }
     }
-
+    
     public static function hasPermissionUser(string $scope, string $type, int $userId)
     {
         $usersPermissions = new UsersPermissionsModel();
@@ -66,7 +62,7 @@ class PermissionsBusiness
 
     public static function hasPermissionUserAuth(array $permissionQuery = [])
     {
-        $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
+        $permissions =  PermissionsSearchBusiness::getPermissionUserAuth($permissionQuery);
 
         if (count($permissions) === 0)
             throw new Exceptions('Api.users.invalid.not_permission', FORBIDDEN_ERROR);
@@ -75,47 +71,12 @@ class PermissionsBusiness
     public static function applyOwnershipRestriction(array $permissionQuery = [], array $payload = [])
     {
         $session = session();
-        $permissions =  PermissionsBusiness::getPermissionUserAuth($permissionQuery);
+        $permissions =  PermissionsSearchBusiness::getPermissionUserAuth($permissionQuery);
 
         if (count($permissions) === 0)
             $payload['owner_id'] = $session->get('userAuthId');
 
         return $payload;
     }
-
-    /**
-     * @return array{PermissionEntity}
-     */
-    public static function getPermissionUserAuth(array $permissionQuery = []): array
-    {
-        $session = \session();
-        /** @var UserEntity */
-        $userAuth = $session->get(SESSION_KEY_AUTH_USER);
-
-        $permissionsModel = new PermissionsModel();
-
-        if (\count($permissionQuery) > 0)
-            $permissionsModel->where($permissionQuery);
-
-        $userAuthId = $userAuth->getId();
-        
-        $usersRolesModel = new UsersRolesModel();
-        $foundRoles = $usersRolesModel->where("user_id", $userAuthId)->findAll();
-        $roleIds = \array_map(fn(UserRoleEntity $role) => $role->getRoleId(), $foundRoles);
-
-        $permissionsModel
-            ->select('permissions.*')
-            ->join('users_permissions up', 'up.permission_id = permissions.id AND up.user_id = ' . (int)$userAuthId, 'left');
-
-        if (count($roleIds) > 0)
-            $permissionsModel
-                ->join('roles_permissions rp', 'rp.permission_id = permissions.id', 'left')
-                ->whereIn('rp.role_id', $roleIds); // verifica permissões pelo role
-
-        $foundPermissions = $permissionsModel
-            ->orWhere('up.user_id', $userAuthId) // ou permissões individuais;
-            ->findAll();
-
-        return $foundPermissions;
-    }
+    
 }

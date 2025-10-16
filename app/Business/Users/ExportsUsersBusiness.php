@@ -3,7 +3,7 @@
 namespace App\Business\Users;
 
 use App\Business\BaseBusiness;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Database\Entities\Fields\ClientFieldEntity;
 use App\Database\Entities\Fields\FieldsGroupEntity;
 use App\Database\Entities\Users\UserEntity;
@@ -45,7 +45,7 @@ class ExportsUsersBusiness
             $payload["in_ids"] = $usersFiltered;
         }
 
-        $payload = PermissionsBusiness::applyOwnershipRestriction([
+        $payload = PermissionsValidationBusiness::applyOwnershipRestriction([
             'scope' => 'users',
             'type' => 'VIEW'
         ], $payload);
