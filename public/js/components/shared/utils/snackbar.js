@@ -2,18 +2,6 @@ import { Component, ComponentManager } from "../../../helpers/components.js";
 
 const TIME_CLOSE_MODAL = 4000;
 
-export const init = () => {
-  const closeBtn = document.querySelectorAll(
-    "[data-component='snackbar:close']"
-  );
-
-  closeBtn.forEach((closeBtnElement) => {
-    closeBtnElement.addEventListener("click", () => {
-      closeBtnElement.closest("[component='snackbar']").remove();
-    });
-  });
-};
-
 export function Snackbar() {
   /**
    *
@@ -51,3 +39,23 @@ export function Snackbar() {
 }
 
 export const snackbar = new Snackbar();
+
+export const init = () => {
+  const closeBtn = document.querySelectorAll("[component='snackbar:close']");
+
+  closeBtn.forEach((closeBtnElement) => {
+    closeBtnElement.addEventListener("click", () => {
+      closeBtnElement.closest("[component='snackbar']").remove();
+    });
+  });
+
+  const snackbarList = Array.from(
+    document.querySelectorAll("[component='snackbar']")
+  );
+
+  snackbarList.forEach(() => {
+    setTimeout(() => {
+      snackbar.clean();
+    }, 4000);
+  });
+};

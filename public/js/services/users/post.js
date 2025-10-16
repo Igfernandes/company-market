@@ -1,37 +1,26 @@
-import { Snackbar } from "../../components/shared/utils/snackbar.js";
-import { getParams } from "../../helpers/route.js";
+import { snackbar, Snackbar } from "../../components/shared/utils/snackbar.js";
 import { ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
 import { translate } from "../../translate/index.js";
 
-export async function putUser({ id, ...payload } = {}) {
-  const snackbar = new Snackbar();
+export async function postUsers(payload = {}) {
   const snackbarTitleText = translate("Screens.users.snackbar_title");
 
   try {
     const { users } = API_ROUTES;
 
-    const { data } = await ajax.custom(
-      getParams(users.put, {
-        id: id ?? "",
-      }),
-      payload,
-      {
-        method: "PUT",
-      }
-    );
+    const { data } = await ajax.post(users.post, payload);
 
-    if (data.error)
-      return snackbar.execute("FAIL", {
+    if (!data || data.error)
+      return snackbar.execute("fail", {
         title: snackbarTitleText,
         message: translate(data.error),
       });
 
-    snackbar.execute("SUCCESS", {
-      title: snackbarTitleText,
+    snackbar.execute("success", {
+      title: translate("Texts.send_solicitation"),
       message: translate(data.success),
     });
-
     return data;
   } catch (error) {
     snackbar.execute("NOTICE", {

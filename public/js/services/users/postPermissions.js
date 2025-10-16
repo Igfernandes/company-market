@@ -4,21 +4,20 @@ import { ajax } from "../../libraries/Ajax/index.js";
 import { API_ROUTES } from "../../settings/api.js";
 import { translate } from "../../translate/index.js";
 
-export async function putUser({ id, ...payload } = {}) {
+export async function postUsersPermissions({ userId, ...payload } = {}) {
   const snackbar = new Snackbar();
-  const snackbarTitleText = translate("Screens.users.snackbar_title");
+  const snackbarTitleText = translate(
+    "Screens.users.permissions.snackbar_title"
+  );
 
   try {
     const { users } = API_ROUTES;
 
-    const { data } = await ajax.custom(
-      getParams(users.put, {
-        id: id ?? "",
+    const { data } = await ajax.post(
+      getParams(users.permissions, {
+        userId: userId ?? "",
       }),
-      payload,
-      {
-        method: "PUT",
-      }
+      JSON.stringify(payload)
     );
 
     if (data.error)

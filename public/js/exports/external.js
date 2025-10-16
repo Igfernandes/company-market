@@ -3,4 +3,5 @@ export const exportsExternal = {
   "/register": [],
   "/forgot-password": ["/js/modules/public/forgotPassword/init.js"],
   "/alter-password": ["/js/modules/public/alterPassword/init.js"],
+  "/user/create": ["/js/modules/public/user/create/init.js"],
 };

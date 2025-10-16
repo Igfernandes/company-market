@@ -3,13 +3,16 @@
 @import "./utils/recaptcha.scss";
 @import "./utils/popup.scss";
 @import "./utils/exports.scss";
+@import "./utils/snapshot.scss";
 @import "./utils/skeleton/index.scss";
+@import "./utils/loader.scss";
 
 @import "./forms/label.scss";
 @import "./forms/checkbox.scss";
 @import "./forms/submit.scss";
 @import "./forms/password.scss";
 @import "./forms/phone.scss";
+@import "./forms/switch.scss";
 
 @import "./layouts/tabs.scss";
 @import "./layouts/table.scss";

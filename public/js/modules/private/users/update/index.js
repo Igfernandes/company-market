@@ -1,4 +1,5 @@
 import { snackbar } from "../../../../components/shared/utils/snackbar.js";
+import { getFormDataToJson } from "../../../../helpers/route.js";
 import { Validations } from "../../../../libraries/Validations/index.js";
 import { putUser } from "../../../../services/users/put.js";
 import { translate } from "../../../../translate/index.js";
@@ -11,8 +12,8 @@ export function UserUpdateForm() {
     this.handleLoading(form, true);
 
     snackbar.execute("NOTICE", {
-      title: translate("Screens.alter_password.sending_form"),
-      message: translate("Screens.alter_password.awaiting"),
+      title: translate("Screens.default.sending_form"),
+      message: translate("Screens.default.awaiting"),
     });
 
     const payload = new FormData(form);
@@ -24,8 +25,6 @@ export function UserUpdateForm() {
 
     this.handleLoading(form, false);
   };
-
-  this.hasValidPassword = () => {};
 
   this.handleLoading = (form, isDisabled) => {
     const button = form.querySelector("button[type='submit']");

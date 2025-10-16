@@ -2,14 +2,14 @@ export const SCREENS = {
   default: {
     service_error:
       "Ocorreu um problema em nosso sistema. Tente a operação mais tarde.",
+    sending_form: "Enviando Solicitação",
+    awaiting: "Aguarde enquanto estamos enviando a solicitação",
   },
   auth: {
     snackbar_title: "Autenticação",
   },
   forgot_password: {
     snackbar_title: "Recuperação de Senha",
-    sending_form: "Enviando Solicitação",
-    awaiting: "Aguarde enquanto estamos enviando a solicitação",
   },
   alter_password: {
     snackbar_title: "Alteração de Senha",
@@ -18,6 +18,9 @@ export const SCREENS = {
   },
   users: {
     snackbar_title: "Atualização de informações",
+    permissions: {
+      snackbar_title: "Atualização de permissões",
+    },
     delete: {
       modal_title: "Confirmar Exclusão",
       modal_subtitle: "Você tem certeza que deseja excluir este usuário?",
@@ -39,6 +42,9 @@ export const SCREENS = {
   },
   notifications: {
     snackbar_title: "Notificações",
+  },
+  file: {
+    snackbar_title: "Upload de arquivo",
   },
   roles: {
     snackbar_title: "Funções",

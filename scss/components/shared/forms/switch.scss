@@ -1,0 +1,38 @@
+.switch {
+  display: inline-block;
+  height: 2.1rem;
+  border: 1px solid;
+  border-radius: 0.2rem;
+  .switch-content {
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    font-size: 0.7rem;
+    label {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      text-align: center;
+      padding: 7px 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 100%;
+     
+    }
+    input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      transition: background 0.3s ease-in-out;
+      &:checked {
+        background-color: var(--bg-accent);
+        & ~ span {
+          color: #fff;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}

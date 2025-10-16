@@ -3,7 +3,7 @@ import { EyeOpenIcon } from "../../../../assets/icons/EyeOpenIcon.js";
 
 export const init = () => {
   const elementsPassword = document.querySelectorAll(
-    "[component='password-toggle:visibility']"
+    "[password-visibility]"
   );
 
   const handleToggleTypePassword = (eyeContent) => {

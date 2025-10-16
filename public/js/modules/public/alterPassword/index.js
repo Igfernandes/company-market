@@ -13,8 +13,8 @@ export function AlterPasswordForm() {
     const form = ev.currentTarget;
 
     snackbar.execute("NOTICE", {
-      title: translate("Screens.alter_password.sending_form"),
-      message: translate("Screens.alter_password.awaiting"),
+      title: translate("Screens.default.sending_form"),
+      message: translate("Screens.default.awaiting"),
     });
 
     const payload = new FormData(form);

@@ -7,8 +7,10 @@ export const API_ROUTES = {
     default: "/api/notifications",
   },
   users: {
-    put: "/api/users",
+    post: "/api/users",
+    put: "/api/users/{id}",
     delete: "/api/users/{id}",
+    permissions: "/api/users/{userId}/permissions",
     permanently: "/api/users/trash/{id}",
     roles: {
       get: "/api/users/roles/{id}",
@@ -20,6 +22,9 @@ export const API_ROUTES = {
   },
   invites: {
     user: "/api/invites/user",
+  },
+  files: {
+    post: "/api/files",
   },
   exports: {
     post: "/api/exports",

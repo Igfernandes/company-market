@@ -1,10 +1,7 @@
 export const COMPONENTS = {
   "component='snackbar'": "/js/components/shared/utils/snackbar.js",
-  "component='password-toggle'":
-    "/js/components/shared/forms/password/toggle.js",
   "data-label-toggle": "/js/components/shared/forms/label/toggle.js",
   "component='carousel'": "/js/components/shared/layouts/carousel.js",
-  "component='recaptcha'": "/js/components/shared/utils/recaptcha/index.js",
   "component='table'": "/js/components/shared/layouts/table/init.js",
   "checked-settings='all'":
     "/js/components/shared/layouts/table/utils/handle.js",
@@ -17,9 +14,11 @@ export const COMPONENTS = {
   "component='notification'": "/js/components/private/notifications/index.js",
   "component='tabs'": "/js/components/shared/layouts/tabs/init.js",
   "component='phone'": "/js/components/shared/forms/phone.js",
-  "component='date-icon'": "/js/components/shared/forms/date.js",
+  "date='true'": "/js/components/shared/forms/date.js",
   "component='exports'": "/js/components/shared/utils/exports.js",
   "component='modal'": "/js/components/shared/utils/modal/init.js",
   "component='counter-field'": "/js/components/shared/forms/counter.js",
-  "component='permissions'": "/js/components/shared/utils/permissions/init.js"
+  "component='permissions'": "/js/components/shared/utils/permissions/init.js",
+  "password-visibility": "/js/components/shared/forms/password/toggle.js",
+  "component='snapshot'": "/js/components/shared/utils/snapshot/init.js",
 };

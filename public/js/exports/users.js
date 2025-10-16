@@ -13,4 +13,9 @@ export const usersExports = {
     "/js/modules/private/users/roles/UpdatePermissions/init.js",
     "/js/modules/private/users/roles/Update/init.js",
   ],
+  "/dashboard/users/invites": ["/js/modules/private/users/Invite/init.js"],
+  "/dashboard/users/profile/*": [
+    "/js/modules/private/users/update/init.js",
+    "/js/modules/private/users/permissions/init.js",
+  ],
 };

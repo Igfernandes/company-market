@@ -9,7 +9,7 @@ const maskDates = {
 
 export const init = () => {
   const components = Array.from(
-    document.querySelectorAll("[component='date-icon']")
+    document.querySelectorAll("[date='true']")
   );
 
   const handleDate = function (ev, dateRef) {
@@ -55,8 +55,8 @@ export const init = () => {
   };
 
   components.forEach((component) => {
-    const dateInput = component.querySelector("[component='date-icon:input']");
-    const dateRef = document.querySelector("[component='date-icon:reference']");
+    const dateInput = component.querySelector("[component='date:input']");
+    const dateRef = document.querySelector("[component='date:reference']");
 
     dateInput.addEventListener("keyup", (ev) => handleDate(ev, dateRef));
     dateRef.addEventListener("change", (ev) => handleDateRef(ev, dateInput));
