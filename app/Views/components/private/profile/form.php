@@ -7,6 +7,8 @@ use App\Components\Shared\Forms\Fields\Date\DateIcon\DateIcon;
 use App\Components\Shared\Forms\Fields\Input\InputIcon\InputIcon;
 use App\Components\Shared\Forms\Fields\Phone\Simple\Phone;
 use App\Components\Shared\Forms\Fields\Submit\Submit;
+use App\Components\Shared\Forms\Fields\SwitchButton\SwitchButton;
+use App\Components\Shared\Utils\Snapshot\Snapshot;
 use App\Database\Entities\Users\UserEntity;
 
 /** @var UserEntity $user */
@@ -14,6 +16,59 @@ use App\Database\Entities\Users\UserEntity;
 ?>
 <div component="profile:form" class="mt-8 pb-6">
     <form send='user-update'>
+        <?php if (isset($id)): ?>
+            <div class="hidden">
+                <?= InputIcon::render(
+                    type: "hidden",
+                    name: "id",
+                    value: strval($id),
+                ); ?>
+            </div>
+        <?php endif; ?>
+        <div class="form-header flex flex-wrap items-center mb-5">
+            <div class="w-100 md:w-50">
+                <div class="flex flex-wrap">
+                    <div class="w-20 mr-5">
+                        <?= Snapshot::render(
+                            ref: "profile",
+                            api: "/api/users/{$user->getId()}",
+                            operation: "avatar",
+                            src: $user->getAvatar()
+                        ) ?>
+                    </div>
+                    <div class="text-center inline-block">
+                        <span class="text-accent"><strong>Status</strong></span>
+                        <div>
+                            <?= SwitchButton::render(
+                                name: "status",
+                                id: "status",
+                                value: strval($user->getStatus()),
+                                left: [
+                                    "title" => "Ativo",
+                                    "value" => "ACTIVE"
+                                ],
+                                right: [
+                                    "title" => "Inativo",
+                                    "value" => "INACTIVE"
+                                ]
+                            ) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 md:w-50">
+                <div class="flex justify-end">
+                    <div class="text-sm text-center border-r-2 border-gray-300 px-2">
+                        <p><strong>Criado em:</strong></p>
+                        <span><?= (new Datetime($user->getCreatedAt()))->format("d/m/Y H:i"); ?></span>
+                    </div>
+                    <div class="text-sm text-center px-2">
+                        <p><strong>Atualizado em:</strong></p>
+                        <span><?= (new Datetime($user->getUpdatedAt()))->format("d/m/Y H:i") ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="form-row flex flex-wrap justify-between w-100">
             <div class="form-group w-47">
                 <?= InputIcon::render(

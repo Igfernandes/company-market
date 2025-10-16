@@ -14,24 +14,18 @@ use App\Components\Shared\Layouts\Table\Table;
         <div>
             <?php
             BreadcrumbHeader::render(
-                title: "Usuários do sistema",
-                text: "Listagem de usuário no sistema e suas informações",
+                title: "Convites enviados",
+                text: "Listagem de convites enviados para novos usuários",
                 icon: '<i class="bi bi-person"></i>'
             );
             ?>
         </div>
         <div class="bg-content text-left px-4 py-4 shadow my-2 md:mx-4">
             <?= QuickActions::render(
-                trash: "./users/trash",
-                export: [
-                    "entity" => "users",
-                    "excel" => true,
-                    "pdf" => true
-                ],
                 actions: [
                     [
                         "text" => "+ Convidar Usuários",
-                        "class" => "bg-accent text-gray-100 block w-full w-[24rem] md:inline-block text-center",
+                        "class" => "bg-accent text-gray-100 block w-100 md:w-[16rem] md:inline-block text-center",
                         "attributes" => [
                             "invite" => 'users'
                         ]
@@ -39,11 +33,10 @@ use App\Components\Shared\Layouts\Table\Table;
                 ]
             ) ?>
             <?= Table::render(
-                id: "users",
-                heads: ['Id', 'Nome', 'Status', 'E-mail', 'Função'],
-                relations: ['id', 'name', 'status', 'email', 'roles.name'],
-                ajax: '/api/users',
-                update: "/dashboard/users/profile",
+                id: "invites",
+                heads: ['Id', 'Nome',  'E-mail', 'É Valido?', 'Expira em'],
+                relations: ['id', 'name', 'email', 'is_valid', 'expired_at'],
+                ajax: '/api/invites/user',
                 delete: "users",
             ) ?>
         </div>
@@ -51,6 +44,6 @@ use App\Components\Shared\Layouts\Table\Table;
 </div>
 <?php
 
-DeleteModal::render();
 InviteModal::render();
+DeleteModal::render();
 ?>

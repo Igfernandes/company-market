@@ -34,7 +34,7 @@ $icon = [
                         <li class="text-black-800  my-1">
                             <div class="menu-item">
                                 <?= isset($icon[$slug]) ? $icon[$slug] : "" ?>
-                                <a class="font-arial font-normal ml-1" href="<?= $slug ?>"> <?= $item ?></a>
+                                <a class="font-arial font-normal ml-1" href="<?= $slug ?>"> <?= ucfirst($item) ?></a>
                             </div>
                             <?= SubMenu::render(
                                 topic: $slug

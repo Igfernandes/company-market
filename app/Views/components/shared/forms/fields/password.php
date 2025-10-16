@@ -9,7 +9,7 @@ if (isset($name) && isset($storeValue[$name]))
 
 <div class="password-toggle mb-3" component="password-toggle" password='visibility'>
     <div class="input-group relative shadow-sm border-gray-200 border-2 rounded-md">
-        <input class="form-control w-100 h-[3rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-accent focus:outline-solid" type="password" data-password-target
+        <input class="form-control w-100 h-[3.5rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-accent focus:outline-solid" type="password" data-password-target
             name="<?= $name ?>"
             value="<?= isset($value) ? $value : null ?>"
             id="<?= $id ?? $name ?>"
@@ -26,7 +26,7 @@ if (isset($name) && isset($storeValue[$name]))
 
             </strong>
         </label>
-        <div component="password-toggle:visibility" class="input-group-append absolute w-[.5rem] h-[.5rem] top-20 right-1 z-20 cursor-pointer fill-accent" password-visibility='show'>
+        <div component="password-toggle:visibility" class="input-group-append absolute w-[.5rem] h-[.5rem] top-20 right-1 z-20 cursor-pointer fill-accent"  password-visibility='show'>
         </div>
     </div>
     <div class="invalid-message text-xs text-red-500 px-2 mt-1" data-invalid="<?= $name ?>">

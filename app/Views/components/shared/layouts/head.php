@@ -56,14 +56,17 @@
     <link rel="stylesheet" href="/css/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/theme.css">
     <!-- Dev (Vite) -->
-    <?php if (ENVIRONMENT === 'development'): ?>
+    <?php
+
+    use App\Components\Shared\Utils\Snackbar\Snackbar;
+
+    if (ENVIRONMENT === 'development'): ?>
         <script type="module" src="http://localhost:3000/@vite/client"></script>
     <?php else: ?>
         <!-- Produção (build do dist) -->
         <link rel="stylesheet" href="/dist/assets/app.css">
         <script type="module" src="/dist/assets/app.js"></script>
     <?php endif; ?>
-
 
     <!-- JQuery -->
     <script src="/js/libraries/JQuery/jquery-3.7.1.min.js"></script>
@@ -72,6 +75,13 @@
 
 
     <link rel="stylesheet" href="/css/dataTables/dataTables.css" />
-  <link rel="stylesheet" href="/css/dataTables/responsive.dataTables.css" />
+    <link rel="stylesheet" href="/css/dataTables/responsive.dataTables.css" />
 
 <body>
+    <?php if ($msg = session()->getFlashdata('failed')):
+        Snackbar::render(
+            title: "Operação inválida",
+            message: session()->getFlashdata('failed') ?? '',
+            type: "FAIL"
+        );
+    endif; ?>

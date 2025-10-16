@@ -7,12 +7,13 @@ if (isset($name) && isset($storeValue[$name]))
     $value = $storeValue[$name];
 
 $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
+$id = !empty($id) ?  $id : $name;
 ?>
 
 <div class="input mb-3" component="input-icon">
     <div class="relative flex shadow-sm border-gray-200 border-2 rounded-md">
         <?php if (isset($iconLeft) || !isset($iconRight)) : ?>
-            <label class="text-lg py-2 px-4 text-black-700" component="input-icon:label" for="<?= $id ?? $name ?>">
+            <label class="text-lg py-2 px-4 text-black-700" component="input-icon:label" for="<?= $id ?>">
                 <?= isset($iconLeft) ? $iconLeft : '<i class="bi bi-pencil"></i>' ?>
             </label>
         <?php endif; ?>
@@ -20,7 +21,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
             <input type="<?= $type  ?>"
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
-                id="<?= $id ?? $name ?>"
+                id="<?= $id ?>"
                 data-label="<?= $label ?>"
                 class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid <?= $class ?? null ?>"
                 <?= !empty($label) ? "placeholder='$label" . "$requiredIcon'" : null ?>

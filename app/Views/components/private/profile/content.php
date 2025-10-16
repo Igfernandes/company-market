@@ -24,7 +24,9 @@ use App\Components\Shared\Layouts\Tabs\Tabs;
                 default: "Informações",
                 contents: [
                     "Informações" => Form::render(),
-                    "Permissões" => Permissions::render()
+                    "Permissões" => Permissions::render(
+                        userId: $id
+                    )
                 ]
             )
             ?>

@@ -4,7 +4,7 @@
 
 <table style="max-width: 550px; width: 100%; margin: 0 auto; text-align: center; font-family:  'Poppins', sans-serif;">
     <thead>
-        <tr style="background: #BC2224;">
+        <tr style="background: <?= getenv("theme.color.default") ?>;">
             <th style="padding: 1rem 0;">
                 <div>
                     <img src="<?= getenv('globals.logotype') ?>" alt="logotipo" style="width: 80px;" />

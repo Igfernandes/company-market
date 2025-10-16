@@ -7,7 +7,10 @@ use App\Components\Private\Layouts\Sidebar\Sidebar;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Scripts\Scripts;
 
-Head::render();
+Head::render(
+    title: $head['title'] ?? "",
+    description: $head['description'] ?? ""
+);
 $session = session();
 $userAuth = $session->get(SESSION_KEY_AUTH_USER);
 

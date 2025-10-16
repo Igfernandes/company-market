@@ -11,7 +11,7 @@ if (isset($name) && isset($storeValue[$name]))
 $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
 ?>
 
-<div class="date mb-3" component="date-icon">
+<div class="date mb-3" component="date-icon" date='true'>
     <div class="relative flex shadow-sm border-gray-200 border-2 rounded-md">
         <?php if (isset($iconLeft) || !isset($iconRight)) : ?>
             <label class="text-lg py-2 px-4 text-black-700" component="input-icon:label" for="<?= $id ?? $name ?>">
@@ -20,7 +20,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
         <?php endif; ?>
         <div class="w-100">
             <input type="text"
-                component='date-icon:input'
+                component='date:input'
                 country="br"
                 value="<?php
                         if (isset($value)) {
@@ -40,7 +40,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                     name="<?= $name ?>"
                     type="date"
                     data-label="<?= $label ?>"
-                    component='date-icon:reference'
+                    component='date:reference'
                     class="w-100 h-100 absolute left-0 opacity-0" style="top:-1rem">
                 <i class="bi bi-calendar4-event cursor-pointer"></i>
             </div>

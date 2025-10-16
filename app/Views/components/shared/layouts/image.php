@@ -1,5 +1,5 @@
 <img component='image'
-   skeleton='true' 
+   skeleton='false' 
    class="w-full h-full <?= $class ?? "" ?>"
    default="<?= $default ?>"
    src="<?= $src ?>"
