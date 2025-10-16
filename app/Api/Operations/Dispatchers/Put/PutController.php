@@ -4,7 +4,7 @@ namespace App\Api\Operations\Dispatchers\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -24,7 +24,7 @@ class PutController extends BaseController
     public function handle(int $dispatcherId)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'dispatchers',
                 'type' => 'UPDATE'
             ]);

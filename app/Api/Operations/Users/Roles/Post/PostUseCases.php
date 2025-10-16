@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Users\Roles\Post;
 
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Database\Entities\Users\RoleEntity;
 use App\Database\Models\Permissions\RolesPermissionsModel;
 use App\Database\Models\Users\RolesModel;
@@ -22,7 +22,7 @@ class PostUseCases
     {
         $roleEntity = new RoleEntity();
         $roleEntity->store((array)$payload);
-        $permissionsBusiness = new PermissionsBusiness();
+        $permissionsBusiness = new PermissionsValidationBusiness();
         $hasPermissionsAvailable = 0;
         
         if (isset($payload->permissions)) {

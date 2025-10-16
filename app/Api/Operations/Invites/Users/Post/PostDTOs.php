@@ -21,6 +21,13 @@ trait PostDTOs
                 'max_length' => 'Api.invites.invalid.email',
                 'required' => 'Api.invites.invalid.email',
             ],
+        ],
+         'role_id' => [
+            'rules' => 'integer|required',
+            'errors' => [
+                'integer' => 'Api.invites.invalid.role_id',
+                'required' => 'Api.invites.invalid.role_id'
+            ],
         ]
     ];
 }

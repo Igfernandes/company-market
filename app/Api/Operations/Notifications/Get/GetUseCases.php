@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Notifications\Get;
 
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsSearchBusiness;
 use App\Database\Entities\Notifications\NotificationEntity;
 use App\Database\Models\Notifications\NotificationsModel;
 use App\Traits\BusinessTrait;
@@ -24,7 +24,7 @@ class GetUseCases
         helper('array');
         $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
 
-        $permissions = PermissionsBusiness::getPermissionUserAuth();
+        $permissions = PermissionsSearchBusiness::getPermissionUserAuth();
 
         $scopes = [];
         $actions = [];

@@ -17,7 +17,8 @@ class PostUseCases
     /**
      * @param array{
      *   name: string,
-     *   email: string
+     *   email: string,
+     *   role_id: integer
      * } $payload
      */
     public function execute(array $payload)
@@ -34,12 +35,19 @@ class PostUseCases
         $invitesModel = new InvitesModel();
         $inviteEntity = new InviteEntity();
 
+        $found = $invitesModel->where("email_sha256", $payload['email'])->first();
+
+        if (!empty($found)) {
+            $inviteEntity = $found;
+        }
+
         $token = new Tokens();
         $tokenInvite = $token->create(4);
 
         $inviteEntity->setToken($tokenInvite);
         $inviteEntity->setType('USER');
         $inviteEntity->setIsValid(true);
+        $inviteEntity->setEmailSha256($payload['email']);
         $inviteEntity->setOwnerId($userAuth->getId());
         $inviteEntity->setExpiredAt(date('Y-m-d H:i:s', strtotime('+1 day')));
 

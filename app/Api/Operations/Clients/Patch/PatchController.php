@@ -5,7 +5,7 @@ namespace App\Api\Operations\Clients\Patch;
 use App\Api\Operations\Clients\Patch\Category\PatchCategoryUseCases;
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -22,7 +22,7 @@ class PatchController extends BaseController
     public function handle()
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
                 'type' => 'UPDATE'
             ]);

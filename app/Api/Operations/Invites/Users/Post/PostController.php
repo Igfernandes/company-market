@@ -4,7 +4,7 @@ namespace App\Api\Operations\Invites\Users\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -24,7 +24,7 @@ class PostController extends BaseController
     public function handle()
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'users',
                 'type' => 'CREATE'
             ]);

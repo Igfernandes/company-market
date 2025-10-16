@@ -18,6 +18,7 @@ class PutUseCases
      * @param array{
      *     id: integer,
      *     name: string, 
+     *     status: 'ACTIVE'|'INACTIVE',
      *     email: string,
      *     phone: string,
      *     document: string,

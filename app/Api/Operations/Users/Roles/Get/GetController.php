@@ -4,7 +4,7 @@ namespace App\Api\Operations\Users\Roles\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -24,7 +24,7 @@ class GetController extends BaseController
     public function handle(int $id = 0)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'users',
                 'type' => 'VIEW'
             ]);

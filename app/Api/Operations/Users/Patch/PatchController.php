@@ -3,13 +3,15 @@
 namespace App\Api\Operations\Users\Patch;
 
 use App\Api\ExceptionApi;
+use App\Api\Operations\Users\Patch\Avatar\PatchAvatarUseCases;
 use App\Api\Operations\Users\Patch\Password\PatchPasswordUseCases;
 use App\Api\Operations\Users\Patch\Status\PatchStatusUseCases;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
+use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
 class PatchController extends BaseController
@@ -22,23 +24,27 @@ class PatchController extends BaseController
     {
         $this->operations = [
             "status" => new PatchStatusUseCases(),
-            "password" => new PatchPasswordUseCases()
+            "password" => new PatchPasswordUseCases(),
+            "avatar" => new PatchAvatarUseCases(),
         ];
     }
 
     public function handle(int $userId = 0)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'users',
                 'type' => 'UPDATE'
             ]);
-            $payload = (array) $this->request->getVar();
+            $payload = (array) $this->request->getJSON();
+
+            if (!isset($payload['operation']))
+                throw new Exception("Api.not_found", ResponseInterface::HTTP_BAD_GATEWAY);
 
             $operation = $payload['operation'];
             $validation = \Config\Services::validation();
 
-            $data = isset($payload['data']) ? $payload['data'] : (Object)[];
+            $data = isset($payload['data']) ? $payload['data'] : (object)[];
             $data->id = $userId;
 
             $validation->setRules($this->rules);

@@ -4,7 +4,7 @@ namespace App\Api\Operations\CustomForms\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -23,7 +23,7 @@ class PutController extends BaseController
     public function handle(int $customFormId = 0)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'forms',
                 'type' => 'UPDATE'
             ]);

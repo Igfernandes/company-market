@@ -4,7 +4,7 @@ namespace App\Api\Operations\Users\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Database\Entities\Users\UserEntity;
 use App\Libraries\Exceptions\Exceptions;
@@ -25,7 +25,7 @@ class PutController extends BaseController
     public function handle(int $userId = 0)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'users',
                 'type' => 'UPDATE'
             ]);

@@ -5,27 +5,26 @@ namespace App\Api\Operations\Users\Post;
 trait PostDTOs
 {
     protected array $rules = [
-        'cpf' => [
-            'rules'  => 'string|max_length[100]|required|regex_match[' . VALIDATE_CPF_CNPJ . ']',
+        'document' => [
+            'rules'  => 'string|max_length[50]|required',
             'errors' => [
                 'string'      => 'Api.users.invalid.document',
                 'max_length'  => 'Api.users.invalid.document',
                 'required'    => 'Api.users.invalid.document',
-                'regex_match' => 'Api.users.invalid.document',
             ],
         ],
         'birthdate' => [
             'rules'  => 'valid_date|required',
             'errors' => [
-                'string'   => 'Api.users.invalid.birthdate',
+                'valid_date'   => 'Api.users.invalid.birthdate',
                 'required' => 'Api.users.invalid.birthdate',
             ],
         ],
-        'keyword' => [
+        'token' => [
             'rules'  => 'string|required',
             'errors' => [
-                'string'   => 'Api.users.invalid.keyword',
-                'required' => 'Api.users.invalid.keyword',
+                'string'   => 'Api.users.invalid.token',
+                'required' => 'Api.users.invalid.token',
             ],
         ],
         'password' => [

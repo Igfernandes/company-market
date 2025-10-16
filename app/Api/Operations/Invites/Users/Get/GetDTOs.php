@@ -47,5 +47,18 @@ trait GetDTOs
                 'valid_date' => 'Api.invites.invalid.expired_at',
             ],
         ],
+        'start' => [
+            'rules'  => 'numeric|permit_empty',
+            'errors' => [
+                'numeric' => 'Api.users.invalid.start',
+            ],
+        ],
+        'limit' => [
+            'rules'  => 'numeric|less_than_equal_to[500]|permit_empty',
+            'errors' => [
+                'numeric'    => 'Api.users.invalid.limit',
+                'less_than_equal_to' => 'Api.users.invalid.limit',
+            ],
+        ],
     ];
 }

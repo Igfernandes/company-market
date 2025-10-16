@@ -4,7 +4,7 @@ namespace App\Api\Operations\Clients\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -25,7 +25,7 @@ class PutController extends BaseController
     public function handle(int $clientId)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'clients',
                 'type' => 'UPDATE'
             ]);

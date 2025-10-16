@@ -4,7 +4,7 @@ namespace App\Api\Operations\Forms\Fills\Delete;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -23,7 +23,7 @@ class DeleteController extends BaseController
     public function handle(int $formId = 0, string $package = "")
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'forms',
                 'type' => 'DELETE'
             ]);

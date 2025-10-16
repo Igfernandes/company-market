@@ -4,7 +4,7 @@ namespace App\Api\Operations\Forms\Services\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
@@ -26,7 +26,7 @@ class PostController extends BaseController
     public function handle(string $package, int $serviceId)
     {
         try {
-            PermissionsBusiness::hasPermissionUserAuth([
+            PermissionsValidationBusiness::hasPermissionUserAuth([
                 'scope' => 'services',
                 'type' => 'UPDATE'
             ]);

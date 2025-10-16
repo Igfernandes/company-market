@@ -5,7 +5,7 @@ namespace App\Api\Operations\Clients\Services\Patch;
 use App\Api\Operations\Clients\Services\Patch\IsConfirm\PatchIsConfirmUseCases;
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;

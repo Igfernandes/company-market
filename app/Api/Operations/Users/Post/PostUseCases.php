@@ -2,14 +2,14 @@
 
 namespace App\Api\Operations\Users\Post;
 
+use App\Business\Users\Roles\RolesBusiness;
 use App\Business\Users\UsersBusiness;
 use App\Database\Entities\Invites\InviteEntity;
 use App\Database\Entities\Users\UserEntity;
-use App\Database\Entities\Users\UserGroupsEntity;
+use App\Database\Entities\Users\UserRoleEntity;
 use App\Database\Models\Invites\InvitesModel;
-use App\Database\Models\Users\GroupsModel;
-use App\Database\Models\Users\UsersGroupsModel;
 use App\Database\Models\Users\UsersModel;
+use App\Database\Models\Users\UsersRolesModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
 
@@ -17,7 +17,7 @@ class PostUseCases
 {
     /**
      * @param array{
-     *   cpf: string,
+     *   document: string,
      *   password: string,
      *   birthdate: string,
      *   keyword: string
@@ -26,9 +26,10 @@ class PostUseCases
     public function execute(array $payload)
     {
         $usersBusiness = new UsersBusiness();
+        $document = \str_replace([".", "/", "-", "(", ")", "+"], '', $payload['document']);
 
-        if (!$usersBusiness->isCPFAvailable($payload['cpf']))
-            throw new Exceptions("Api.users.invalid.already_exists_cpf", BAD_BUSINESS_RULES);
+        if (!$usersBusiness->isDocumentAvailable($document))
+            throw new Exceptions("Api.users.invalid.already_exists_document", BAD_BUSINESS_RULES);
 
         $invitesModel = new InvitesModel();
 
@@ -58,32 +59,30 @@ class PostUseCases
         $userEntity->setName($dataInvite->name);
         $userEntity->setIsSocial(false);
         $userEntity->setStatus("ACTIVE");
-        $userEntity->setPhoneSha256(\referenceHash($dataInvite->phone));
-        $userEntity->setEncryptCpf($payload['cpf']);
+        $userEntity->setEncryptDocument($document);
         $userEntity->setEncryptEmail($dataInvite->email);
-        $userEntity->setEncryptKeyword($payload['keyword']);
         $userEntity->setEncryptPassword($payload['password']);
-        $userEntity->setEncryptPhone($dataInvite->phone);
         $userEntity->setBirthdate($payload['birthdate']);
-        $userEntity->setCPFSha256(\referenceHash($payload['cpf']));
+        $userEntity->setDocumentSha256(\referenceHash($document));
         $userEntity->setEmailSha256(\referenceHash($dataInvite->email));
 
         $usersModel->save($userEntity->toArray(true));
 
-        $usersGroupsModel = new UsersGroupsModel();
-        $groupsModel = new GroupsModel();
+        $rolesBusiness = new RolesBusiness();
+        $usersRolesModel = new UsersRolesModel();
 
-        foreach ($dataInvite->group as $groupId) {
-            $usersGroupsEntity = new UserGroupsEntity();
+        $userRoleEntity = new UserRoleEntity();
+        $roleId = $dataInvite->role_id;
 
-            $foundGroup = $groupsModel->where(["id" => $groupId])->first();
-            if (empty($foundGroup)) continue;
+        if ($rolesBusiness->hasRole([
+            "id" => $roleId
+        ]));
 
-            $usersGroupsEntity->setUserId($usersModel->getInsertID());
-            $usersGroupsEntity->setGroupId($groupId);
+        $userRoleEntity->setUserId($usersModel->getInsertID());
+        $userRoleEntity->setRoleId($roleId);
 
-            $usersGroupsModel->save($usersGroupsEntity);
-        }
+        $usersRolesModel->save($userRoleEntity);
+
 
         $invitesModel->set(['is_valid' => false])->where("id", $foundInvite->getId())->update();
 

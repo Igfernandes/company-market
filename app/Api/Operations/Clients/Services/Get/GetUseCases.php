@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Clients\Services\Get;
 
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Database\Entities\Services\ClientServiceEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Services\ClientsServicesModel;
@@ -26,7 +26,7 @@ class GetUseCases
 
         $clientsServicesModel = new ClientsServicesModel();
 
-        $hasPermissionToView = PermissionsBusiness::hasPermissionUser("services", "VIEW", $userAuthId);
+        $hasPermissionToView = PermissionsValidationBusiness::hasPermissionUser("services", "VIEW", $userAuthId);
 
         if (!$hasPermissionToView)
             return [];

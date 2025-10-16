@@ -4,7 +4,7 @@ namespace App\Api\Operations\Clients\Categories\Get;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use Exception;
@@ -31,7 +31,7 @@ class GetController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $payload = PermissionsBusiness::applyOwnershipRestriction([
+            $payload = PermissionsValidationBusiness::applyOwnershipRestriction([
                 'scope' => 'categories',
                 'type' => 'VIEW'
             ], $payload);

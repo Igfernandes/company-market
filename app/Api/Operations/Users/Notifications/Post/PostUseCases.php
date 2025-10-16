@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Users\Notifications\Post;
 
-use App\Business\Permissions\PermissionsBusiness;
+use App\Business\Permissions\PermissionsSearchBusiness;
 use App\Database\Entities\Notifications\NotificationEntity;
 use App\Database\Entities\Notifications\UserNotificationEntity;
 use App\Database\Models\Notifications\NotificationsModel;
@@ -16,13 +16,12 @@ class PostUseCases
         $session = session();
         $userAuthId = $session->get('userAuthId');
 
-        $groupsPermissions = PermissionsBusiness::getPermissionUserAuth();
+        $permissions = PermissionsSearchBusiness::getPermissionUserAuth();
 
         $scopes = [];
         $actions = [];
 
-        foreach ($groupsPermissions as $groupPermission) {
-            $permission = $groupPermission->getPermission();
+        foreach ($permissions as $permission) {
             \array_push($scopes, $permission->getScope());
             \array_push($actions, $permission->getType());
         }

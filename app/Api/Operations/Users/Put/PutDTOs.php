@@ -28,6 +28,14 @@ trait PutDTOs
                 'required'   => 'Api.users.invalid.birthdate',
             ],
         ],
+        'status' => [
+            'rules'  => 'string|in_list[ACTIVE, INACTIVE]|required',
+            'errors' => [
+                'string'     => 'Api.users.invalid.status',
+                'in_list' => 'Api.users.invalid.status',
+                'required'   => 'Api.users.invalid.status',
+            ],
+        ],
         'document' => [
             'rules'  => 'string|min_length[4]|max_length[20]|required',
             'errors' => [
