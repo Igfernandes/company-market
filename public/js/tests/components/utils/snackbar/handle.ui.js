@@ -4,7 +4,7 @@ export const HANDLE_TESTS = {
   ShouldCloseSnackbar: () => {
     const snackbar = document.querySelector("[component='snackbar']");
     const closeButton = snackbar.querySelector(
-      "[data-component='snackbar:close']"
+      "[component='snackbar:close']"
     );
 
     if (!snackbar || !closeButton)

@@ -13,7 +13,7 @@ export const INIT_TESTS = {
 
     ["title", "message", "close"].forEach((param) => {
       const hasElementInSnackbar = snackbar.querySelector(
-        `[data-component="snackbar:${param}"]`
+        `[component="snackbar:${param}"]`
       );
       if (!hasElementInSnackbar) {
         Log("ERROR", {
