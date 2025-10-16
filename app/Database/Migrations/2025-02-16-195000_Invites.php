@@ -32,6 +32,9 @@ class Invites extends Migration
             'is_valid' => [
                 'type' => 'BOOLEAN'
             ],
+            'email_sha256' => [
+                'type' => 'VARCHAR(70)'
+            ],
             'owner_id' => [
                 'type' => 'INT',
                 'null' => true,

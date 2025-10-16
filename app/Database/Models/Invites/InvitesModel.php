@@ -13,7 +13,7 @@ class InvitesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Invites\InviteEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['token', 'type', 'data', 'is_valid', 'owner_id', 'expired_at'];
+    protected $allowedFields    = ['token', 'type', 'data', 'is_valid', 'email_sha256', 'owner_id', 'expired_at'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

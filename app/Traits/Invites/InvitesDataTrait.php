@@ -26,6 +26,7 @@ trait InvitesDataTrait
 
         return  (object)[
             "id" => $inviteEntity->getId(),
+            "name" => $data->name,
             "email" => $data->email,
             "is_valid" => $inviteEntity->getIsValid(),
             "expired_at" => $inviteEntity->getExpiredAt(),

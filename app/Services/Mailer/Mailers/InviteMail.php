@@ -24,9 +24,9 @@ class InviteMail
 
         $optionsMail->title =  lang("Mails.invites.subject") . \getenv('system.mail.author');
         $optionsMail->recipients = $payload['recipients'];
+        $inviteLink = \base_url("/user/create?invite_token=" . $payload['inviteToken']);
 
-        $optionsMail->html = (string) view('mails/invite', ['inviteToken' => $payload['inviteToken']]);
-        $inviteLink = getenv('globals.href.frontend') . "/create-user?invite_token=" . $payload['inviteToken'];
+        $optionsMail->html = (string) view('mails/invite', ['inviteLink' => $inviteLink]);
         $optionsMail->textHtml =  str_replace(["{company}", "{link}"], [\getenv('system.mail.author'), $inviteLink],  lang("Mails.unsubscribe.text_aux"));;
 
         $mailService->send($optionsMail);
