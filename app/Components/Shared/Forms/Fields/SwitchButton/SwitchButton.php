@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Checkbox;
+namespace App\Components\Shared\Forms\Fields\SwitchButton;
 
 use App\Components\BaseComponents;
 
-class Checkbox extends BaseComponents
+class SwitchButton extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/fields/checkbox";
+    const ORIGIN = "components/shared/forms/fields/switch-button";
     const PROPS = [
         "name",
         "id",
-        "label",
+        "left",
+        "right",
         "class",
         "required",
         "attributes",
@@ -22,7 +23,8 @@ class Checkbox extends BaseComponents
 
     public static function render(
         ?string $id = "",
-        ?string $label = "",
+        ?array $left = [],
+        ?array $right = [],
         ?string $name = "",
         ?string $class = "",
         ?string $required = "",

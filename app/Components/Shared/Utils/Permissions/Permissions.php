@@ -4,7 +4,6 @@ namespace App\Components\Shared\Utils\Permissions;
 
 use App\Components\BaseComponents;
 use App\Components\Shared\Utils\Modal\Modal;
-use App\Database\Entities\Permissions\PermissionEntity;
 use App\Database\Models\Permissions\PermissionsModel;
 
 class Permissions extends BaseComponents

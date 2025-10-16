@@ -1,37 +1,38 @@
 <?php
 
-namespace App\Components\Shared\Forms\Fields\Phone\Simple;
+namespace App\Components\Shared\Forms\Fields\Select\SelectFloatLabel;
 
 use App\Components\BaseComponents;
 
-class Simple extends BaseComponents
+class SelectFloatLabel extends BaseComponents
 {
-    const ORIGIN = "components/shared/forms/fields/phone/simple";
+    const ORIGIN = "components/shared/forms/fields/select/select-float-label";
     const PROPS = [
         "name",
         "label",
         "id",
-        "code",
         "value",
+        "options",
         "class",
         "required",
         "attributes",
         "disabled",
         "readonly",
+        "icon"
     ];
 
     public static function render(
         ?string $name = "",
         ?string $id = "",
         ?string $label = "",
-        ?string $code = "br",
-        ?string $type = "text",
+        ?array $options = [],
         ?string $value = "",
         ?string $class = "",
         ?string $required = "",
         ?array $attributes = [],
         ?bool $disabled = null,
-        ?bool $readonly = null
+        ?bool $readonly = null,
+        ?string $icon = null
     ) {
         Component(self::ORIGIN, compact(self::PROPS));
     }
