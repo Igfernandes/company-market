@@ -28,7 +28,7 @@ class Snapshot extends BaseComponents
         string $ref = "",
         string $api = "",
         string $operation = "photo",
-        string $src = "",
+        string|null $src = "",
         string $size = "md"
     ) {
         Component(self::ORIGIN, compact(self::PROPS));

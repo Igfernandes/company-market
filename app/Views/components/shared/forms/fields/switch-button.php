@@ -32,9 +32,9 @@ $id = !empty($id) ? $id : uniqid(str_replace("[]", "", $name));
                 name="<?= $name ?>"
                 value="<?= isset($left['value']) ? $left['value'] : null ?>"
                 class="radio appearance-none rounded-xs p-[7px] cursor-pointer <?= $class ?? "" ?>"
-                data-label="<?= $label ?>"
                 <?= $value == $left['value'] || empty($value) ? "checked" : null ?>
-                <?= !empty($attributeData) ? $attributeData : null ?>>
+                <?= $required ? "true" : null ?>
+                <?= strval($readonly) ?? null ?> />
             <span> <strong><?= ucfirst($left['title']) ?></strong></span>
             <span class="slide"> </span>
         </label>

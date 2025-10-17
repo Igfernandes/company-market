@@ -8,7 +8,7 @@ $icon = [
     "news" => '<i class="bi bi-newspaper"></i>',
     "statistics" => '<i class="bi bi-thermometer-sun"></i>',
     "clients" => '<i class="bi bi-people"></i>',
-    "boat" => '<i class="bi bi-life-preserver"></i>',
+    "boats" => '<i class="bi bi-life-preserver"></i>',
     'documents' => '<i class="bi bi-file-break"></i>',
     'forms' => '<i class="bi bi-pencil"></i>',
     'sales' => '<i class="bi bi-receipt"></i>',

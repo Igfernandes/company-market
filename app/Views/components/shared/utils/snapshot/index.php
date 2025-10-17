@@ -10,7 +10,7 @@ $sizes = [
 ?>
 
 <div component='snapshot' snapshot-target='<?= $ref ?>' snapshot-fetch='<?= $api ??  "" ?>' snapshot-operation="<?= $operation ?? "" ?>">
-    <div class=" relative" component="snapshot:image">
+    <div class="relative <?= $sizes[$size ?? 'md'] ?> mx-auto" component="snapshot:image">
         <?= Image::render(
             src: $src,
             class: "{$sizes[$size ?? '']} rounded-full object-cover border-2 border-accent mx-auto",
