@@ -1,7 +1,7 @@
 {
-  "name": "nautisys",
+  "name": "Company Market",
   "version": "1.0.0",
-  "description": "The nautisys plataform create to ocean tours",
+  "description": "The Company Market plataform create to ocean tours",
   "main": "nautsys",
   "directories": {
     "test": "tests"

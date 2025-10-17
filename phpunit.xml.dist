@@ -53,10 +53,10 @@
         <const name="PUBLICPATH" value="./public/" />
         <!-- Database configuration -->
         <env name="database.default.hostname" value="localhost" />
-        <env name="database.default.database" value="nautisys_test" />
+        <env name="database.default.database" value="company_tests" />
         <env name="database.default.username" value="root" />
         <env name="database.default.password" value="" />
         <env name="database.default.DBDriver" value="MySQLi" />
-        <env name="database.default.DBPrefix" value="nts_" />
+        <env name="database.default.DBPrefix" value="cm_" />
     </php>
 </phpunit>

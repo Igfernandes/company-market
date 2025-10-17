@@ -167,9 +167,9 @@ class Database extends Config
         'hostname'    => 'localhost',
         'username'    => 'root',
         'password'    => '',
-        'database'    => 'nautisys_test',
+        'database'    => 'company_tests',
         'DBDriver'    => 'MySQLi',
-        'DBPrefix'    => 'nts_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
+        'DBPrefix'    => 'cm_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
         'pConnect'    => false,
         'DBDebug'     => true,
         'charset'     => 'utf8',

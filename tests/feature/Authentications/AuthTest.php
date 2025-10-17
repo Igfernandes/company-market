@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Authentications;
 
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Test\FeatureTestTrait;
 use CodeIgniter\Test\ReflectionHelper;
@@ -39,7 +40,7 @@ class AuthTest extends CIUnitTestCase
         $result->assertJSONFragment(['error' => 'Api.auth.invalid.recaptcha']);
     }
 
-    public function testCredenciaisInvalidas()
+    public function testCredentialInvalids()
     {
         $result = $this->post($this->route, [
             'login' => 'notfound@email.com',
@@ -47,11 +48,11 @@ class AuthTest extends CIUnitTestCase
             'recaptcha' => getenv('globals.recaptcha.tokenTest'),
             'remember-me' => '0'
         ]);
-        $result->assertStatus(ResponseInterface::HTTP_NOT_ACCEPTABLE); 
+        $result->assertStatus(ResponseInterface::HTTP_NOT_ACCEPTABLE);
         $result->assertJSONFragment(['error' => 'Api.auth.invalid.credentials']);
     }
 
-    public function testLoginValidoSemRememberMe()
+    public function testLoginValidWithoutRememberMe()
     {
         $result = $this->post($this->route, [
             'login' => getenv('globals.admin.login'),
@@ -64,7 +65,7 @@ class AuthTest extends CIUnitTestCase
         $result->assertJSONMissing(['reference_token']);
     }
 
-    public function testLoginValidoComRememberMe()
+    public function testLoginValidWithRememberMe()
     {
         $result = $this->post($this->route, [
             'login' => getenv('globals.admin.login'),
@@ -73,8 +74,8 @@ class AuthTest extends CIUnitTestCase
             'remember-me' => '1'
         ]);
 
-        $result->assertStatus(ResponseInterface::HTTP_OK);
         $result->assertJSONFragment(['success' => 'Api.auth.success.post']);
+        $result->assertStatus(Response::HTTP_OK);
         $data = json_decode($result->getJSON(), true);
         $this->assertArrayHasKey('reference_token', $data);
     }
