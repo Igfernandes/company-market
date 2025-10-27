@@ -23,7 +23,7 @@ use App\Database\Entities\Users\UserEntity;
                 <?= Image::render(
                     src: $user->getAvatar(),
                     class: "w-40 h-[4.5rem] rounded-full border-2 border-accent mx-auto",
-                    default: "/imgs/preview/preview-avatar.jpg"
+                    default: "/images/preview/preview-avatar.jpg"
                 ) ?>
             </div>
             <div class="username text-center mt-2 mb-1">

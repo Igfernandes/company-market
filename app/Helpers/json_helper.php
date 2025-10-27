@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 if (!function_exists('isJsonValid')) {
     /**
@@ -20,5 +21,27 @@ if (!function_exists('isJsonValid')) {
 
         // Verifica se houve erro
         return json_last_error() === JSON_ERROR_NONE;
+    }
+}
+
+
+if (!function_exists('getJson')) {
+    /**
+     * Lê um arquivo JSON e executa código PHP definido nele.
+     *
+     * @param string $path Caminho absoluto ou relativo ao arquivo JSON
+     * @return mixed Resultado da execução
+     */
+    function getJson(string $path)
+    {
+        $path = ROOTPATH . $path;
+
+        if (!is_file($path)) {
+            return null;
+        }
+
+        $json = file_get_contents($path);
+
+        return json_decode($json, true);
     }
 }

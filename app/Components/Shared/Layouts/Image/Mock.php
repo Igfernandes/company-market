@@ -6,7 +6,7 @@ class Mock
 {
     public const PROPS = [
         "class" => "object-contain",
-        "src" => "/imgs/nautisys-image-white.png",
+        "src" => "/images/nautisys-image-white.png",
         "alt" => "Logotipo do projeto"
     ];
 }

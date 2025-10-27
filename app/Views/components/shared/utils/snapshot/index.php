@@ -14,7 +14,7 @@ $sizes = [
         <?= Image::render(
             src: $src,
             class: "{$sizes[$size ?? '']} rounded-full object-cover border-2 border-accent mx-auto",
-            default: "/imgs/preview/preview-avatar.jpg"
+            default: "/images/preview/preview-avatar.jpg"
         ) ?>
         <div component="snapshot:message" class="absolute left-0 top-0 bg-gray h-100 w-100 rounded-100 text-center text-sm flex align-items-center border-2 border-accent">
             <span>Clique para editar</span>

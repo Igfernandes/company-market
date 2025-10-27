@@ -8,35 +8,36 @@
     <meta name="description" content="<?= $description ?? "" ?>">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="<?= base_url($path ?? "") ?>">
-    <meta name="author" content="Nautisys">
+    <meta name="author" content="Company Market">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Passeios Náuticos com a Nautisys">
-    <meta property="og:description" content="Alugue barcos e viva experiências no mar com a Nautisys.">
-    <meta property="og:image" content="<?= base_url("/imgs/nautisys-logotype.png") ?>">
-    <meta property="og:url" content="<?= base_url($path ?? "") ?>">
+    <meta property="og:title" content="Transforme sua marca com a Company Market">
+    <meta property="og:description" content="Soluções criativas, tecnologia e marketing digital para impulsionar seu negócio. Conecte-se à inovação com a Company Market.">
+    <meta property="og:image" content="<?= base_url('/images/company-market-cover.png') ?>">
+    <meta property="og:url" content="<?= base_url($path ?? '') ?>">
     <meta property="og:type" content="website">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Passeios Náuticos com a Nautisys">
-    <meta name="twitter:description" content="Alugue barcos e viva experiências incríveis no mar.">
-    <meta name="twitter:image" content="<?= base_url("/imgs/nautisys-logotype.png") ?>">
+    <meta name="twitter:title" content="Transforme sua marca com a Company Market">
+    <meta name="twitter:description" content="Criamos experiências digitais que geram resultados. Marketing, design e tecnologia para o seu crescimento.">
+    <meta name="twitter:image" content="<?= base_url('/images/company-market-cover.png') ?>">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
 
     <!-- Favicon padrão -->
-    <link rel="icon" type="image/x-icon" href="<?= base_url("/imgs/favicon.ico") ?>">
+    <link rel="icon" type="image/x-icon" href="<?= base_url("/images/favicon.ico") ?>">
 
     <!-- PNGs para dispositivos modernos -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url("/imgs/favicon-180x180.png") ?>">
-    <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url("/imgs/favicon-192x192.png") ?>">
-    <link rel="icon" type="image/png" sizes="512x512" href="<?= base_url("/imgs/favicon-512x512.png") ?>">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url("/images/favicon-180x180.png") ?>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url("/images/favicon-192x192.png") ?>">
+    <link rel="icon" type="image/png" sizes="512x512" href="<?= base_url("/images/favicon-512x512.png") ?>">
 
     <!-- Meta para Android/Chrome -->
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Nautisys">
+    <meta name="application-name" content="Company Market">
 
     <!-- Tailwind -->
     <link rel="stylesheet" href="/css/tailwind.min.css">
@@ -62,10 +63,6 @@
 
     if (ENVIRONMENT === 'development'): ?>
         <script type="module" src="http://localhost:3000/@vite/client"></script>
-    <?php else: ?>
-        <!-- Produção (build do dist) -->
-        <link rel="stylesheet" href="/dist/assets/app.css">
-        <script type="module" src="/dist/assets/app.js"></script>
     <?php endif; ?>
 
     <!-- JQuery -->
