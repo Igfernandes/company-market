@@ -15,6 +15,7 @@ class SubMenu extends BaseComponents
         'clients' => [
             'clients' => 'Geral',
             'clients/create' => 'Criar',
+            'clients/categories' => 'Categorias'
         ],
         'boats' => [
             'boats' => 'Geral',

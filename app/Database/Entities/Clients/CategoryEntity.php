@@ -2,9 +2,9 @@
 
 namespace App\Database\Entities\Clients;
 
-use App\Libraries\Crypto\Crypto;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\HTTP\Response;
 use Exception;
 
 class CategoryEntity extends Entity
@@ -15,7 +15,6 @@ class CategoryEntity extends Entity
     public $attributes = [
         'id'              => null,
         'name'            => null,
-        'position'        => null,
         'description'     => null,
         'created_at'      => null,
         'updated_at'      => null
@@ -63,32 +62,11 @@ class CategoryEntity extends Entity
     {
 
         if (strlen($name) > 100)
-            throw new Exception('Api.clients.categories.name_max_length_100', BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.categories.invalid.name', Response::HTTP_NOT_ACCEPTABLE);
 
         if (!empty($name)) {
             $this->attributes['name'] = $name;
         }
-    }
-
-    /**
-     * @method mixed getPosition()
-     *
-     * @return int|null
-     */
-    public function getPosition(): ?int
-    {
-        return $this->attributes['position'];
-    }
-
-    /**
-     * @method mixed setPosition()
-     *
-     * @param int|null $setPosition
-     * @return void
-     */
-    public function setPosition(?int $position)
-    {
-        $this->attributes['position'] = $position;
     }
 
     /**
@@ -110,7 +88,7 @@ class CategoryEntity extends Entity
     public function setDescription(?string $description)
     {
         if (strlen($description) > 300)
-            throw new Exception('Api.clients.categories.name_max_length_100', BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.categories.name', Response::HTTP_NOT_ACCEPTABLE);
 
         if (!empty($description)) {
             $this->attributes['description'] = $description;

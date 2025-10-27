@@ -16,7 +16,7 @@ class CategoriesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Clients\CategoryEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description', 'position'];
+    protected $allowedFields    = ['name', 'description'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';

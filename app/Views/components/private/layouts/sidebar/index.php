@@ -22,7 +22,7 @@ use App\Database\Entities\Users\UserEntity;
             <div class="avatar">
                 <?= Image::render(
                     src: $user->getAvatar(),
-                    class: "w-40 h-[4.5rem] rounded-full border-2 border-accent mx-auto",
+                    class: "w-40 h-[4.5rem] rounded-full border-2 border-theme mx-auto",
                     default: "/images/preview/preview-avatar.jpg"
                 ) ?>
             </div>
@@ -33,10 +33,10 @@ use App\Database\Entities\Users\UserEntity;
             </div>
             <div class="social-icons">
                 <ul class="flex justify-center">
-                    <li class="px-2 text-xl border-r-2 border-accent">
+                    <li class="px-2 text-xl border-r-2 border-theme">
                         <i class="bi bi-whatsapp text-dark"></i>
                     </li>
-                    <li class="px-2 text-xl border-r-2 border-accent">
+                    <li class="px-2 text-xl border-r-2 border-theme">
                         <i class="bi bi-instagram text-dark"></i>
                     </li>
                     <li class="px-2 text-xl">

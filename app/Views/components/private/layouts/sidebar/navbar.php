@@ -5,16 +5,9 @@ use App\Components\Private\Layouts\Sidebar\SubMenu;
 $icon = [
     "overview" => '<i class="bi bi-house-door"></i>',
     "logout" => '<i class="bi bi-box-arrow-right"></i>',
-    "news" => '<i class="bi bi-newspaper"></i>',
-    "statistics" => '<i class="bi bi-thermometer-sun"></i>',
+    "dispatchers" => '<i class="bi bi-send"></i>',
     "clients" => '<i class="bi bi-people"></i>',
-    "boats" => '<i class="bi bi-life-preserver"></i>',
-    'documents' => '<i class="bi bi-file-break"></i>',
-    'forms' => '<i class="bi bi-pencil"></i>',
-    'sales' => '<i class="bi bi-receipt"></i>',
-    'charges' => '<i class="bi bi-cash-stack"></i>',
-    'expenses' => '<i class="bi bi-clipboard-data"></i>',
-    "coupons" => '<i class="bi bi-ticket-detailed"></i>',
+    "content" => '<i class="bi bi-file-break"></i>',
     "sistema" => '<i class="bi bi-gear"></i>',
     "users" => '<i class="bi bi-person-lock"></i>'
 ];

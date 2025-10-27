@@ -1,4 +1,4 @@
-<div component='settings:board' target-popup='settings' class="absolute right-1 top-100 min-w-[16rem] shadow bg-light pt-4 pb-8 px-3 border-accent border-2 shadow rounded-md">
+<div component='settings:board' target-popup='settings' class="absolute right-1 top-100 min-w-[16rem] shadow bg-light pt-4 pb-8 px-3 border-theme border-2 shadow rounded-md">
     <div class="board-menu">
         <ul class="flex border-b-2 border-accent">
             <?php foreach ($tabs as $index => $tab):  ?>
