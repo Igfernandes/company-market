@@ -8,6 +8,7 @@ class Modal extends BaseComponents
 {
     const ORIGIN = "components/shared/utils/modal";
     const PROPS = [
+        'class',
         'type',
         'title',
         'subtitle',
@@ -27,6 +28,7 @@ class Modal extends BaseComponents
      * @param boolean $isActive O booleano que vai ver se o modal está ativo
      */
     public static function render(
+        ?string $class = "",
         string $type = "",
         ?string $title = "",
         ?string $subtitle = "",

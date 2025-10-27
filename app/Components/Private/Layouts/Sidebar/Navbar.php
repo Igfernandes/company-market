@@ -11,8 +11,11 @@ class Navbar extends BaseComponents
         'menu'
     ];
     const MENU = [
-        'PRINCIPAL' => [
+        'GESTÃO' => [
             'clients' => 'Clientes',
+            'companies' => 'Empresas',
+        ],
+        'COMUNICAÇÃO' => [
             'dispatchers' => 'Envios',
             'content' => 'Conteúdo'
         ],

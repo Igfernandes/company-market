@@ -17,17 +17,13 @@ class SubMenu extends BaseComponents
             'clients/create' => 'Criar',
             'clients/categories' => 'Categorias'
         ],
+        'companies' => [
+            'companies' => 'Geral',
+            'companies/create' => 'Criar'
+        ],
         'boats' => [
             'boats' => 'Geral',
             'boats/create' => 'Criar'
-        ],
-        'documents' => [
-            'documents' => 'Geral',
-            'documents/create' => 'Criar',
-        ],
-        'forms' => [
-            'forms' => 'Geral',
-            'forms/create' => 'Criar',
         ],
         'users' => [
             'users' => 'Geral',

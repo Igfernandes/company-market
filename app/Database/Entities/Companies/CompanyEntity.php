@@ -14,7 +14,7 @@ class CompanyEntity extends Entity
     public $attributes = [
         'id'              => null,
         'name'            => null,
-        'avatar'          => null,
+        'logotype'        => null,
         'phone'           => null,
         'email'           => null,
         'inscribed_at'    => null,
@@ -28,7 +28,7 @@ class CompanyEntity extends Entity
         'updated_at'      => null,
         'deleted_at'      => null,
     ];
-    
+
 
     /**
      * @method mixed getId()
@@ -95,13 +95,9 @@ class CompanyEntity extends Entity
      * @return void
      */
     public function setLogotype(?string $logotype)
-    {;
-        if (!empty($logotype) && !strlen($logotype) > 500)
-            throw new Exception("Api.clients.logotype", Response::HTTP_NOT_ACCEPTABLE);
+    {
 
-        if (!empty($logotype)) {
-            $this->attributes['logotype'] = $logotype;
-        }
+        $this->attributes['logotype'] = $logotype;
     }
 
     /**

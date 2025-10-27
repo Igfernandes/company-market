@@ -9,6 +9,7 @@ $icon = [
     "clients" => '<i class="bi bi-people"></i>',
     "content" => '<i class="bi bi-file-break"></i>',
     "sistema" => '<i class="bi bi-gear"></i>',
+    "companies" => '<i class="bi bi-shop"></i>',
     "users" => '<i class="bi bi-person-lock"></i>'
 ];
 ?>

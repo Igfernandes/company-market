@@ -1,5 +1,5 @@
 <div id="modal_<?= $type ?>" modal='<?= $type ?>' component='modal' class="fixed top-0 left-0 z-max w-full px-4 md:px-0 h-full bg-overlay flex justify-center items-center <?= $isActive ? "" : "hidden" ?>">
-    <div class="modal bg-white bg-white lg:min-w-[25rem] pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
+    <div class="modal bg-white bg-white <?= $class ? $class  : "lg:min-w-[25rem]" ?>   pl-5 pb-1 px-4 shadow-md rounded-md justify-center items-center">
         <div class="modal-header text-xl py-4 text-secondary flex justify-between">
             <span component='modal:title'>
                 <span class="text-xll"><strong><?= $title ?></strong></span>

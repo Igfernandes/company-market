@@ -47,6 +47,9 @@ class PostUseCases
         if (!empty($payload['document']))
             $companyEntity->setEncryptDocument($payload['document']);
 
+        if (!empty($payload['email']))
+            $companyEntity->setEncryptEmail($payload['email']);
+
         $companiesModel->save($companyEntity);
 
         NotificationsService::store([
@@ -54,7 +57,7 @@ class PostUseCases
             "action" => "CREATE",
             "key" => $companiesModel->getInsertID()
         ]);
-        
+
         return (object)[
             "success" => "Api.companies.success.post"
         ];

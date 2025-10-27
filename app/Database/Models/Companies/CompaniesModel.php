@@ -15,7 +15,7 @@ class CompaniesModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Companies\CompanyEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'avatar', 'phone', 'inscribed_at', 'email', 'status', 'phone_sha256', 'document', 'document_type', 'system_key', 'owner_id', 'deleted_at'];
+    protected $allowedFields    = ['name', 'logotype', 'phone', 'inscribed_at', 'email', 'status', 'phone_sha256', 'document', 'document_type', 'system_key', 'owner_id', 'deleted_at'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
