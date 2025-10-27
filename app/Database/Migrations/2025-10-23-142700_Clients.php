@@ -50,6 +50,7 @@ class Clients extends Migration
             ],
             'document'       => [
                 'type'       => 'BLOB',
+                'null'       => true
             ],
             'document_type'  => [
                 'type'       => 'VARCHAR',
