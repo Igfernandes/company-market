@@ -36,9 +36,13 @@ class GetUseCases
         if (count($in_ids) > 0)
             $categoriesModel->whereIn("id", $in_ids);
 
-        $categoryEntity->fill($filteredPayload);
+        $categoryEntity->store($filteredPayload);
+
+        $limit = isset($payload['limit']) ? \intval($payload['limit']) : 50;
+        $startIndexRegister = isset($payload['start']) ? \intval($payload['start']) : 0;
+
         /** @var array{CategoryEntity}*/
-        $foundCategories = $categoriesModel->where($filteredPayload)->findAll();
+        $foundCategories = $categoriesModel->limit($limit, $startIndexRegister)->where($categoryEntity->toArray(true))->findAll();
 
         return array_map(fn(CategoryEntity $Category) => $Category->toArray(), $foundCategories);
     }

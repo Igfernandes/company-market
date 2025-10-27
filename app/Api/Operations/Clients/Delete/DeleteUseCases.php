@@ -2,7 +2,7 @@
 
 namespace App\Api\Operations\Clients\Delete;
 
-use App\Business\Clients\DeleteClientsBusiness;
+use App\Database\Models\Clients\ClientsModel;
 use App\Services\Notifications\NotificationsService;
 
 class DeleteUseCases
@@ -12,13 +12,12 @@ class DeleteUseCases
      */
     public function execute(array $payload)
     {
-        $deleteClientBusiness = new DeleteClientsBusiness();
-        
-        if (is_array($payload['in_clients'])) {
-            $deleteClientBusiness->deleteMultipleClients($payload['in_clients']);
+        $clientsModel = new ClientsModel();
+
+        if (isset($payload['in_clients']) && is_array($payload['in_clients'])) {
+            $clientsModel->whereIn("id", $payload['in_clients'])->delete();
         } else if (!empty($payload['client_id'])) {
-            unset($payload['in_clients']);
-            $deleteClientBusiness->deleteSingleClient($payload);
+            $clientsModel->where("id", $payload['client_id'])->delete();
         }
 
         NotificationsService::store([

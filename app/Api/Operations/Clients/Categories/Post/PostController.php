@@ -32,10 +32,9 @@ class PostController extends BaseController
             $validation = \Config\Services::validation();
 
             $payload = (array) $this->request->getVar();
-            $payloadVerify["categories"] =  \json_encode($payload["categories"]);
             $validation->setRules($this->rules);
 
-            if (!$validation->run($payloadVerify))
+            if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
             $responsePost = $this->postUseCases->execute($payload);

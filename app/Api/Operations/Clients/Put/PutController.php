@@ -31,7 +31,8 @@ class PutController extends BaseController
             ]);
             $validation = \Config\Services::validation();
 
-            $payload = $this->request->getVar(array_keys($this->rules));
+            $allPayload = $this->request->getJSON() ?? [];
+            $payload = array_intersect_key((array)$allPayload, array_flip(array_keys($this->rules)));
             $validation->setRules($this->rules);
 
             $payload['id'] = $clientId;

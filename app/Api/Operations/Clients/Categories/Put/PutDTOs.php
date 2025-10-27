@@ -1,10 +1,16 @@
 <?php
 
-namespace App\Api\Operations\Clients\Categories\Post;
+namespace App\Api\Operations\Clients\Categories\Put;
 
-trait PostDTOs
+trait PutDTOs
 {
     protected array $rules = [
+        'id' => [
+            'rules'  => 'numeric|required',
+            'errors' => [
+                'string' => 'Api.categories.invalid.id',
+            ],
+        ],
         'name' => [
             'rules'  => 'string|required|max_length[100]',
             'errors' => [
