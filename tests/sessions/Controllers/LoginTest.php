@@ -6,7 +6,7 @@ use App\Database\Entities\Users\UserEntity;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Sessions\BaseSessionTests;
 
-class IndexLoginTest extends BaseSessionTests
+class LoginTest extends BaseSessionTests
 {
     use FeatureTestTrait;
 
@@ -15,7 +15,7 @@ class IndexLoginTest extends BaseSessionTests
      */
     public function testLoginPageForGuest()
     {
-        $result = $this->call('get', 'index/login');
+        $result = $this->call('get', 'home/login');
 
         $result->assertOK();
         $result->assertSee('Login');         // texto da tela
@@ -39,7 +39,7 @@ class IndexLoginTest extends BaseSessionTests
         \Config\Services::injectMock('session', $sessionMock);
 
         // Faz o request normalmente
-        $result = $this->call('get', 'index/login');
+        $result = $this->call('get', 'home/login');
 
         // Verifica o redirecionamento
         $result->assertRedirectTo('dashboard/overview');

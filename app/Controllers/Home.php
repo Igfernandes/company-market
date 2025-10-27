@@ -14,8 +14,30 @@ class Home extends BaseController
         return view("layouts/index");
     }
 
-    public function email()
+    public function login()
     {
-        return view("mails/subscribe");
+        $session = session();
+        $userAuth = $session->get(SESSION_KEY_AUTH_USER);
+        $token = $this->request->getCookie('rm_token');
+
+        if (empty($userAuth) && !empty($token))
+            $userAuth =  RememberBusiness::isRememberTokenValid($token);
+
+        if (!empty($userAuth))
+            return redirect()->to('dashboard/overview');
+
+        return view("layouts/login");
+    }
+
+    public function logout()
+    {
+        $session = session();
+        /** @var UserEntity */
+        $userAuth = $session->get(SESSION_KEY_AUTH_USER);
+        $session->remove(SESSION_KEY_AUTH_USER);
+
+        RememberBusiness::revokeRememberToken($userAuth->getId());
+
+        return redirect('login');
     }
 }
