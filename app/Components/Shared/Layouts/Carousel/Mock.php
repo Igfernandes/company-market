@@ -6,8 +6,8 @@ class Mock
 {
     public const PROPS = [
         "slides" => [
-            "/imgs/nautisys-original.png",
-            "/imgs/nautisys-image.png",
+            "/images/nautisys-original.png",
+            "/images/nautisys-image.png",
         ],
         "spaceBetween" => 40,
         "effect" => "fade"

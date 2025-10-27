@@ -36,6 +36,13 @@
   .max-h-\[#{$i}rem\] {
     max-height: #{$i}rem;
   }
+
+  .min-h-\[#{$i}vh\] {
+    min-height: #{$i}vh;
+  }
+  .max-h-\[#{$i}vh\] {
+    max-height: #{$i}vh;
+  }
   @for $d from 1 through 9 {
     .h-\[#{ $i }\.#{ $d }rem\] {
       height: #{"#{$i}.#{$d}rem"};

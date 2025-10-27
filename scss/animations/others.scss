@@ -222,3 +222,30 @@
     transform: scale(1);
   }
 }
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-1px);
+  }
+  15% {
+    transform: translateX(1px);
+  }
+  20% {
+    transform: translateX(0px);
+  }
+  80% {
+    transform: translateX(-1px);
+  }
+  85% {
+    transform: translateX(1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.shake {
+  animation: shake 0.5s ease-in-out;
+}

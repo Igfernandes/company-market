@@ -3,6 +3,16 @@ export const API = {
     recaptcha:
       "A página contém recursos desatualizados. Recarregue e tente novamente.",
   },
+  contact: {
+    success: {
+      post: "A sua mensagem foi enviada com sucesso! Aguarde o nosso retorno",
+    },
+  },
+  subscribe: {
+    success: {
+      post: "Você foi inscrito com sucesso!",
+    },
+  },
   auth: {
     success: {
       post: "Logo você será redirecionado",

@@ -14,6 +14,12 @@
       .#{$mq}\:max-h-\[#{ $i }rem\] {
         max-height: #{$i}rem;
       }
+      .#{$mq}\:min-h-\[#{ $i }vh\] {
+        min-height: #{$i}vh;
+      }
+      .#{$mq}\:max-h-\[#{ $i }vh\] {
+        max-height: #{$i}vh;
+      }
       @for $d from 1 through 9 {
         .#{$mq}\:h-\[#{ $i }\.#{ $d }rem\] {
           height: #{"#{$i}.#{$d}rem"};

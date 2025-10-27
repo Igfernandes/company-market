@@ -16,7 +16,7 @@ if (isset($name) && isset($storeValue[$name]))
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= !empty($id) ? $id : $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-[3rem] text-sm lg:text-lg pl-2 pr-9 pt-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-[3rem] text-sm lg:text-lg pl-2 pr-9 pt-3 rounded-sm outline-red-200 focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>

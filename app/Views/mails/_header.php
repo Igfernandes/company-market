@@ -2,12 +2,12 @@
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 </style>
 
-<table style="max-width: 550px; width: 100%; margin: 0 auto; text-align: center; font-family:  'Poppins', sans-serif;">
+<table style="max-width: 550px; width: 100%; margin: 0 auto; font-family:  'Poppins', sans-serif;">
     <thead>
-        <tr style="background: <?= getenv("theme.color.default") ?>;">
-            <th style="padding: 1rem 0;">
+        <tr>
+            <th style="padding: 0rem 0;background: #f0f0f0;border: 1px solid #d2d2d2;">
                 <div>
-                    <img src="<?= getenv('globals.logotype') ?>" alt="logotipo" style="width: 80px;" />
+                    <img src="<?= base_url(getenv('globals.logotype')) ?>" alt="logotipo" style="width: 300px;" />
                 </div>
             </th>
         </tr>

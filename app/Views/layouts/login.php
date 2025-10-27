@@ -23,7 +23,7 @@ Head::render(title: "Login - Nautisys System");
                 <?= Carousel::render(
                     class: "max-h-[40rem] h-[80vh]",
                     slides: [
-                        "/imgs/nautisys-image-white.png"
+                        "/images/nautisys-image-white.png"
                     ]
                 ) ?>
             </div>
@@ -31,7 +31,7 @@ Head::render(title: "Login - Nautisys System");
                 <form class="flex flex-col justify-center h-100 px-4 sm:px-6 py-10" data-send="auth">
                     <div class="form-header text-center">
                         <div class="form-icon w-20 mx-auto">
-                            <?= Image::render(src: "/imgs/nautisys-icon.png", alt: "Icon of NautiSys") ?>
+                            <?= Image::render(src: "/images/nautisys-icon.png", alt: "Icon of NautiSys") ?>
                         </div>
                         <div class="form-title mt-2">
                             <h2 class="text-lg sm:text-md lg:header-xs">Bem Vindo a NautiSys!</h2>

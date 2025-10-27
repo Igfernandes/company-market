@@ -1,0 +1,47 @@
+$sides: "l", "t", "b", "r";
+
+@for $i from 0 through 100 {
+  // Ex: .m-[1rem]
+  .m-\[#{$i}rem\] {
+    margin: #{$i}rem;
+  }
+
+  // Ex: .m-[1.5rem]
+  .m-\[#{$i}\.5rem\] {
+    margin: #{$i + 0.5}rem;
+  }
+
+    // Ex: .m-[1.5rem]
+  .m-\[#{$i}px\] {
+    margin: #{$i}px ;
+  }
+
+
+  @each $side in $sides {
+    // Ex: .ml-[1rem]
+    .m#{$side}-\[#{$i}rem\] {
+      @if $side == "l" {
+        margin-left: #{$i}rem;
+      } @else if $side == "t" {
+        margin-top: #{$i}rem;
+      } @else if $side == "b" {
+        margin-bottom: #{$i}rem;
+      } @else if $side == "r" {
+        margin-right: #{$i}rem;
+      }
+    }
+
+    // Ex: .ml-[1.5rem]
+    .m#{$side}-\[#{$i}\.5rem\] {
+      @if $side == "l" {
+        margin-left: #{$i + 0.5}rem;
+      } @else if $side == "t" {
+        margin-top: #{$i + 0.5}rem;
+      } @else if $side == "b" {
+        margin-bottom: #{$i + 0.5}rem;
+      } @else if $side == "r" {
+        margin-right: #{$i + 0.5}rem;
+      }
+    }
+  }
+}

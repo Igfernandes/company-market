@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white-300">
         <div class="flex items-center justify-content-between p-4">
             <a class="navbar-brand flex items-center px-2" href="#">
-                <img class="w-15 h-15 mr-2" src="/imgs/LOGOTYPE_COMPANY_MARKET.png" alt="logotype Company">
+                <img class="w-15 h-15 mr-2" src="/images/LOGOTYPE_COMPANY_MARKET.png" alt="logotype Company">
                 <span class="font-poppins header-xs font-600">Component Tester</span>
             </a>
             <div class="ml-auto collapse navbar-collapse flex justify-content-end items-center" id="navbarSupportedContent">

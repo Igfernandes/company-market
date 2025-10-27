@@ -1,7 +1,7 @@
 const { TABS, TOOLS } = FilerobotImageEditor;
 
 export const SETTINGS = {
-  source: "/imgs/preview/preview-avatar.jpg",
+  source: "/images/preview/preview-avatar.jpg",
   annotationsCommon: {
     fill: "#ff0000",
   },

@@ -21,7 +21,7 @@ Head::render(title: "Criar conta - Nautisys System");
                 <form class="flex flex-col justify-center h-100 px-6" data-send="user-create">
                     <div class="form-header text-center">
                         <div class="form-icon w-20 mx-auto xxl:w-25">
-                            <?= Image::render(src: "/imgs/nautisys-icon.png", alt: "Icon of NautiSys") ?>
+                            <?= Image::render(src: "/images/nautisys-icon.png", alt: "Icon of NautiSys") ?>
                         </div>
                         <div class="form-title mt-2">
                             <h2 class="forgot-title header-xs xxl:header-md">Crie sua conta</h2>
