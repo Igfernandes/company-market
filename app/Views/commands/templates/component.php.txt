@@ -1,12 +1,4 @@
 <?php
-/**
- * Template de geração de componentes
- *
- * ⚠️ Este arquivo contém placeholders (ex: {{className}}, {{namespace}}) que
- * são substituídos dinamicamente pelo comando `php spark component:make`.
- *
- */
-
 namespace {{namespace}};
 
 use App\Components\BaseComponents;
@@ -18,6 +10,6 @@ class {{className}} extends BaseComponents
 
     public static function render()
     {
-        Component(self::ORIGIN, compact(self::PROPS));
+        return Component(self::ORIGIN, compact(self::PROPS));
     }
 }

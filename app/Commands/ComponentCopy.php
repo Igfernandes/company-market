@@ -9,13 +9,14 @@ class ComponentCopy extends BaseCommand
 {
     protected $group       = 'Custom';
     protected $name        = 'component:copy';
-    protected $description = 'Copia a estrutura de um componente existente para um novo.';
+    protected $description = 'Copia a estrutura de um componente existente (classe + view) para um novo.';
+
     protected $usage       = 'php spark component:copy origem destino';
 
     public function run(array $params)
     {
         if (count($params) < 2) {
-            CLI::error('Uso incorreto. Exemplo: php spark component:copy Shared/Forms/Fields/Input Shared/Forms/Fields/Checkbox');
+            CLI::error('❌ Uso incorreto. Exemplo: php spark component:copy Shared/Forms/Fields/Input Shared/Forms/Fields/Checkbox');
             return;
         }
 
@@ -29,21 +30,21 @@ class ComponentCopy extends BaseCommand
         $sourceClass = basename($sourcePath);
         $targetClass = basename($targetPath);
 
-        // Caminhos completos
+        // Caminhos base
         $baseDir = APPPATH . 'Components' . DIRECTORY_SEPARATOR;
         $sourceFile = $baseDir . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $sourcePath) . DIRECTORY_SEPARATOR . $sourceClass . '.php';
         $targetDir = $baseDir . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $targetPath);
         $targetFile = $targetDir . DIRECTORY_SEPARATOR . $targetClass . '.php';
 
-        // Valida se origem existe
+        // Valida se a origem existe
         if (!file_exists($sourceFile)) {
-            CLI::error("O componente de origem não existe: {$sourceFile}");
+            CLI::error("❌ O componente de origem não existe: {$sourceFile}");
             return;
         }
 
         // Evita sobrescrever
         if (file_exists($targetFile)) {
-            CLI::error("O componente de destino já existe: {$targetFile}");
+            CLI::error("❌ O componente de destino já existe: {$targetFile}");
             return;
         }
 
@@ -73,30 +74,47 @@ class ComponentCopy extends BaseCommand
 
         // Gera o conteúdo da nova classe
         $template = <<<PHP
-            <?php
+        <?php
 
-            namespace {$namespace};
+        namespace {$namespace};
 
-            use App\Components\BaseComponents;
+        use App\Components\BaseComponents;
 
-            class {$targetClass} extends BaseComponents
+        class {$targetClass} extends BaseComponents
+        {
+            const ORIGIN = "{$origin}";
+            const PROPS = {$propsBlock};
+
+            public static function render({$paramsBlock})
             {
-                const ORIGIN = "{$origin}";
-                const PROPS = {$propsBlock};
-
-                public static function render({$paramsBlock})
-                {
-                    Component(self::ORIGIN, compact(self::PROPS));
-                }
+                Component(self::ORIGIN, compact(self::PROPS));
             }
-            PHP;
+        }
+        PHP;
 
-        // Salva o novo arquivo
+        // Salva o novo arquivo da classe
         file_put_contents($targetFile, $template);
 
+        // Copia a view correspondente, se existir
+        $viewsBase = APPPATH . 'Views' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR;
+        $sourceViewFile = $viewsBase . strtolower(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $sourcePath)) . '.php';
+        $targetViewFile = $viewsBase . strtolower(str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $targetPath)) . '.php';
+
+        if (file_exists($sourceViewFile)) {
+            if (!is_dir(dirname($targetViewFile))) {
+                mkdir(dirname($targetViewFile), 0777, true);
+            }
+
+            copy($sourceViewFile, $targetViewFile);
+            CLI::write("📄 View copiada: {$targetViewFile}", 'green');
+        } else {
+            CLI::write("⚠️ Nenhuma view encontrada para copiar ({$sourceViewFile})", 'yellow');
+        }
+
+        // Feedback final
         CLI::write("✅ Componente copiado com sucesso!", 'green');
-        CLI::write("📦 Origem: {$sourcePath}");
-        CLI::write("📁 Novo: {$targetPath}");
+        CLI::write("📦 Classe: {$targetFile}");
+        CLI::write("📁 View:   " . (file_exists($targetViewFile) ? $targetViewFile : 'Nenhuma view encontrada'));
         CLI::newLine();
     }
 }

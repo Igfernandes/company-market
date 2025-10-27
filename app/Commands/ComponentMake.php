@@ -36,8 +36,13 @@ class ComponentMake extends BaseCommand
         // Namespace da classe
         $namespace = 'App\\Components\\' . str_replace(['/', '\\'], '\\', $path);
 
-        // Caminho ORIGIN da view (minúsculo)
-        $origin = 'components/' . strtolower(str_replace(['\\', '/'], '/', $path));
+        // Caminho ORIGIN da view (mantém último segmento camelCase)
+        $segments = explode('/', str_replace(['\\'], '/', $path));
+        $last = array_pop($segments);
+
+        // Monta novamente o caminho com o último em camelCase
+        $origin = 'components/' . strtolower(implode('/', $segments));
+        $origin .= ($origin ? '/' : '') . lcfirst($last);
 
         // Caminhos dos templates
         $templateDir = APPPATH . 'Views' . DIRECTORY_SEPARATOR . 'commands' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
