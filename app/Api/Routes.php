@@ -7,6 +7,7 @@ use App\Api\Routes\AuthenticationsRoutes;
 use App\Api\Routes\ChargesRoutes;
 use App\Api\Routes\CheckoutRoutes;
 use App\Api\Routes\ClientsRoutes;
+use App\Api\Routes\CompaniesRoutes;
 use App\Api\Routes\CustomFormsRoutes;
 use App\Api\Routes\DispatchersRoutes;
 use App\Api\Routes\ExportsRoutes;
@@ -32,7 +33,6 @@ class Routes
     AuthenticationsRoutes::class,
     ClientsRoutes::class,
     DispatchersRoutes::class,
-    FieldsRoutes::class,
     IntegrationsRoutes::class,
     InvitesRoutes::class,
     NotificationsRoutes::class,
@@ -45,7 +45,8 @@ class Routes
     WebhooksRoutes::class,
     ExportsRoutes::class,
     FilesRoutes::class,
-    AttemptsRoutes::class
+    AttemptsRoutes::class,
+    CompaniesRoutes::class
   ];
   public function init(RouteCollection $routes)
   {
