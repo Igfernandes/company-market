@@ -30,7 +30,7 @@ use App\Components\Shared\Layouts\Table\Table;
                 actions: [
                     [
                         "text" => "Recuperar Clientes",
-                        "class" => "bg-accent text-gray-100",
+                        "class" => "bg-theme text-gray-100",
                         "attributes" => [
                             "recover" => 'clients'
                         ]

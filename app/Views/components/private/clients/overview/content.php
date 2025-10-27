@@ -27,7 +27,7 @@ use App\Components\Shared\Layouts\Table\Table;
                 actions: [
                     [
                         "text" => "+ Criar Clientes",
-                        "class" => "bg-accent text-gray-100 block w-full w-[24rem] md:inline-block text-center",
+                        "class" => "bg-theme text-gray-100 block w-full w-[24rem] md:inline-block text-center",
                         "link" => "/dashboard/clients/create"
                     ],
                 ]

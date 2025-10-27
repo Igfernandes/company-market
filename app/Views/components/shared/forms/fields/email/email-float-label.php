@@ -23,7 +23,7 @@ if (isset($name) && isset($storeValue[$name]))
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (!isset($labelNot)) : ?>
-                <label class="absolute left-1 top-20 pl-1 text-sm lg:text-lg text-black-700" data-label-toggle component="email:label" for="<?= !empty($id) ? $id : $name ?>">
+                <label class="absolute left-1 top-28 pl-1 text-sm lg:text-md text-black-700" data-label-toggle component="email:label" for="<?= !empty($id) ? $id : $name ?>">
                     <strong class="font-arial">
                         <?= ucfirst($label) ?>
                         <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/variants/tooltip/required") : null ?>
@@ -33,7 +33,7 @@ if (isset($name) && isset($storeValue[$name]))
         </div>
         <?php if (isset($icon)) : ?>
             <div class="absolute right-0 top-0 h-full pt-2 pr-2">
-                <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-accent">
+                <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-theme">
                     <?= $icon ?>
                 </div>
             </div>

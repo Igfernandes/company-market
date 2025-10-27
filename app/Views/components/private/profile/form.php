@@ -37,7 +37,7 @@ use App\Database\Entities\Users\UserEntity;
                         ) ?>
                     </div>
                     <div class="text-center inline-block">
-                        <span class="text-accent"><strong>Status</strong></span>
+                        <span class="text-theme"><strong>Status</strong></span>
                         <div>
                             <?= SwitchButton::render(
                                 name: "status",

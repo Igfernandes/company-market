@@ -13,10 +13,10 @@ $sizes = [
     <div class="relative <?= $sizes[$size ?? 'md'] ?> mx-auto" component="snapshot:image">
         <?= Image::render(
             src: $src,
-            class: "{$sizes[$size ?? '']} rounded-full object-cover border-2 border-accent mx-auto",
+            class: "{$sizes[$size ?? '']} rounded-full object-cover border-2 border-theme mx-auto",
             default: "/images/preview/preview-avatar.jpg"
         ) ?>
-        <div component="snapshot:message" class="absolute left-0 top-0 bg-gray h-100 w-100 rounded-100 text-center text-sm flex align-items-center border-2 border-accent">
+        <div component="snapshot:message" class="absolute left-0 top-0 bg-gray h-100 w-100 rounded-100 text-center text-sm flex align-items-center border-2 border-theme">
             <span>Clique para editar</span>
         </div>
     </div>

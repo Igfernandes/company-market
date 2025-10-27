@@ -9,7 +9,7 @@ use App\Components\Shared\Forms\Fields\Checkbox\Checkbox;
             <h3 class="font-poppins">Gerenciador de Permissões</h3>
             <p class="text-sm text-justify my-2">As permissões listadas abaixo serão vinculadas à função escolhida. Todos os usuários atribuídos a essa função receberão automaticamente essas permissões.</p>
         </div>
-        <div class="overflow-y-auto h-[10rem] px-3 py-2 border-2 border-accent">
+        <div class="overflow-y-auto h-[10rem] px-3 py-2 border-2 border-theme">
             <?php if (isset($permissions) && is_array($permissions)):
                 foreach ($permissions as $scope => $permissionScope): ?>
                     <div class="mb-4">

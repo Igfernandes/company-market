@@ -4,7 +4,7 @@
         <div class="content">
             <?php if (isset($author)): ?>
                 <div class="author text-right">
-                    <span class="text-accent  text-sm"> <strong> Autor:</strong> <i component='notification:author'><?= $author ?></i></span>
+                    <span class="text-theme  text-sm"> <strong> Autor:</strong> <i component='notification:author'><?= $author ?></i></span>
                 </div>
             <?php endif; ?>
             <strong component='notification:title'></strong>

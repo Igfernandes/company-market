@@ -26,7 +26,7 @@ use App\Components\Shared\Forms\Fields\Submit\Submit;
                 <div class="overflow-y-auto flex flex-wrap justify-around h-[40rem] px-5 py-2">
                     <?php if (isset($permissions) && is_array($permissions)):
                         foreach ($permissions as $scope => $permissionScope): ?>
-                            <div class=" mb-4 border-2 border-accent py-2 px-4">
+                            <div class=" mb-4 border-2 border-theme py-2 px-4">
                                 <div class="mb-1">
                                     <span class="text-md font-semibold"><u><?= lang("Words.$scope") ?></u></span>
                                 </div>

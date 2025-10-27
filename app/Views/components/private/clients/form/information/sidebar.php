@@ -37,7 +37,7 @@ use App\Database\Entities\Clients\ClientEntity;
         ) ?>
     </div>
     <div class="text-center mt-6">
-        <span class="text-accent"><strong>Status</strong></span>
+        <span class="text-theme"><strong>Status</strong></span>
         <div>
             <?= SwitchButton::render(
                 name: "status",
@@ -55,11 +55,11 @@ use App\Database\Entities\Clients\ClientEntity;
         </div>
     </div>
     <?php if (isset($id) && !empty($id)): ?>
-        <div class="text-center rounded-sm text-sm border-r-2  border-2 border-accent py-1 px-2 mt-4">
+        <div class="text-center rounded-sm text-sm border-r-2  border-2 border-theme py-1 px-2 mt-4">
             <p class="text-gray-600"><strong>Criado em:</strong></p>
             <span class="text-xs font-600 text-gray-900"><i><?= (new DateTime($client->getCreatedAt()))->format("d/m/Y H:i"); ?></i></span>
         </div>
-        <div class="text-center rounded-sm text-sm border-r-2 border-2 border-accent  py-1 px-2 mt-4">
+        <div class="text-center rounded-sm text-sm border-r-2 border-2 border-theme  py-1 px-2 mt-4">
             <p class="text-gray-600"><strong>Atualizado em:</strong></p>
             <span class="text-xs font-600 text-gray-900"><i><?= (new Datetime($client->getUpdatedAt()))->format("d/m/Y H:i") ?></i></span>
         </div>

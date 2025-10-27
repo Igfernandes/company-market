@@ -31,7 +31,7 @@ use App\Components\Shared\Layouts\Table\Table;
                 actions: [
                     [
                         "text" => "+ Convidar Usuários",
-                        "class" => "bg-accent text-gray-100 block w-full w-[24rem] md:inline-block text-center",
+                        "class" => "bg-theme text-gray-100 block w-full w-[24rem] md:inline-block text-center",
                         "attributes" => [
                             "invite" => 'users'
                         ]

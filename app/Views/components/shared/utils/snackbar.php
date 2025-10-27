@@ -35,7 +35,7 @@
             </div>
             <div class="box-buttons flex justify-end">
                 <?php if (!empty($action)): ?>
-                    <div class="btn ms-2 bg-accent btn-action" component="snackbar:action">
+                    <div class="btn ms-2 bg-theme btn-action" component="snackbar:action">
                         <?= $action ?>
                     </div>
                 <?php endif; ?>
