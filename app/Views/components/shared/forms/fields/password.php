@@ -9,7 +9,7 @@ if (isset($name) && isset($storeValue[$name]))
 
 <div class="password-toggle mb-3" component="password-toggle" password='visibility'>
     <div class="input-group relative shadow-sm border-gray-200 border-2 rounded-md">
-        <input class="form-control w-100 h-[3.5rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-accent focus:outline-solid" type="password" data-password-target
+        <input class="form-control w-100 h-[3.5rem] text-sm lg:text-lg px-2 pt-3 rounded-sm outline-theme focus:outline-solid" type="password" data-password-target
             name="<?= $name ?>"
             value="<?= isset($value) ? $value : null ?>"
             id="<?= $id ?? $name ?>"

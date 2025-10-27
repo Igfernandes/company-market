@@ -8,7 +8,7 @@ if (isset($name) && isset($storeValue[$name]))
 ?>
 
 <div class="search" component="search">
-    <div class="relative shadow-sm border-gray-200 border-2 rounded-xl hover:border-2 hover:border-accent">
+    <div class="relative shadow-sm border-gray-200 border-2 rounded-xl hover:border-2 hover:border-theme">
         <div class="w-100">
             <input type="text"
                 name="<?= $name ?>"
@@ -16,7 +16,7 @@ if (isset($name) && isset($storeValue[$name]))
                 id="<?= $id ?? $name ?>"
                 data-label="<?= $label ?>"
                 placeholder="<?= $label ?>"
-                class="form-control w-100 h-[2.3rem] bg-disabled text-lg px-2 py-1 pr-1 rounded-xl outline-accent focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-[2.3rem] bg-disabled text-lg px-2 py-1 pr-1 rounded-xl outline-theme focus:outline-solid <?= $className ?? null ?>"
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>

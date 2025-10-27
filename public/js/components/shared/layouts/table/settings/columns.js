@@ -3,7 +3,7 @@ import { getColumnIndex } from "../utils/columns.js";
 export const handleRenderUpdate = (id, updateAction) => {
   if (!id || !updateAction) return "";
 
-  return `<a class='t-btn-update text-white-500 bg-accent py-2 pl-2 pr-1 rounded-xs mr-2'
+  return `<a class='t-btn-update text-white-500 bg-theme py-2 pl-2 pr-1 rounded-xs mr-2'
      href="${updateAction}/${id}">
       <i class="bi bi-pencil-square"></i>
     </a>
@@ -12,7 +12,7 @@ export const handleRenderUpdate = (id, updateAction) => {
 export const handleRenderDelete = (id, deleteAction) => {
   if (!id || !deleteAction) return "";
 
-  return `<span class='t-btn-delete text-white-500 bg-accent p-2 rounded-xs cursor-pointer' data-delete-entity="${deleteAction}" data-delete-key="${id}">
+  return `<span class='t-btn-delete text-white-500 bg-theme p-2 rounded-xs cursor-pointer' data-delete-entity="${deleteAction}" data-delete-key="${id}">
     <i class="bi bi-trash"></i>
     </span>
   `;
@@ -32,7 +32,7 @@ export const handleRenderOptions = (id, strOptions) => {
         ${options
           .map(
             (option) =>
-              `<li class="hover:bg-accent hover:text-white px-4 py-2 my-1 cursor-pointer" 
+              `<li class="hover:bg-theme hover:text-white px-4 py-2 my-1 cursor-pointer" 
             option-ref='${option.key ?? ""}'
             option-key='${id}'>${option.title ?? ""}</li>`
           )

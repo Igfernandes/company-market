@@ -66,11 +66,11 @@ class ClientsBusiness
     }
 
 
-    public function hasClient(int $clientId): bool
+    public function has(array $query): bool
     {
         $clientsModel = new ClientsModel();
 
-        $foundClient = $clientsModel->where("id", $clientId)->first();
+        $foundClient = $clientsModel->withDeleted(true)->where($query)->first();
 
         return !empty($foundClient);
     }

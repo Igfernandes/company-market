@@ -22,7 +22,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?? $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-theme focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($label) ? "placeholder='$label" . "$requiredIcon'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>

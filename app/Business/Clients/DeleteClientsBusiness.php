@@ -22,7 +22,6 @@ class DeleteClientsBusiness
         $this->clientCategoriesModel = new ClientsCategoriesModel();
         $this->clientsFieldsModel = new ClientsFieldsModel();
         $this->clientsFormsHistory = new ClientsFormsHistoryModel();
-        $this->clientsServices = new ClientsServicesModel();
     }
 
     /**
@@ -32,8 +31,7 @@ class DeleteClientsBusiness
     {
         $this->clientCategoriesModel->where($payload)->delete();
         $this->clientsFieldsModel->where($payload)->delete();
-        $this->clientsFormsHistory->whereIn($payload)->delete();
-        $this->clientsServices->whereIn($payload)->delete();
+        // $this->clientsFormsHistory->whereIn("id", $payload)->delete();
         $this->clientsModel->where("id", $payload['client_id'])->delete();
     }
 

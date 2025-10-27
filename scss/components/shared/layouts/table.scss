@@ -14,7 +14,7 @@
         align-items: center;
         select {
           height: 2rem;
-          border: 1px solid var(--border-accent);
+          border: 1px solid var(--border-theme);
           border-radius: 10%;
         }
         label {
@@ -42,7 +42,7 @@
             margin-right: 4%;
           }
           input {
-            border: 1px solid var(--border-accent);
+            border: 1px solid var(--border-theme);
             height: 2rem;
             padding-left: 1rem;
             border-radius: 4%;
@@ -59,7 +59,7 @@
         tbody {
           tr {
             &::nth-child(odd) {
-              background-color: var(--bg-accent-light);
+              background-color: var(--bg-theme-light);
             }
             td {
               &.dt-empty {

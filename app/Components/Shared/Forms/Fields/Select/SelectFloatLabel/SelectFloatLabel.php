@@ -21,6 +21,12 @@ class SelectFloatLabel extends BaseComponents
         "icon"
     ];
 
+    /**
+     * @param array{array{
+     * text: string,
+     *  value: string
+     * }} $options
+     */
     public static function render(
         ?string $name = "",
         ?string $id = "",

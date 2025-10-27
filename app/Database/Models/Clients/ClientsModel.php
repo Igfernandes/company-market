@@ -15,9 +15,12 @@ class ClientsModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType       = 'App\Database\Entities\Clients\ClientEntity';
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'avatar', 'phone', 'email', 'birthdate', 'status', 'email_sha256', 'phone_sha256', 'system_key', 'owner_id'];
+    protected $allowedFields    = ['name', 'avatar', 'phone', 'email', 'birthdate', 'status', 'phone_sha256', 'document', 'document_type', 'system_key', 'owner_id', 'deleted_at'];
 
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+
+    protected $useSoftDeletes = true;
+    protected $deletedField   = 'deleted_at';
 }

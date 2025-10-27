@@ -2,7 +2,6 @@
 
 use App\Components\Private\Layouts\Settings\Settings;
 use App\Components\Private\Layouts\Header\Translate;
-use App\Components\Private\Features\MsgCenter\MsgCenter;
 use App\Components\Private\Layouts\Sidebar\Toggle;
 use App\Components\Shared\Forms\Fields\Search\Search;
 use App\Components\Shared\Utils\Notification\Notification;
@@ -21,9 +20,6 @@ use App\Components\Shared\Utils\Notification\Notification;
             ?>
         </div>
         <div class="flex items-center ml-auto">
-            <div class="mr-3">
-                <?php MsgCenter::render(); ?>
-            </div>
             <div>
                 <?php Notification::render(); ?>
             </div>

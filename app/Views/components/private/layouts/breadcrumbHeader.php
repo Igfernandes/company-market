@@ -1,7 +1,7 @@
 <div component='breadcrumb-header'>
     <div class="flex items-center my-4 mx-4 py-6 px-4 bg-content rounded-xs shadow">
         <div class="icon text-center w-5 min-w-[3rem]">
-            <span class="text-xxl border-2 py-2 px-3 text-accent border-accent rounded-sm shadow">
+            <span class="text-xxl border-2 py-2 px-3 text-theme border-theme rounded-sm shadow">
                 <?= $icon ?>
             </span>
         </div>

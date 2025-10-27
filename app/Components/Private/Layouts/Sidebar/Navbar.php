@@ -12,21 +12,9 @@ class Navbar extends BaseComponents
     ];
     const MENU = [
         'PRINCIPAL' => [
-            'overview' => 'Visão Geral',
-            'news' => 'Notícias',
-            'statistics' => 'Estatísticas',
-        ],
-        'GESTÃO' => [
             'clients' => 'Clientes',
-            'boat' => 'Embarcações',
-            'documents' => 'Documentos',
-            'forms' => 'Formulários',
-        ],
-        'FINANCEIRO' => [
-            'sales' => 'Vendas',
-            'charges' => 'Cobranças',
-            'expenses' => 'Despesas',
-            'coupons' => 'Cupons'
+            'dispatchers' => 'Envios',
+            'content' => 'Conteúdo'
         ],
         'SISTEMA' => [
             'users' => 'usuários',

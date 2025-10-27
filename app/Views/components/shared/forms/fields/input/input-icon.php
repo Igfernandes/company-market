@@ -23,7 +23,7 @@ $id = !empty($id) ?  $id : $name;
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?>"
                 data-label="<?= $label ?>"
-                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid <?= $class ?? null ?>"
+                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-theme focus:outline-solid <?= $class ?? null ?>"
                 <?= !empty($label) ? "placeholder='$label" . "$requiredIcon'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>

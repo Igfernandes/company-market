@@ -8,9 +8,9 @@
           margin-bottom: -2px;
           &.active {
             background-color: var(--bg-disabled);
-            border-right-color: var(--border-accent);
-            border-left-color: var(--border-accent);
-            border-top-color: var(--border-accent);
+            border-right-color: var(--border-theme);
+            border-left-color: var(--border-theme);
+            border-top-color: var(--border-theme);
             border-bottom-color: #fff;
           }
         }

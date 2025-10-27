@@ -28,7 +28,7 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                             echo $date->format("d/m/Y");
                         } ?>"
                 id="<?= $id ?? $name ?>"
-                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-accent focus:outline-solid  <?= isset($iconRight) ? "text-right" : "text-left"   ?> <?= $class ?? null ?>"
+                class="form-control w-100 h-100 text-md px-3 rounded-sm outline-theme focus:outline-solid  <?= isset($iconRight) ? "text-right" : "text-left"   ?> <?= $class ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>

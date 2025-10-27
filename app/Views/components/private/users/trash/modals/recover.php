@@ -1,4 +1,4 @@
 <div class="px-4">
-    <p>Ao recuperar este usuário, ele voltará a estar <strong class="text-accent">disponível</strong> em todo o sistema.
+    <p>Ao recuperar este usuário, ele voltará a estar <strong class="text-theme">disponível</strong> em todo o sistema.
         Suas <strong>permissões</strong> e <strong>funcionalidades</strong> serão restabelecidas, pois o status do usuário será alterado para ativo novamente.</p>
 </div>

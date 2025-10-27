@@ -4,9 +4,9 @@
     height: 16px;
     width: 16px;
     background-color: var(--bg-light);
-    border: 1px solid var(--border-accent);
+    border: 1px solid var(--border-theme);
     &:checked {
-      background-color: var(--bg-accent);
+      background-color: var(--bg-theme);
     }
   }
 }

@@ -2,17 +2,16 @@
 
 namespace App\Database\Entities\Clients;
 
-use App\Libraries\Crypto\Crypto;
 use App\Traits\CryptoEntityTrait;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\HTTP\Response;
 use Exception;
 
 class ClientEntity extends Entity
 {
-    use CryptoEntityTrait, EntityEnhancerTrait;
+    use CryptoEntityTrait;
 
-    protected $dates = [];
     public $attributes = [
         'id'              => null,
         'name'            => null,
@@ -22,17 +21,15 @@ class ClientEntity extends Entity
         'birthdate'       => null,
         'status'          => null,
         'phone_sha256'    => null,
-        'email_sha256'    => null,
+        'document'        => null,
+        'document_type'   => null,
         'system_key'      => null,
         'owner_id'        => null,
         'created_at'      => null,
-        'updated_at'      => null
+        'updated_at'      => null,
+        'deleted_at'      => null,
     ];
-
-    public function __construct()
-    {
-        $this->cryptoLibrary = new Crypto();
-    }
+    
 
     /**
      * @method mixed getId()
@@ -75,7 +72,7 @@ class ClientEntity extends Entity
     public function setName(?string $name)
     {
         if (!empty($name) && strlen($name) > 100)
-            throw new Exception('Api.clients.name_max_length_100', BAD_BUSINESS_RULES);
+            throw new Exception('Api.clients.name_max_length_100', Response::HTTP_NOT_ACCEPTABLE);
 
         if (!empty($name)) {
             $this->attributes['name'] = $name;
@@ -101,7 +98,7 @@ class ClientEntity extends Entity
     public function setAvatar(?string $avatar)
     {;
         if (!empty($avatar) && !strlen($avatar) > 500)
-            throw new Exception("Api.clients.avatar_max_length_500", BAD_BUSINESS_RULES);
+            throw new Exception("Api.clients.avatar_max_length_500", Response::HTTP_NOT_ACCEPTABLE);
 
         if (!empty($avatar)) {
             $this->attributes['avatar'] = $avatar;
@@ -139,7 +136,7 @@ class ClientEntity extends Entity
         if (!empty($phone) && strlen($phone) > 35)
             throw new Exception(
                 "Api.clients.phone_max_length_35",
-                BAD_BUSINESS_RULES
+                Response::HTTP_NOT_ACCEPTABLE
             );
 
         if (!empty($phone)) {
@@ -188,7 +185,7 @@ class ClientEntity extends Entity
     public function setEmail(?string $email)
     {
         if (!empty($email) && strlen($email) > 255)
-            throw new Exception("Api.clients.email_max_length_255", BAD_BUSINESS_RULES);
+            throw new Exception("Api.clients.email_max_length_255", Response::HTTP_NOT_ACCEPTABLE);
 
         $this->attributes['email'] = $email;
     }
@@ -249,6 +246,79 @@ class ClientEntity extends Entity
     {
         if (!empty($status)) {
             $this->attributes['status'] = $status;
+        }
+    }
+
+
+    /**
+     * @method mixed getDocument()
+     *
+     * @return string|null
+     */
+    public function getDocument(): ?string
+    {
+        return $this->attributes['document'];
+    }
+
+    /**
+     * @method mixed getDecryptDocument()
+     *
+     * @return String|null
+     */
+    public function getDecryptDocument()
+    {
+        return $this->cryptoLibrary->decrypt(
+            $this->attributes['document'],
+            $this->getEncryptedKey()
+        );
+    }
+
+    /**
+     * @method mixed setDocument()
+     *
+     * @param string|null $email
+     * @return void
+     */
+    public function setDocument(?string $document)
+    {
+        if (!empty($document) && strlen($document) > 20)
+            throw new Exception("Api.clients.invalid.document", Response::HTTP_NOT_ACCEPTABLE);
+
+        $this->attributes['document'] = $document;
+    }
+
+    /**
+     * @method mixed setEncryptDocument()
+     *
+     * @param String|null $document
+     * @return void
+     */
+    public function setEncryptDocument(?String $document)
+    {
+        if (!empty($document))
+            $this->attributes['document'] = $this->cryptoLibrary->encrypt(strtolower($document), $this->getEncryptedKey());
+    }
+
+    /**
+     * @method string getDocumentType()
+     *
+     * @return string|null
+     */
+    public function getDocumentType(): ?string
+    {
+        return $this->attributes['document_type'];
+    }
+
+    /**
+     * @method mixed setDocumentType()
+     *
+     * @param string|null $documentType
+     * @return void
+     */
+    public function setDocumentType(?string $documentType)
+    {
+        if (!empty($documentType)) {
+            $this->attributes['document_type'] = $documentType;
         }
     }
 
@@ -365,5 +435,15 @@ class ClientEntity extends Entity
         if (!empty($updatedAt)) {
             $this->attributes['updated_at'] = $updatedAt;
         }
+    }
+
+    public function getDeletedAt(): ?string
+    {
+        return $this->attributes['deleted_at'];
+    }
+
+    public function setDeletedAt(?string $deletedAt): void
+    {
+        $this->attributes['deleted_at'] = $deletedAt;
     }
 }

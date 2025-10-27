@@ -41,7 +41,7 @@
 
                     <?php if (!empty($right)): ?>
                         <div class="relative w-45 ml-10">
-                            <button type="button" class="bg-accent text-white active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
+                            <button type="button" class="bg-theme text-white active:scale-95 px-4 block min-w-20 duration-75 w-full min-h-[48px] rounded-md mx-auto 
                         disabled:bg-disabled disabled:text-disabled cursor-pointer p-2 "
                                 component="modal:right-btn">
                                 <span class="px-2 my-2">
