@@ -21,4 +21,8 @@ export const COMPONENTS = {
   "component='permissions'": "/js/components/shared/utils/permissions/init.js",
   "password-visibility": "/js/components/shared/forms/password/toggle.js",
   "component='snapshot'": "/js/components/shared/utils/snapshot/init.js",
+  "component='video'": "/js/components/shared/layouts/video.js",
+  "component='slides'": "/js/components/shared/layouts/slides.js",
+  "component='topics'": "/js/components/shared/layouts/topics/init.js",
+  "component='collapse'": "/js/components/shared/layouts/collapse/init.js",
 };

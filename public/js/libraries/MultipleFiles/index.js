@@ -22,7 +22,7 @@ export function MultipleFiles() {
   };
 
   this.addMultipleFiles = () => {
-    const imgs = this.inputFiles.files;
+    const images = this.inputFiles.files;
     const clone = new Clone();
     const snackbar = new Snackbar();
     clone.init();
@@ -31,7 +31,7 @@ export function MultipleFiles() {
       "[data-clone='content']"
     ).length;
 
-    const multipleFiles = this.uploadMax(imgs);
+    const multipleFiles = this.uploadMax(images);
 
     if (filesCurrent + multipleFiles.length > 60)
       return snackbar.show(
@@ -46,7 +46,7 @@ export function MultipleFiles() {
           `[name='block[${pos}][foto]']`
         );
         const container = new DataTransfer();
-        container.items.add(imgs[key]);
+        container.items.add(images[key]);
         inputFile.files = container.files;
         const contentImg = inputFile.closest(".form-upload");
         contentImg.querySelector("img").src = URL.createObjectURL(file);

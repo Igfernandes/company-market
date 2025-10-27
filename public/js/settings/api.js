@@ -6,6 +6,12 @@ export const API_ROUTES = {
   notifications: {
     default: "/api/notifications",
   },
+  contact: {
+    post: "/api/contact",
+  },
+  subscribe: {
+    post: "/api/subscribe",
+  },
   users: {
     post: "/api/users",
     put: "/api/users/{id}",

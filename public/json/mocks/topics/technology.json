@@ -1,0 +1,50 @@
+[
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "E-mail Marketing",
+    "text": "Produzimos e realizamos disparos de campanhas de e-mail marketing via hospedagem ou Mailchimp. Garantimos personalização e automação para seus envios.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": 400.00,
+    "image": "/images/services/email-marketing.png"
+  },
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "Landing Page",
+    "text": "Desenvolvemos landing pages personalizadas com captura de leads, integração de pagamentos e gestão de conteúdo no-code. O design é responsivo e otimizado para conversão.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": 700.00,
+    "image": "/images/services/landing-page.png"
+  },
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "One Page",
+    "text": "Criamos páginas One Page responsivas com captura de leads, integração de pagamentos e proteção via Recaptcha. Ideal para apresentar produtos ou serviços de forma objetiva.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": 1000.00,
+    "image": "/images/services/one-page.png"
+  },
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "Site / Loja Virtual / Marketplace / Sistema Agendado",
+    "text": "Desenvolvemos sites, lojas virtuais, marketplaces e sistemas agendados com funcionalidades completas e integração de pagamentos. Priorizamos experiência do usuário e desempenho.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": 2000.00,
+    "image": "/images/services/ecommerces.png"
+  },
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "Plataforma Monolítica / Microserviços - Integrações",
+    "text": "Oferecemos plataformas monolíticas ou microserviços com integrações, interfaces personalizadas e soluções escaláveis. Adaptamos a arquitetura às necessidades do seu negócio.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": 2500.20,
+    "image": "/images/services/websites.png"
+  },
+  {
+    "ref": "Desenvolvimento Digital",
+    "title": "Serviços Encomendados",
+    "text": "Criamos serviços personalizados incluindo interfaces, captura de leads, integrações, sistemas agendados e aplicativos nativos ou PWA. Todas as soluções são pensadas para maximizar resultados.",
+    "link": "https://wa.me/5521981325543?text=eu%20estou%20interessado%20em%20solicitar%20alguns%20servi%C3%A7os",
+    "price": "",
+    "image": "/images/services/custom-projects.png"
+  }
+]
