@@ -30,7 +30,9 @@ class PutUseCases
         $userAuthId = $session->get('userAuthId');
         $categoryBusiness = new CategoryBusiness();
 
-        if (!$categoryBusiness->hasCategory($payload['category']))
+        if (!$categoryBusiness->has([
+            "id" => $payload['category']
+        ]))
             throw new Exceptions("Api.clients.invalid.not_found_category", BAD_BUSINESS_RULES);
 
         $clientsModel = new  ClientsModel();

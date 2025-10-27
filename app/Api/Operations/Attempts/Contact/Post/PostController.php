@@ -1,28 +1,27 @@
 <?php
 
-namespace App\Api\Operations\Clients\Services\Patch;
+namespace App\Api\Operations\Attempts\Contact\Post;
 
-use App\Api\Operations\Clients\Services\Patch\IsConfirm\PatchIsConfirmUseCases;
 use App\Api\ExceptionApi;
 use App\Api\Validation;
-use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
-use App\Traits\ControllersTrait;
 use Exception;
 
-class PatchController extends BaseController
+class PostController extends BaseController
 {
-    use Validation, ExceptionApi, PatchDTOs, ControllersTrait;
+    use Validation, ExceptionApi, PostDTOs;
 
-    private array $operations = [
-        "is_confirm" => PatchIsConfirmUseCases::class
-    ];
+    private PostUseCases $postUseCases;
+
+    public function __construct()
+    {
+        $this->postUseCases = new PostUseCases();
+    }
 
     public function handle()
     {
         try {
-
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
@@ -31,12 +30,9 @@ class PatchController extends BaseController
             if (!$validation->run($payload))
                 throw new Exceptions($validation->getErrors(), BAD_REQUEST);
 
-            $operationClass = $this->operations[$payload['path']];
-            $operation = new $operationClass();
+            $responsePost = $this->postUseCases->execute($payload);
 
-            $responsePatch = $operation->execute((array) $payload['data']);
-
-            return $this->response->setJSON($responsePatch)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

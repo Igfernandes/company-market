@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\Clients\Fields\Post;
+namespace App\Api\Operations\Clients\Categories\Put;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -8,39 +8,41 @@ use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
+use CodeIgniter\HTTP\Response;
 use Exception;
 
-class PostController extends BaseController
+class PutController extends BaseController
 {
-    use Validation, ExceptionApi, PostDTOs, ControllersTrait;
+    use Validation, ExceptionApi, PutDTOs, ControllersTrait;
 
-    private PostUseCases $postUseCases;
+    private PutUseCases $putUseCases;
 
     public function __construct()
     {
-        $this->postUseCases = new PostUseCases();
+        $this->putUseCases = new PutUseCases();
+        helper('crypto');
     }
 
-    public function handle(int $ClientId = 0)
+    public function handle(int $id)
     {
         try {
             PermissionsValidationBusiness::hasPermissionUserAuth([
-                'scope' => 'fields',
-                'type' => 'CREATE'
+                'scope' => 'clients',
+                'type' => 'VIEW'
             ]);
             $validation = \Config\Services::validation();
 
-            $payload = $this->request->getVar();
+            $payload = (array)$this->request->getJSON();
+            $payload['id'] = $id;
+
             $validation->setRules($this->rules);
-            $filesData = $this->request->getFiles();
-            $payload['client'] =  $ClientId;
 
             if (!$validation->run($payload))
-                throw new Exceptions($validation->getErrors(), BAD_REQUEST);
+                throw new Exceptions($validation->getErrors(), Response::HTTP_BAD_REQUEST);
 
-            $responsePost = $this->postUseCases->execute($payload, $filesData['fields'] ?? []);
+            $responsePut = $this->putUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responsePut)->setStatusCode(Response::HTTP_OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

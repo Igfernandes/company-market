@@ -30,7 +30,7 @@ $id = !empty($id) ? $id : uniqid(str_replace("[]", "", $name));
                 name="<?= $name ?>"
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= $id ?>"
-                class="checkbox appearance-none bg-accent rounded-xs  cursor-pointer <?= $class ?? "" ?>"
+                class="checkbox appearance-none bg-theme rounded-xs  cursor-pointer <?= $class ?? "" ?>"
                 data-label="<?= $label ?>"
                 <?= $checked ? "checked" : null ?>
                 <?= !empty($attributeData) ? $attributeData : null ?>

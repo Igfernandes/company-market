@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Api\Routes\AttemptsRoutes;
 use App\Api\Routes\AuthenticationsRoutes;
 use App\Api\Routes\ChargesRoutes;
 use App\Api\Routes\CheckoutRoutes;
@@ -48,7 +49,8 @@ class Routes
     UsersRoutes::class,
     WebhooksRoutes::class,
     ExportsRoutes::class,
-    FilesRoutes::class
+    FilesRoutes::class,
+    AttemptsRoutes::class
   ];
   public function init(RouteCollection $routes)
   {

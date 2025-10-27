@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Operations\Clients\Services\Post;
+namespace App\Api\Operations\Clients\Trash\Post;
 
 use App\Api\ExceptionApi;
 use App\Api\Validation;
@@ -8,35 +8,38 @@ use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
+use CodeIgniter\HTTP\Response;
 use Exception;
 
 class PostController extends BaseController
 {
-    use Validation, ExceptionApi, PostDTOs, ControllersTrait;
+    use Validation, ExceptionApi, ControllersTrait, PostDTOs;
 
     private PostUseCases $postUseCases;
-    protected $helpers = [''];
 
     public function __construct()
     {
         $this->postUseCases = new PostUseCases();
-        helper('crypto');
     }
 
-    public function handle(int $serviceId)
+    public function handle()
     {
         try {
             PermissionsValidationBusiness::hasPermissionUserAuth([
-                'scope' => 'services',
+                'scope' => 'clients',
                 'type' => 'UPDATE'
             ]);
+            $validation = \Config\Services::validation();
 
-            $payload = $this->request->getVar(array_keys($this->rules));
-            $payload['service_id'] = $serviceId;
-            
-            $responsePost = $this->postUseCases->execute($payload);
+            $payload = (array)$this->request->getJSON();
+            $validation->setRules($this->rules);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(CREATED);
+            if (!$validation->run($payload))
+                throw new Exceptions($validation->getErrors(), Response::HTTP_BAD_REQUEST);
+
+            $responseDelete = $this->postUseCases->execute($payload);
+
+            return $this->response->setJSON($responseDelete)->setStatusCode(Response::HTTP_OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[

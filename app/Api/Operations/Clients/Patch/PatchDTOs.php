@@ -5,10 +5,10 @@ namespace App\Api\Operations\Clients\Patch;
 trait PatchDTOs
 {
     protected array $rules = [
-        'path' => [
+        'operation' => [
             'rules' => 'string',
             'errors' => [
-                'string' => 'Api.clients.invalid.path',
+                'string' => 'Api.clients.invalid.operation',
             ],
         ],
         'data' => [

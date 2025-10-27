@@ -21,18 +21,20 @@ class GetUseCases
      *     birthdate: string, 
      *     status: 'ACTIVE' | 'INACTIVE', 
      *     created_at: string, 
-     *     updated_at: string 
+     *     updated_at: string,
+     *     limit: integer|undefined,
+     *     start: integer|undefined
      * } $payload
      */
     public function execute(array $payload)
     {
-        $session = session();
-        $userAuthId = $session->get('userAuthId');
-
-        $filteredPayload = \array_filter($payload, fn($field) => !empty($field));
+        $filteredPayload = array_filter($payload, fn($field) => !empty($field));
 
         $clientsModel = new ClientsModel();
         $clientsCategoriesModel = new ClientsCategoriesModel();
+
+        $clientEntity = new ClientEntity();
+        $clientEntity->store($payload);
 
         $in_ids = isset($filteredPayload['in_ids']) ? $filteredPayload['in_ids'] : [];
         unset($filteredPayload['in_ids']);
@@ -42,20 +44,22 @@ class GetUseCases
             unset($filteredPayload['phone']);
         }
 
-        $clientsModel->where($filteredPayload);
+        $clientsModel->where($clientEntity->toArray(true));
         if (count($in_ids) > 0)
             $clientsModel->whereIn("id", $in_ids);
 
         $clientsModel = $this->builderClauseWithContains($filteredPayload, $clientsModel);
-        $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($filteredPayload);
 
-        $foundClients = $clientsModel->findAll();
+        $foundClientsCategory = $clientsCategoriesModel->getClientsWithCategory($clientEntity->toArray(true));
 
-        $clientsData = array_map(
+        $limit = isset($payload['limit']) ? \intval($payload['limit']) : 50;
+        $startIndexRegister = isset($payload['start']) ? \intval($payload['start']) : 0;
+
+        $foundClients = $clientsModel->limit($limit, $startIndexRegister)->findAll();
+
+        return array_map(
             fn(ClientEntity $client) => $this->clientWithCategories($client, $foundClientsCategory),
             $foundClients
         );
-
-        return \array_values($clientsData);
     }
 }

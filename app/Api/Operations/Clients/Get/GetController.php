@@ -24,6 +24,11 @@ class GetController extends BaseController
     public function handle(int $clientId = 0)
     {
         try {
+            PermissionsValidationBusiness::hasPermissionUserAuth([
+                'scope' => 'clients',
+                'type' => 'VIEW'
+            ]);
+
             $validation = \Config\Services::validation();
 
             $payload = $this->request->getVar(array_keys($this->rules));
