@@ -12,13 +12,11 @@ export function mapData(data = [], orderKeys) {
         indexes = indexes.splice(1);
 
         let value = item[key] ?? "--";
+        const isDate = firstKey.indexOf("_at") >= 0 && typeof value === "string";
 
         if (Array.isArray(item[firstKey]) && item[firstKey].length > 0) {
           value = getDataInObject(indexes.join("."), item[firstKey][0]) ?? "--";
-        } else if (
-          typeof value === "string" &&
-          dayjs(value.replace(" ", "T")).isValid()
-        ) {
+        } else if (isDate && dayjs(value.replace(" ", "T")).isValid()) {
           value = dayjs(value.replace(" ", "T")).format("DD/MM/YYYY HH:mm");
         } else if (Object.is(value)) {
           value = getDataInObject(key, value) ?? "--";

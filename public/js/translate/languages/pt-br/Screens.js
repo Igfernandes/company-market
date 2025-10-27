@@ -51,4 +51,27 @@ export const SCREENS = {
     problems_in_table:
       "Ocorreu um problema ao carregar os recursos. Recarregue e tente novamente.",
   },
+  categories: {
+    snackbar_title: "Categorias",
+    problems_in_table:
+      "Ocorreu um problema ao carregar os recursos. Recarregue e tente novamente.",
+  },
+  clients: {
+    snackbar_title: "Clientes",
+    trash: {
+      invalid: {
+        client_ids:
+          "É obrigatório selecionar pelo menos um cliente para a restauração",
+      },
+    },
+  },
+  companies: {
+    snackbar_title: "Empresas",
+    trash: {
+      invalid: {
+        client_ids:
+          "É obrigatório selecionar pelo menos uma empresa para a restauração",
+      },
+    },
+  },
 };

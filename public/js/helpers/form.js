@@ -1,3 +1,6 @@
+import { snackbar } from "../components/shared/utils/snackbar.js";
+import { translate } from "../translate/index.js";
+
 export function hydrateForm(formSelector, payload = {}) {
   const form = document.querySelector(formSelector);
 
@@ -14,4 +17,24 @@ export function hydrateForm(formSelector, payload = {}) {
   });
 
   return form;
+}
+
+export function handleLoading(
+  form = document.querySelector(""),
+  isLoading = false,
+  text = "Salvar"
+) {
+  const button = form.querySelector("button[type='submit']");
+
+  if (isLoading) {
+    button.disabled = true;
+    button.innerText = "Enviando...";
+    
+    snackbar.execute("NOTICE", {
+      title: translate("Screens.alter_password.sending_form"),
+      message: translate("Screens.alter_password.awaiting"),
+    });
+  } else button.removeAttribute("disabled");
+
+  button.innerText = text;
 }

@@ -35,4 +35,22 @@ export const API_ROUTES = {
   exports: {
     post: "/api/exports",
   },
+  clients: {
+    post: "/api/clients",
+    put: "/api/clients/{id}",
+    delete: "/api/clients/{id}",
+    permanently: "/api/clients/trash/{id}",
+    categories: {
+      get: "/api/clients/categories/{id}",
+      post: "/api/clients/categories",
+      put: "/api/clients/categories/{id}",
+      delete: "/api/clients/categories/{id}",
+    },
+  },
+  companies: {
+    post: "/api/companies",
+    put: "/api/companies/{id}",
+    delete: "/api/companies/{id}",
+    permanently: "/api/companies/trash/{id}",
+  },
 };

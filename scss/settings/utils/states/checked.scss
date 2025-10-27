@@ -1,11 +1,13 @@
-.checkbox:checked {
-  background-color: var(--bg-hover);
-  &::after {
-    content: "\f26e";
-    font-family: bootstrap-icons !important;
-    position: absolute;
-    top: -3px;
-    left: 0px;
-    color: #fff;
+[component="table"] {
+  .checkbox:checked {
+    background-color: var(--bg-theme);
+    &::after {
+      content: "\f26e";
+      font-family: bootstrap-icons !important;
+      position: absolute;
+      top: -5px;
+      left: 0px;
+      color: #fff;
+    }
   }
 }
