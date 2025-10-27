@@ -1,9 +1,9 @@
-footer{
-    text-align: center;
-    p{
-        margin: 0;
-        @include mq("sm", max){
-            font-size: .7rem;
-        }
+footer {
+  text-align: center;
+  p {
+    margin: 0;
+    @include mq("sm", max) {
+      font-size: 0.7rem;
     }
+  }
 }

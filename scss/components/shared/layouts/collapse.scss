@@ -1,0 +1,35 @@
+[component="collapse"] {
+  .collapse-box {
+    overflow: hidden;
+  }
+  .collapse-header {
+    position: relative;
+    z-index: 10;
+    background-color: var(--bg-light);
+    span {
+      color: var(--text-gray-600);
+    }
+    .collapse-arrow {
+      transition: transform 0.2s ease-in;
+    }
+    & ~ .collapse-content {
+      position: relative;
+      z-index: 0;
+      p {
+        margin-top: -100vh;
+        transition: margin 0.5s ease-in-out;
+      }
+    }
+    &.active {
+      span {
+        color: var(--red-500);
+      }
+      .collapse-arrow {
+        transform: rotate(180deg);
+      }
+      & ~ .collapse-content p {
+        margin-top: 0vh;
+      }
+    }
+  }
+}

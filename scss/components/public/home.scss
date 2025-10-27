@@ -1,0 +1,39 @@
+#home {
+  .services,
+  .clients,
+  .contact {
+    background: url("/images/banners/banner-black.png");
+    background-size: contain;
+    background-attachment: fixed;
+  }
+  .services {
+    .topics {
+      margin-top: -12vh;
+      @include mq("md", max){
+        margin: 0;
+      }
+    }
+    [component="card"] {
+      background: url("/images/banners/banner-red.png");
+      background-size: contain;
+      background-repeat: repeat;
+    }
+  }
+  .faq {
+    background: url("/images/banners/company.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  .subscribe {
+    background: url("/images/banners/banner-subscribe.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+  }
+  .contact {
+    [component="contact:information"] {
+      background: url("/images/banners/banner-red.png");
+      background-size: contain;
+      background-repeat: repeat;
+    }
+  }
+}

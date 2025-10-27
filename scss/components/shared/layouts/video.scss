@@ -1,0 +1,9 @@
+[component="video"] {
+  video {
+    @include mq("sm", max) {
+      transform: scale(4.5);
+      position: relative;
+      top: 30vh;
+    }
+  }
+}
