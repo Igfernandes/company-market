@@ -30,18 +30,13 @@ class Routes
 {
   private $routesInstances = [
     AuthenticationsRoutes::class,
-    ChargesRoutes::class,
-    CheckoutRoutes::class,
     ClientsRoutes::class,
-    CustomFormsRoutes::class,
     DispatchersRoutes::class,
     FieldsRoutes::class,
-    FormsRoutes::class,
     IntegrationsRoutes::class,
     InvitesRoutes::class,
     NotificationsRoutes::class,
     OperationsFailuresRoutes::class,
-    PaymentsRoutes::class,
     PermissionsRoutes::class,
     RecoversRoutes::class,
     SchedulesRoutes::class,
