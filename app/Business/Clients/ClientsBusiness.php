@@ -36,19 +36,15 @@ class ClientsBusiness
         $crypto = new Crypto();
         $systemKey = $crypto->encrypt($payload['name'] . ":" . $phone, getenv('system.encrypted_key'));
 
+        $clientEntity->store($payload);
         $clientEntity->setSystemKey($systemKey);
-        $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
         $clientEntity->setPhoneSha256($phoneSha256);
         $clientEntity->setOwnerId($userAuthId);
         $clientEntity->setEncryptPhone($phone);
 
-        if (!empty($payload['birthdate']))
-            $clientEntity->setBirthdate($payload['birthdate']);
         if (!empty($payload['email']))
             $clientEntity->setEncryptEmail($payload['email']);
-        if (!empty($payload['avatar']))
-            $clientEntity->setAvatar($payload['avatar']);
 
         $this->clientsModel->save($clientEntity);
 

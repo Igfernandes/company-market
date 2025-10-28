@@ -22,6 +22,8 @@ class PutFailedTest extends ClientsMock
 
         $payload = SELF::DATA[0];
         $payload['category'] = 1;
+        $payload['company'] = 1;
+
         unset($payload['id']);
 
         $result = $this->withBody(json_encode($payload), 'application/json')->put("{$this->route}/999");

@@ -3,6 +3,7 @@
 namespace App\Api\Operations\Clients\Post;
 
 use App\Business\Clients\CategoryBusiness;
+use App\Business\Companies\CompaniesBusiness;
 use App\Database\Entities\Clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
@@ -36,6 +37,13 @@ class PostUseCases
             "id" => $payload['category']
         ]))
             throw new Exceptions("Api.clients.invalid.not_found_category", Response::HTTP_NOT_ACCEPTABLE);
+
+        $companiesBusiness = new CompaniesBusiness();
+
+        if (!$companiesBusiness->has([
+            "id" => $payload['company']
+        ]))
+            throw new Exceptions("Api.clients.invalid.not_found_company", Response::HTTP_NOT_ACCEPTABLE);
 
         $clientsModel = new  ClientsModel();
         $clientCategoryModel = new ClientsCategoriesModel();

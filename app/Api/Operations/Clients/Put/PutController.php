@@ -8,6 +8,7 @@ use App\Business\Permissions\PermissionsValidationBusiness;
 use App\Controllers\BaseController;
 use App\Libraries\Exceptions\Exceptions;
 use App\Traits\ControllersTrait;
+use CodeIgniter\HTTP\Response;
 use Exception;
 
 class PutController extends BaseController
@@ -38,11 +39,11 @@ class PutController extends BaseController
             $payload['id'] = $clientId;
 
             if (!$validation->run($payload))
-                throw new Exceptions($validation->getErrors(), BAD_REQUEST);
+                throw new Exceptions($validation->getErrors(), Response::HTTP_BAD_REQUEST);
 
             $responsePost = $this->putUseCases->execute($payload);
 
-            return $this->response->setJSON($responsePost)->setStatusCode(OK);
+            return $this->response->setJSON($responsePost)->setStatusCode(Response::HTTP_OK);
         } catch (Exception | Exceptions $err) {
 
             return  $this->response->setJSON((object)[
