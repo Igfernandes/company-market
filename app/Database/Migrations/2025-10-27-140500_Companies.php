@@ -22,7 +22,7 @@ class Companies extends Migration
                 'constraint' => '150',
                 'null' => true,
             ],
-            'avatar'       => [
+            'logotype'       => [
                 'type'      => 'TINYTEXT',
                 'null'      => true,
             ],

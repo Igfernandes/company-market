@@ -63,11 +63,18 @@ class Clients extends Migration
                 'unsigned'       => true,
                 'null'           => true,
             ],
+            'company_id' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'null'           => true,
+            ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',
             'deleted_at datetime',
         ]);
 
+        $this->forge->addForeignKey("company_id", "companies", ["id"]);
         $this->forge->addForeignKey("owner_id", "users", ["id"]);
 
         $this->forge->addKey('id', true);

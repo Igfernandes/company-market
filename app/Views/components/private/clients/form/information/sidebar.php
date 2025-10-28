@@ -81,7 +81,22 @@ use App\Database\Entities\Clients\ClientEntity;
             ]
         ); ?>
     </div>
-
+    <div class="form-group mt-6">
+        <?= SelectFloatLabel::render(
+            name: "company",
+            id: "company",
+            label: "Empresa Relacionada",
+            required: "true",
+            value: strval($client->getCompanyId()),
+            options: [
+                [
+                    "text" => "Selecione",
+                    "value" => null
+                ],
+                ...$companies
+            ]
+        ); ?>
+    </div>
     <div class="mt-6">
         <?= Submit::render(
             text: "Salvar"

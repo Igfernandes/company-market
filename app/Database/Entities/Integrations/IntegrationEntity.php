@@ -15,10 +15,7 @@ class IntegrationEntity extends Entity
         'id'            => null,
         'provider'      => null,
         'type'          => null,
-        'public_token'  => null,
-        'private_token' => null,
-        'username'      => null,
-        'action'        => null,
+        'settings'      => null,
         'status'        => null,
         'created_at'    => null,
     ];
@@ -40,28 +37,6 @@ class IntegrationEntity extends Entity
         if ($id !== null) {
             $this->attributes['id'] = $id;
         }
-    }
-
-    /**
-     * getLogotype function
-     *
-     * @return String|null
-     */
-    public function getLogotype(): ?String
-    {
-        return $this->attributes['logotype'];
-    }
-
-    /**
-     * setLogotype function
-     *
-     * @param String|null $logotype
-     * @return void
-     */
-    public function setLogotype(?String $logotype)
-    {
-        if (!empty($logotype))
-            $this->attributes['logotype'] = $logotype;
     }
 
     /**
@@ -106,117 +81,45 @@ class IntegrationEntity extends Entity
     /**
      * @return string|null
      */
-    public function getAction(): ?string
+    public function getSettings(): ?string
     {
-        return $this->attributes['action'];
+        return $this->attributes['settings'];
     }
 
     /**
-     * @param string|null $action
+     * @param string|null $settings
      * @return void
      */
-    public function setAction(?string $action): void
+    public function setSettings(?string $settings): void
     {
-        if (!empty($action)) {
-            $this->attributes['action'] = $action;
+        if (!empty($settings)) {
+            $this->attributes['settings'] = $settings;
         }
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPublicToken(): ?string
-    {
-        return $this->attributes['public_token'];
-    }
 
     /**
-     * @param string|null $token
-     * @return void
-     */
-    public function setPublicToken(?string $token): void
-    {
-        $this->attributes['public_token'] = $token;
-    }
-
-    /**
-     * @method mixed getDecryptPublicToken()
+     * @method mixed getDecryptSettings()
      *
      * @return String|null
      */
-    public function getDecryptPublicToken()
+    public function getDecryptSettings()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['public_token'], $this->getEncryptedKey());
+        if (!empty($this->attributes['settings']))
+            return $this->cryptoLibrary->decrypt($this->attributes['settings'], $this->getEncryptedKey());
     }
 
     /**
-     * @method mixed setEncryptPublicToken()
+     * @method mixed setEncryptSettings()
      *
-     * @param String|null $publicToken
+     * @param String|null $settings
      * @return void
      */
-    public function setEncryptPublicToken(?String $publicToken)
+    public function setEncryptSettings(?String $settings)
     {
-        if (!empty($publicToken))
-            $this->attributes['public_token'] = $this->cryptoLibrary->encrypt($publicToken, $this->getEncryptedKey());
+        if (!empty($settings))
+            $this->attributes['settings'] = $this->cryptoLibrary->encrypt($settings, $this->getEncryptedKey());
     }
-
-    /**
-     * @return string|null
-     */
-    public function getPrivateToken(): ?string
-    {
-        return $this->attributes['private_token'];
-    }
-
-    /**
-     * @param string|null $token
-     * @return void
-     */
-    public function setPrivateToken(?string $token): void
-    {
-        $this->attributes['private_token'] = $token;
-    }
-
-    /**
-     * @method mixed getDecryptPrivateToken()
-     *
-     * @return String|null
-     */
-    public function getDecryptPrivateToken()
-    {
-        return $this->cryptoLibrary->decrypt($this->attributes['private_token'], $this->getEncryptedKey());
-    }
-
-    /**
-     * @method mixed setEncryptPrivateToken()
-     *
-     * @param String|null $privateToken
-     * @return void
-     */
-    public function setEncryptPrivateToken(?String $privateToken)
-    {
-        if (!empty($privateToken))
-            $this->attributes['private_token'] = $this->cryptoLibrary->encrypt($privateToken, $this->getEncryptedKey());
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUsername(): ?string
-    {
-        return $this->attributes['username'];
-    }
-
-    /**
-     * @param string|null $username
-     * @return void
-     */
-    public function setUsername(?string $username): void
-    {
-        $this->attributes['username'] = $username;
-    }
-
 
     /**
      * @method mixed getSystemKey()
@@ -262,10 +165,33 @@ class IntegrationEntity extends Entity
     {
 
         if (array_search($status, ["ACTIVE", "INACTIVE", "ANALYSIS"]) === false)
-            throw new Exceptions("Api.integrations.invalid.status_max_length_200", BAD_REQUEST);
+            throw new Exceptions("Api.integrations.invalid.status", BAD_REQUEST);
 
         if (!empty($status))
             $this->attributes['status'] = $status;
+    }
+
+    /**
+     * @method mixed getCompanyId()
+     *
+     * @return int|null
+     */
+    public function getCompanyId(): ?int
+    {
+        return $this->attributes['company_id'];
+    }
+
+    /**
+     * @method mixed setCompanyId()
+     *
+     * @param int|null $companyId
+     * @return void
+     */
+    public function setCompanyId(?int $companyId)
+    {
+        if (!empty($companyId)) {
+            $this->attributes['company_id'] = $companyId;
+        }
     }
 
     /**
@@ -284,6 +210,29 @@ class IntegrationEntity extends Entity
     {
         if (!empty($createdAt)) {
             $this->attributes['created_at'] = $createdAt;
+        }
+    }
+
+    /**
+     * @method mixed getUpdatedAt()
+     *
+     * @return string|null
+     */
+    public function getUpdatedAt(): ?string
+    {
+        return $this->attributes['updated_at'];
+    }
+
+    /**
+     * @method mixed setUpdatedAt()
+     *
+     * @param string|null $updatedAt
+     * @return void
+     */
+    public function setUpdatedAt(?string $updatedAt)
+    {
+        if (!empty($updatedAt)) {
+            $this->attributes['updated_at'] = $updatedAt;
         }
     }
 }

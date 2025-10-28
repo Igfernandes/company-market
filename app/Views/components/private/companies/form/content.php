@@ -1,8 +1,21 @@
 <?php
 
 use App\Components\Private\Companies\Form\Information\Information;
+use App\Components\Private\Companies\Form\Integrations\Integrations;
 use App\Components\Private\Layouts\BreadcrumbHeader\BreadcrumbHeader;
 use App\Components\Shared\Layouts\Tabs\Tabs;
+
+$tabs = [
+    "Informações" => Information::render(
+        isReturn: true
+    )
+];
+
+if (isset($id)) {
+    $tabs['Integrações'] = Integrations::render(
+        isReturn: true
+    );
+}
 
 ?>
 
@@ -21,11 +34,7 @@ use App\Components\Shared\Layouts\Tabs\Tabs;
             <?php
             Tabs::render(
                 default: "Informações",
-                contents: [
-                    "Informações" => Information::render(
-                        isReturn: true
-                    )
-                ]
+                contents: $tabs
             );
             ?>
         </div>

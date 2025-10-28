@@ -10,12 +10,13 @@ class Content extends BaseComponents
 {
     const ORIGIN = "components/private/companies/form/content";
     const PROPS = [
-        'company'
+        'company',
+        'integrations'
     ];
 
     public static function render(
         CompanyEntity $company = new CompanyEntity(),
-        array $categories = []
+        array $integrations = [],
     ) {
 
         return Container::render(

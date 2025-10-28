@@ -25,11 +25,12 @@ class ClientEntity extends Entity
         'document_type'   => null,
         'system_key'      => null,
         'owner_id'        => null,
+        'company_id'      => null,
         'created_at'      => null,
         'updated_at'      => null,
         'deleted_at'      => null,
     ];
-    
+
 
     /**
      * @method mixed getId()
@@ -173,7 +174,8 @@ class ClientEntity extends Entity
      */
     public function getDecryptEmail()
     {
-        return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->getEncryptedKey());
+        if (!empty($this->attributes['email']))
+            return $this->cryptoLibrary->decrypt($this->attributes['email'], $this->getEncryptedKey());
     }
 
     /**
@@ -267,10 +269,11 @@ class ClientEntity extends Entity
      */
     public function getDecryptDocument()
     {
-        return $this->cryptoLibrary->decrypt(
-            $this->attributes['document'],
-            $this->getEncryptedKey()
-        );
+        if (!empty($this->attributes['document']))
+            return $this->cryptoLibrary->decrypt(
+                $this->attributes['document'],
+                $this->getEncryptedKey()
+            );
     }
 
     /**
@@ -367,6 +370,30 @@ class ClientEntity extends Entity
             $this->attributes['owner_id'] = $ownerId;
         }
     }
+
+    /**
+     * @method mixed getCompanyId()
+     *
+     * @return int|null
+     */
+    public function getCompanyId(): ?int
+    {
+        return $this->attributes['company_id'];
+    }
+
+    /**
+     * @method mixed setCompanyId()
+     *
+     * @param int|null $companyId
+     * @return void
+     */
+    public function setCompanyId(?int $companyId)
+    {
+        if (!empty($companyId)) {
+            $this->attributes['company_id'] = $companyId;
+        }
+    }
+
 
     /**
      * @method mixed getSystemKey()

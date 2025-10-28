@@ -2,11 +2,12 @@
 
 namespace App\Controllers\Dashboard;
 
+use App\Components\Shared\Forms\Fields\Select\SelectMapper;
 use App\Controllers\BaseController;
-use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Models\Clients\CategoriesModel;
 use App\Database\Models\Clients\ClientsCategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
+use App\Database\Models\Companies\CompaniesModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Clients extends BaseController
@@ -22,11 +23,12 @@ class Clients extends BaseController
         $categoriesModel = new CategoriesModel();
         $categories = $categoriesModel->findAll();
 
+        $companiesModel = new CompaniesModel();
+        $companies = $companiesModel->findAll();
+
         return view("layouts/dashboard/clients/forms", [
-            "categories" => \array_map(fn(CategoryEntity $category) => [
-                "text" => $category->getName(),
-                "value" => $category->getId()
-            ], $categories)
+            "categories" => SelectMapper::getOptionsByEntities($categories, "name", "id"),
+            "companies" => SelectMapper::getOptionsByEntities($companies, "name", "id"),
         ]);
     }
 
@@ -46,13 +48,14 @@ class Clients extends BaseController
         $clientsCategoriesModel = new ClientsCategoriesModel();
         $categoriesUsed = $clientsCategoriesModel->where("client_id", $found->getId())->findAll();
 
+        $companiesModel = new CompaniesModel();
+        $companies = $companiesModel->findAll();
+
         return view("layouts/dashboard/clients/forms", [
             "id" => $clientId,
             "client" => $found,
-            "categories" => \array_map(fn(CategoryEntity $category) => [
-                "text" => $category->getName(),
-                "value" => $category->getId()
-            ], $categories),
+            "categories" => SelectMapper::getOptionsByEntities($categories, "name", "id"),
+            "companies" => SelectMapper::getOptionsByEntities($companies, "name", "id"),
             "categoryId" => $categoriesUsed[0]->getCategoryId()
         ]);
     }

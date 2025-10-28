@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Dashboard;
 
+use App\Business\Integrations\IntegrationsSearchBusiness;
 use App\Controllers\BaseController;
 use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Models\Clients\CategoriesModel;
@@ -34,9 +35,14 @@ class Companies extends BaseController
         if (empty($found))
             throw new PageNotFoundException();
 
+        $integrations = IntegrationsSearchBusiness::getOrderByProvider([
+            "company_id" => $companyId
+        ]);
+
         return view("layouts/dashboard/companies/forms", [
             "id" => $companyId,
-            "client" => $found,
+            "company" => $found,
+            "integrations" =>  $integrations
         ]);
     }
 

@@ -19,13 +19,10 @@ class IntegrationsModel extends Model
     protected $allowedFields    = [
         'provider',
         'type',
-        'public_token',
-        'private_token',
-        'username',
-        'action',
+        'settings',
         'status',
-        'logotype',
-        'system_key'
+        'system_key',
+        'company_id'
     ];
 
     protected $dateFormat    = 'datetime';

@@ -24,14 +24,14 @@ $icon = [
                     <span class="font-medium text-md font-poppins text-active"><?= $topic ?></span>
                 </div>
                 <ul class="px-2 rounded-xs">
-                    <?php foreach ($itens as $slug => $item): ?>
+                    <?php foreach ($itens as $key => $item): ?>
                         <li class="text-black-800  my-1">
                             <div class="menu-item">
-                                <?= isset($icon[$slug]) ? $icon[$slug] : "" ?>
-                                <a class="font-arial font-normal ml-1" href="<?= $slug ?>"> <?= ucfirst($item) ?></a>
+                                <?= isset($icon[$item['slug']]) ? $icon[$item['slug']] : "" ?>
+                                <a class="font-arial font-normal ml-1" href="/dashboard/<?= $item['slug'] ?>"> <?= ucfirst($item['title']) ?></a>
                             </div>
                             <?= SubMenu::render(
-                                topic: $slug
+                                topic: $item['slug']
                             ); ?>
                         </li>
                     <?php endforeach; ?>
