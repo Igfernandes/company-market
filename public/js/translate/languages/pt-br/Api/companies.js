@@ -13,17 +13,17 @@ export const CompaniesTranslates = {
       "Ocorreu um problema nos nossos sistemas ao criar o empresa, tente novamente mais tarde.",
   },
   success: {
-    post: "O empresa foi criado com sucesso",
-    put: "O empresa foi atualizada com sucesso",
+    post: "A empresa foi criado com sucesso",
+    put: "A empresa foi atualizada com sucesso",
     patch: {
       logotype: "A foto do empresa foi atualizada com sucesso",
     },
-    delete: "O empresa foi movido para a lixeira com sucesso",
+    delete: "A empresa foi movido para a lixeira com sucesso",
   },
   trash: {
     success: {
       restore: "empresa(s) recuperado(s) com sucesso!",
-      delete: "O empresa foi excluída permanentemente com sucesso!",
+      delete: "A empresa foi excluída permanentemente com sucesso!",
     },
   },
 };

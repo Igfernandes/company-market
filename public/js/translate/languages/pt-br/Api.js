@@ -6,6 +6,7 @@ import { CompaniesTranslates } from "./Api/companies.js";
 import { ContactTranslates } from "./Api/contact.js";
 import { ExportsTranslates } from "./Api/exports.js";
 import { FilesTranslates } from "./Api/files.js";
+import { IntegrationsTranslates } from "./Api/integrations.js";
 import { InvitesTranslates } from "./Api/invites.js";
 import { RecoversTranslates } from "./Api/recovers.js";
 import { RolesTranslates } from "./Api/roles.js";
@@ -32,4 +33,5 @@ export const API = {
   clients: ClientsTranslates,
   categories: CategoriesTranslates,
   companies: CompaniesTranslates,
+  integrations: IntegrationsTranslates,
 };

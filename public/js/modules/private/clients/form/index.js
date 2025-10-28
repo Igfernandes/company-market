@@ -22,10 +22,11 @@ export function ClientCreate() {
     const clientId = payload.get("id");
     let data = {};
 
+    const payloadJson = getFormDataToJson(payload);
     if (clientId) {
-      data = await putClient(getFormDataToJson(payload));
+      data = await putClient(payloadJson);
     } else {
-      data = await postClient(payload);
+      data = await postClient(payloadJson);
     }
 
     handleLoading(form, false);
