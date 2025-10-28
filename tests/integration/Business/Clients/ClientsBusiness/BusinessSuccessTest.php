@@ -10,20 +10,14 @@ class BusinessSuccessTest extends ClientsMock
 {
     protected $namespace = 'App';
 
-    private ClientsBusiness $business;
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->business = new ClientsBusiness();
-    }
 
     public function testReturnExistInHasMethod()
     {
+        $business = new ClientsBusiness();
         $clientsModel = new ClientsModel();
         $found = $clientsModel->first();
 
-        $hasClient = $this->business->has([
+        $hasClient = $business->has([
             'id' => $found->getId()
         ]);
 

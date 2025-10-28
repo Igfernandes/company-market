@@ -14,14 +14,14 @@ if (isset($name) && isset($storeValue[$name]))
             <div class="absolute top-22 <?= isset($iconRight) ? "left" : "right"   ?>-2 w-[1rem] h-full cursor-pointer">
                 <input
                     value="<?= isset($value) ? $value : null ?>"
-                    type="date"
+                    type="date" name="<?= $name ?>"
                     data-label="<?= $label ?>"
                     component='date:reference'
                     class="w-100 h-100 absolute left-0 opacity-0" style="top:-1rem">
                 <i class="bi bi-calendar4-event cursor-pointer"></i>
             </div>
             <input type="text"
-                component='date:input' name="<?= $name ?>"
+                component='date:input'
                 country="br"
                 value="<?php
                         if (isset($value)) {
@@ -29,7 +29,7 @@ if (isset($name) && isset($storeValue[$name]))
                             echo $date->format("d/m/Y");
                         } ?>"
                 id="<?= $id ?? $name ?>"
-                class="form-control w-100 h-[3.5rem] text-sm lg:text-lg pl-2 pr-9 pt-3 rounded-sm outline-theme focus:outline-solid <?= $className ?? null ?>"
+                class="form-control w-100 h-[3.5rem] text-sm lg:text-lg pl-2 pr-9 pt-3 rounded-sm outline-accent focus:outline-solid <?= $className ?? null ?>"
                 <?= !empty($placeholder) ? "placeholder='$placeholder'" : null ?>
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
@@ -47,7 +47,7 @@ if (isset($name) && isset($storeValue[$name]))
         </div>
         <?php if (isset($icon)) : ?>
             <div class="absolute right-0 top-0 h-full pt-2 pr-2">
-                <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-theme">
+                <div class="input-group-append text-xl w-[1.5rem] h-[1rem] text-accent">
                     <?= $icon ?>
                 </div>
             </div>

@@ -5,5 +5,6 @@ use App\Database\Entities\Clients\ClientEntity;
 
 Content::render(
     client: $client ?? new ClientEntity(),
-    categories: $categories ?? []
+    categories: $categories ?? [],
+    companies: $companies ?? [], 
 );

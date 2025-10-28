@@ -14,3 +14,6 @@ export function mapData(data = [], orderKeys) {
     return Object.values(item);
   });
 }
+export function arrayToNestedObject(keys, value = "") {
+  return keys.reduceRight((acc, key) => ({ [key]: acc }), value);
+}

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Clients\Post;
 
 use App\Database\Models\Clients\CategoriesModel;
+use App\Database\Models\Companies\CompaniesModel;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Clients\ClientsMock;
@@ -29,6 +30,10 @@ class PostSuccessTest extends ClientsMock
 
         $payload['category'] = $category->getId();
 
+        $companiesModel = new  CompaniesModel();
+        $company = $companiesModel->first();
+
+        $payload['company'] = $company->getId();
 
         $result = $this->withBody(json_encode($payload), 'application/json')
             ->post($this->route);

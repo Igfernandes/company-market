@@ -29,6 +29,10 @@ export function Snackbar() {
     setTimeout(() => {
       snackbarContent.remove();
     }, timeToClose ?? TIME_CLOSE_MODAL);
+
+    return {
+      modal: snackbarContent,
+    };
   };
 
   this.clean = () => {

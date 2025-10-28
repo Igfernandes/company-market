@@ -28,7 +28,8 @@ export function tableRender(tableContainer) {
     if (!id) return id;
 
     return `<div class='flex items-center'>
-    <input id='table_id_${dateReference}_${id}' onchange='handleChecked(event)' target-checked name='table_id[]' value='${id}' type='checkbox' class='checkbox cursor-pointer rounded-xs appearance-none border-2 border-gray-700 p-2 mr-2' />
+    <input id='table_id_${dateReference}_${id}' onchange='handleChecked(event)' target-checked name='table_id[]' value='${id}' type='checkbox' 
+    class='checkbox cursor-pointer rounded-xs checked:bg-theme appearance-none border-2 border-gray-700 p-2 mr-2' />
     <label for='table_id_${dateReference}_${id}' class='cursor-pointer'>${id}</label>
     </div>`;
   };

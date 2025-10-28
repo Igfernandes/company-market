@@ -12,9 +12,8 @@
     position: absolute;
     z-index: -1;
     top: 0;
-    visibility: hidden;
     opacity: 0;
-    transition: opacity 0.5s linear;
+    transition: opacity 0.2s linear;
     &.active {
       position: initial;
       z-index: 0;

@@ -8,6 +8,7 @@ use App\Database\Models\Clients\CategoriesModel;
 
 class CategoryBusiness
 {
+    use BaseBusiness;
     private CategoriesModel $categoriesModel;
 
     public function __construct()
@@ -15,7 +16,6 @@ class CategoryBusiness
         $this->categoriesModel = new CategoriesModel();
     }
 
-    use BaseBusiness;
 
     /**
      * @param int $payload

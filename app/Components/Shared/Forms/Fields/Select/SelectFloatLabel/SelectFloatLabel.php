@@ -14,6 +14,7 @@ class SelectFloatLabel extends BaseComponents
         "value",
         "options",
         "class",
+        "placeholder",
         "required",
         "attributes",
         "disabled",
@@ -36,6 +37,7 @@ class SelectFloatLabel extends BaseComponents
         ?string $class = "",
         ?string $required = "",
         ?array $attributes = [],
+        ?string $placeholder = "",
         ?bool $disabled = null,
         ?bool $readonly = null,
         ?string $icon = null

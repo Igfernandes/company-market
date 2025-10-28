@@ -6,6 +6,7 @@ use App\Components\Shared\Forms\Fields\Date\DateFloatLabel\DateFloatLabel;
 use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
 use App\Components\Shared\Forms\Fields\Input\InputFloatLabel\InputFloatLabel;
 use App\Components\Shared\Forms\Fields\Phone\Simple\Phone;
+use App\Components\Shared\Forms\Fields\Select\SelectFloatLabel\SelectFloatLabel;
 use App\Database\Entities\Clients\ClientEntity;
 
 /**
@@ -66,11 +67,18 @@ use App\Database\Entities\Clients\ClientEntity;
             ); ?>
         </div>
         <div class="form-group w-100 md:w-48">
-            <?= InputFloatLabel::render(
+            <?= SelectFloatLabel::render(
                 label: "Tipo do Documento",
                 name: "document_type",
+                options: [
+                    ["text" => "CPF", "value" => "CPF"],
+                    ["text" => "RG", "value" => "RG"],
+                    ["text" => "PASSAPORTE", "value" => "PASSAPORTE"],
+                    ["text" => "Outro", "value" => "OTHER"],
+                ],
                 value: $client->getDocumentType()
             ); ?>
         </div>
+
     </div>
 </div>

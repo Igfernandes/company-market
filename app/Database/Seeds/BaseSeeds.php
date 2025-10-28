@@ -13,5 +13,6 @@ class BaseSeeds extends Seeder
         $this->call('App\Database\Seeds\Users\UsersRolesSeeder');
         $this->call('App\Database\Seeds\Permissions\PermissionsSeeder');
         $this->call('App\Database\Seeds\Permissions\RolesPermissionsSeeder');
+        $this->call('App\Database\Seeds\Clients\CategoriesSeeder');
     }
 }

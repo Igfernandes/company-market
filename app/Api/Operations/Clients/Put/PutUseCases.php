@@ -3,6 +3,7 @@
 namespace App\Api\Operations\Clients\Put;
 
 use App\Business\Clients\CategoryBusiness;
+use App\Business\Clients\ClientsBusiness;
 use App\Database\Entities\Clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
@@ -10,6 +11,7 @@ use App\Database\Models\Clients\ClientsModel;
 use App\Libraries\Crypto\Crypto;
 use App\Libraries\Exceptions\Exceptions;
 use App\Services\Notifications\NotificationsService;
+use CodeIgniter\HTTP\Response;
 
 class PutUseCases
 {
@@ -33,7 +35,15 @@ class PutUseCases
         if (!$categoryBusiness->has([
             "id" => $payload['category']
         ]))
-            throw new Exceptions("Api.clients.invalid.not_found_category", BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.not_found_category", Response::HTTP_NOT_ACCEPTABLE);
+
+        $clientsBusiness = new ClientsBusiness();
+        if (!$clientsBusiness->has([
+            "id" => $payload['id']
+        ]))
+            throw new Exceptions("Api.clients.invalid.not_found", Response::HTTP_NOT_ACCEPTABLE);
+
+
 
         $clientsModel = new  ClientsModel();
         $clientCategoryModel = new ClientsCategoriesModel();
@@ -44,9 +54,11 @@ class PutUseCases
         $crypto = new Crypto();
         $systemKey = $crypto->encrypt($payload['name'] . ":" . $phone, getenv('system.encrypted_key'));
 
+        $clientEntity->store($payload);
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
+        $clientEntity->setCompanyId($payload['company']);
         $clientEntity->setPhoneSha256(\referenceHash($phone));
         $clientEntity->setOwnerId($userAuthId);
         $clientEntity->setEncryptPhone($phone);
@@ -58,15 +70,13 @@ class PutUseCases
             ]
         )->first();
         if (!empty($foundClientWithPhone))
-            throw new Exceptions("Api.clients.invalid.phone", BAD_BUSINESS_RULES);
+            throw new Exceptions("Api.clients.invalid.phone", Response::HTTP_NOT_ACCEPTABLE);
 
-        if (!empty($payload['birthdate']))
-            $clientEntity->setBirthdate($payload['birthdate']);
+        if (!empty($payload['document']))
+            $clientEntity->setEncryptDocument($payload['document']);
+
         if (!empty($payload['email']))
             $clientEntity->setEncryptEmail($payload['email']);
-        else $clientEntity->setEmail($payload['email']);
-        if (!empty($payload['avatar']))
-            $clientEntity->setAvatar($payload['avatar']);
 
         $clientsModel->set($clientEntity->toArray(true))->where("id", $payload['id'])->update();
 

@@ -22,13 +22,13 @@ $requiredIcon = isset($required) && strval($required) == "true" ? "*" : "";
                 value="<?= isset($value) ? $value : null ?>"
                 id="<?= !empty($id) ? $id : $name ?>"
                 data-label="<?= $label ?>"
-                class="form-control  block ml-auto w-100 h-[3rem] text-md pl-16 pt-4 rounded-sm outline-theme focus:outline-solid <?= $class ?? null ?>"
+                class="form-control  block ml-auto w-100 h-[2.7rem] text-md pl-16 pt-4 rounded-sm outline-theme focus:outline-solid <?= $class ?? null ?>"
                 <?= getAttributes($attributes) ?>
                 <?= isset($disabled) ? strval($disabled) : null  ?>
                 <?= $required ? "required" : null ?>
                 <?= strval($readonly) ?? null ?>>
             <?php if (isset($label)) : ?>
-                <label class="absolute left-1 top-15 pl-14 text-sm lg:text-lg text-black-700" data-label-toggle component="input:label" for="<?= !empty($id) ? $id : $name ?>">
+                <label class="absolute left-1 top-22 pl-14 text-sm lg:text-md text-black-400" data-label-toggle component="input:label" for="<?= !empty($id) ? $id : $name ?>">
                     <strong class="font-arial">
                         <?= ucfirst($label) ?>
                         <?= isset($required) && $required == "true" ?  Component("/components/shared/forms/variants/tooltip/required") : null ?>

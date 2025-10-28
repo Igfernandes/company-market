@@ -7,28 +7,21 @@ use App\Components\Shared\Forms\Fields\Checkbox\Checkbox;
 use App\Components\Shared\Forms\Fields\Email\EmailFloatLabel\EmailFloatLabel;
 use App\Components\Shared\Forms\Fields\Password\Password;
 use App\Components\Shared\Forms\Fields\Submit\Submit;
-use App\Components\Shared\Layouts\Carousel\Carousel;
 use App\Components\Shared\Layouts\Head\Head;
 use App\Components\Shared\Layouts\Image\Image;
 use App\Components\Shared\Layouts\Link\Link;
-use App\Components\Shared\Layouts\Video\Video;
 use App\Components\Shared\Utils\Recaptcha\Recaptcha;
 
 Head::render(title: "Login - Company Market");
 ?>
 
-<div class="login bg-black-300 flex flex-col justify-center h-[92vh] relative z-0 w-100">
+<div class="login bg-black-300 flex flex-col justify-center h-[90vh] mb-2 relative z-0 w-100">
     <div class="content w-90 md:w-75 max-w-[70rem] mx-auto">
         <div class="row my-4">
             <div class="overlay absolute top-0 left-0 w-full h-full overflow-hidden" style="
     filter: brightness(0.3);">
-                <?php Video::render(
-                    class: "",
-                    src: "/videos/banner.mp4",
-                    autoplay: true,
-                    muted: true,
-                    controls: false,
-                    default: "/images/banners/fallback-video.png"
+                <?php Image::render(
+                    src: "/images/banners/banner-login.jpg"
                 ); ?>
             </div>
             <div class="col w-100 sm:w-60 lg:w-50 bg-white relative z-10 rounded-r-lg mx-auto">

@@ -3,6 +3,7 @@
 namespace App\Api\Operations\Clients\Post;
 
 use App\Business\Clients\CategoryBusiness;
+use App\Business\Companies\CompaniesBusiness;
 use App\Database\Entities\Clients\ClientCategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\ClientsCategoriesModel;
@@ -22,7 +23,8 @@ class PostUseCases
      *   document: string|null,
      *   document_type: string|null,
      *   phone: string,
-     *   email: string|null
+     *   email: string|null,
+     *   company: integer
      * } $payload
      */
     public function execute(array $payload)
@@ -35,6 +37,13 @@ class PostUseCases
             "id" => $payload['category']
         ]))
             throw new Exceptions("Api.clients.invalid.not_found_category", Response::HTTP_NOT_ACCEPTABLE);
+
+        $companiesBusiness = new CompaniesBusiness();
+
+        if (!$companiesBusiness->has([
+            "id" => $payload['company']
+        ]))
+            throw new Exceptions("Api.clients.invalid.not_found_company", Response::HTTP_NOT_ACCEPTABLE);
 
         $clientsModel = new  ClientsModel();
         $clientCategoryModel = new ClientsCategoriesModel();
@@ -50,6 +59,7 @@ class PostUseCases
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setPhoneSha256(\referenceHash($phone));
         $clientEntity->setOwnerId($userAuthId);
+        $clientEntity->setCompanyId($payload['company']);
         $clientEntity->setEncryptPhone($phone);
 
         $foundClientWithPhone = $clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
@@ -58,6 +68,8 @@ class PostUseCases
 
         if (!empty($payload['document']))
             $clientEntity->setEncryptDocument($payload['document']);
+        if (!empty($payload['email']))
+            $clientEntity->setEncryptEmail($payload['email']);
 
         $clientsModel->save($clientEntity);
 

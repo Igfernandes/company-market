@@ -1,0 +1,1 @@
+export const TABLE_TRASH_ID = "table_trash";

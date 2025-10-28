@@ -7,13 +7,14 @@ use App\Database\Entities\Clients\CategoryEntity;
 use App\Database\Entities\Clients\ClientEntity;
 use App\Database\Models\Clients\CategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
+use App\Database\Models\Companies\CompaniesModel;
 use CodeIgniter\Test\CIUnitTestCase;
+use Tests\Support\Mocks\Companies\CompaniesMock;
 
 class ClientsMock extends CIUnitTestCase
 {
     const DATA = [
         [
-            'id' => 1, // id inexistente
             'name' => 'Jessica Barmas',
             'avatar' => 'http://localhost/public/avatar.png',
             'phone' => '5521966033549',
@@ -21,10 +22,9 @@ class ClientsMock extends CIUnitTestCase
             'birthdate' => '25/12/1995',
             'status' => 'ACTIVE',
             'document' => '17225479621',
-            'document_type' => 'CPF',
+            'document_type' => 'CPF'
         ],
         [
-            'id' => 2, // id inexistente
             'name' => 'Eduardo Thomas',
             'avatar' => 'http://localhost/public/avatar.png',
             'phone' => '55219752033549',
@@ -32,7 +32,7 @@ class ClientsMock extends CIUnitTestCase
             'birthdate' => '25/10/2000',
             'status' => 'ACTIVE',
             'document' => '172485479621',
-            'document_type' => 'CPF',
+            'document_type' => 'CPF'
         ]
     ];
 
@@ -41,14 +41,20 @@ class ClientsMock extends CIUnitTestCase
         parent::setUpBeforeClass();
 
         CategoriesMock::setUpBeforeClass();
+        CompaniesMock::setUpBeforeClass();
         $categoriesModel = new CategoriesModel();
-        
+        $companiesModel = new CompaniesModel();
+
+        $company = $companiesModel->first();
+
         /** @var CategoryEntity */
         $category = $categoriesModel->first();
 
         $clientsBusiness = new ClientsBusiness();
         foreach (SELF::DATA as $data) {
             $data['category'] = $category->getId();
+            $data['company_id'] = $company->getId();
+
             $clientsBusiness->store($data);
         }
     }

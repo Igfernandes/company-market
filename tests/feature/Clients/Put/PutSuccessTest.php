@@ -4,6 +4,7 @@ namespace Tests\Feature\Clients\Put;
 
 use App\Database\Models\Clients\CategoriesModel;
 use App\Database\Models\Clients\ClientsModel;
+use App\Database\Models\Companies\CompaniesModel;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\Test\FeatureTestTrait;
 use Tests\Support\Mocks\Clients\ClientsMock;
@@ -27,6 +28,11 @@ class PutSuccessTest extends ClientsMock
         $category = $categoriesModel->first();
 
         $payload['category'] = $category->getId();
+
+        $companiesModel = new  CompaniesModel();
+        $company = $companiesModel->first();
+
+        $payload['company'] = $company->getId();
 
         $clientsModel = new ClientsModel();
         $client = $clientsModel->where("name", $payload['name'])->first();

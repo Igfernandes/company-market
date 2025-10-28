@@ -11,14 +11,35 @@ class Navbar extends BaseComponents
         'menu'
     ];
     const MENU = [
-        'PRINCIPAL' => [
-            'clients' => 'Clientes',
-            'dispatchers' => 'Envios',
-            'content' => 'Conteúdo'
+        'GESTÃO' => [
+            [
+                'title' => 'Clientes',
+                'slug' => 'clients'
+            ],
+            [
+                'title' => 'Empresas',
+                'slug' => 'companies'
+            ]
+        ],
+        'COMUNICAÇÃO' => [
+            [
+                'title' => 'Envios',
+                'slug' => 'dispatchers'
+            ],
+            [
+                'title' => 'Conteúdo',
+                'slug' => 'content'
+            ]
         ],
         'SISTEMA' => [
-            'users' => 'usuários',
-            '/logout' => 'Sair'
+            [
+                'title' => 'Usuários',
+                'slug' => 'users'
+            ],
+            [
+                'title' => 'Sair',
+                'slug' => 'logout'
+            ]
         ]
     ];
 
