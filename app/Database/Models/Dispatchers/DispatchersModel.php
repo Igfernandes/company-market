@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Database\Models\MessagesDispatcher;
+namespace App\Database\Models\Dispatchers;
 
 use CodeIgniter\Model;
 
-class MessagesDispatcherModel extends Model
+class DispatchersModel extends Model
 {
-    protected $table            = 'messages_dispatcher';
+    protected $table            = 'dispatchers';
     protected $primaryKey       = 'id';
     protected $DBGroup          = 'default';
 
     protected $useAutoIncrement = true;
-    protected $returnType       = 'App\Database\Entities\MessagesDispatcher\MessageDispatcherEntity';
+    protected $returnType       = 'App\Database\Entities\Dispatchers\DispatcherEntity';
     protected $protectFields    = true;
 
     protected $allowedFields = [
@@ -23,8 +23,7 @@ class MessagesDispatcherModel extends Model
         'scheduled_day',
         'weekday',
         'started_at',
-        'service_id',
-        'charge_id',
+        'content_id',
         'reference',
         'author_id',
     ];

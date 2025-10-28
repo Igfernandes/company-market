@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Database\Entities\MessagesDispatcher;
+namespace App\Database\Entities\Dispatchers;
 
 use CodeIgniter\Entity\Entity;
 use App\Traits\EntityEnhancerTrait;
 
-class MessageDispatcherEntity extends Entity
+class DispatcherEntity extends Entity
 {
     use EntityEnhancerTrait;
     protected $dates = [];
@@ -19,8 +19,7 @@ class MessageDispatcherEntity extends Entity
         'scheduled_at'  => null,
         'weekday'       => null,
         'started_at'    => null,
-        'service_id'    => null,
-        'charge_id'     => null,
+        'content_id'    => null,
         'author_id'     => null,
         'reference'     => null,
         'created_at'    => null,
@@ -108,24 +107,14 @@ class MessageDispatcherEntity extends Entity
         $this->attributes['started_at'] = $datetime;
     }
 
-    public function getServiceId(): ?int
+    public function getContentId(): ?int
     {
-        return $this->attributes['service_id'];
+        return $this->attributes['content_id'];
     }
 
-    public function setServiceId(?int $serviceId): void
+    public function setContentId(?int $contentId): void
     {
-        $this->attributes['service_id'] = $serviceId;
-    }
-
-    public function getChargeId(): ?int
-    {
-        return $this->attributes['charge_id'];
-    }
-
-    public function setChargeId(?int $chargeId): void
-    {
-        $this->attributes['charge_id'] = $chargeId;
+        $this->attributes['content_id'] = $contentId;
     }
 
     public function getAuthorId(): ?int

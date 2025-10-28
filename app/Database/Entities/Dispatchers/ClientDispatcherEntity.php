@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Database\Entities\MessagesDispatcher;
+namespace App\Database\Entities\Dispatchers;
 
 use App\Database\Entities\Clients\ClientEntity;
 use App\Traits\EntityEnhancerTrait;
 use CodeIgniter\Entity\Entity;
 
-class ClientMessageDispatcherEntity extends Entity
+class ClientDispatcherEntity extends Entity
 {
     use EntityEnhancerTrait;
 
     protected $dates = [];
     public $attributes = [
         'id'                => null,
-        'user_id'           => null,
-        'message_id'         => null,
+        'client_id'         => null,
+        'dispatcher_id'     => null,
         'status'            => null,
         'platform'          => null,
         'log_error'         => null,
@@ -23,7 +23,7 @@ class ClientMessageDispatcherEntity extends Entity
     ];
 
     public $relations = [
-        'user'            => null,
+        'client'     => null,
         'message'    => null,
     ];
 
@@ -45,13 +45,13 @@ class ClientMessageDispatcherEntity extends Entity
         $this->attributes['client_id'] = $id;
     }
 
-    public function getMessageId(): ?int
+    public function getDispatcherId(): ?int
     {
-        return $this->attributes['message_id'];
+        return $this->attributes['dispatcher_id'];
     }
-    public function setMessageId(?int $id): void
+    public function setDispatcherId(?int $id): void
     {
-        $this->attributes['message_id'] = $id;
+        $this->attributes['dispatcher_id'] = $id;
     }
 
     public function getStatus(): ?string
@@ -111,12 +111,12 @@ class ClientMessageDispatcherEntity extends Entity
         $this->relations['client'] = $client;
     }
 
-    public function getMessage(): ?MessageDispatcherEntity
+    public function getDispatcher(): ?DispatcherEntity
     {
-        return $this->relations['message'];
+        return $this->relations['dispatcher'];
     }
-    public function setMessage(?MessageDispatcherEntity $message): void
+    public function setDispatcher(?DispatcherEntity $dispatcher): void
     {
-        $this->relations['message'] = $message;
+        $this->relations['dispatcher'] = $dispatcher;
     }
 }

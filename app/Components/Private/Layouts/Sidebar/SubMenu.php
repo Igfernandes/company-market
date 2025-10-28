@@ -21,9 +21,9 @@ class SubMenu extends BaseComponents
             'companies' => 'Geral',
             'companies/create' => 'Criar'
         ],
-        'boats' => [
-            'boats' => 'Geral',
-            'boats/create' => 'Criar'
+        'content' => [
+            'contents' => 'Geral',
+            'contents/create' => 'Criar'
         ],
         'users' => [
             'users' => 'Geral',
