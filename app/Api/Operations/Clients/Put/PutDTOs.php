@@ -75,5 +75,11 @@ trait PutDTOs
                 'max_length' => 'Api.clients.invalid.document_type'
             ],
         ],
+        'company' => [
+            'rules' => 'integer',
+            'errors' => [
+                'integer' => 'Api.clients.invalid.company',
+            ],
+        ],
     ];
 }

@@ -68,5 +68,11 @@ trait PostDTOs
                 'integer' => 'Api.clients.invalid.category',
             ],
         ],
+        'company' => [
+            'rules' => 'integer',
+            'errors' => [
+                'integer' => 'Api.clients.invalid.company',
+            ],
+        ],
     ];
 }

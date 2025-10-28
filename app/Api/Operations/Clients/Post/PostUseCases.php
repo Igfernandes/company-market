@@ -22,7 +22,8 @@ class PostUseCases
      *   document: string|null,
      *   document_type: string|null,
      *   phone: string,
-     *   email: string|null
+     *   email: string|null,
+     *   company: integer
      * } $payload
      */
     public function execute(array $payload)
@@ -50,6 +51,7 @@ class PostUseCases
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setPhoneSha256(\referenceHash($phone));
         $clientEntity->setOwnerId($userAuthId);
+        $clientEntity->setCompanyId($payload['company']);
         $clientEntity->setEncryptPhone($phone);
 
         $foundClientWithPhone = $clientsModel->where("phone_sha256", $clientEntity->getPhoneSha256())->first();
@@ -58,6 +60,8 @@ class PostUseCases
 
         if (!empty($payload['document']))
             $clientEntity->setEncryptDocument($payload['document']);
+        if (!empty($payload['email']))
+            $clientEntity->setEncryptEmail($payload['email']);
 
         $clientsModel->save($clientEntity);
 

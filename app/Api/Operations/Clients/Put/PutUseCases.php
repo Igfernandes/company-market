@@ -44,9 +44,11 @@ class PutUseCases
         $crypto = new Crypto();
         $systemKey = $crypto->encrypt($payload['name'] . ":" . $phone, getenv('system.encrypted_key'));
 
+        $clientEntity->store($payload);
         $clientEntity->setSystemKey($systemKey);
         $clientEntity->setName($payload['name']);
         $clientEntity->setStatus('ACTIVE');
+        $clientEntity->setCompanyId($payload['company']);
         $clientEntity->setPhoneSha256(\referenceHash($phone));
         $clientEntity->setOwnerId($userAuthId);
         $clientEntity->setEncryptPhone($phone);
@@ -60,13 +62,11 @@ class PutUseCases
         if (!empty($foundClientWithPhone))
             throw new Exceptions("Api.clients.invalid.phone", BAD_BUSINESS_RULES);
 
-        if (!empty($payload['birthdate']))
-            $clientEntity->setBirthdate($payload['birthdate']);
+        if (!empty($payload['document']))
+            $clientEntity->setEncryptDocument($payload['document']);
+
         if (!empty($payload['email']))
             $clientEntity->setEncryptEmail($payload['email']);
-        else $clientEntity->setEmail($payload['email']);
-        if (!empty($payload['avatar']))
-            $clientEntity->setAvatar($payload['avatar']);
 
         $clientsModel->set($clientEntity->toArray(true))->where("id", $payload['id'])->update();
 
